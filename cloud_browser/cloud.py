@@ -77,7 +77,7 @@ class Config(object):
 
     kwargs = cls.get_credentials(cfg, cls.creds_rackspace)
 
-    return cls(**kwargs)
+    return cls(**kwargs)  # pylint: disable=W0142
 
   @classmethod
   def from_settings(cls):
