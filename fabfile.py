@@ -7,8 +7,12 @@ from fabric.api import cd, local
 ###############################################################################
 MOD = "cloud_browser"
 PROJ = "cloud_browser_project"
+PYLINT_INCLUDES = (
+  "fabfile.py",
+  MOD,
+  PROJ,
+)
 PYLINT_CFG = "dev/pylint.cfg"
-
 
 ###############################################################################
 # Quality
@@ -20,7 +24,7 @@ def pylint(rcfile=PYLINT_CFG):
   """
   # Have a spurious DeprecationWarning in pylint.
   local("python -W ignore::DeprecationWarning `which pylint` --rcfile=%s %s" %
-        (rcfile, MOD), capture=False)
+        (rcfile, " ".join(PYLINT_INCLUDES)), capture=False)
 
 
 ###############################################################################
