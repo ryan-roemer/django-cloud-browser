@@ -7,7 +7,7 @@ from fabric.api import cd, local
 ###############################################################################
 MOD = "cloud_browser"
 PROJ = "cloud_browser_project"
-PYLINT_INCLUDES = (
+CHECK_INCLUDES = (
   "fabfile.py",
   MOD,
   PROJ,
@@ -24,7 +24,12 @@ def pylint(rcfile=PYLINT_CFG):
   """
   # Have a spurious DeprecationWarning in pylint.
   local("python -W ignore::DeprecationWarning `which pylint` --rcfile=%s %s" %
-        (rcfile, " ".join(PYLINT_INCLUDES)), capture=False)
+        (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+
+
+def pep8():
+  """Run pep8 style checker."""
+  local("pep8 -r %s" % " ".join(CHECK_INCLUDES), capture=False)
 
 
 ###############################################################################
