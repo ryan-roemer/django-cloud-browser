@@ -18,17 +18,24 @@ def _path_parts(path=''):
 def browser(request, path='', template="cloud_browser/browser.html"):
     """Basic browser view."""
     folder, file = _path_parts(path)
+    folder_infos = None
+    file_infos = None
+    file_limit = 20
     conn = get_connection()
-    print(conn)
 
     if folder == '':
         # List folders.
-        pass
+        folder_infos = conn.list_containers_info()
 
     else:
         # List files for a folder.
-        pass
-    
+        folder_obj = conn.get_container(folder)
+        file_infos = folder_obj.list_objects_info(
+            prefix=file, limit=file_limit)
+        for info in file_infos:
+            info['path'] = '/'.join((folder, info['name']))
+
     return render_to_response(template,
-                              {'folder': folder, 'file': file},
+                              {'folder': folder, 'folder_infos': folder_infos,
+                               'file': file, 'file_infos': file_infos},
                               context_instance=RequestContext(request))

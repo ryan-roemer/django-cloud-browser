@@ -11,9 +11,54 @@ Cloud Browser
 {% endblock %}
 
 {% block content %}
-Path parts:
+<h2>Path Parts</h2>
 <ul>
-  <li>Folder: "<b>{{ folder }}</b>".</li>
+  <li>Folder: "<b><a href="{% url cloud_browser_browser folder %}"
+      >{{ folder }}</a></b>".</li>
   <li>File: "<b>{{ file }}</b>".</li>
 </ul>
+
+{% if folder_infos %}
+<h2>Folders</h2>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Count</th>
+    <th>Bytes</th>
+  </thead>
+  <tbody>
+    {% for info in folder_infos %}
+      <tr>
+        <td><a href="{% url cloud_browser_browser info.name %}">
+            {{ info.name }}</a></td>
+        <td>{{ info.count }}</td>
+        <td>{{ info.bytes }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if file_infos %}
+<h2>Files</h2>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Bytes</th>
+    <th>Type</th>
+    <th>Date</th>
+  </thead>
+  <tbody>
+    {% for info in file_infos %}
+      <tr>
+        <td><a href="{% url cloud_browser_browser info.path %}">
+            {{ info.name }}</a></td>
+        <td>{{ info.bytes }}</td>
+        <td>{{ info.content_type }}</td>
+        <td>{{ info.last_modified }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 {% endblock %}
