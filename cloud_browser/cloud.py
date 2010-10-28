@@ -79,7 +79,7 @@ class Config(object):
 
         kwargs = cls.get_credentials(cfg, cls.creds_rackspace)
 
-        return cls(**kwargs)    # pylint: disable=W0142
+        return cls(**kwargs)  # pylint: disable=W0142
 
     @classmethod
     def from_settings(cls):
@@ -90,7 +90,7 @@ class Config(object):
 
         obj = None
         if (has_setting("CLOUD_BROWSER_ACCOUNT") and
-                has_setting("CLOUD_BROWSER_SECRET_KEY")):
+            has_setting("CLOUD_BROWSER_SECRET_KEY")):
             # First try raw settings.
             obj = cls(settings.CLOUD_BROWSER_ACCOUNT,
                       settings.CLOUD_BROWSER_SECRET_KEY,
