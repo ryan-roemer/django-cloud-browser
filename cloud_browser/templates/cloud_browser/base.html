@@ -1,0 +1,23 @@
+{% comment %}
+###############################################################################
+# Browser Base
+#
+# Note: Override this base template to integrate rest of templates to site
+# look and feel.
+###############################################################################
+{% endcomment %}
+
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+{% block body %}
+  {# {% block menu %}{% endblock %} #}
+  {# {% block content_title %}{% endblock %} #}
+  {% block content %}{% endblock %}
+{% endblock %}
+</body>
+</html>
