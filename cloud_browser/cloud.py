@@ -15,6 +15,7 @@ class Config(object):
     opt_account = 'account'
     opt_key = 'secret_key'
     opt_servicenet = 'servicenet'
+    __singleton = None
 
     def __init__(self, account, secret_key, rs_servicenet=False):
         """Initializer."""
@@ -105,3 +106,15 @@ class Config(object):
             raise ConfigurationError("No suitable credentials found.")
 
         return obj
+
+    @classmethod
+    def singleton(cls):
+        """Get singleton object."""
+        if cls.__singleton is None:
+            cls.__singleton = cls.from_settings()
+        return cls.__singleton
+
+
+def get_connection():
+    """Wrapper for global connection/config object."""
+    return Config.singleton().connection
