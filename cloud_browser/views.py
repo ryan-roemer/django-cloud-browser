@@ -36,10 +36,37 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         folder_infos = conn.list_containers_info()
 
     else:
-        # List files for a folder.
         folder_obj = conn.get_container(folder_path)
-        file_infos = folder_obj.list_objects_info(
-            path=file_path, limit=file_limit)
+
+        # List Objects Info Issue:
+        #
+        # If there are not psuedo-directories, then a `path` parameter to
+        # `list_objects_info` will not match any contained folders. On the
+        # Other hand, `prefix` parameter matching will always work, but will
+        # be overly constrained.
+        #
+        # We employ the following heuristic. If there is a pseudo-directory
+        # at the current level, we **do** use prefix, *else* we use path.
+
+        list_kwargs = {
+            'limit': file_limit,
+        }
+
+        use_path = False
+        if file_path != '':
+            try:
+                file_obj = folder_obj.get_object(file_path)
+                use_path = file_obj.content_type == 'application/directory'
+            except cloudfiles.errors.NoSuchObject:
+                pass
+
+        if use_path:
+            list_kwargs['path'] = file_path
+        else:
+            list_kwargs['prefix'] = file_path
+
+        # List files for a folder.
+        file_infos = folder_obj.list_objects_info(**list_kwargs)
         for info in file_infos:
             info['path'] = _path_join(folder_path, info['name'])
             info['rel_path'] = info['name'].lstrip(file_path).lstrip('/')
