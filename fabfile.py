@@ -14,7 +14,7 @@ CHECK_INCLUDES = (
     MOD,
     PROJ,
 )
-CHECK_IGNORES = ('E225',)
+PEP8_IGNORES = ('E225',)
 PYLINT_CFG = "dev/pylint.cfg"
 
 
@@ -35,8 +35,14 @@ def pylint(rcfile=PYLINT_CFG):
 def pep8():
     """Run pep8 style checker."""
     includes = "-r %s" % " ".join(CHECK_INCLUDES)
-    ignores = "--ignore=%s" % ",".join(CHECK_IGNORES) if CHECK_IGNORES else ''
+    ignores = "--ignore=%s" % ",".join(PEP8_IGNORES) if PEP8_IGNORES else ''
     local("pep8 %s %s" % (includes, ignores), capture=False)
+
+
+def check():
+    """Run all checkers."""
+    pylint()
+    pep8()
 
 
 ###############################################################################
