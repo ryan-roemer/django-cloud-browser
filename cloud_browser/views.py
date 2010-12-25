@@ -2,9 +2,8 @@
 # TODO: Need to add directory "application/directory" markers everywhere.
 # Probably should consider writing a stupid crawler.
 
-import os.path
+import cloudfiles
 
-from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -66,7 +65,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             list_kwargs['prefix'] = file_path
 
         # List files for a folder.
-        file_infos = folder_obj.list_objects_info(**list_kwargs)
+        file_infos = folder_obj.list_objects_info( # pylint: disable=W0142
+            **list_kwargs)
         for info in file_infos:
             info['path'] = _path_join(folder_path, info['name'])
             info['rel_path'] = info['name'].lstrip(file_path).lstrip('/')
