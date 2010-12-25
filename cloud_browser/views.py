@@ -23,7 +23,19 @@ def _path_join(*args):
     return '/'.join((x for x in args if x not in (None, '')))
 
 def browser(request, path='', template="cloud_browser/browser.html"):
-    """Basic browser view."""
+    """View files in a file path.
+
+    Note the viewing results are different whether or not there is a
+    pseudo-directory marker present. If there is a not a pseudo-directory
+    up to the current level, we use a "prefix" match instead.
+
+    This ambiguity can be most properly addressed by adding pseudo-directory
+    markers for all file objects.
+
+    :param request: The request.
+    :param path: Path to resource, including container as first part of path.
+    :param template: Template to render.
+    """
     folder_path, file_path = _path_parts(path)
     folder_infos = None
     file_infos = None
