@@ -9,6 +9,7 @@ from django.template import RequestContext
 
 from cloud_browser.cloud import get_connection
 
+
 def _path_parts(path=''):
     """Split path into folder, file tuple."""
     path = path if path is not None else ''
@@ -18,9 +19,11 @@ def _path_parts(path=''):
 
     return parts[0], _path_join(*parts[1:])
 
+
 def _path_join(*args):
     """Custom path joining."""
     return '/'.join((x for x in args if x not in (None, '')))
+
 
 def browser(request, path='', template="cloud_browser/browser.html"):
     """View files in a file path.
@@ -77,7 +80,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             list_kwargs['prefix'] = file_path
 
         # List files for a folder.
-        file_infos = folder_obj.list_objects_info( # pylint: disable=W0142
+        file_infos = folder_obj.list_objects_info(  # pylint: disable=W0142
             **list_kwargs)
         for info in file_infos:
             info['path'] = _path_join(folder_path, info['name'])
