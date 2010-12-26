@@ -3,6 +3,7 @@
 # Probably should consider writing a stupid crawler.
 
 import cloudfiles
+import os.path
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -23,6 +24,23 @@ def _path_parts(path=''):
 def _path_join(*args):
     """Custom path joining."""
     return '/'.join((x for x in args if x not in (None, '')))
+
+
+def _get_files2(folder_obj, folder_path, file_path):
+    """Get files."""
+
+    file_limit = 20
+    file_path = file_path + '/' if file_path else ''
+    file_infos = folder_obj.list_objects_info(
+        limit=file_limit, delimiter='/', prefix=file_path)
+
+    for info in (i for i in file_infos if i.get('subdir', None)):
+        info['name'] = info['subdir']
+    for info in file_infos:
+        info['path'] = _path_join(folder_path, info['name'])
+        info['rel_path'] = os.path.relpath(info['name'], file_path)
+
+    return file_infos
 
 
 def _get_files(folder_obj, folder_path, file_path):
@@ -60,7 +78,7 @@ def _get_files(folder_obj, folder_path, file_path):
         **list_kwargs)
     for info in file_infos:
         info['path'] = _path_join(folder_path, info['name'])
-        info['rel_path'] = info['name'].lstrip(file_path).lstrip('/')
+        info['rel_path'] = os.path.relpath(info['name'], file_path)
 
     return file_infos
 
@@ -90,12 +108,12 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
     else:
         folder_obj = conn.get_container(folder_path)
-        file_infos = _get_files(folder_obj, folder_path, file_path)
+        file_infos = _get_files2(folder_obj, folder_path, file_path)
 
     return render_to_response(template,
-                              {'folder': folder_path,
+                              {'path': path,
+                               'folder': folder_path,
                                'folder_infos': folder_infos,
-                               'path': path,
                                'file': file_path,
                                'file_infos': file_infos},
                               context_instance=RequestContext(request))
