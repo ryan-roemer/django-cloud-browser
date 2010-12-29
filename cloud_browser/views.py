@@ -3,7 +3,7 @@
 # Probably should consider writing a stupid crawler.
 
 import cloudfiles
-import os.path
+import os
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -26,6 +26,32 @@ def _path_join(*args):
     return '/'.join((x for x in args if x not in (None, '')))
 
 
+def _relpath(path, start=os.curdir):
+    """Get relative path to start.
+
+    Note: Modeled after python2.6 version.
+    """
+
+    # Helpers.
+    slash = "/"
+    parent = ".."
+
+    path_parts = os.path.abspath(path).split(slash)
+    start_parts = os.path.abspath(start).split(slash)
+    common = os.path.commonprefix([start_parts, path_parts])
+
+    # Shared parts index in both lists.
+    shared_ind = len(common)
+    parent_num = len(start_parts) - shared_ind
+
+    # Start with parent traversal and add relative parts.
+    rel_parts = [parent] * parent_num + path_parts[shared_ind:]
+    if not rel_parts:
+        return os.curdir
+
+    return os.path.join(*rel_parts)  # pylint: disable=W0142
+
+
 def _get_files2(folder_obj, folder_path, file_path):
     """Get files."""
 
@@ -38,7 +64,7 @@ def _get_files2(folder_obj, folder_path, file_path):
         info['name'] = info['subdir']
     for info in file_infos:
         info['path'] = _path_join(folder_path, info['name'])
-        info['rel_path'] = os.path.relpath(info['name'], file_path)
+        info['rel_path'] = _relpath(info['name'], file_path)
 
     return file_infos
 
@@ -78,7 +104,7 @@ def _get_files(folder_obj, folder_path, file_path):
         **list_kwargs)
     for info in file_infos:
         info['path'] = _path_join(folder_path, info['name'])
-        info['rel_path'] = os.path.relpath(info['name'], file_path)
+        info['rel_path'] = _relpath(info['name'], file_path)
 
     return file_infos
 

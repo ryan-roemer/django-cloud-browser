@@ -1,20 +1,13 @@
 """Cloud abstractions and helpers."""
 # TODO: Add RetryPolicy class.
 
-import os.path
+import os
 
-from ConfigParser import SafeConfigParser as ConfigParser
-
-from cloud_browser.errors import ConfigurationError
+from django.core.exceptions import ImproperlyConfigured
 
 
 class Config(object):
     """Cloud configuration."""
-    default_path = os.path.expanduser("~/.cloud_browser/cloud.cfg")
-    creds_rackspace = 'RackspaceCredentials'
-    opt_account = 'account'
-    opt_key = 'secret_key'
-    opt_servicenet = 'servicenet'
     __singleton = None
 
     def __init__(self, account, secret_key, rs_servicenet=False):
@@ -29,83 +22,46 @@ class Config(object):
     @property
     def connection(self):
         """Return Rackspace connection object."""
-        import cloudfiles
+        import cloudfiles as cf
 
         if not self.__rs_conn_set:
-            self.__rs_conn = cloudfiles.get_connection(
-                username=self.account, api_key=self.secret_key,
-                servicenet=self.rs_servicenet)
+            kwargs = {
+                'username': self.account,
+                'api_key': self.secret_key,
+            }
+
+            # Only add kwarg for servicenet if True because user could set
+            # environment variable 'RACKSPACE_SERVICENET' separately.
+            if self.rs_servicenet:
+                kwargs['servicenet'] = True
+
+            self.__rs_conn = cf.get_connection(  # pylint: disable=W0142
+                **kwargs)
             self.__rs_conn_set = True
 
         return self.__rs_conn
 
     @classmethod
-    def get_credentials(cls, cfg, section):
-        """Get credentials for section type."""
-        creds = {
-            'account': None,
-            'secret_key': None,
-        }
-
-        if (cfg.has_section(section) and
-                cfg.has_option(section, cls.opt_account) and
-                cfg.has_option(section, cls.opt_key)):
-            # Basics
-            creds['account'] = cfg.get(section, cls.opt_account)
-            creds['secret_key'] = cfg.get(section, cls.opt_key)
-
-            # Extras
-            if cfg.has_option(section, cls.opt_servicenet):
-                creds['rs_servicenet'] = cfg.getboolean(
-                    section, cls.opt_servicenet)
-
-        return creds
-
-    @classmethod
-    def from_file(cls, config=None):
-        """Create configuration from file."""
-        if config is None and not os.path.exists(cls.default_path):
-            return None
-
-        cfg = ConfigParser()
-        if config is None:
-            # Default path
-            cfg.read(cls.default_path)
-        elif isinstance(config, basestring):
-            # Filename
-            cfg.read(config)
-        else:
-            # File-like object
-            cfg.readfp(config)
-
-        kwargs = cls.get_credentials(cfg, cls.creds_rackspace)
-
-        return cls(**kwargs)  # pylint: disable=W0142
-
-    @classmethod
     def from_settings(cls):
-        """Create configuration from Django settings."""
+        """Create configuration from Django settings or environment."""
         from django.conf import settings
 
-        has_setting = lambda x: getattr(settings, x, None) not in (None, '')
+        def _get_setting(name):
+            """Get setting from settings.py or environment."""
+            # Prefer settings, then environment.
+            value = getattr(settings, name, None)
+            if not value:
+                value = os.environ.get(name, None)
+            return value
 
-        obj = None
-        if (has_setting("CLOUD_BROWSER_ACCOUNT") and
-            has_setting("CLOUD_BROWSER_SECRET_KEY")):
-            # First try raw settings.
-            obj = cls(settings.CLOUD_BROWSER_ACCOUNT,
-                      settings.CLOUD_BROWSER_SECRET_KEY,
-                      getattr(settings, "CLOUD_BROWSER_SERVICENET", False))
+        account = _get_setting('CLOUD_BROWSER_RACKSPACE_ACCOUNT')
+        secret_key = _get_setting('CLOUD_BROWSER_RACKSPACE_SECRET_KEY')
+        servicenet = _get_setting('CLOUD_BROWSER_RACKSPACE_SERVICENET')
 
-        if obj is None:
-            # Then try configuration file.
-            obj = cls.from_file(getattr(
-                settings, "CLOUD_BROWSER_CONFIG_FILE", None))
+        if not (account and secret_key):
+            raise ImproperlyConfigured("No suitable credentials found.")
 
-        if obj is None:
-            raise ConfigurationError("No suitable credentials found.")
-
-        return obj
+        return cls(account, secret_key, servicenet)
 
     @classmethod
     def singleton(cls):
