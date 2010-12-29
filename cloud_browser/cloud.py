@@ -5,6 +5,7 @@ import os
 
 from django.core.exceptions import ImproperlyConfigured
 
+from cloud_browser.common import SEP, path_join, basename
 
 class Config(object):
     """Cloud configuration."""
@@ -74,3 +75,62 @@ class Config(object):
 def get_connection():
     """Wrapper for global connection/config object."""
     return Config.singleton().connection
+
+
+class CloudObject(object):
+    """Cloud object wrapper."""
+    class Types(object):
+        FILE = 'file'
+        SUBDIR = 'subdirectory'
+    
+    def __init__(self, container, name, bytes=0, content_type='',
+            last_modified=None, obj_type=None):
+        """Initializer."""
+        self.container = container
+        self.name = name.rstrip(SEP)
+        self.bytes = bytes
+        self.content_type = content_type
+        self.last_modified = last_modified
+        self.type = obj_type or self.Types.FILE
+
+    @property
+    def is_subdir(self):
+        """Is a subdirectory?"""
+        return self.type == self.Types.SUBDIR
+    
+    @property
+    def is_file(self):
+        """Is a file object?"""
+        return self.type == self.Types.FILE
+    
+    @property
+    def path(self):
+        """Full path (including container)."""
+        return path_join(self.container.name, self.name)
+
+    @property
+    def basename(self):
+        """Base name from rightmost separator."""
+        return basename(self.name)
+
+    @classmethod
+    def from_info(cls, container, info_obj):
+        """Create from subdirectory or file info object."""
+        create_fn = cls.from_subdir if 'subdir' in info_obj \
+            else cls.from_file_info
+        return create_fn(container, info_obj)
+
+    @classmethod
+    def from_subdir(cls, container, info_obj):
+        """Create from subdirectory info object."""
+        return cls(container, info_obj['subdir'], obj_type=cls.Types.SUBDIR)
+
+    @classmethod
+    def from_file_info(cls, container, info_obj):
+        """Create from regular info object."""
+        return cls(container,
+                   info_obj['name'],
+                   info_obj['bytes'],
+                   info_obj['content_type'],
+                   info_obj['last_modified'],
+                   cls.Types.FILE)

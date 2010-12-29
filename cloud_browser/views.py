@@ -5,30 +5,19 @@ from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from cloud_browser.common import path_parts, path_join, relpath
-from cloud_browser.cloud import get_connection
+from cloud_browser.common import SEP, path_parts, path_join, path_yield, relpath
+from cloud_browser.cloud import get_connection, CloudObject
 
 
-def _get_object_infos(container_obj, object_path):
+def _get_objects(container_obj, object_path):
     """Get object information."""
 
     object_limit = 20
-    object_path = object_path + '/' if object_path else ''
+    object_path = object_path + SEP if object_path else ''
     object_infos = container_obj.list_objects_info(
-        limit=object_limit, delimiter='/', prefix=object_path)
+        limit=object_limit, delimiter=SEP, prefix=object_path)
 
-    # Add extra information for subdir's.
-    for info in (i for i in object_infos if i.get('subdir', None)):
-        info['name'] = info['subdir']
-        info['is_file'] = False
-
-    # Add path information for all infos.
-    for info in object_infos:
-        info['path'] = path_join(container_obj.name, info['name'])
-        info['rel_path'] = relpath(info['name'], object_path)
-        info['is_file'] = info.get('is_file', True)
-
-    return object_infos
+    return [CloudObject.from_info(container_obj, x) for x in object_infos]
 
 
 def _breadcrumbs(path):
@@ -36,10 +25,9 @@ def _breadcrumbs(path):
 
     full = None
     crumbs = []
-    if path:
-        for part in path.strip('/').split('/'):
-            full = path_join(full, part) if full else part
-            crumbs.append((full, part))
+    for part in path_yield(path):
+        full = path_join(full, part) if full else part
+        crumbs.append((full, part))
 
     return crumbs
 
@@ -66,7 +54,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         except cf.errors.NoSuchContainer:
             raise Http404("No container at: %s" % container_path)
 
-        object_infos = _get_object_infos(container_obj, object_path)
+        object_infos = _get_objects(container_obj, object_path)
         if not object_infos:
             raise Http404("No objects at: %s" % object_path)
 

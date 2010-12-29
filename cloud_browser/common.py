@@ -14,6 +14,16 @@ PARENT = ".."
 ###############################################################################
 # Path helpers.
 ###############################################################################
+def basename(path):
+    """Rightmost part of path after separator."""
+    base_path = path.strip(SEP)
+    sep_ind = base_path.rfind(SEP)
+    if sep_ind < 0:
+        return path
+
+    return base_path[sep_ind+1:]
+
+
 def path_parts(path):
     """Split path into container, object.
 

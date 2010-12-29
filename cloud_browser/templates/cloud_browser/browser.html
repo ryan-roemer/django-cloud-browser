@@ -38,19 +38,19 @@ Cloud Browser - {{ path }}
   <thead>
     <th>Name</th>
     <th>Bytes</th>
-    <th>Type</th>
+    <th>Content Type</th>
     <th>Date</th>
-    <th>Is File?</th>
+    <th>Obj. Type</th>
   </thead>
   <tbody>
     {% for info in object_infos %}
       <tr>
         <td><a href="{% url cloud_browser_browser info.path %}">
-            {{ info.rel_path }}</a></td>
+            {{ info.basename }}</a></td>
         <td>{{ info.bytes }}</td>
         <td>{{ info.content_type }}</td>
         <td>{{ info.last_modified }}</td>
-        <td>{{ info.is_file }}</td>
+        <td>{{ info.type }}</td>
       </tr>
     {% endfor %}
   </tbody>
