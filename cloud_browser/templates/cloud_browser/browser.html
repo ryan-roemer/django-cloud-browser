@@ -40,6 +40,7 @@ Cloud Browser - {{ path }}
     <th>Bytes</th>
     <th>Type</th>
     <th>Date</th>
+    <th>Is File?</th>
   </thead>
   <tbody>
     {% for info in object_infos %}
@@ -49,6 +50,7 @@ Cloud Browser - {{ path }}
         <td>{{ info.bytes }}</td>
         <td>{{ info.content_type }}</td>
         <td>{{ info.last_modified }}</td>
+        <td>{{ info.is_file }}</td>
       </tr>
     {% endfor %}
   </tbody>

@@ -59,11 +59,13 @@ def _get_object_infos(container_obj, object_path):
     # Add extra information for subdir's.
     for info in (i for i in object_infos if i.get('subdir', None)):
         info['name'] = info['subdir']
+        info['is_file'] = False
 
     # Add path information for all infos.
     for info in object_infos:
         info['path'] = _path_join(container_obj.name, info['name'])
         info['rel_path'] = _relpath(info['name'], object_path)
+        info['is_file'] = info.get('is_file', True)
 
     print(object_infos)
     return object_infos
