@@ -1,8 +1,4 @@
 """Cloud browser views."""
-# TODO: Need to add directory "application/directory" markers everywhere.
-# Probably should consider writing a stupid crawler.
-
-import cloudfiles
 import os
 
 from django.shortcuts import render_to_response
@@ -52,61 +48,25 @@ def _relpath(path, start=os.curdir):
     return os.path.join(*rel_parts)  # pylint: disable=W0142
 
 
-def _get_files2(folder_obj, folder_path, file_path):
-    """Get files."""
+def _get_object_infos(container_obj, object_path):
+    """Get object information."""
 
-    file_limit = 20
-    file_path = file_path + '/' if file_path else ''
-    file_infos = folder_obj.list_objects_info(
-        limit=file_limit, delimiter='/', prefix=file_path)
+    object_limit = 20
+    object_path = object_path + '/' if object_path else ''
+    object_infos = container_obj.list_objects_info(
+        limit=object_limit, delimiter='/', prefix=object_path)
 
-    for info in (i for i in file_infos if i.get('subdir', None)):
+    # Add extra information for subdir's.
+    for info in (i for i in object_infos if i.get('subdir', None)):
         info['name'] = info['subdir']
-    for info in file_infos:
-        info['path'] = _path_join(folder_path, info['name'])
-        info['rel_path'] = _relpath(info['name'], file_path)
 
-    return file_infos
+    # Add path information for all infos.
+    for info in object_infos:
+        info['path'] = _path_join(container_obj.name, info['name'])
+        info['rel_path'] = _relpath(info['name'], object_path)
 
-
-def _get_files(folder_obj, folder_path, file_path):
-    """Get files."""
-    # List Objects Info Issue:
-    #
-    # If there are not psuedo-directories, then a `path` parameter to
-    # `list_objects_info` will not match any contained folders. On the
-    # Other hand, `prefix` parameter matching will always work, but will
-    # be overly constrained.
-    #
-    # We employ the following heuristic. If there is a pseudo-directory
-    # at the current level, we **do** use prefix, *else* we use path.
-
-    file_limit = 20
-    list_kwargs = {
-        'limit': file_limit,
-    }
-
-    use_path = False
-    if file_path != '':
-        try:
-            file_obj = folder_obj.get_object(file_path)
-            use_path = file_obj.content_type == 'application/directory'
-        except cloudfiles.errors.NoSuchObject:
-            pass
-
-    if use_path or file_path == '':
-        list_kwargs['path'] = file_path
-    else:
-        list_kwargs['prefix'] = file_path
-
-    # List files for a folder.
-    file_infos = folder_obj.list_objects_info(  # pylint: disable=W0142
-        **list_kwargs)
-    for info in file_infos:
-        info['path'] = _path_join(folder_path, info['name'])
-        info['rel_path'] = _relpath(info['name'], file_path)
-
-    return file_infos
+    print(object_infos)
+    return object_infos
 
 
 def browser(request, path='', template="cloud_browser/browser.html"):
@@ -123,23 +83,23 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
-    folder_path, file_path = _path_parts(path)
-    folder_infos = None
-    file_infos = None
+    container_path, object_path = _path_parts(path)
+    container_infos = None
+    object_infos = None
     conn = get_connection()
 
-    if folder_path == '':
-        # List folders.
-        folder_infos = conn.list_containers_info()
+    if container_path == '':
+        # List containers.
+        container_infos = conn.list_containers_info()
 
     else:
-        folder_obj = conn.get_container(folder_path)
-        file_infos = _get_files2(folder_obj, folder_path, file_path)
+        container_obj = conn.get_container(container_path)
+        object_infos = _get_object_infos(container_obj, object_path)
 
     return render_to_response(template,
                               {'path': path,
-                               'folder': folder_path,
-                               'folder_infos': folder_infos,
-                               'file': file_path,
-                               'file_infos': file_infos},
+                               'container_path': container_path,
+                               'container_infos': container_infos,
+                               'object_path': object_path,
+                               'object_infos': object_infos},
                               context_instance=RequestContext(request))

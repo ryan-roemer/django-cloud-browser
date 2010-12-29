@@ -14,18 +14,18 @@ Cloud Browser
 <h2>Path Parts</h2>
 <ul>
   <li><b><a href="{% url cloud_browser_browser '' %}">Root</a></b></li>
-  {% if folder %}
-  <li>Folder: "<b><a href="{% url cloud_browser_browser folder %}"
-    >{{ folder }}</a></b>".</li>
+  {% if container_path %}
+  <li>Container: "<b><a href="{% url cloud_browser_browser container_path %}"
+    >{{ container_path }}</a></b>".</li>
   {% endif %}
-  {% if file %}
-  <li>File: "<b><a href="{% url cloud_browser_browser path %}"
-    >{{ file }}</a></b>".</li>
+  {% if object_path %}
+  <li>Object Path: "<b><a href="{% url cloud_browser_browser path %}"
+    >{{ object_path }}</a></b>".</li>
   {% endif %}
 </ul>
 
-{% if folder_infos %}
-<h2>Folders</h2>
+{% if container_infos %}
+<h2>Containers</h2>
 <table>
   <thead>
     <th>Name</th>
@@ -33,7 +33,7 @@ Cloud Browser
     <th>Bytes</th>
   </thead>
   <tbody>
-    {% for info in folder_infos %}
+    {% for info in container_infos %}
       <tr>
         <td><a href="{% url cloud_browser_browser info.name %}">
             {{ info.name }}</a></td>
@@ -45,8 +45,8 @@ Cloud Browser
 </table>
 {% endif %}
 
-{% if file_infos %}
-<h2>Files</h2>
+{% if object_infos %}
+<h2>Objects</h2>
 <table>
   <thead>
     <th>Name</th>
@@ -55,7 +55,7 @@ Cloud Browser
     <th>Date</th>
   </thead>
   <tbody>
-    {% for info in file_infos %}
+    {% for info in object_infos %}
       <tr>
         <td><a href="{% url cloud_browser_browser info.path %}">
             {{ info.rel_path }}</a></td>
