@@ -1,6 +1,8 @@
 """Cloud browser views."""
 import os
+import cloudfiles as cf
 
+from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -67,7 +69,6 @@ def _get_object_infos(container_obj, object_path):
         info['rel_path'] = _relpath(info['name'], object_path)
         info['is_file'] = info.get('is_file', True)
 
-    print(object_infos)
     return object_infos
 
 
@@ -108,8 +109,16 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         container_infos = conn.list_containers_info()
 
     else:
-        container_obj = conn.get_container(container_path)
+        try:
+            container_obj = conn.get_container(container_path)
+        except cf.errors.NoSuchContainer:
+            raise Http404("No container at: %s" % container_path)
+
         object_infos = _get_object_infos(container_obj, object_path)
+        if not object_infos:
+            raise Http404("No objects at: %s" % object_path)
+
+        # TODO: Have a 'view object' if get single object succeeds.
 
     return render_to_response(template,
                               {'path': path,
