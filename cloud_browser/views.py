@@ -88,13 +88,6 @@ def _breadcrumbs(path):
 def browser(request, path='', template="cloud_browser/browser.html"):
     """View files in a file path.
 
-    Note the viewing results are different whether or not there is a
-    pseudo-directory marker present. If there is a not a pseudo-directory
-    up to the current level, we use a "prefix" match instead.
-
-    This ambiguity can be most properly addressed by adding pseudo-directory
-    markers for all file objects.
-
     :param request: The request.
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
