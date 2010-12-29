@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from cloud_browser.common import SEP, path_parts, path_join, path_yield, relpath
+from cloud_browser.common import SEP, path_parts, path_join, path_yield
 from cloud_browser.cloud import get_connection, CloudObject
 
 

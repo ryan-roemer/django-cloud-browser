@@ -1,11 +1,8 @@
 """Cloud abstractions and helpers."""
 # TODO: Add RetryPolicy class.
 
-import os
-
-from django.core.exceptions import ImproperlyConfigured
-
 from cloud_browser.common import SEP, path_join, basename
+
 
 class Config(object):
     """Cloud configuration."""
@@ -45,7 +42,9 @@ class Config(object):
     @classmethod
     def from_settings(cls):
         """Create configuration from Django settings or environment."""
+        import os
         from django.conf import settings
+        from django.core.exceptions import ImproperlyConfigured
 
         def _get_setting(name):
             """Get setting from settings.py or environment."""
@@ -82,27 +81,34 @@ class CloudObject(object):
     class Types(object):
         FILE = 'file'
         SUBDIR = 'subdirectory'
-    
-    def __init__(self, container, name, bytes=0, content_type='',
-            last_modified=None, obj_type=None):
-        """Initializer."""
+
+    def __init__(self, container, name, **kwargs):
+        """Initializer.
+
+        :param container: Container object.
+        :param name: Object name / path.
+        :kwarg bytes: Number of bytes in object.
+        :kwarg content_type: Document 'content-type'.
+        :kwarg last_modified: Last modified date.
+        :kwarg obj_type: Type of object (e.g., file or subdirectory).
+        """
         self.container = container
         self.name = name.rstrip(SEP)
-        self.bytes = bytes
-        self.content_type = content_type
-        self.last_modified = last_modified
-        self.type = obj_type or self.Types.FILE
+        self.bytes = kwargs.get('bytes', 0)
+        self.content_type = kwargs.get('content_type', '')
+        self.last_modified = kwargs.get('last_modified', None)
+        self.type = kwargs.get('obj_type', self.Types.FILE)
 
     @property
     def is_subdir(self):
         """Is a subdirectory?"""
         return self.type == self.Types.SUBDIR
-    
+
     @property
     def is_file(self):
         """Is a file object?"""
         return self.type == self.Types.FILE
-    
+
     @property
     def path(self):
         """Full path (including container)."""
@@ -129,8 +135,8 @@ class CloudObject(object):
     def from_file_info(cls, container, info_obj):
         """Create from regular info object."""
         return cls(container,
-                   info_obj['name'],
-                   info_obj['bytes'],
-                   info_obj['content_type'],
-                   info_obj['last_modified'],
-                   cls.Types.FILE)
+                   name=info_obj['name'],
+                   bytes=info_obj['bytes'],
+                   content_type=info_obj['content_type'],
+                   last_modified=info_obj['last_modified'],
+                   obj_type=cls.Types.FILE)
