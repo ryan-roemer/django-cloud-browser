@@ -68,3 +68,26 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                                'object_path': object_path,
                                'object_infos': object_infos},
                               context_instance=RequestContext(request))
+
+
+def view(_, path=''):
+    """View single file from path.
+
+    :param request: The request.
+    :param path: Path to resource, including container as first part of path.
+    :param template: Template to render.
+    """
+    container_path, object_path = path_parts(path)
+    conn = get_connection()
+    try:
+        container_obj = conn.get_container(container_path)
+    except cf.errors.NoSuchContainer:
+        raise Http404("No container at: %s" % container_path)
+
+    try:
+        file_obj = container_obj.get_object(object_path)
+    except cf.errors.NoSuchObject:
+        raise Http404("No object at: %s" % object_path)
+
+    print(file_obj)
+    raise Http404("TODO: IMPLEMENT ME: %s" % object_path)

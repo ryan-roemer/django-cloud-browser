@@ -45,8 +45,13 @@ Cloud Browser - {{ path }}
   <tbody>
     {% for info in object_infos %}
       <tr>
+        {% if info.is_file %}
+        <td><a href="{% url cloud_browser_view info.path %}">
+            {{ info.basename }}</a></td>
+        {% else %}
         <td><a href="{% url cloud_browser_browser info.path %}">
             {{ info.basename }}</a></td>
+        {% endif %}
         <td>{{ info.bytes }}</td>
         <td>{{ info.content_type }}</td>
         <td>{{ info.last_modified }}</td>
