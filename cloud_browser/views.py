@@ -1,7 +1,7 @@
 """Cloud browser views."""
 import cloudfiles as cf
 
-from django.http import Http404
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -70,13 +70,15 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                               context_instance=RequestContext(request))
 
 
-def view(_, path=''):
+def view(request, path=''):
     """View single file from path.
 
     :param request: The request.
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
+    import mimetypes
+
     container_path, object_path = path_parts(path)
     conn = get_connection()
     try:
@@ -89,5 +91,17 @@ def view(_, path=''):
     except cf.errors.NoSuchObject:
         raise Http404("No object at: %s" % object_path)
 
-    print(file_obj)
-    raise Http404("TODO: IMPLEMENT ME: %s" % object_path)
+    content_type = file_obj.content_type
+    guessed_type, encoding = mimetypes.guess_type(file_obj.name)
+    if content_type in (None, '', 'application/octet-stream'):
+        content_type = guessed_type
+
+    response = HttpResponse(content=file_obj.read(),
+                            content_type=content_type)
+
+    # Check if compression allowed. If so, set up pass through
+    use_gzip = 'gzip' in request.META.get("HTTP_ACCEPT_ENCODING", '')
+    if use_gzip and encoding == 'gzip':
+        response['Content-Encoding'] = 'gzip'
+
+    return response
