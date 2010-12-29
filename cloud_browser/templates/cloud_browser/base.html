@@ -15,9 +15,10 @@
 </head>
 <body>
 {% block body %}
-  {# {% block menu %}{% endblock %} #}
-  {# {% block content_title %}{% endblock %} #}
-  {% block content %}{% endblock %}
+  {% block breadcrumbs %}
+    {% include "cloud_browser/_breadcrumbs.html" %}
+  {% endblock %}
+  <div id="cb-content">{% block content %}{% endblock %}</div>
 {% endblock %}
 </body>
 </html>

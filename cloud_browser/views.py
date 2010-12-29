@@ -69,6 +69,19 @@ def _get_object_infos(container_obj, object_path):
     return object_infos
 
 
+def _breadcrumbs(path):
+    """Return breadcrumb dict from path."""
+
+    full = None
+    crumbs = []
+    if path:
+        for part in path.strip('/').split('/'):
+            full = os.path.join(full, part) if full else part
+            crumbs.append((full, part))
+
+    return crumbs
+
+
 def browser(request, path='', template="cloud_browser/browser.html"):
     """View files in a file path.
 
@@ -98,6 +111,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
     return render_to_response(template,
                               {'path': path,
+                               'breadcrumbs': _breadcrumbs(path),
                                'container_path': container_path,
                                'container_infos': container_infos,
                                'object_path': object_path,
