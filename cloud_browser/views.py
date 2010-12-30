@@ -91,17 +91,17 @@ def view(request, path=''):
     except cf.errors.NoSuchObject:
         raise Http404("No object at: %s" % object_path)
 
+    # Get content-type and guess.
     content_type = file_obj.content_type
     guessed_type, encoding = mimetypes.guess_type(file_obj.name)
     if content_type in (None, '', 'application/octet-stream'):
         content_type = guessed_type
 
-    response = HttpResponse(content=file_obj.read(),
+    content = file_obj.read()
+    response = HttpResponse(content=content,
                             content_type=content_type)
+    if encoding not in (None, ''):
+        response['Content-Encoding'] = encoding
 
-    # Check if compression allowed. If so, set up pass through
-    use_gzip = 'gzip' in request.META.get("HTTP_ACCEPT_ENCODING", '')
-    if use_gzip and encoding == 'gzip':
-        response['Content-Encoding'] = 'gzip'
-
+    # TODO: Need to handle .gz.xml (strip suffixes while no content_encoding).
     return response
