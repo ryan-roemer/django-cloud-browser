@@ -73,9 +73,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 def view(_, path=''):
     """View single file from path.
 
-    :param request: The request.
     :param path: Path to resource, including container as first part of path.
-    :param template: Template to render.
     """
     container_path, object_path = path_parts(path)
     conn = get_connection()
