@@ -1,5 +1,6 @@
 """Cloud abstractions and helpers."""
 # TODO: Add RetryPolicy class.
+import mimetypes
 
 from cloud_browser.common import SEP, path_join, basename
 
@@ -96,6 +97,7 @@ class CloudObject(object):
         self.name = name.rstrip(SEP)
         self.bytes = kwargs.get('bytes', 0)
         self.content_type = kwargs.get('content_type', '')
+        self.content_encoding = None  # RS has no content encoding.
         self.last_modified = kwargs.get('last_modified', None)
         self.type = kwargs.get('obj_type', self.Types.FILE)
 
@@ -119,6 +121,27 @@ class CloudObject(object):
         """Base name from rightmost separator."""
         return basename(self.name)
 
+    @property
+    def smart_content_type(self):
+        """Smart content type."""
+        content_type = self.content_type
+        if content_type in (None, '', 'application/octet-stream'):
+            content_type, _ = mimetypes.guess_type(self.name)
+
+        return content_type
+
+    @property
+    def smart_content_encoding(self):
+        """Smart content encoding."""
+        encoding = self.content_encoding
+        if not encoding:
+            base_list = self.basename.split('.')
+            while (not encoding) and len(base_list) > 1:
+                _, encoding = mimetypes.guess_type('.'.join(base_list))
+                base_list.pop()
+
+        return encoding
+
     @classmethod
     def from_info(cls, container, info_obj):
         """Create from subdirectory or file info object."""
@@ -139,4 +162,14 @@ class CloudObject(object):
                    bytes=info_obj['bytes'],
                    content_type=info_obj['content_type'],
                    last_modified=info_obj['last_modified'],
+                   obj_type=cls.Types.FILE)
+
+    @classmethod
+    def from_obj(cls, container, file_obj):
+        """Create from regular info object."""
+        return cls(container,
+                   name=file_obj.name,
+                   bytes=file_obj.size,
+                   content_type=file_obj.content_type,
+                   last_modified=file_obj.last_modified,
                    obj_type=cls.Types.FILE)

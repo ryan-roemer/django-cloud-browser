@@ -77,8 +77,6 @@ def view(request, path=''):
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
-    import mimetypes
-
     container_path, object_path = path_parts(path)
     conn = get_connection()
     try:
@@ -91,17 +89,12 @@ def view(request, path=''):
     except cf.errors.NoSuchObject:
         raise Http404("No object at: %s" % object_path)
 
-    # Get content-type and guess.
-    content_type = file_obj.content_type
-    guessed_type, encoding = mimetypes.guess_type(file_obj.name)
-    if content_type in (None, '', 'application/octet-stream'):
-        content_type = guessed_type
-
-    content = file_obj.read()
-    response = HttpResponse(content=content,
-                            content_type=content_type)
+    # Get content-type and encoding.
+    storage_obj = CloudObject.from_obj(container_obj, file_obj)
+    content_type = storage_obj.smart_content_type
+    encoding = storage_obj.smart_content_encoding
+    response = HttpResponse(content=file_obj.read(), content_type=content_type)
     if encoding not in (None, ''):
         response['Content-Encoding'] = encoding
 
-    # TODO: Need to handle .gz.xml (strip suffixes while no content_encoding).
     return response
