@@ -56,9 +56,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
         object_infos = _get_objects(container_obj, object_path)
         if not object_infos:
-            raise Http404("No objects at: %s" % object_path)
-
-        # TODO: Have a 'view object' if get single object succeeds.
+            # Try the view document instead.
+            return document(request, path)
 
     return render_to_response(template,
                               {'path': path,
@@ -70,8 +69,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                               context_instance=RequestContext(request))
 
 
-def view(_, path=''):
-    """View single file from path.
+def document(_, path=''):
+    """View single document from path.
 
     :param path: Path to resource, including container as first part of path.
     """
