@@ -70,7 +70,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                               context_instance=RequestContext(request))
 
 
-def view(request, path=''):
+def view(_, path=''):
     """View single file from path.
 
     :param request: The request.
