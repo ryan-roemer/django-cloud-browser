@@ -9,13 +9,12 @@ from cloud_browser.common import SEP, path_parts, path_join, path_yield
 from cloud_browser.cloud import get_connection, CloudObject
 
 
-def _get_objects(container_obj, object_path, marker=None):
+def _get_objects(container_obj, object_path, marker=None, limit=20):
     """Get object information."""
 
-    object_limit = 20
     object_path = object_path + SEP if object_path else ''
     object_infos = container_obj.list_objects_info(
-        limit=object_limit, delimiter=SEP, prefix=object_path, marker=marker)
+        limit=limit, delimiter=SEP, prefix=object_path, marker=marker)
 
     return [CloudObject.from_info(container_obj, x) for x in object_infos]
 
@@ -40,27 +39,44 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     :param template: Template to render.
     """
     container_path, object_path = path_parts(path)
+    marker = request.GET.get('marker', None)
+    limit = int(request.GET.get('limit', 20))
     container_infos = None
     object_infos = None
     conn = get_connection()
+
+    # Checks
+    if limit < 0 or limit >= 10000 -1:
+        raise Exception("Limit parameter is out of bounds: %s" % limit)
 
     if container_path == '':
         # List containers.
         container_infos = conn.list_containers_info()
 
     else:
+        # Q1: Get the container.
         try:
             container_obj = conn.get_container(container_path)
         except cf.errors.NoSuchContainer:
             raise Http404("No container at: %s" % container_path)
 
-        object_infos = _get_objects(container_obj, object_path)
+        # Q2: Get objects for instant list, plus one to check "next".
+        object_infos = _get_objects(container_obj, object_path, marker, limit+1)
+        marker = None
+
         if not object_infos:
             # Try the view document instead.
             return document(request, path)
 
+        # If over limit, strip last item and set marker.
+        elif len(object_infos) == limit + 1:
+            object_infos = object_infos[:limit]
+            marker = object_infos[-1].name
+
     return render_to_response(template,
                               {'path': path,
+                               'marker': marker,
+                               'limit': limit,
                                'breadcrumbs': _breadcrumbs(path),
                                'container_path': container_path,
                                'container_infos': container_infos,

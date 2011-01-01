@@ -36,12 +36,14 @@ Cloud Browser - {{ path }}
 <h2>Objects</h2>
 <table>
   <thead>
-    <th>Name</th>
-    <th>Bytes</th>
-    <th>Content Type</th>
-    <th>Encoding</th>
-    <th>Date</th>
-    <th>Obj. Type</th>
+    <tr>
+      <th>Name</th>
+      <th>Bytes</th>
+      <th>Content Type</th>
+      <th>Encoding</th>
+      <th>Date</th>
+      <th>Obj. Type</th>
+    </tr>
   </thead>
   <tbody>
     {% for info in object_infos %}
@@ -61,6 +63,15 @@ Cloud Browser - {{ path }}
       </tr>
     {% endfor %}
   </tbody>
+  <tfooter>
+    <tr>
+      <td colspan="6">
+        {% if marker %}
+        <a href="{% url cloud_browser_browser path %}?marker={{ marker|urlencode }}&limit={{ limit|urlencode }}">Next</a> &raquo;
+        {% endif %}
+      </td>
+    </tr>
+  </tfooter>
 </table>
 {% endif %}
 {% endblock %}
