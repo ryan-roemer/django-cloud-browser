@@ -61,7 +61,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             raise Http404("No container at: %s" % container_path)
 
         # Q2: Get objects for instant list, plus one to check "next".
-        object_infos = _get_objects(container_obj, object_path, marker, limit+1)
+        object_infos = _get_objects(
+            container_obj, object_path, marker, limit+1)
         marker = None
 
         if not object_infos:
