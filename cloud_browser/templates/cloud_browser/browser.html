@@ -39,6 +39,7 @@ Cloud Browser - {{ path }}
     <th>Name</th>
     <th>Bytes</th>
     <th>Content Type</th>
+    <th>Encoding</th>
     <th>Date</th>
     <th>Obj. Type</th>
   </thead>
@@ -53,8 +54,9 @@ Cloud Browser - {{ path }}
             {{ info.basename }}</a></td>
         {% endif %}
         <td>{{ info.bytes }}</td>
-        <td>{{ info.content_type }}</td>
-        <td>{{ info.last_modified }}</td>
+        <td>{{ info.smart_content_type|default_if_none:'' }}</td>
+        <td>{{ info.smart_content_encoding|default_if_none:'' }}</td>
+        <td>{{ info.last_modified|default_if_none:'' }}</td>
         <td>{{ info.type }}</td>
       </tr>
     {% endfor %}

@@ -9,13 +9,13 @@ from cloud_browser.common import SEP, path_parts, path_join, path_yield
 from cloud_browser.cloud import get_connection, CloudObject
 
 
-def _get_objects(container_obj, object_path):
+def _get_objects(container_obj, object_path, marker=None):
     """Get object information."""
 
     object_limit = 20
     object_path = object_path + SEP if object_path else ''
     object_infos = container_obj.list_objects_info(
-        limit=object_limit, delimiter=SEP, prefix=object_path)
+        limit=object_limit, delimiter=SEP, prefix=object_path, marker=marker)
 
     return [CloudObject.from_info(container_obj, x) for x in object_infos]
 
