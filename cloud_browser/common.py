@@ -12,6 +12,19 @@ PARENT = ".."
 
 
 ###############################################################################
+# General.
+###############################################################################
+def get_int(value, default, test_fn=lambda x: True):
+    """Convert to integer."""
+    try:
+        converted = int(value)
+    except ValueError:
+        return default
+
+    return converted if test_fn(converted) else default
+
+
+###############################################################################
 # Path helpers.
 ###############################################################################
 def basename(path):

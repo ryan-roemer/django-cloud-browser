@@ -5,8 +5,12 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from cloud_browser.common import SEP, path_parts, path_join, path_yield
+from cloud_browser.common import SEP, path_parts, path_join, path_yield, \
+    get_int
 from cloud_browser.cloud import get_connection, CloudObject
+
+
+DEFAULT_LIMIT = 20
 
 
 def _get_objects(container_obj, object_path, marker=None, limit=20):
@@ -38,16 +42,17 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
+    # Inputs.
     container_path, object_path = path_parts(path)
     marker = request.GET.get('marker', None)
-    limit = int(request.GET.get('limit', 20))
+    limit = get_int(request.GET.get('limit', DEFAULT_LIMIT),
+                    DEFAULT_LIMIT,
+                    lambda x: x > 0 and x < 10000 - 1)
+
+    # Other variables.
     container_infos = None
     object_infos = None
     conn = get_connection()
-
-    # Checks
-    if limit < 0 or limit >= 10000 -1:
-        raise Exception("Limit parameter is out of bounds: %s" % limit)
 
     if container_path == '':
         # List containers.
