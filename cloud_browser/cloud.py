@@ -1,5 +1,4 @@
 """Cloud abstractions and helpers."""
-# TODO: Add RetryPolicy class.
 import mimetypes
 
 from cloud_browser.common import SEP, path_join, basename
@@ -43,21 +42,12 @@ class Config(object):
     @classmethod
     def from_settings(cls):
         """Create configuration from Django settings or environment."""
-        import os
-        from django.conf import settings
+        from cloud_browser.app_settings import settings
         from django.core.exceptions import ImproperlyConfigured
 
-        def _get_setting(name):
-            """Get setting from settings.py or environment."""
-            # Prefer settings, then environment.
-            value = getattr(settings, name, None)
-            if not value:
-                value = os.environ.get(name, None)
-            return value
-
-        account = _get_setting('CLOUD_BROWSER_RACKSPACE_ACCOUNT')
-        secret_key = _get_setting('CLOUD_BROWSER_RACKSPACE_SECRET_KEY')
-        servicenet = _get_setting('CLOUD_BROWSER_RACKSPACE_SERVICENET')
+        account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
+        secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
+        servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
 
         if not (account and secret_key):
             raise ImproperlyConfigured("No suitable credentials found.")
