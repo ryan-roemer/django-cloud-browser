@@ -11,7 +11,7 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block content %}
-{% if container_infos %}
+{% if containers %}
 <h2>Containers</h2>
 <table>
   <thead>
@@ -20,19 +20,19 @@ Cloud Browser - {{ path }}
     <th>Bytes</th>
   </thead>
   <tbody>
-    {% for info in container_infos %}
+    {% for cont in containers %}
       <tr>
-        <td><a href="{% url cloud_browser_browser info.name %}">
-            {{ info.name }}</a></td>
-        <td>{{ info.count }}</td>
-        <td>{{ info.bytes }}</td>
+        <td><a href="{% url cloud_browser_browser cont.name %}">
+            {{ cont.name }}</a></td>
+        <td>{{ cont.count }}</td>
+        <td>{{ cont.size }}</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
 {% endif %}
 
-{% if object_infos %}
+{% if objects %}
 <h2>Objects</h2>
 <table>
   <thead>
@@ -46,20 +46,20 @@ Cloud Browser - {{ path }}
     </tr>
   </thead>
   <tbody>
-    {% for info in object_infos %}
+    {% for obj in objects %}
       <tr>
-        {% if info.is_file %}
-        <td><a href="{% url cloud_browser_document info.path %}">
-            {{ info.basename }}</a></td>
+        {% if obj.is_file %}
+        <td><a href="{% url cloud_browser_document obj.path %}">
+            {{ obj.basename }}</a></td>
         {% else %}
-        <td><a href="{% url cloud_browser_browser info.path %}">
-            {{ info.basename }}</a></td>
+        <td><a href="{% url cloud_browser_browser obj.path %}">
+            {{ obj.basename }}</a></td>
         {% endif %}
-        <td>{{ info.bytes }}</td>
-        <td>{{ info.smart_content_type|default_if_none:'' }}</td>
-        <td>{{ info.smart_content_encoding|default_if_none:'' }}</td>
-        <td>{{ info.last_modified|default_if_none:'' }}</td>
-        <td>{{ info.type }}</td>
+        <td>{{ obj.bytes }}</td>
+        <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
+        <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
+        <td>{{ obj.last_modified|default_if_none:'' }}</td>
+        <td>{{ obj.type }}</td>
       </tr>
     {% endfor %}
   </tbody>
