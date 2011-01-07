@@ -1,10 +1,8 @@
 """Cloud configuration."""
-from cloud_browser.cloud.rackspace import RackspaceConnection
 
 
 class Config(object):
     """Cloud configuration helper."""
-    conn_cls = RackspaceConnection
     __singleton = None
 
     def __init__(self, connection):
@@ -17,14 +15,19 @@ class Config(object):
         from cloud_browser.app_settings import settings
         from django.core.exceptions import ImproperlyConfigured
 
-        account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
-        secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
-        servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
+        conn = None
+        if conn is None:
+            # Try Rackspace
+            account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
+            secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
+            servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
+            if (account and secret_key):
+                from cloud_browser.cloud.rackspace import RackspaceConnection
+                conn = RackspaceConnection(account, secret_key, servicenet)
 
-        if not (account and secret_key):
+        if not conn:
             raise ImproperlyConfigured("No suitable credentials found.")
 
-        conn = cls.conn_cls(account, secret_key, servicenet)
         return cls(conn)
 
     @classmethod
