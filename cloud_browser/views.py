@@ -1,12 +1,10 @@
 """Cloud browser views."""
-import cloudfiles as cf
-
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from cloud_browser.cloud import get_connection, errors
 from cloud_browser.common import path_parts, path_join, path_yield, get_int
-from cloud_browser.cloud import get_connection
 
 
 DEFAULT_LIMIT = 20
@@ -51,7 +49,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         # Q1: Get the container.
         try:
             container = conn.get_container(container_path)
-        except cf.errors.NoSuchContainer:
+        except errors.NoContainerException:
             raise Http404("No container at: %s" % container_path)
 
         # Q2: Get objects for instant list, plus one to check "next".
@@ -88,12 +86,12 @@ def document(_, path=''):
     conn = get_connection()
     try:
         container = conn.get_container(container_path)
-    except cf.errors.NoSuchContainer:
+    except errors.NoContainerException:
         raise Http404("No container at: %s" % container_path)
 
     try:
         storage_obj = container.get_object(object_path)
-    except cf.errors.NoSuchObject:
+    except errors.NoObjectException:
         raise Http404("No object at: %s" % object_path)
 
     # Get content-type and encoding.

@@ -1,7 +1,54 @@
 """Cloud API base abstraction."""
+import cloudfiles as cf
 import mimetypes
+import sys
 
+from cloud_browser.cloud import errors
 from cloud_browser.common import SEP, path_join, basename
+
+
+class CloudExceptionWrapper(object):
+    """Exception translator."""
+    translations = {}
+    _excepts = None
+
+    @classmethod
+    def excepts(cls):
+        """Exception tuple."""
+        if cls._excepts is None:
+            cls._excepts = tuple(cls.translations.keys())
+        return cls._excepts
+
+    def __call__(self, operation):
+        """Call and wrap exceptions."""
+
+        def wrapped(*args, **kwargs):
+            """Wrapped function."""
+
+            try:
+                return operation(*args, **kwargs)
+            except self.excepts(), exc:
+                # Find actual class.
+                key_cls = None
+                for key in self.translations.keys():
+                    if isinstance(exc, key):
+                        key_cls = key
+                        break
+
+                # Wrap and raise with stack intact.
+                new_cls = self.translations[key_cls]
+                raise new_cls, new_cls(exc), sys.exc_info()[2]
+
+        return wrapped
+
+
+class RackspaceExceptionWrapper(CloudExceptionWrapper):
+    """Exception translator."""
+    translations = {
+        cf.errors.NoSuchContainer: errors.NoContainerException,
+        cf.errors.NoSuchObject: errors.NoObjectException,
+    }
+wrap_rs_errors = RackspaceExceptionWrapper()  # pylint: disable=C0103
 
 
 class CloudObject(object):
@@ -31,6 +78,7 @@ class CloudObject(object):
         self.__native = None
 
     @property
+    @wrap_rs_errors
     def native_obj(self):
         """Return native storage object."""
         if self.__native is None:
@@ -80,6 +128,7 @@ class CloudObject(object):
 
         return encoding
 
+    @wrap_rs_errors
     def read(self):
         """Return contents of object."""
         return self.native_obj.read()
@@ -131,6 +180,7 @@ class CloudContainer(object):
         self.__native = None
 
     @property
+    @wrap_rs_errors
     def native_container(self):
         """Native container object."""
         if self.__native is None:
@@ -139,6 +189,7 @@ class CloudContainer(object):
         return self.__native
 
     # TODO: set limit to DEFAULT_LIMIT
+    @wrap_rs_errors
     def get_objects(self, path, marker=None, limit=20):
         """Get objects."""
         path = path + SEP if path else ''
@@ -147,6 +198,7 @@ class CloudContainer(object):
 
         return [self.obj_cls.from_info(self, x) for x in object_infos]
 
+    @wrap_rs_errors
     def get_object(self, path):
         """Get single object."""
         obj = self.native_container.get_object(path)
@@ -172,10 +224,9 @@ class CloudConnection(object):
 
         return self.__native
 
+    @wrap_rs_errors
     def _get_connection(self):
         """Return native connection object."""
-        import cloudfiles as cf
-
         kwargs = {
             'username': self.account,
             'api_key': self.secret_key,
@@ -188,12 +239,14 @@ class CloudConnection(object):
 
         return cf.get_connection(**kwargs)  # pylint: disable=W0142
 
+    @wrap_rs_errors
     def get_containers(self):
         """Return available containers."""
         infos = self.native_conn.list_containers_info()
         return [self.cont_cls(self, i['name'], i['count'], i['bytes'])
                 for i in infos]
 
+    @wrap_rs_errors
     def get_container(self, path):
         """Return single container."""
         cont = self.native_conn.get_container(path)
