@@ -1,7 +1,7 @@
 """Fabric file."""
 from __future__ import with_statement
 
-from fabric.api import cd, local
+from fabric.api import abort, local
 
 ###############################################################################
 # Constants
@@ -37,7 +37,9 @@ def pep8():
     """Run pep8 style checker."""
     includes = "-r %s" % " ".join(CHECK_INCLUDES)
     ignores = "--ignore=%s" % ",".join(PEP8_IGNORES) if PEP8_IGNORES else ''
-    local("pep8 %s %s" % (includes, ignores), capture=False)
+    errors = local("pep8 %s %s" % (includes, ignores), capture=False)
+    if errors.strip():
+        abort("PEP8 failed.")
 
 
 def check():
@@ -49,18 +51,15 @@ def check():
 ###############################################################################
 # Django Targets
 ###############################################################################
-def _manage(target, extra=''):
+def _manage(target, extra='', proj_settings=PROJ_SETTINGS):
     """Generic wrapper for ``django-admin.py``."""
     local("export PYTHONPATH='' && "
           "export DJANGO_SETTINGS_MODULE='%s' && "
           "django-admin.py %s %s" %
-          (PROJ_SETTINGS, target, extra),
+          (proj_settings, target, extra),
           capture=False)
 
 
-def run_server(addr="127.0.0.1:8000"):
+def run_server(addr="127.0.0.1:8000", proj_settings=PROJ_SETTINGS):
     """Run Django dev. server."""
-    _manage("runserver", addr)
-    with cd(PROJ):
-        local("python manage.py runserver --pythonpath='..' %s" % addr,
-              capture=False)
+    _manage("runserver", addr, proj_settings)
