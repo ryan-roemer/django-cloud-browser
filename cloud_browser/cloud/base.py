@@ -1,68 +1,25 @@
 """Cloud API base abstraction."""
-import cloudfiles as cf
 import mimetypes
-import sys
 
-from cloud_browser.cloud import errors
 from cloud_browser.common import SEP, path_join, basename
 
 
-class CloudExceptionWrapper(object):
-    """Exception translator."""
-    translations = {}
-    _excepts = None
-
-    @classmethod
-    def excepts(cls):
-        """Exception tuple."""
-        if cls._excepts is None:
-            cls._excepts = tuple(cls.translations.keys())
-        return cls._excepts
-
-    def __call__(self, operation):
-        """Call and wrap exceptions."""
-
-        def wrapped(*args, **kwargs):
-            """Wrapped function."""
-
-            try:
-                return operation(*args, **kwargs)
-            except self.excepts(), exc:
-                # Find actual class.
-                key_cls = None
-                for key in self.translations.keys():
-                    if isinstance(exc, key):
-                        key_cls = key
-                        break
-
-                # Wrap and raise with stack intact.
-                new_exc = self.translations[key_cls](unicode(exc))
-                raise new_exc.__class__, new_exc, sys.exc_info()[2]
-
-        return wrapped
-
-
-class RackspaceExceptionWrapper(CloudExceptionWrapper):
-    """Exception translator."""
-    translations = {
-        cf.errors.NoSuchContainer: errors.NoContainerException,
-        cf.errors.NoSuchObject: errors.NoObjectException,
-    }
-wrap_rs_errors = RackspaceExceptionWrapper()  # pylint: disable=C0103
+class CloudObjectTypes(object):
+    """Cloud object types helper."""
+    FILE = 'file'
+    SUBDIR = 'subdirectory'
 
 
 class CloudObject(object):
     """Cloud object wrapper."""
-    class Types(object):
-        FILE = 'file'
-        SUBDIR = 'subdirectory'
+    type_cls = CloudObjectTypes
 
     def __init__(self, container, name, **kwargs):
         """Initializer.
 
         :param container: Container object.
         :param name: Object name / path.
-        :kwarg bytes: Number of bytes in object.
+        :kwarg size: Number of bytes in object.
         :kwarg content_type: Document 'content-type'.
         :kwarg content_encoding: Document 'content-encoding'.
         :kwarg last_modified: Last modified date.
@@ -70,32 +27,34 @@ class CloudObject(object):
         """
         self.container = container
         self.name = name.rstrip(SEP)
-        self.bytes = kwargs.get('bytes', 0)
+        self.size = kwargs.get('size', 0)
         self.content_type = kwargs.get('content_type', '')
         self.content_encoding = kwargs.get('content_encoding', '')
         self.last_modified = kwargs.get('last_modified', None)
-        self.type = kwargs.get('obj_type', self.Types.FILE)
+        self.type = kwargs.get('obj_type', self.type_cls.FILE)
         self.__native = None
 
     @property
-    @wrap_rs_errors
     def native_obj(self):
-        """Return native storage object."""
+        """Native storage object."""
         if self.__native is None:
-            self.__native = \
-                self.container.native_container.get_object(self.name)
+            self.__native = self._get_object()
 
         return self.__native
+
+    def _get_object(self):
+        """Return native storage object."""
+        raise NotImplementedError("Must implement.")
 
     @property
     def is_subdir(self):
         """Is a subdirectory?"""
-        return self.type == self.Types.SUBDIR
+        return self.type == self.type_cls.SUBDIR
 
     @property
     def is_file(self):
         """Is a file object?"""
-        return self.type == self.Types.FILE
+        return self.type == self.type_cls.FILE
 
     @property
     def path(self):
@@ -128,47 +87,17 @@ class CloudObject(object):
 
         return encoding
 
-    @wrap_rs_errors
     def read(self):
         """Return contents of object."""
-        return self.native_obj.read()
+        return self._read()
 
-    @classmethod
-    def from_info(cls, container, info_obj):
-        """Create from subdirectory or file info object."""
-        create_fn = cls.from_subdir if 'subdir' in info_obj \
-            else cls.from_file_info
-        return create_fn(container, info_obj)
-
-    @classmethod
-    def from_subdir(cls, container, info_obj):
-        """Create from subdirectory info object."""
-        return cls(container, info_obj['subdir'], obj_type=cls.Types.SUBDIR)
-
-    @classmethod
-    def from_file_info(cls, container, info_obj):
-        """Create from regular info object."""
-        return cls(container,
-                   name=info_obj['name'],
-                   bytes=info_obj['bytes'],
-                   content_type=info_obj['content_type'],
-                   last_modified=info_obj['last_modified'],
-                   obj_type=cls.Types.FILE)
-
-    @classmethod
-    def from_obj(cls, container, file_obj):
-        """Create from regular info object."""
-        return cls(container,
-                   name=file_obj.name,
-                   bytes=file_obj.size,
-                   content_type=file_obj.content_type,
-                   last_modified=file_obj.last_modified,
-                   obj_type=cls.Types.FILE)
+    def _read(self):
+        """Return contents of object."""
+        raise NotImplementedError("Must implement.")
 
 
-# TODO: Wrap rs exceptions.
 class CloudContainer(object):
-    """Cloud object wrapper."""
+    """Cloud container wrapper."""
     obj_cls = CloudObject
 
     def __init__(self, conn, name=None, count=None, size=None):
@@ -180,7 +109,6 @@ class CloudContainer(object):
         self.__native = None
 
     @property
-    @wrap_rs_errors
     def native_container(self):
         """Native container object."""
         if self.__native is None:
@@ -188,25 +116,22 @@ class CloudContainer(object):
 
         return self.__native
 
+    def _get_container(self):
+        """Return native container object."""
+        raise NotImplementedError("Must implement.")
+
     # TODO: set limit to DEFAULT_LIMIT
-    @wrap_rs_errors
     def get_objects(self, path, marker=None, limit=20):
         """Get objects."""
-        path = path + SEP if path else ''
-        object_infos = self.native_container.list_objects_info(
-            limit=limit, delimiter=SEP, prefix=path, marker=marker)
+        raise NotImplementedError("Must implement.")
 
-        return [self.obj_cls.from_info(self, x) for x in object_infos]
-
-    @wrap_rs_errors
     def get_object(self, path):
         """Get single object."""
-        obj = self.native_container.get_object(path)
-        return self.obj_cls.from_obj(self, obj)
+        raise NotImplementedError("Must implement.")
 
 
 class CloudConnection(object):
-    """Cloud connection abstraction."""
+    """Cloud connection wrapper."""
     cont_cls = CloudContainer
 
     def __init__(self, account, secret_key, rs_servicenet=False):
@@ -218,39 +143,20 @@ class CloudConnection(object):
 
     @property
     def native_conn(self):
-        """Return native connection object."""
+        """Native connection object."""
         if self.__native is None:
             self.__native = self._get_connection()
 
         return self.__native
 
-    @wrap_rs_errors
     def _get_connection(self):
         """Return native connection object."""
-        kwargs = {
-            'username': self.account,
-            'api_key': self.secret_key,
-        }
+        raise NotImplementedError("Must implement.")
 
-        # Only add kwarg for servicenet if True because user could set
-        # environment variable 'RACKSPACE_SERVICENET' separately.
-        if self.rs_servicenet:
-            kwargs['servicenet'] = True
-
-        return cf.get_connection(**kwargs)  # pylint: disable=W0142
-
-    @wrap_rs_errors
     def get_containers(self):
         """Return available containers."""
-        infos = self.native_conn.list_containers_info()
-        return [self.cont_cls(self, i['name'], i['count'], i['bytes'])
-                for i in infos]
+        raise NotImplementedError("Must implement.")
 
-    @wrap_rs_errors
     def get_container(self, path):
         """Return single container."""
-        cont = self.native_conn.get_container(path)
-        return self.cont_cls(self,
-                             cont.name,
-                             cont.object_count,
-                             cont.size_used)
+        raise NotImplementedError("Must implement.")

@@ -1,10 +1,10 @@
 """Cloud configuration."""
-from cloud_browser.cloud.base import CloudConnection
+from cloud_browser.cloud.rackspace import RackspaceConnection
 
 
 class Config(object):
     """Cloud configuration helper."""
-    conn_cls = CloudConnection
+    conn_cls = RackspaceConnection
     __singleton = None
 
     def __init__(self, connection):
