@@ -15,15 +15,17 @@ Cloud Browser - {{ path }}
 <h2>Containers</h2>
 <table>
   <thead>
-    <th>Name</th>
-    <th>Count</th>
-    <th>Bytes</th>
+    <tr>
+      <th>Name</th>
+      <th>Count</th>
+      <th>Size (Bytes)</th>
+    </tr>
   </thead>
   <tbody>
     {% for cont in containers %}
       <tr>
-        <td><a href="{% url cloud_browser_browser cont.name %}">
-            {{ cont.name }}</a></td>
+        <td><a href="{% url cloud_browser_browser cont.name %}"
+           >{{ cont.name }}</a></td>
         <td>{{ cont.count }}</td>
         <td>{{ cont.size }}</td>
       </tr>
@@ -38,11 +40,11 @@ Cloud Browser - {{ path }}
   <thead>
     <tr>
       <th>Name</th>
-      <th>Bytes</th>
+      <th>Type</th>
       <th>Content Type</th>
       <th>Encoding</th>
+      <th>Size (Bytes)</th>
       <th>Date</th>
-      <th>Obj. Type</th>
     </tr>
   </thead>
   <tbody>
@@ -55,11 +57,11 @@ Cloud Browser - {{ path }}
         <td><a href="{% url cloud_browser_browser obj.path %}">
             {{ obj.basename }}</a></td>
         {% endif %}
-        <td>{{ obj.bytes }}</td>
+        <td>{{ obj.type }}</td>
         <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
         <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
+        <td>{{ obj.size }}</td>
         <td>{{ obj.last_modified|default_if_none:'' }}</td>
-        <td>{{ obj.type }}</td>
       </tr>
     {% endfor %}
   </tbody>

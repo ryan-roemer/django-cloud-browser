@@ -1,4 +1,9 @@
 """Rackspace cloud wrapper."""
+try:
+    import cloudfiles  # pylint: disable=F0401
+except ImportError:
+    cloudfiles = None  # pylint: disable=C0103
+
 
 from cloud_browser.cloud import errors, base
 from cloud_browser.common import SEP
@@ -6,8 +11,6 @@ from cloud_browser.common import SEP
 
 class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
-    import cloudfiles
-
     translations = {
         cloudfiles.errors.NoSuchContainer: errors.NoContainerException,
         cloudfiles.errors.NoSuchObject: errors.NoObjectException,
@@ -100,8 +103,6 @@ class RackspaceConnection(base.CloudConnection):
     @wrap_rs_errors
     def _get_connection(self):
         """Return native connection object."""
-        import cloudfiles
-
         kwargs = {
             'username': self.account,
             'api_key': self.secret_key,
