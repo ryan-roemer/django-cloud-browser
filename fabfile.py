@@ -1,7 +1,7 @@
 """Fabric file."""
 from __future__ import with_statement
 
-from fabric.api import abort, local
+from fabric.api import abort, local, settings
 
 ###############################################################################
 # Constants
@@ -37,15 +37,18 @@ def pep8():
     """Run pep8 style checker."""
     includes = "-r %s" % " ".join(CHECK_INCLUDES)
     ignores = "--ignore=%s" % ",".join(PEP8_IGNORES) if PEP8_IGNORES else ''
-    errors = local("pep8 %s %s" % (includes, ignores), capture=False)
-    if errors.strip():
+    with settings(warn_only=True):
+        results = local("pep8 %s %s" % (includes, ignores), capture=True)
+    errors = results.strip() if results else None
+    if errors:
+        print(errors)
         abort("PEP8 failed.")
 
 
 def check():
     """Run all checkers."""
-    pylint()
     pep8()
+    pylint()
 
 
 ###############################################################################
