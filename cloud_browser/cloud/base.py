@@ -36,8 +36,8 @@ class CloudExceptionWrapper(object):
                         break
 
                 # Wrap and raise with stack intact.
-                new_cls = self.translations[key_cls]
-                raise new_cls, new_cls(exc), sys.exc_info()[2]
+                new_exc = self.translations[key_cls](unicode(exc))
+                raise new_exc.__class__, new_exc, sys.exc_info()[2]
 
         return wrapped
 
