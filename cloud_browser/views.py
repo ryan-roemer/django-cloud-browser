@@ -7,7 +7,8 @@ from django.template import RequestContext
 
 from cloud_browser.common import SEP, path_parts, path_join, path_yield, \
     get_int
-from cloud_browser.cloud import get_connection, CloudObject
+from cloud_browser.cloud import get_connection
+from cloud_browser.cloud.base import CloudObject
 
 
 DEFAULT_LIMIT = 20
