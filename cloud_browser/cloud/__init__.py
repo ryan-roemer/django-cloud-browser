@@ -4,25 +4,22 @@ import mimetypes
 from cloud_browser.common import SEP, path_join, basename
 
 
-class Config(object):
-    """Cloud configuration."""
-    __singleton = None
+class CloudConnection(object):
+    """Cloud connection abstraction."""
 
     def __init__(self, account, secret_key, rs_servicenet=False):
         """Initializer."""
         self.account = account
         self.secret_key = secret_key
         self.rs_servicenet = rs_servicenet
-
-        self.__rs_conn_set = False
-        self.__rs_conn = None
+        self._conn = None
 
     @property
     def connection(self):
         """Return Rackspace connection object."""
         import cloudfiles as cf
 
-        if not self.__rs_conn_set:
+        if self._conn is None:
             kwargs = {
                 'username': self.account,
                 'api_key': self.secret_key,
@@ -33,38 +30,9 @@ class Config(object):
             if self.rs_servicenet:
                 kwargs['servicenet'] = True
 
-            self.__rs_conn = cf.get_connection(  # pylint: disable=W0142
-                **kwargs)
-            self.__rs_conn_set = True
+            self._conn = cf.get_connection(**kwargs)  # pylint: disable=W0142
 
-        return self.__rs_conn
-
-    @classmethod
-    def from_settings(cls):
-        """Create configuration from Django settings or environment."""
-        from cloud_browser.app_settings import settings
-        from django.core.exceptions import ImproperlyConfigured
-
-        account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
-        secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
-        servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
-
-        if not (account and secret_key):
-            raise ImproperlyConfigured("No suitable credentials found.")
-
-        return cls(account, secret_key, servicenet)
-
-    @classmethod
-    def singleton(cls):
-        """Get singleton object."""
-        if cls.__singleton is None:
-            cls.__singleton = cls.from_settings()
-        return cls.__singleton
-
-
-def get_connection():
-    """Wrapper for global connection/config object."""
-    return Config.singleton().connection
+        return self._conn
 
 
 class CloudObject(object):
@@ -163,3 +131,41 @@ class CloudObject(object):
                    content_type=file_obj.content_type,
                    last_modified=file_obj.last_modified,
                    obj_type=cls.Types.FILE)
+
+
+class Config(object):
+    """Cloud configuration."""
+    conn_cls = CloudConnection
+    __singleton = None
+
+    def __init__(self, connection):
+        """Initializer."""
+        self.connection = connection
+
+    @classmethod
+    def from_settings(cls):
+        """Create configuration from Django settings or environment."""
+        from cloud_browser.app_settings import settings
+        from django.core.exceptions import ImproperlyConfigured
+
+        account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
+        secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
+        servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
+
+        if not (account and secret_key):
+            raise ImproperlyConfigured("No suitable credentials found.")
+
+        conn = cls.conn_cls(account, secret_key, servicenet)
+        return cls(conn)
+
+    @classmethod
+    def singleton(cls):
+        """Get singleton object."""
+        if cls.__singleton is None:
+            cls.__singleton = cls.from_settings()
+        return cls.__singleton
+
+
+def get_connection():
+    """Wrapper for global connection/config object."""
+    return Config.singleton().connection.connection
