@@ -25,7 +25,14 @@ class Config(object):
                 from cloud_browser.cloud.rackspace import RackspaceConnection
                 conn = RackspaceConnection(account, secret_key, servicenet)
 
-        if not conn:
+        if conn is None:
+            # Mock filesystem
+            root = settings.CLOUD_BROWSER_FILESYSTEM_ROOT
+            if root is not None:
+                from cloud_browser.cloud.fs import FilesystemConnection
+                conn = FilesystemConnection(root)
+
+        if conn is None:
             raise ImproperlyConfigured("No suitable credentials found.")
 
         return cls(conn)

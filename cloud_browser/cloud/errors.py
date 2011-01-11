@@ -7,6 +7,11 @@ class CloudException(Exception):
     pass
 
 
+class InvalidNameException(CloudException):
+    """Bad name."""
+    pass
+
+
 class NoContainerException(CloudException):
     """No container found."""
     pass

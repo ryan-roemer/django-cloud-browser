@@ -3,6 +3,11 @@ import os
 from django.conf import settings as _settings
 
 
+def _get_setting(name, default=None):
+    """Get setting from settings.py."""
+    return getattr(_settings, name, default)
+
+
 def _get_setting_or_env(name, default=None):
     """Get setting from settings.py or environment."""
     # Prefer settings, then environment.
@@ -21,6 +26,7 @@ class Settings(object):
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SERVICENET': _get_setting_or_env,
+        'CLOUD_BROWSER_FILESYSTEM_ROOT': _get_setting,
     }
 
     def __getattr__(self, name, default=None):
