@@ -47,6 +47,11 @@ class FilesystemObject(base.CloudObject):
         """Return contents of object."""
         return "TODO"
 
+    @property
+    def base_path(self):
+        """Base absolute path of container."""
+        return os.path.join(self.container.base_path, self.name)
+
     @classmethod
     def from_path(cls, container, path):
         """Create object from path."""
@@ -75,13 +80,20 @@ class FilesystemContainer(base.CloudContainer):
         return object()
 
     # TODO: get_objects - set limit to DEFAULT_LIMIT
-    # TODO: get_objects - Actually use marker!
     @wrap_fs_obj_errors
     def get_objects(self, path, marker=None, limit=20):
         """Get objects."""
+        def _filter(name):
+            """Filter."""
+            return (not_dot(name) and
+                    (marker is None or
+                     os.path.join(path, name).strip(SEP) > marker.strip(SEP)))
+
         search_path = os.path.join(self.base_path, path)
-        return [self.obj_cls.from_path(self, os.path.join(path, d))
-                for d in os.listdir(search_path) if not_dot(d)][:limit]
+        all = [self.obj_cls.from_path(self, os.path.join(path, o))
+               for o in os.listdir(search_path) if _filter(o)]
+        all = sorted(all, key=lambda x: x.base_path)
+        return all[:limit]
 
     @wrap_fs_obj_errors
     def get_object(self, path):
