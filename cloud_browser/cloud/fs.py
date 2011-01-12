@@ -90,10 +90,10 @@ class FilesystemContainer(base.CloudContainer):
                      os.path.join(path, name).strip(SEP) > marker.strip(SEP)))
 
         search_path = os.path.join(self.base_path, path)
-        all = [self.obj_cls.from_path(self, os.path.join(path, o))
-               for o in os.listdir(search_path) if _filter(o)]
-        all = sorted(all, key=lambda x: x.base_path)
-        return all[:limit]
+        objs = [self.obj_cls.from_path(self, os.path.join(path, o))
+                for o in os.listdir(search_path) if _filter(o)]
+        objs = sorted(objs, key=lambda x: x.base_path)
+        return objs[:limit]
 
     @wrap_fs_obj_errors
     def get_object(self, path):
