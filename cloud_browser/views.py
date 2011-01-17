@@ -56,12 +56,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         objects = container.get_objects(object_path, marker, limit+1)
         marker = None
 
-        if not objects:
-            # Try the view document instead.
-            return document(request, path)
-
         # If over limit, strip last item and set marker.
-        elif len(objects) == limit + 1:
+        if len(objects) == limit + 1:
             objects = objects[:limit]
             marker = objects[-1].name
 

@@ -1,4 +1,6 @@
 """File-system mock cloud wrapper."""
+from __future__ import with_statement
+
 import os
 import re
 
@@ -45,7 +47,8 @@ class FilesystemObject(base.CloudObject):
 
     def _read(self):
         """Return contents of object."""
-        return "TODO"
+        with open(self.base_path, 'rb') as file_obj:
+            return file_obj.read()
 
     @property
     def base_path(self):
