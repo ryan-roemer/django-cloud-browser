@@ -65,6 +65,13 @@ table#cloud-browser-objects-table tfoot a {
 table#cloud-browser-objects-table tfoot {
     text-align: right;
 }
+table#cloud-browser-objects-table tbody a {
+    color: #333;
+    text-decoration: none;
+}
+table#cloud-browser-objects-table tbody a:hover {
+    text-decoration: underline;
+}
 .cloud-browser-empty {
     text-align: center;
     font-style: italic;
@@ -113,7 +120,7 @@ table#cloud-browser-objects-table tfoot {
         <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
         <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
         <td>{{ obj.size|filesizeformat }}</td>
-        <td>{{ obj.last_modified|default_if_none:'' }}</td>
+        <td>{{ obj.last_modified|default_if_none:''|date:'DATETIME_FORMAT' }}</td>
       </tr>
     {% endfor %}
   </tbody>

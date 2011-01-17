@@ -1,9 +1,10 @@
 """Rackspace cloud wrapper."""
+from datetime import datetime, timedelta
+
 try:
     import cloudfiles  # pylint: disable=F0401
 except ImportError:
     cloudfiles = None  # pylint: disable=C0103
-
 
 from cloud_browser.cloud import errors, base
 from cloud_browser.common import SEP
@@ -24,6 +25,21 @@ wrap_rs_errors = RackspaceExceptionWrapper()  # pylint: disable=C0103
 
 class RackspaceObject(base.CloudObject):
     """Cloud object wrapper."""
+
+    def __init__(self, container, name, **kwargs):
+        """Initializer."""
+        def _to_dt(iso_str):
+            """Convert ISO date to `datetime` object."""
+            dt_str, _, ms_str = iso_str.partition(".")
+            dt_obj = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S")
+            microseconds = int(ms_str, 10)
+            return dt_obj + timedelta(microseconds=microseconds)
+
+        last_modified = kwargs.get('last_modified', None)
+        if last_modified:
+            kwargs['last_modified'] = _to_dt(last_modified)
+
+        super(RackspaceObject, self).__init__(container, name, **kwargs)
 
     @wrap_rs_errors
     def _get_object(self):
