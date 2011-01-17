@@ -4,8 +4,8 @@
 ###############################################################################
 {% endcomment %}
 
-{% block cb_breadcrumbs %}
-<div id="cb-breadcrumbs">
+{% block cloud_browser_breadcrumbs %}
+<div id="cloud-browser-breadcrumbs">
   ( <a href="{% url cloud_browser_browser '' %}">Home</a> )
   {% for crumb_path, crumb in breadcrumbs %}
     &raquo; <a href="{% url cloud_browser_browser crumb_path %}">{{ crumb }}</a>

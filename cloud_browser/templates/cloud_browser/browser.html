@@ -10,37 +10,72 @@
 Cloud Browser - {{ path }}
 {% endblock %}
 
-{% block cb_breadcrumbs %}
+{% block cloud_browser_breadcrumbs %}
   {% include "cloud_browser/_breadcrumbs.html" %}
 {% endblock %}
 
 {% block template_head %}
+{# TODO: Replace with alternate template tag / "include or serve" option #}
 <style type="text/css">
-div #containers, div #objects {
-    border: 1px solid red;
+div#cloud-browser-breadcrumbs {
+    color: #999;
 }
-div #containers {
+div#cloud-browser-breadcrumbs a {
+    color: #333;
+    text-decoration: none;
+}
+div#cloud-browser-breadcrumbs a:hover {
+    text-decoration: underline;
+}
+/*div#cloud-browser-containers,
+div #cloud-browser-objects {
+    border: 1px solid red;
+}TODO DEBUG REMOVE*/
+div#cloud-browser-containers h2,
+div #cloud-browser-objects h2 {
+    text-align: center;
+}
+div#cloud-browser-containers {
     background: #333;
     color: #ccc;
     float: left;
-    width: 150px;
+    width: 200px;
 }
-div #containers a {
+div#cloud-browser-containers a {
     color: #ccc;
     text-decoration: none;
 }
-div #containers a:hover {
+div#cloud-browser-containers a:hover {
     text-decoration: underline;
 }
-div #objects {
+div#cloud-browser-objects {
+    margin-left: 200px;
     width: auto;
+}
+table#cloud-browser-objects-table {
+    margin: auto;
+    width: 99%;
+}
+table#cloud-browser-objects-table thead,
+table#cloud-browser-objects-table tfoot,
+table#cloud-browser-objects-table tfoot a {
+    background: #333;
+    color: #ccc;
+}
+table#cloud-browser-objects-table tfoot {
+    text-align: right;
+}
+.cloud-browser-empty {
+    text-align: center;
+    font-style: italic;
+    color: #666;
 }
 </style>
 {% endblock %}
 
 {% block content %}
-<div id="all">
-<div id="containers">
+<div id="cloud-browser-all">
+<div id="cloud-browser-containers">
 <h2>Containers</h2>
 <ul>
 {% for cont in containers %}
@@ -50,10 +85,10 @@ div #objects {
 </ul>
 </div>
 
-<div id="objects">
+<div id="cloud-browser-objects">
 <h2>Objects</h2>
-<br/>
-<table>
+{% if objects %}
+<table id="cloud-browser-objects-table">
   <thead>
     <tr>
       <th>Name</th>
@@ -82,16 +117,29 @@ div #objects {
       </tr>
     {% endfor %}
   </tbody>
-  <tfooter>
+  <tfoot>
     <tr>
-      <td colspan="6">
+      <th colspan="6">
         {% if marker %}
         <a href="{% url cloud_browser_browser path %}?marker={{ marker|urlencode }}&limit={{ limit|urlencode }}">Next</a> &raquo;
+        {% else %}
+            &nbsp;
         {% endif %}
       </td>
     </tr>
-  </tfooter>
+  </tfoot>
 </table>
+{% else %}
+    {% if container %}
+        <div class="cloud-browser-empty" colspan="6">
+          No objects found in &ldquo;{{ path }}.&rdquo;
+        </div>
+    {% else %}
+        <div class="cloud-browser-empty" colspan="6">
+          No container selected. Please click on a container to list object contents.
+        </div>
+    {% endif %}
+{% endif %}
 </div>
 </div>
 {% endblock %}

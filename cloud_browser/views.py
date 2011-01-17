@@ -71,6 +71,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                                'breadcrumbs': _breadcrumbs(path),
                                'container_path': container_path,
                                'containers': containers,
+                               'container': container,
                                'object_path': object_path,
                                'objects': objects},
                               context_instance=RequestContext(request))
