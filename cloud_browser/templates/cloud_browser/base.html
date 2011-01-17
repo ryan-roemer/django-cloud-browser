@@ -16,9 +16,6 @@
 <body>
 {% block body %}
   {% block menu %}{% endblock %}
-  {% block cb_breadcrumbs %}
-    {% include "cloud_browser/_breadcrumbs.html" %}
-  {% endblock %}
   <div id="cb-content">{% block content %}{% endblock %}</div>
 {% endblock %}
 </body>

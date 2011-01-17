@@ -11,31 +11,22 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block content %}
-{% if containers %}
+<div id="all">
+<div id="containers">
 <h2>Containers</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Count</th>
-      <th>Size (Bytes)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for cont in containers %}
-      <tr>
-        <td><a href="{% url cloud_browser_browser cont.name %}"
-           >{{ cont.name }}</a></td>
-        <td>{{ cont.count }}</td>
-        <td>{{ cont.size }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+<ul>
+{% for cont in containers %}
+  <li><a href="{% url cloud_browser_browser cont.name %}">{{ cont.name }}</a>
+      {#({{ cont.count }} objects, {{ cont.size|filesizeformat }})#}</li>
+{% endfor %}
+</ul>
+</div>
 
-{% if objects %}
+<div id="objects">
 <h2>Objects</h2>
+{% block cb_breadcrumbs %}
+  {% include "cloud_browser/_breadcrumbs.html" %}
+{% endblock %}
 <table>
   <thead>
     <tr>
@@ -60,7 +51,7 @@ Cloud Browser - {{ path }}
         <td>{{ obj.type }}</td>
         <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
         <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
-        <td>{{ obj.size }}</td>
+        <td>{{ obj.size|filesizeformat }}</td>
         <td>{{ obj.last_modified|default_if_none:'' }}</td>
       </tr>
     {% endfor %}
@@ -75,5 +66,6 @@ Cloud Browser - {{ path }}
     </tr>
   </tfooter>
 </table>
-{% endif %}
+</div>
+</div>
 {% endblock %}

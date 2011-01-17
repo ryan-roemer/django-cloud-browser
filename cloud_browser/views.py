@@ -29,6 +29,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
+    from itertools import ifilter, islice
+
     # Inputs.
     container_path, object_path = path_parts(path)
     marker = request.GET.get('marker', None)
@@ -36,23 +38,24 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                     DEFAULT_LIMIT,
                     lambda x: x > 0 and x < 10000 - 1)
 
-    # Other variables.
-    containers = None
-    objects = None
+    # Q1: Get all containers.
+    #     We optimize here by not individually looking up containers later,
+    #     instead going through this in-memory list.
+    # TODO: Check if this is too expensive network and results-wise.
     conn = get_connection()
+    containers = conn.get_containers()
 
-    if container_path == '':
-        # List containers.
-        containers = conn.get_containers()
-
-    else:
-        # Q1: Get the container.
-        try:
-            container = conn.get_container(container_path)
-        except errors.NoContainerException:
+    container = None
+    objects = None
+    if container_path != '':
+        # Find marked container from list.
+        cont_eq = lambda c: c.name == container_path
+        cont_list = list(islice(ifilter(cont_eq, containers), 1))
+        if not cont_list:
             raise Http404("No container at: %s" % container_path)
 
         # Q2: Get objects for instant list, plus one to check "next".
+        container = cont_list[0]
         objects = container.get_objects(object_path, marker, limit+1)
         marker = None
 
