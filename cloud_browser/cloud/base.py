@@ -4,6 +4,9 @@ import mimetypes
 from cloud_browser.common import SEP, path_join, basename
 
 
+DEFAULT_GET_OBJS_LIMIT = 20
+
+
 class CloudObjectTypes(object):
     """Cloud object types helper."""
     FILE = 'file'
@@ -120,8 +123,7 @@ class CloudContainer(object):
         """Return native container object."""
         raise NotImplementedError("Must implement.")
 
-    # TODO: set limit to DEFAULT_LIMIT
-    def get_objects(self, path, marker=None, limit=20):
+    def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
         raise NotImplementedError("Must implement.")
 

@@ -9,6 +9,10 @@ from cloud_browser.cloud import errors, base
 from cloud_browser.common import SEP
 
 
+# Current Rackspace maximum.
+RS_MAX_GET_OBJS_LIMIT = 10000
+
+
 class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
     translations = {
@@ -76,8 +80,14 @@ class RackspaceContainer(base.CloudContainer):
         return self.conn.native_conn.get_container(self.name)
 
     @wrap_rs_errors
-    def get_objects(self, path, marker=None, limit=20):
+    def get_objects(self, path, marker=None,
+                    limit=base.DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
+        # Require 1 less than RS max. to allow for "next" count.
+        if limit >= RS_MAX_GET_OBJS_LIMIT - 1:
+            raise errors.CloudException("Object limit must be less than %s" %
+                                        (RS_MAX_GET_OBJS_LIMIT - 1))
+
         path = path + SEP if path else ''
         object_infos = self.native_container.list_objects_info(
             limit=limit, delimiter=SEP, prefix=path, marker=marker)

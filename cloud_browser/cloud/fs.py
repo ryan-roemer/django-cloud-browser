@@ -37,7 +37,6 @@ class FilesystemObjectWrapper(errors.CloudExceptionWrapper):
 wrap_fs_obj_errors = FilesystemObjectWrapper()  # pylint: disable=C0103
 
 
-# TODO: Handle empty directory (with non non-dot files).
 class FilesystemObject(base.CloudObject):
     """Filesystem object wrapper."""
 
@@ -82,9 +81,9 @@ class FilesystemContainer(base.CloudContainer):
         """Return native container object."""
         return object()
 
-    # TODO: get_objects - set limit to DEFAULT_LIMIT
     @wrap_fs_obj_errors
-    def get_objects(self, path, marker=None, limit=20):
+    def get_objects(self, path, marker=None,
+                    limit=base.DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
         def _filter(name):
             """Filter."""
