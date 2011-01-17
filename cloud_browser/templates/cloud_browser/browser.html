@@ -10,6 +10,34 @@
 Cloud Browser - {{ path }}
 {% endblock %}
 
+{% block cb_breadcrumbs %}
+  {% include "cloud_browser/_breadcrumbs.html" %}
+{% endblock %}
+
+{% block template_head %}
+<style type="text/css">
+div #containers, div #objects {
+    border: 1px solid red;
+}
+div #containers {
+    background: #333;
+    color: #ccc;
+    float: left;
+    width: 150px;
+}
+div #containers a {
+    color: #ccc;
+    text-decoration: none;
+}
+div #containers a:hover {
+    text-decoration: underline;
+}
+div #objects {
+    width: auto;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <div id="all">
 <div id="containers">
@@ -24,9 +52,7 @@ Cloud Browser - {{ path }}
 
 <div id="objects">
 <h2>Objects</h2>
-{% block cb_breadcrumbs %}
-  {% include "cloud_browser/_breadcrumbs.html" %}
-{% endblock %}
+<br/>
 <table>
   <thead>
     <tr>
