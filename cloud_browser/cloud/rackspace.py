@@ -1,5 +1,5 @@
 """Rackspace cloud wrapper."""
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     import cloudfiles  # pylint: disable=F0401
@@ -25,21 +25,6 @@ wrap_rs_errors = RackspaceExceptionWrapper()  # pylint: disable=C0103
 
 class RackspaceObject(base.CloudObject):
     """Cloud object wrapper."""
-
-    def __init__(self, container, name, **kwargs):
-        """Initializer."""
-        def _to_dt(iso_str):
-            """Convert ISO date to `datetime` object."""
-            dt_str, _, ms_str = iso_str.partition(".")
-            dt_obj = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S")
-            microseconds = int(ms_str, 10)
-            return dt_obj + timedelta(microseconds=microseconds)
-
-        last_modified = kwargs.get('last_modified', None)
-        if last_modified:
-            kwargs['last_modified'] = _to_dt(last_modified)
-
-        super(RackspaceObject, self).__init__(container, name, **kwargs)
 
     @wrap_rs_errors
     def _get_object(self):
@@ -68,16 +53,24 @@ class RackspaceObject(base.CloudObject):
     @classmethod
     def from_file_info(cls, container, info_obj):
         """Create from regular info object."""
+        # 2010-04-15T01:52:13.919070
+        dt_str = info_obj['last_modified'].partition('.')[0]
+        last_modified = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S")
         return cls(container,
                    name=info_obj['name'],
                    size=info_obj['bytes'],
                    content_type=info_obj['content_type'],
-                   last_modified=info_obj['last_modified'],
+                   last_modified=last_modified,
                    obj_type=cls.type_cls.FILE)
 
     @classmethod
     def from_obj(cls, container, file_obj):
         """Create from regular info object."""
+        # Thu, 07 Jun 2007 18:57:07 GMT
+        dt_str = file_obj.last_modified
+        last_modified = datetime.strptime(dt_str, "%a, %d %b %Y %H:%M:%S GMT")
+        print(file_obj.last_modified)
+        print(last_modified)
         return cls(container,
                    name=file_obj.name,
                    size=file_obj.size,
