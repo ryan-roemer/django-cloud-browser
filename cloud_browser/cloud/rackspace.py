@@ -69,8 +69,6 @@ class RackspaceObject(base.CloudObject):
         # Thu, 07 Jun 2007 18:57:07 GMT
         dt_str = file_obj.last_modified
         last_modified = datetime.strptime(dt_str, "%a, %d %b %Y %H:%M:%S GMT")
-        print(file_obj.last_modified)
-        print(last_modified)
         return cls(container,
                    name=file_obj.name,
                    size=file_obj.size,
