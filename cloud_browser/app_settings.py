@@ -20,13 +20,41 @@ def _get_setting_or_env(name, default=None):
 class Settings(object):
     """Cloud Browser application settings.
 
-    Class wraps the "real" Django settings object, so can be used instead.
+    This class wraps the "real" Django settings object, so can be used instead.
+    The additional cloud browser settings are as follows:
+
+    **Rackspace**: Configure Rackspace Cloud Files as backing datastore.
+
+    * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name.
+    * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key.
+    * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
+      not to use Rackspace's servicenet (i.e., the private interface on a
+      Cloud Server).
+
+    **Filesystem**: Configure simple filesystem mock datastore.
+
+    * ``CLOUD_BROWSER_FILESYSTEM_ROOT``: Filesystem root to serve from.
+
+    **Container Permissions**: Cloud browser allows a very rudimentary form
+    of access control at the container level with white and black lists.
+    If the white list is set, only container names in the white list are
+    allowed. If the white list is unset, then any container name *not* in
+    the black list is permitted. All name matching is exact (no regular
+    expressions, etc.).
+
+    * ``CLOUD_BROWSER_CONTAINER_WHITELIST``: White list of names. (Iterable)
+    * ``CLOUD_BROWSER_CONTAINER_BLACKLIST``: Black list of names. (Iterable)
     """
     SETTINGS = {
+        # Rackspace datastore settings.
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SERVICENET': _get_setting_or_env,
+
+        # Filesystem datastore settings.
         'CLOUD_BROWSER_FILESYSTEM_ROOT': _get_setting,
+
+        # Permissions lists for containers.
         'CLOUD_BROWSER_CONTAINER_WHITELIST': _get_setting,
         'CLOUD_BROWSER_CONTAINER_BLACKLIST': _get_setting,
     }
@@ -61,7 +89,12 @@ class Settings(object):
         return self.__container_blacklist
 
     def container_permitted(self, name):
-        """Return whether or not a container is permitted."""
+        """Return whether or not a container is permitted.
+
+        :param name: Container name.
+        :return: ``True`` if container is permitted.
+        :rtype:  ``bool``
+        """
         white = self._container_whitelist
         black = self._container_blacklist
         return name not in black and (not white or name in white)

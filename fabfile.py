@@ -18,6 +18,17 @@ CHECK_INCLUDES = (
 PEP8_IGNORES = ('E225',)
 PYLINT_CFG = "dev/pylint.cfg"
 
+DOC_INPUT = "doc"
+DOC_OUTPUT = "doc_html"
+
+
+###############################################################################
+# Build
+###############################################################################
+def clean():
+    """Clean build files."""
+    local("rm -rf %s" % DOC_OUTPUT)
+
 
 ###############################################################################
 # Quality
@@ -49,6 +60,16 @@ def check():
     """Run all checkers."""
     pep8()
     pylint()
+
+
+###############################################################################
+# Documentation
+###############################################################################
+def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
+    """Generate API documentation (using Sphinx)."""
+    local("export DJANGO_SETTINGS_MODULE=%s && "
+          "sphinx-build -b html %s %s" % (proj_settings, DOC_INPUT, output),
+          capture=False)
 
 
 ###############################################################################
