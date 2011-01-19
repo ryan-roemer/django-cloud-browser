@@ -1,6 +1,8 @@
 """Cloud API base abstraction."""
 import mimetypes
 
+from cloud_browser.cloud import errors
+from cloud_browser.app_settings import settings
 from cloud_browser.common import SEP, path_join, basename
 
 
@@ -115,7 +117,7 @@ class CloudContainer(object):
     def native_container(self):
         """Native container object."""
         if self.__native is None:
-            self.__native = self.conn.native_conn.get_container(self.name)
+            self.__native = self._get_container()
 
         return self.__native
 
@@ -157,8 +159,20 @@ class CloudConnection(object):
 
     def get_containers(self):
         """Return available containers."""
+        permitted = lambda c: settings.container_permitted(c.name)
+        return [c for c in self._get_containers() if permitted(c)]
+
+    def _get_containers(self):
+        """Return available containers."""
         raise NotImplementedError("Must implement.")
 
     def get_container(self, path):
+        """Return single container."""
+        if not settings.container_permitted(path):
+            raise errors.NotPermittedException(
+                "Access to container \"%s\" is not permitted." % path)
+        return self._get_container(path)
+
+    def _get_container(self, path):
         """Return single container."""
         raise NotImplementedError("Must implement.")

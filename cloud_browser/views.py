@@ -88,6 +88,8 @@ def document(_, path=''):
         container = conn.get_container(container_path)
     except errors.NoContainerException:
         raise Http404("No container at: %s" % container_path)
+    except errors.NotPermittedException:
+        raise Http404("Access denied for container at: %s" % container_path)
 
     try:
         storage_obj = container.get_object(object_path)

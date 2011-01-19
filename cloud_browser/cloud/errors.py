@@ -12,6 +12,11 @@ class InvalidNameException(CloudException):
     pass
 
 
+class NotPermittedException(CloudException):
+    """Access is not permitted"""
+    pass
+
+
 class NoContainerException(CloudException):
     """No container found."""
     pass

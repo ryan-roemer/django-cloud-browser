@@ -73,7 +73,7 @@ class RackspaceObject(base.CloudObject):
                    name=file_obj.name,
                    size=file_obj.size,
                    content_type=file_obj.content_type,
-                   last_modified=file_obj.last_modified,
+                   last_modified=last_modified,
                    obj_type=cls.type_cls.FILE)
 
 
@@ -133,14 +133,14 @@ class RackspaceConnection(base.CloudConnection):
         return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
 
     @wrap_rs_errors
-    def get_containers(self):
+    def _get_containers(self):
         """Return available containers."""
         infos = self.native_conn.list_containers_info()
         return [self.cont_cls(self, i['name'], i['count'], i['bytes'])
                 for i in infos]
 
     @wrap_rs_errors
-    def get_container(self, path):
+    def _get_container(self, path):
         """Return single container."""
         cont = self.native_conn.get_container(path)
         return self.cont_cls(self,

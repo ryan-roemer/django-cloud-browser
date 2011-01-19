@@ -130,14 +130,14 @@ class FilesystemConnection(base.CloudConnection):
         return object()
 
     @wrap_fs_cont_errors
-    def get_containers(self):
+    def _get_containers(self):
         """Return available containers."""
         full_fn = lambda p: os.path.join(self.abs_root, p)
         return [self.cont_cls.from_path(self, d)
                 for d in os.listdir(self.abs_root) if is_dir(full_fn(d))]
 
     @wrap_fs_cont_errors
-    def get_container(self, path):
+    def _get_container(self, path):
         """Return single container."""
         path = path.strip(SEP)
         if SEP in path:
