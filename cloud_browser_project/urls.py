@@ -8,6 +8,6 @@ from django.views.generic.simple import redirect_to
 # admin.autodiscover()
 
 urlpatterns = patterns('',  # pylint: disable=C0103
-    url(r'^$', redirect_to, name='index', kwargs={'url': 'browser/'}),
-    url(r'^browser/', include('cloud_browser.urls')),
+    url(r'^$', redirect_to, name='index', kwargs={'url': 'cb/'}),
+    url(r'^cb/', include('cloud_browser.urls')),
 )
