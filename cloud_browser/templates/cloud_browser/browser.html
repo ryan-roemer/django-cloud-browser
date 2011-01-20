@@ -97,8 +97,8 @@ form#cloud-browser-next-form input[name='limit'] {
 </style>
 <script type="text/javascript">
 /** Submit the "next" page results form. */
-function submitNext() {
-    document.getElementById('cloud-browser-next-form').submit();
+function submitForm(formId) {
+    document.getElementById(formId).submit();
     return false;
 }
 </script>
@@ -156,7 +156,8 @@ function submitNext() {
           action="{% url cloud_browser_browser path %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="marker" value="{{ marker }}"/>
-          Get <a href="#"onclick="return submitNext();">next</a>
+          Get
+          <a href="#" onclick="return submitForm('cloud-browser-next-form');">next</a>
           <input name="limit" type="text" size="5" value="{{ limit }}"/>
           objects.
         </form>

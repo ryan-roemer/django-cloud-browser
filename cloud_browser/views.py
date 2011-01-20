@@ -34,7 +34,6 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     # Inputs.
     container_path, object_path = path_parts(path)
     incoming = request.POST or request.GET or {}
-    print(incoming)
     marker = incoming.get('marker', None)
     limit = get_int(incoming.get('limit', DEFAULT_LIMIT),
                     DEFAULT_LIMIT,
