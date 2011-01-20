@@ -4,7 +4,7 @@
 
 .. automodule:: cloud_browser
 
-Application Settings
-====================
+``cloud_browser.app_settings`` - Application Settings
+=====================================================
 .. automodule:: cloud_browser.app_settings
    :members:
