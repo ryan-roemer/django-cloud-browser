@@ -33,8 +33,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
     # Inputs.
     container_path, object_path = path_parts(path)
-    marker = request.GET.get('marker', None)
-    limit = get_int(request.GET.get('limit', DEFAULT_LIMIT),
+    incoming = request.POST or request.GET or {}
+    print(incoming)
+    marker = incoming.get('marker', None)
+    limit = get_int(incoming.get('limit', DEFAULT_LIMIT),
                     DEFAULT_LIMIT,
                     lambda x: x > 0 and x < 10000 - 1)
 

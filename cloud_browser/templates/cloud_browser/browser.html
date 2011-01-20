@@ -65,6 +65,9 @@ table#cloud-browser-objects-table tfoot a {
 table#cloud-browser-objects-table tfoot {
     text-align: right;
 }
+table#cloud-browser-objects-table tfoot th {
+    padding: 2px;
+}
 table#cloud-browser-objects-table tbody a {
     color: #333;
     text-decoration: none;
@@ -77,7 +80,28 @@ table#cloud-browser-objects-table tbody a:hover {
     font-style: italic;
     color: #666;
 }
+form#cloud-browser-next-form {
+    display: inline;
+}
+form#cloud-browser-next-form input[type='text'] {
+    background: #ccc;
+    color: #333;
+    border: 1px solid #333;
+    text-align: center;
+    font-size: .75em;
+}
+form#cloud-browser-next-form input[name='limit'] {
+    width: 25px;
+}
+
 </style>
+<script type="text/javascript">
+/** Submit the "next" page results form. */
+function submitNext() {
+    document.getElementById('cloud-browser-next-form').submit();
+    return false;
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -128,11 +152,18 @@ table#cloud-browser-objects-table tbody a:hover {
     <tr>
       <th colspan="6">
         {% if marker %}
-        <a href="{% url cloud_browser_browser path %}?marker={{ marker|urlencode }}&limit={{ limit|urlencode }}">Next</a> &raquo;
+        <form id="cloud-browser-next-form"
+          action="{% url cloud_browser_browser path %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="marker" value="{{ marker }}"/>
+          Get <a href="#"onclick="return submitNext();">next</a>
+          <input name="limit" type="text" size="5" value="{{ limit }}"/>
+          objects.
+        </form>
         {% else %}
             &nbsp;
         {% endif %}
-      </td>
+      </th>
     </tr>
   </tfoot>
 </table>
