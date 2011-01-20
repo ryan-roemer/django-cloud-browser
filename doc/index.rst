@@ -12,6 +12,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
+   README
+   TODO
    cloud_browser
 
 Indices and tables

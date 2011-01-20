@@ -1,6 +1,6 @@
-===============
- Cloud Browser
-===============
+=======================
+ Cloud Browser App API
+=======================
 
 .. automodule:: cloud_browser
 
