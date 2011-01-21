@@ -14,7 +14,6 @@ Features
 * **Browser**:
 
   * *Previous*: Add previous variable and lock to previous limit.
-  * *Jump To*: Jump to a marker (might be confusing).
 
 * **URL/View Choices**: Add different URLs, and maybe alternate views at the
   same time.
