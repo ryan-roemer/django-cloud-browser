@@ -66,7 +66,8 @@ table#cloud-browser-objects-table tfoot {
     text-align: right;
 }
 table#cloud-browser-objects-table tfoot th {
-    padding: 2px;
+    padding: 1px;
+    border: 2px solid #333;
 }
 table#cloud-browser-objects-table tbody a {
     color: #333;
@@ -80,19 +81,30 @@ table#cloud-browser-objects-table tbody a:hover {
     font-style: italic;
     color: #666;
 }
-form#cloud-browser-next-form {
+form.cloud-browser-form {
     display: inline;
+    padding: 3px;
+    /*border: 1px solid #ccc;*/
 }
-form#cloud-browser-next-form input[type='text'] {
+form.cloud-browser-form input[type='text'] {
     background: #ccc;
     color: #333;
     border: 1px solid #333;
     text-align: center;
     font-size: .75em;
 }
-form#cloud-browser-next-form input[name='limit'] {
+form.cloud-browser-form input[name='limit'] {
     width: 25px;
 }
+a.cloud-browser-form-link {
+    text-decoration: none;
+}
+/*.cloud-browser-round4 {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}*/
 
 </style>
 <script type="text/javascript">
@@ -152,14 +164,16 @@ function submitForm(formId) {
     <tr>
       <th colspan="6">
         {% if marker %}
-        <form id="cloud-browser-next-form"
+        <form id="cloud-browser-next"
+          class="cloud-browser-form"
           action="{% url cloud_browser_browser path %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="marker" value="{{ marker }}"/>
-          Get
-          <a href="#" onclick="return submitForm('cloud-browser-next-form');">next</a>
-          <input name="limit" type="text" size="5" value="{{ limit }}"/>
-          objects.
+          <a href="#"
+             class="cloud-browser-form-link"
+             onclick="return submitForm('cloud-browser-next');">Next
+             <input name="limit" type="text" size="5" value="{{ limit }}"/>
+             &raquo;</a>
         </form>
         {% else %}
             &nbsp;
