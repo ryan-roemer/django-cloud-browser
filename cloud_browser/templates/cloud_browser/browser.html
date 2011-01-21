@@ -113,6 +113,15 @@ function submitForm(formId) {
     document.getElementById(formId).submit();
     return false;
 }
+/** Return key pressed */
+function enterPressed(event) {
+    var key = window.event ? window.event.keyCode /*IE*/ : event.which /*FF*/;
+    return key === 13;
+}
+/** Submit form on enter. */
+function submitOnEnter(event, formId) {
+    return enterPressed(event) ? submitForm(formId) : false;
+}
 </script>
 {% endblock %}
 
@@ -168,9 +177,12 @@ function submitForm(formId) {
           action="{% url cloud_browser_browser path %}" method="post">
           {% csrf_token %}
           Next
-          <input name="limit" type="text" size="5" value="{{ limit }}"/>
+          <input name="limit" type="text" size="5"
+              onkeypress="submitOnEnter(event, 'cloud-browser-next');"
+              value="{{ limit }}"/>
           after
           <input name="marker_part" type="text" size="7"
+              onkeypress="submitOnEnter(event, 'cloud-browser-next');"
               value="{{ marker_part }}"/>
           <a href="#" class="cloud-browser-form-link"
               onclick="return submitForm('cloud-browser-next');">&raquo;</a>
