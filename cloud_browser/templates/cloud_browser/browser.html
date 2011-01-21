@@ -163,17 +163,17 @@ function submitForm(formId) {
   <tfoot>
     <tr>
       <th colspan="6">
-        {% if marker %}
-        <form id="cloud-browser-next"
-          class="cloud-browser-form"
+        {% if marker_part %}
+        <form id="cloud-browser-next" class="cloud-browser-form"
           action="{% url cloud_browser_browser path %}" method="post">
           {% csrf_token %}
-          <input type="hidden" name="marker" value="{{ marker }}"/>
-          <a href="#"
-             class="cloud-browser-form-link"
-             onclick="return submitForm('cloud-browser-next');">Next
-             <input name="limit" type="text" size="5" value="{{ limit }}"/>
-             &raquo;</a>
+          Next
+          <input name="limit" type="text" size="5" value="{{ limit }}"/>
+          after
+          <input name="marker_part" type="text" size="7"
+              value="{{ marker_part }}"/>
+          <a href="#" class="cloud-browser-form-link"
+              onclick="return submitForm('cloud-browser-next');">&raquo;</a>
         </form>
         {% else %}
             &nbsp;
@@ -185,11 +185,12 @@ function submitForm(formId) {
 {% else %}
     {% if container %}
         <div class="cloud-browser-empty" colspan="6">
-          No objects found in &ldquo;{{ path }}.&rdquo;
+            No objects found in &ldquo;{{ path }}.&rdquo;
         </div>
     {% else %}
         <div class="cloud-browser-empty" colspan="6">
-          No container selected. Please click on a container to list object contents.
+            No container selected. Please click on a container to list
+            object contents.
         </div>
     {% endif %}
 {% endif %}

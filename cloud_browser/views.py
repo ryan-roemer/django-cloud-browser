@@ -4,7 +4,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from cloud_browser.cloud import get_connection, errors
-from cloud_browser.common import path_parts, path_join, path_yield, get_int
+from cloud_browser.common import path_parts, path_join, path_yield, relpath, \
+    get_int
 
 
 DEFAULT_LIMIT = 20
@@ -34,7 +35,12 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     # Inputs.
     container_path, object_path = path_parts(path)
     incoming = request.POST or request.GET or {}
+
     marker = incoming.get('marker', None)
+    marker_part = incoming.get('marker_part', None)
+    if marker_part:
+        marker = path_join(object_path, marker_part)
+
     limit = get_int(incoming.get('limit', DEFAULT_LIMIT),
                     DEFAULT_LIMIT,
                     lambda x: x > 0 and x < 10000 - 1)
@@ -46,6 +52,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     conn = get_connection()
     containers = conn.get_containers()
 
+    marker_part = None
     container = None
     objects = None
     if container_path != '':
@@ -64,10 +71,12 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         if len(objects) == limit + 1:
             objects = objects[:limit]
             marker = objects[-1].name
+            marker_part = relpath(marker, object_path)
 
     return render_to_response(template,
                               {'path': path,
                                'marker': marker,
+                               'marker_part': marker_part,
                                'limit': limit,
                                'breadcrumbs': _breadcrumbs(path),
                                'container_path': container_path,
