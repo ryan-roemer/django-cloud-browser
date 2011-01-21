@@ -8,6 +8,14 @@ Logistics
 * **README**: Write this up.
 * **Sphinx**: Continue documentation of all source in ``cloud_browser``.
 
+Bugs
+====
+
+* If have a limit = 1 and have both a pseudo-directory and a dummy marker
+  object with a name match and the browser is at the second object, clicking
+  next doesn't work because the marker value is always the same and jumps to
+  the second object again and again.
+
 Features
 ========
 
