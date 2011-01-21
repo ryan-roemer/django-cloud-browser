@@ -108,19 +108,25 @@ a.cloud-browser-form-link {
 
 </style>
 <script type="text/javascript">
-/** Submit the "next" page results form. */
-function submitForm(formId) {
-    document.getElementById(formId).submit();
-    return false;
-}
-/** Return key pressed */
-function enterPressed(event) {
-    var key = window.event ? window.event.keyCode /*IE*/ : event.which /*FF*/;
-    return key === 13;
-}
-/** Submit form on enter. */
-function submitOnEnter(event, formId) {
-    return enterPressed(event) ? submitForm(formId) : false;
+var CloudBrowser = {
+    /** Submit the "next" page results form. */
+    submitForm: function (formId) {
+        document.getElementById(formId).submit();
+        return false;
+    },
+    /** Return key pressed */
+    enterPressed: function (event) {
+        var key = window.event ?
+            window.event.keyCode /*IE*/ :
+            event.which /*FF*/;
+        return key === 13;
+    },
+    /** Submit form on enter. */
+    submitOnEnter: function (event, formId) {
+        if (CloudBrowser.enterPressed(event)) {
+            CloudBrowser.submitForm(formId);
+        }
+    }
 }
 </script>
 {% endblock %}
@@ -178,14 +184,15 @@ function submitOnEnter(event, formId) {
           {% csrf_token %}
           Next
           <input name="limit" type="text" size="5"
-              onkeypress="submitOnEnter(event, 'cloud-browser-next');"
+              onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
               value="{{ limit }}"/>
           after
           <input name="marker_part" type="text" size="7"
-              onkeypress="submitOnEnter(event, 'cloud-browser-next');"
+              onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
               value="{{ marker_part }}"/>
           <a href="#" class="cloud-browser-form-link"
-              onclick="return submitForm('cloud-browser-next');">&raquo;</a>
+              onclick="return CloudBrowser.submitForm('cloud-browser-next');"
+              >&raquo;</a>
         </form>
         {% else %}
             &nbsp;
