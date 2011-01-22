@@ -123,9 +123,6 @@ class RackspaceContainer(base.CloudContainer):
         only rarely occur.
 
         """
-        # TODO: BUG: subdir has '/' that is stripped off, but needed when
-        # passing in the marker string to list_objects_info
-
         # Enforce maximum object size.
         orig_limit = limit
         if limit > RS_MAX_GET_OBJS_LIMIT:
@@ -138,6 +135,17 @@ class RackspaceContainer(base.CloudContainer):
         # slash.
         limit += 1
 
+        object_infos = self._get_object_infos(path, marker, limit)
+        if object_infos:
+            # If we have over the original limit, truncate.
+            object_infos = object_infos[:orig_limit]
+
+        return [self.obj_cls.from_info(self, x) for x in object_infos]
+
+    @wrap_rs_errors
+    def _get_object_infos(self, path, marker=None,
+                          limit=base.DEFAULT_GET_OBJS_LIMIT):
+        """Get raw object infos (single-shot)."""
         path = path + SEP if path else ''
         object_infos = self.native_container.list_objects_info(
             limit=limit, delimiter=SEP, prefix=path, marker=marker)
@@ -160,10 +168,7 @@ class RackspaceContainer(base.CloudContainer):
             # Collapse subdirs and dummy objects.
             object_infos = list(_collapse(object_infos))
 
-            # If we have over the original limit, truncate.
-            object_infos = object_infos[:orig_limit]
-
-        return [self.obj_cls.from_info(self, x) for x in object_infos]
+        return object_infos
 
     @wrap_rs_errors
     def get_object(self, path):
