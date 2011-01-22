@@ -1,4 +1,4 @@
-"""Cloud API base abstraction."""
+"""Cloud datastore API base abstraction."""
 import mimetypes
 
 from cloud_browser.cloud import errors
