@@ -41,6 +41,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     if marker_part:
         marker = path_join(object_path, marker_part)
 
+    # TODO: Use hard-coded max constraint.
     limit = get_int(incoming.get('limit', DEFAULT_LIMIT),
                     DEFAULT_LIMIT,
                     lambda x: x > 0 and x < 10000 - 1)

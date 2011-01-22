@@ -95,18 +95,73 @@ class RackspaceContainer(base.CloudContainer):
     @wrap_rs_errors
     def get_objects(self, path, marker=None,
                     limit=base.DEFAULT_GET_OBJS_LIMIT):
-        """Get objects."""
+        """Get objects.
+
+        **Pseudo-directory Notes**: Rackspace has two approaches to pseudo-
+        directories within the (really) flat storage object namespace:
+
+          1. Dummy directory storage objects. These are real storage objects
+             of type "application/directory" and must be manually uploaded
+             by the client.
+          2. Implied subdirectories using the `path` API query parameter.
+
+        Both serve the same purpose, but the latter is much preferred because
+        there is no independent maintenance of extra dummy objects, and the
+        `path` approach is always correct (for the existing storage objects).
+
+        This package uses the latter `path` approach, but gets into an
+        ambiguous situation where there is both a dummy directory storage
+        object and an implied subdirectory. To remedy this situation, we only
+        show information for the dummy directory object in results if present,
+        and ignore the implied subdirectory. But, under the hood this means
+        that our `limit` parameter may end up with less than the desired
+        number of objects. So, we use the heuristic that if we **do** have
+        "application/directory" objects, we end up doing an extra query of
+        double the limit size to ensure we can get up to the limit amount
+        of objects. This double query approach is inefficient, but as
+        using dummy objects should now be deprecated, the second query should
+        only rarely occur.
+
+        """
         # TODO: BUG: subdir has '/' that is stripped off, but needed when
         # passing in the marker string to list_objects_info
 
-        # Require 1 less than RS max. to allow for "next" count.
-        if limit >= RS_MAX_GET_OBJS_LIMIT - 1:
+        # Enforce maximum object size.
+        orig_limit = limit
+        if limit > RS_MAX_GET_OBJS_LIMIT:
             raise errors.CloudException("Object limit must be less than %s" %
-                                        (RS_MAX_GET_OBJS_LIMIT - 1))
+                                        RS_MAX_GET_OBJS_LIMIT)
+
+        # Adjust limit to +1 to handle marker object as first result.
+        # We can get in to this situation for a marker of "foo", that will
+        # still return a 'subdir' object of "foo/" because of the extra
+        # slash.
+        limit += 1
 
         path = path + SEP if path else ''
         object_infos = self.native_container.list_objects_info(
             limit=limit, delimiter=SEP, prefix=path, marker=marker)
+
+        def _collapse(infos):
+            """Remove duplicate dummy / implied objects."""
+            name = None
+            for info in infos:
+                name = info.get('name', name)
+                subdir = info.get('subdir', '').strip(SEP)
+                if not name or subdir != name:
+                    yield info
+
+        if object_infos:
+            # Check first object for marker match and truncate if so.
+            if marker and \
+                object_infos[0].get('subdir', '').strip(SEP) == marker:
+                object_infos = object_infos[1:]
+
+            # Collapse subdirs and dummy objects.
+            object_infos = list(_collapse(object_infos))
+
+            # If we have over the original limit, truncate.
+            object_infos = object_infos[:orig_limit]
 
         return [self.obj_cls.from_info(self, x) for x in object_infos]
 
