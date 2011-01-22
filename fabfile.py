@@ -49,7 +49,7 @@ def pep8():
     includes = "-r %s" % " ".join(CHECK_INCLUDES)
     ignores = "--ignore=%s" % ",".join(PEP8_IGNORES) if PEP8_IGNORES else ''
     with settings(warn_only=True):
-        results = local("pep8 %s %s" % (includes, ignores), capture=False)
+        results = local("pep8 %s %s" % (includes, ignores), capture=True)
     errors = results.strip() if results else None
     if errors:
         print(errors)

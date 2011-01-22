@@ -1,19 +1,32 @@
-"""Rackspace cloud wrapper."""
+"""Rackspace cloud wrapper.
+
+**Install Note**: Use of this module requires the Rackspace ``cloudfiles``
+package, and at least version 1.7.4 (which introduced the ``path`` container
+query support).
+"""
 from datetime import datetime
+
+from cloud_browser.cloud import errors, base
+from cloud_browser.common import SEP, check_version
+
+###############################################################################
+# Contstants / Conditional Imports
+###############################################################################
+# 1.7.4 introduced the ``path`` parameter for ``list_objects_info``.
+RS_MIN_CLOUDFILES_VERSION = (1, 7, 4)
+# Current Rackspace maximum number of objects for listing.
+RS_MAX_GET_OBJS_LIMIT = 10000
 
 try:
     import cloudfiles  # pylint: disable=F0401
+    check_version(cloudfiles, RS_MIN_CLOUDFILES_VERSION)
 except ImportError:
     cloudfiles = None  # pylint: disable=C0103
 
-from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP
 
-
-# Current Rackspace maximum.
-RS_MAX_GET_OBJS_LIMIT = 10000
-
-
+###############################################################################
+# Classes
+###############################################################################
 class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
     translations = {

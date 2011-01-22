@@ -24,6 +24,18 @@ def get_int(value, default, test_fn=lambda x: True):
     return converted if test_fn(converted) else default
 
 
+def check_version(mod, required):
+    """Check module version."""
+    from django.core.exceptions import ImproperlyConfigured
+
+    vers = tuple(int(v) for v in mod.__version__.split('.')[:3])
+    if vers < required:
+        req = '.'.join(str(v) for v in required)
+        raise ImproperlyConfigured(
+            "Module \"%s\" version (%s) must be >= %s." %
+            (mod.__name__, mod.__version__, req))
+
+
 ###############################################################################
 # Path helpers.
 ###############################################################################
