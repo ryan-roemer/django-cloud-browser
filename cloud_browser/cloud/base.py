@@ -49,7 +49,7 @@ class CloudObject(object):
 
     def _get_object(self):
         """Return native storage object."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
     @property
     def is_subdir(self):
@@ -98,7 +98,7 @@ class CloudObject(object):
 
     def _read(self):
         """Return contents of object."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
 
 class CloudContainer(object):
@@ -123,15 +123,15 @@ class CloudContainer(object):
 
     def _get_container(self):
         """Return native container object."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
     def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
     def get_object(self, path):
         """Get single object."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
 
 class CloudConnection(object):
@@ -155,7 +155,7 @@ class CloudConnection(object):
 
     def _get_connection(self):
         """Return native connection object."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
     def get_containers(self):
         """Return available containers."""
@@ -164,7 +164,7 @@ class CloudConnection(object):
 
     def _get_containers(self):
         """Return available containers."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
 
     def get_container(self, path):
         """Return single container."""
@@ -175,4 +175,4 @@ class CloudConnection(object):
 
     def _get_container(self, path):
         """Return single container."""
-        raise NotImplementedError("Must implement.")
+        raise NotImplementedError
