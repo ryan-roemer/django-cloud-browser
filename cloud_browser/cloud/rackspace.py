@@ -51,6 +51,12 @@ class RackspaceObject(base.CloudObject):
                    obj_type=cls.type_cls.SUBDIR)
 
     @classmethod
+    def choose_type(cls, content_type):
+        """Choose object type from content type."""
+        return cls.type_cls.SUBDIR if content_type == "application/directory" \
+            else cls.type_cls.FILE
+
+    @classmethod
     def from_file_info(cls, container, info_obj):
         """Create from regular info object."""
         # 2010-04-15T01:52:13.919070
@@ -61,7 +67,7 @@ class RackspaceObject(base.CloudObject):
                    size=info_obj['bytes'],
                    content_type=info_obj['content_type'],
                    last_modified=last_modified,
-                   obj_type=cls.type_cls.FILE)
+                   obj_type=cls.choose_type(info_obj['content_type']))
 
     @classmethod
     def from_obj(cls, container, file_obj):
@@ -74,7 +80,7 @@ class RackspaceObject(base.CloudObject):
                    size=file_obj.size,
                    content_type=file_obj.content_type,
                    last_modified=last_modified,
-                   obj_type=cls.type_cls.FILE)
+                   obj_type=cls.choose_type(file_obj.content_type))
 
 
 class RackspaceContainer(base.CloudContainer):
@@ -90,6 +96,9 @@ class RackspaceContainer(base.CloudContainer):
     def get_objects(self, path, marker=None,
                     limit=base.DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
+        # TODO: BUG: subdir has '/' that is stripped off, but needed when
+        # passing in the marker string to list_objects_info
+
         # Require 1 less than RS max. to allow for "next" count.
         if limit >= RS_MAX_GET_OBJS_LIMIT - 1:
             raise errors.CloudException("Object limit must be less than %s" %
