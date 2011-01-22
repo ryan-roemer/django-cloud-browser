@@ -124,21 +124,17 @@ class RackspaceContainer(base.CloudContainer):
 
         """
         # Enforce maximum object size.
-        orig_limit = limit
         if limit > RS_MAX_GET_OBJS_LIMIT:
             raise errors.CloudException("Object limit must be less than %s" %
                                         RS_MAX_GET_OBJS_LIMIT)
 
-        # Adjust limit to +1 to handle marker object as first result.
-        # We can get in to this situation for a marker of "foo", that will
-        # still return a 'subdir' object of "foo/" because of the extra
-        # slash.
-        limit += 1
-
-        object_infos = self._get_object_infos(path, marker, limit)
-        if object_infos:
-            # If we have over the original limit, truncate.
-            object_infos = object_infos[:orig_limit]
+        object_infos, full_query = self._get_object_infos(path, marker, limit)
+        if full_query and len(object_infos) < limit:
+            # The underlying query returned a full result set, but we
+            # truncated it to under limit. Re-run at twice the limit and then
+            # slice back.
+            object_infos, _ = self._get_object_infos(path, marker, 2*limit)
+            object_infos = object_infos[:limit]
 
         return [self.obj_cls.from_info(self, x) for x in object_infos]
 
@@ -146,9 +142,14 @@ class RackspaceContainer(base.CloudContainer):
     def _get_object_infos(self, path, marker=None,
                           limit=base.DEFAULT_GET_OBJS_LIMIT):
         """Get raw object infos (single-shot)."""
-        path = path + SEP if path else ''
-        object_infos = self.native_container.list_objects_info(
-            limit=limit, delimiter=SEP, prefix=path, marker=marker)
+        # Adjust limit to +1 to handle marker object as first result.
+        # We can get in to this situation for a marker of "foo", that will
+        # still return a 'subdir' object of "foo/" because of the extra
+        # slash.
+        orig_limit = limit
+        limit += 1
+
+        # TODO: Handle limit adjustment goes over RS_MAX_GET_OBJS_LIMIT case.
 
         def _collapse(infos):
             """Remove duplicate dummy / implied objects."""
@@ -159,6 +160,11 @@ class RackspaceContainer(base.CloudContainer):
                 if not name or subdir != name:
                     yield info
 
+        path = path + SEP if path else ''
+        object_infos = self.native_container.list_objects_info(
+            limit=limit, delimiter=SEP, prefix=path, marker=marker)
+
+        full_query = len(object_infos) == limit
         if object_infos:
             # Check first object for marker match and truncate if so.
             if marker and \
@@ -168,7 +174,11 @@ class RackspaceContainer(base.CloudContainer):
             # Collapse subdirs and dummy objects.
             object_infos = list(_collapse(object_infos))
 
-        return object_infos
+            # Adjust to original limit.
+            if len(object_infos) > orig_limit:
+                object_infos = object_infos[:orig_limit]
+
+        return object_infos, full_query
 
     @wrap_rs_errors
     def get_object(self, path):
