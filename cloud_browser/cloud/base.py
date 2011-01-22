@@ -3,10 +3,8 @@ import mimetypes
 
 from cloud_browser.cloud import errors
 from cloud_browser.app_settings import settings
-from cloud_browser.common import SEP, path_join, basename
-
-
-DEFAULT_GET_OBJS_LIMIT = 20
+from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT, \
+    path_join, basename
 
 
 class CloudObjectTypes(object):
