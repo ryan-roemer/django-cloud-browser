@@ -21,19 +21,19 @@ Cloud Browser - {{ path }}
 # static media definition that we **can** rely on in any deployment.
 {% endcomment %}
 {% if CLOUD_BROWSER_MEDIA_URL %}
-{# Real include of static media. #}
+{# Real static media include. #}
 <link rel="stylesheet" type="text/css"
   href="{{ CLOUD_BROWSER_MEDIA_URL }}css/cloud-browser.css"  />
 <script type="text/javascript"
   src="{{ CLOUD_BROWSER_MEDIA_URL }}js/browser.js"></script>
 
 {% else %}
-{# Manually paste in all static media. #}
+{# Copy / paste in CSS, JS. #}
 <style type="text/css">
-{% include "cloud_browser_static/css/cloud_browser_css.html" %}
+{% include "cloud_browser_media/css/cloud-browser.css" %}
 </style>
 <script type="text/javascript">
-{% include "cloud_browser_static/js/browser_js.html" %}
+{% include "cloud_browser_media/js/browser.js" %}
 </script>
 {% endif %}
 {% endblock %}
