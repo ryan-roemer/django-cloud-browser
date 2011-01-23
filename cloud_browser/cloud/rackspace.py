@@ -10,12 +10,13 @@ from cloud_browser.cloud import errors, base
 from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT, check_version
 
 ###############################################################################
-# Contstants / Conditional Imports
+# Constants / Conditional Imports
 ###############################################################################
 # 1.7.4 introduced the ``path`` parameter for ``list_objects_info``.
 RS_MIN_CLOUDFILES_VERSION = (1, 7, 4)
-# Current Rackspace maximum number of objects for listing.
-RS_MAX_GET_OBJS_LIMIT = 10000
+# Current Rackspace maximum number of objects/containers for listing.
+RS_MAX_LIST_OBJECTS_LIMIT = 10000
+RS_MAX_LIST_CONTAINERS_LIMIT = 10000
 
 try:
     import cloudfiles  # pylint: disable=F0401
@@ -136,9 +137,9 @@ class RackspaceContainer(base.CloudContainer):
 
         """
         # Enforce maximum object size.
-        if limit > RS_MAX_GET_OBJS_LIMIT:
+        if limit > RS_MAX_LIST_OBJECTS_LIMIT:
             raise errors.CloudException("Object limit must be less than %s" %
-                                        RS_MAX_GET_OBJS_LIMIT)
+                                        RS_MAX_LIST_OBJECTS_LIMIT)
 
         object_infos, full_query = self._get_object_infos(path, marker, limit)
         if full_query and len(object_infos) < limit:
@@ -160,8 +161,6 @@ class RackspaceContainer(base.CloudContainer):
         # slash.
         orig_limit = limit
         limit += 1
-
-        # TODO: Handle limit adjustment goes over RS_MAX_GET_OBJS_LIMIT case.
 
         def _collapse(infos):
             """Remove duplicate dummy / implied objects."""
