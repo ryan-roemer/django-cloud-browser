@@ -7,6 +7,7 @@ Logistics
 
 * **README**: Write this up.
 * **Sphinx**: Continue documentation of all source in ``cloud_browser``.
+  Currently at ``cloud_browser.cloud.base``.
 
 Bugs
 ====
@@ -40,3 +41,4 @@ Test / Support
 
 * **Mem FS**: Write memory-based FS (Python-memory).
 * **Unit Tests**: Add unit tests using fs/mem backing store.
+* **Coverage**: Add coverage fabric targets.
