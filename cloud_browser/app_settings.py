@@ -60,6 +60,11 @@ class Settings(object):
 
     * ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to
       diplay per browser page.
+    * ``CLOUD_BROWSER_STATIC_MEDIA_DIR``: If this applications static media
+      (found in ``app_media``) is served up under the ``settings.MEDIA_ROOT``,
+      then set a relative path from the root, and the static media will be
+      used instead of our hacked, "dump all CSS/JS straight into the page"
+      fallback approach.
     """
     SETTINGS = {
         # Rackspace datastore settings.
@@ -76,6 +81,9 @@ class Settings(object):
 
         # Browser settings.
         'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': _get_default(20),
+
+        # Static media root.
+        'CLOUD_BROWSER_STATIC_MEDIA_DIR': _get_setting,
     }
 
     def __init__(self):
@@ -117,6 +125,17 @@ class Settings(object):
         white = self._container_whitelist
         black = self._container_blacklist
         return name not in black and (not white or name in white)
+
+    @property
+    def app_media_url(self):
+        """Get application media root from real media root URL."""
+        url = None
+        media_dir = self.CLOUD_BROWSER_STATIC_MEDIA_DIR
+        if media_dir:
+            url = os.path.join(self.MEDIA_URL, media_dir).rstrip('/') + '/'
+
+        print(url)
+        return url
 
 
 settings = Settings()  # pylint: disable=C0103
