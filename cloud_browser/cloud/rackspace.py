@@ -6,8 +6,9 @@ query support).
 """
 from datetime import datetime
 
+from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT, check_version
+from cloud_browser.common import SEP, check_version
 
 ###############################################################################
 # Constants / Conditional Imports
@@ -126,7 +127,8 @@ class RackspaceContainer(base.CloudContainer):
         return (RS_MAX_LIST_OBJECTS_LIMIT - 1) / 2
 
     @wrap_rs_errors
-    def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
+    def get_objects(self, path, marker=None,
+                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
         """Get objects.
 
         **Pseudo-directory Notes**: Rackspace has two approaches to pseudo-
@@ -167,7 +169,7 @@ class RackspaceContainer(base.CloudContainer):
 
     @wrap_rs_errors
     def _get_object_infos(self, path, marker=None,
-                          limit=DEFAULT_GET_OBJS_LIMIT):
+                          limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
         """Get raw object infos (single-shot)."""
         # Adjust limit to +1 to handle marker object as first result.
         # We can get in to this situation for a marker of "foo", that will

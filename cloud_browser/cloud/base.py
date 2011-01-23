@@ -3,7 +3,7 @@ import mimetypes
 
 from cloud_browser.cloud import errors
 from cloud_browser.app_settings import settings
-from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT, \
+from cloud_browser.common import SEP, \
     path_join, basename
 
 
@@ -128,7 +128,8 @@ class CloudContainer(object):
         """Maximum number of objects that can be listed or ``None``."""
         return None
 
-    def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
+    def get_objects(self, path, marker=None,
+                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
         """Get objects."""
         raise NotImplementedError
 

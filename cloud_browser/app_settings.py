@@ -8,6 +8,17 @@ def _get_setting(name, default=None):
     return getattr(_settings, name, default)
 
 
+def _get_default(default):
+    """Get setting from settings.py with default."""
+    def _get(name, curried_default=default):
+        """Curried function."""
+        if curried_default is None:
+            curried_default = default
+        return _get_setting(name, curried_default)
+
+    return _get
+
+
 def _get_setting_or_env(name, default=None):
     """Get setting from settings.py or environment."""
     # Prefer settings, then environment.
@@ -44,6 +55,11 @@ class Settings(object):
 
     * ``CLOUD_BROWSER_CONTAINER_WHITELIST``: White list of names. (Iterable)
     * ``CLOUD_BROWSER_CONTAINER_BLACKLIST``: Black list of names. (Iterable)
+
+    **General**: Other settings.
+
+    * ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to
+      diplay per browser page.
     """
     SETTINGS = {
         # Rackspace datastore settings.
@@ -57,6 +73,9 @@ class Settings(object):
         # Permissions lists for containers.
         'CLOUD_BROWSER_CONTAINER_WHITELIST': _get_setting,
         'CLOUD_BROWSER_CONTAINER_BLACKLIST': _get_setting,
+
+        # Browser settings.
+        'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': _get_default(20),
     }
 
     def __init__(self):

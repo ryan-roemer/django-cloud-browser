@@ -4,8 +4,9 @@ from __future__ import with_statement
 import os
 import re
 
+from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT
+from cloud_browser.common import SEP
 
 
 NO_DOT_RE = re.compile("^[^.]+")
@@ -82,7 +83,8 @@ class FilesystemContainer(base.CloudContainer):
         return object()
 
     @wrap_fs_obj_errors
-    def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
+    def get_objects(self, path, marker=None,
+                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
         """Get objects."""
         def _filter(name):
             """Filter."""

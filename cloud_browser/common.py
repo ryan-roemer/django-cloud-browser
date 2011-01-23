@@ -11,9 +11,6 @@ Because cloud operations are OS agnostic, we don't use any of :module:`os` or
 SEP = "/"
 PARENT = ".."
 
-# Limits.
-DEFAULT_GET_OBJS_LIMIT = 10
-
 
 ###############################################################################
 # General.

@@ -7,12 +7,18 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 
 
 def get_connection():
-    """Wrapper for global connection/config object."""
+    """Return global connection object.
+
+    :rtype: :class:`cloud_browser.cloud.base.CloudConnection`
+    """
     from cloud_browser.cloud.config import Config
     return Config.get_connection()
 
 
 def get_connection_cls():
-    """Wrapper for global connection/config class."""
+    """Return global connection class.
+
+    :rtype: :class:`type`
+    """
     from cloud_browser.cloud.config import Config
     return Config.get_connection_cls()

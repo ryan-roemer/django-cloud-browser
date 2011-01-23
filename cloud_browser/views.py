@@ -3,8 +3,9 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from cloud_browser.app_settings import settings
 from cloud_browser.cloud import get_connection, get_connection_cls, errors
-from cloud_browser.common import DEFAULT_GET_OBJS_LIMIT, get_int, \
+from cloud_browser.common import get_int, \
     path_parts, path_join, path_yield, relpath
 
 
@@ -42,9 +43,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         marker = path_join(object_path, marker_part)
 
     # Get and adjust listing limit.
+    limit_default = settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
     limit_test = lambda x: x > 0 and (MAX_LIMIT is None or x <= MAX_LIMIT - 1)
-    limit = get_int(incoming.get('limit', DEFAULT_GET_OBJS_LIMIT),
-                    DEFAULT_GET_OBJS_LIMIT,
+    limit = get_int(incoming.get('limit', limit_default),
+                    limit_default,
                     limit_test)
 
     # Q1: Get all containers.
