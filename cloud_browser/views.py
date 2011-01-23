@@ -3,12 +3,12 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from cloud_browser.cloud import get_connection, errors
-from cloud_browser.common import path_parts, path_join, path_yield, relpath, \
-    get_int
+from cloud_browser.cloud import get_connection, get_connection_cls, errors
+from cloud_browser.common import DEFAULT_GET_OBJS_LIMIT, get_int, \
+    path_parts, path_join, path_yield, relpath
 
 
-DEFAULT_LIMIT = 20
+MAX_LIMIT = get_connection_cls().cont_cls.max_list()
 
 
 def _breadcrumbs(path):
@@ -41,15 +41,15 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     if marker_part:
         marker = path_join(object_path, marker_part)
 
-    # TODO: Use hard-coded max constraint.
-    limit = get_int(incoming.get('limit', DEFAULT_LIMIT),
-                    DEFAULT_LIMIT,
-                    lambda x: x > 0 and x < 10000 - 1)
+    # Get and adjust listing limit.
+    limit = get_int(incoming.get('limit', DEFAULT_GET_OBJS_LIMIT),
+                    DEFAULT_GET_OBJS_LIMIT,
+                    lambda x: x > 0 and (MAX_LIMIT is None or x <= MAX_LIMIT))
 
     # Q1: Get all containers.
     #     We optimize here by not individually looking up containers later,
     #     instead going through this in-memory list.
-    # TODO: Check if this is too expensive network and results-wise.
+    # TODO: Should page listed containers with a ``limit`` and ``marker``.
     conn = get_connection()
     containers = conn.get_containers()
 

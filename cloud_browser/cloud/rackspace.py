@@ -14,6 +14,7 @@ from cloud_browser.common import SEP, DEFAULT_GET_OBJS_LIMIT, check_version
 ###############################################################################
 # 1.7.4 introduced the ``path`` parameter for ``list_objects_info``.
 RS_MIN_CLOUDFILES_VERSION = (1, 7, 4)
+
 # Current Rackspace maximum number of objects/containers for listing.
 RS_MAX_LIST_OBJECTS_LIMIT = 10000
 RS_MAX_LIST_CONTAINERS_LIMIT = 10000
@@ -106,6 +107,24 @@ class RackspaceContainer(base.CloudContainer):
         """Return native container object."""
         return self.conn.native_conn.get_container(self.name)
 
+    @classmethod
+    def max_list(cls):
+        """Maximum number of objects that can be listed or ``None``.
+
+        Enforced Rackspace maximums. We need a lower max. to be enforced on
+        the input end because under the hood, we can try subsequent larger
+        queries if we have marker or psuedo/dummy directory clashes.
+
+        Specifically, we need to add one to the query to detect a
+        pseudo-directory matching the marker, and double the limit for a
+        follow-on query if we have both dummy and pseudo-directory objects
+        in results.
+
+        :return: Maximum number of objects that can be listed.
+        :rtype: ``int`` or ``None``.
+        """
+        return (RS_MAX_LIST_OBJECTS_LIMIT - 1) / 2
+
     @wrap_rs_errors
     def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
         """Get objects.
@@ -136,11 +155,6 @@ class RackspaceContainer(base.CloudContainer):
         only rarely occur.
 
         """
-        # Enforce maximum object size.
-        if limit > RS_MAX_LIST_OBJECTS_LIMIT:
-            raise errors.CloudException("Object limit must be less than %s" %
-                                        RS_MAX_LIST_OBJECTS_LIMIT)
-
         object_infos, full_query = self._get_object_infos(path, marker, limit)
         if full_query and len(object_infos) < limit:
             # The underlying query returned a full result set, but we
@@ -161,6 +175,11 @@ class RackspaceContainer(base.CloudContainer):
         # slash.
         orig_limit = limit
         limit += 1
+
+        # Enforce maximum object size.
+        if limit > RS_MAX_LIST_OBJECTS_LIMIT:
+            raise errors.CloudException("Object limit must be less than %s" %
+                                        RS_MAX_LIST_OBJECTS_LIMIT)
 
         def _collapse(infos):
             """Remove duplicate dummy / implied objects."""
@@ -221,6 +240,11 @@ class RackspaceConnection(base.CloudConnection):
             kwargs['servicenet'] = True
 
         return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
+
+    @classmethod
+    def max_list(cls):
+        """Maximum number of containers that can be listed or ``None``."""
+        return RS_MAX_LIST_CONTAINERS_LIMIT
 
     @wrap_rs_errors
     def _get_containers(self):

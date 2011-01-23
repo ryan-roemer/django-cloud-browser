@@ -30,6 +30,11 @@ Features
   * *Admin*: Get anything available to admin, with admin decorators.
   * *AJAX*: Actually get AJAX.
 
+* **Rackspace**:
+
+  * *Container Listing*: Listing containers also uses ``limit`` and ``marker``
+    and we should support this for large numbers of containers.
+
 Test / Support
 ==============
 

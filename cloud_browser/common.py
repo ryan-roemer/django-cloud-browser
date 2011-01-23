@@ -12,19 +12,20 @@ SEP = "/"
 PARENT = ".."
 
 # Limits.
-DEFAULT_GET_OBJS_LIMIT = 20
+DEFAULT_GET_OBJS_LIMIT = 5
 
 
 ###############################################################################
 # General.
 ###############################################################################
-def get_int(value, default, test_fn=lambda x: True):
+def get_int(value, default, test_fn=None):
     """Convert to integer."""
     try:
         converted = int(value)
     except ValueError:
         return default
 
+    test_fn = test_fn if test_fn else lambda x: True
     return converted if test_fn(converted) else default
 
 

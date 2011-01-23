@@ -9,4 +9,10 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 def get_connection():
     """Wrapper for global connection/config object."""
     from cloud_browser.cloud.config import Config
-    return Config.singleton().connection
+    return Config.get_connection()
+
+
+def get_connection_cls():
+    """Wrapper for global connection/config class."""
+    from cloud_browser.cloud.config import Config
+    return Config.get_connection_cls()

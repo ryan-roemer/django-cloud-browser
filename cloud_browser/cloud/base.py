@@ -123,6 +123,11 @@ class CloudContainer(object):
         """Return native container object."""
         raise NotImplementedError
 
+    @classmethod
+    def max_list(cls):
+        """Maximum number of objects that can be listed or ``None``."""
+        return None
+
     def get_objects(self, path, marker=None, limit=DEFAULT_GET_OBJS_LIMIT):
         """Get objects."""
         raise NotImplementedError
@@ -154,6 +159,11 @@ class CloudConnection(object):
     def _get_connection(self):
         """Return native connection object."""
         raise NotImplementedError
+
+    @classmethod
+    def max_list(cls):
+        """Maximum number of containers that can be listed or ``None``."""
+        return None
 
     def get_containers(self):
         """Return available containers."""
