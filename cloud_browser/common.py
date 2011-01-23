@@ -12,7 +12,7 @@ SEP = "/"
 PARENT = ".."
 
 # Limits.
-DEFAULT_GET_OBJS_LIMIT = 5
+DEFAULT_GET_OBJS_LIMIT = 10
 
 
 ###############################################################################

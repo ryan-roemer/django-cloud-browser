@@ -42,9 +42,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         marker = path_join(object_path, marker_part)
 
     # Get and adjust listing limit.
+    limit_test = lambda x: x > 0 and (MAX_LIMIT is None or x <= MAX_LIMIT - 1)
     limit = get_int(incoming.get('limit', DEFAULT_GET_OBJS_LIMIT),
                     DEFAULT_GET_OBJS_LIMIT,
-                    lambda x: x > 0 and (MAX_LIMIT is None or x <= MAX_LIMIT))
+                    limit_test)
 
     # Q1: Get all containers.
     #     We optimize here by not individually looking up containers later,
