@@ -2,7 +2,7 @@
 
 
 class Config(object):
-    """Cloud configuration helper."""
+    """General class helper to construct connection objects."""
     __connection_obj = None
     __connection_cls = None
     __connection_fn = None
@@ -47,14 +47,20 @@ class Config(object):
 
     @classmethod
     def get_connection_cls(cls):
-        """Get connection class."""
+        """Return connection class.
+
+        :rtype: :class:`type`
+        """
         if cls.__connection_cls is None:
             cls.__connection_cls, _ = cls.from_settings()
         return cls.__connection_cls
 
     @classmethod
     def get_connection(cls):
-        """Get singleton object."""
+        """Return connection object.
+
+        :rtype: :class:`cloud_browser.cloud.base.CloudConnection`
+        """
         if cls.__connection_obj is None:
             if cls.__connection_fn is None:
                 _, cls.__connection_fn = cls.from_settings()
