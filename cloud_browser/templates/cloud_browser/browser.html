@@ -15,119 +15,16 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block cloud_browser_template_head %}
-{# TODO: Replace with alternate template tag / "include or serve" option #}
+{% comment %}
+# Hackery: Use symlinked static media files as templates to dump here if not
+# otherwise served as real static media. Inefficient, but we only have one
+# static media definition that we **can** rely on in any deployment.
+{% endcomment %}
 <style type="text/css">
-div#cloud-browser-breadcrumbs {
-    color: #999;
-}
-div#cloud-browser-breadcrumbs a {
-    color: #333;
-    text-decoration: none;
-}
-div#cloud-browser-breadcrumbs a:hover {
-    text-decoration: underline;
-}
-/*div#cloud-browser-containers,
-div #cloud-browser-objects {
-    border: 1px solid red;
-}TODO DEBUG REMOVE*/
-div#cloud-browser-containers h2,
-div #cloud-browser-objects h2 {
-    text-align: center;
-}
-div#cloud-browser-containers {
-    background: #333;
-    color: #ccc;
-    float: left;
-    width: 200px;
-}
-div#cloud-browser-containers a {
-    color: #ccc;
-    text-decoration: none;
-}
-div#cloud-browser-containers a:hover {
-    text-decoration: underline;
-}
-div#cloud-browser-objects {
-    margin-left: 200px;
-    width: auto;
-}
-table#cloud-browser-objects-table {
-    margin: auto;
-    width: 99%;
-}
-table#cloud-browser-objects-table thead,
-table#cloud-browser-objects-table tfoot,
-table#cloud-browser-objects-table tfoot a {
-    background: #333;
-    color: #ccc;
-}
-table#cloud-browser-objects-table tfoot {
-    text-align: right;
-}
-table#cloud-browser-objects-table tfoot th {
-    padding: 1px;
-    border: 2px solid #333;
-}
-table#cloud-browser-objects-table tbody a {
-    color: #333;
-    text-decoration: none;
-}
-table#cloud-browser-objects-table tbody a:hover {
-    text-decoration: underline;
-}
-.cloud-browser-empty {
-    text-align: center;
-    font-style: italic;
-    color: #666;
-}
-form.cloud-browser-form {
-    display: inline;
-    padding: 3px;
-    /*border: 1px solid #ccc;*/
-}
-form.cloud-browser-form input[type='text'] {
-    background: #ccc;
-    color: #333;
-    border: 1px solid #333;
-    text-align: center;
-    font-size: .75em;
-}
-form.cloud-browser-form input[name='limit'] {
-    width: 25px;
-}
-a.cloud-browser-form-link {
-    text-decoration: none;
-}
-/*.cloud-browser-round4 {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    border-radius: 4px;
-}*/
-
+  {% include "cloud_browser_static/css/cloud_browser_css.html" %}
 </style>
 <script type="text/javascript">
-var CloudBrowser = {
-    /** Submit the "next" page results form. */
-    submitForm: function (formId) {
-        document.getElementById(formId).submit();
-        return false;
-    },
-    /** Return key pressed */
-    enterPressed: function (event) {
-        var key = window.event ?
-            window.event.keyCode /*IE*/ :
-            event.which /*FF*/;
-        return key === 13;
-    },
-    /** Submit form on enter. */
-    submitOnEnter: function (event, formId) {
-        if (CloudBrowser.enterPressed(event)) {
-            CloudBrowser.submitForm(formId);
-        }
-    }
-}
+  {% include "cloud_browser_static/js/browser_js.html" %}
 </script>
 {% endblock %}
 

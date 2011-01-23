@@ -1,0 +1,99 @@
+/**
+ * Cloud browser basic styles.
+ */
+
+/** Breadcrumbs */
+div#cloud-browser-breadcrumbs {
+    color: #999;
+}
+div#cloud-browser-breadcrumbs a {
+    color: #333;
+    text-decoration: none;
+}
+div#cloud-browser-breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+/** Containers */
+div#cloud-browser-containers h2,
+div #cloud-browser-objects h2 {
+    text-align: center;
+}
+div#cloud-browser-containers {
+    background: #333;
+    color: #ccc;
+    float: left;
+    width: 200px;
+}
+div#cloud-browser-containers a {
+    color: #ccc;
+    text-decoration: none;
+}
+div#cloud-browser-containers a:hover {
+    text-decoration: underline;
+}
+
+/** Objects */
+div#cloud-browser-objects {
+    margin-left: 200px;
+    width: auto;
+}
+table#cloud-browser-objects-table {
+    margin: auto;
+    width: 99%;
+}
+table#cloud-browser-objects-table thead,
+table#cloud-browser-objects-table tfoot,
+table#cloud-browser-objects-table tfoot a {
+    background: #333;
+    color: #ccc;
+}
+table#cloud-browser-objects-table tfoot {
+    text-align: right;
+}
+table#cloud-browser-objects-table tfoot th {
+    padding: 1px;
+    border: 2px solid #333;
+}
+table#cloud-browser-objects-table tbody a {
+    color: #333;
+    text-decoration: none;
+}
+table#cloud-browser-objects-table tbody a:hover {
+    text-decoration: underline;
+}
+
+/** Messages */
+.cloud-browser-empty {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/** Forms */
+form.cloud-browser-form {
+    display: inline;
+    padding: 3px;
+    /*border: 1px solid #ccc;*/
+}
+form.cloud-browser-form input[type='text'] {
+    background: #ccc;
+    color: #333;
+    border: 1px solid #333;
+    text-align: center;
+    font-size: .75em;
+}
+form.cloud-browser-form input[name='limit'] {
+    width: 25px;
+}
+a.cloud-browser-form-link {
+    text-decoration: none;
+}
+
+/** Unused */
+/*.cloud-browser-round4 {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}*/
