@@ -134,7 +134,6 @@ class Settings(object):
         if media_dir:
             url = os.path.join(self.MEDIA_URL, media_dir).rstrip('/') + '/'
 
-        print(url)
         return url
 
 

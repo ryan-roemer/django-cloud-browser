@@ -6,6 +6,8 @@
 ###############################################################################
 {% endcomment %}
 
+{% load cloud_browser_extras %}
+
 {% block title %}
 Cloud Browser - {{ path }}
 {% endblock %}
@@ -15,27 +17,8 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block cloud_browser_template_head %}
-{% comment %}
-# Hackery: Use symlinked static media files as templates to dump here if not
-# otherwise served as real static media. Inefficient, but we only have one
-# static media definition that we **can** rely on in any deployment.
-{% endcomment %}
-{% if CLOUD_BROWSER_MEDIA_URL %}
-{# Real static media include. #}
-<link rel="stylesheet" type="text/css"
-  href="{{ CLOUD_BROWSER_MEDIA_URL }}css/cloud-browser.css"  />
-<script type="text/javascript"
-  src="{{ CLOUD_BROWSER_MEDIA_URL }}js/browser.js"></script>
-
-{% else %}
-{# Copy / paste in CSS, JS. #}
-<style type="text/css">
-{% include "cloud_browser_media/css/cloud-browser.css" %}
-</style>
-<script type="text/javascript">
-{% include "cloud_browser_media/js/browser.js" %}
-</script>
-{% endif %}
+{% cloud_browser_media_link "css/cloud-browser.css" %}
+{% cloud_browser_media_link "js/browser.js" %}
 {% endblock %}
 
 {% block content %}
