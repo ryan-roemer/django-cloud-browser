@@ -2,6 +2,14 @@
  TODO / Task List
 ==================
 
+Current
+=======
+
+* Change max_list
+* Add AWS?
+* Add license.
+* Package / sdist.
+
 Logistics
 =========
 

@@ -8,10 +8,11 @@ from django.template.loader_tags import IncludeNode
 
 from cloud_browser.app_settings import settings
 
-register = template.Library()
+register = template.Library()  # pylint: disable=C0103
+
 
 @register.tag
-def cloud_browser_media_link(parser, token):
+def cloud_browser_media_link(_, token):
     """Create appropriate ``link``, ``script`` or ``style`` tag from relative
     resource path.
 
@@ -42,6 +43,7 @@ class MediaLinkNode(Node):
 
     def __init__(self, rel_path):
         """Initializer."""
+        super(MediaLinkNode, self).__init__()
         self.rel_path = rel_path.lstrip('/').strip("'").strip('"')
         self.media_type = os.path.splitext(self.rel_path)[1].strip('.').lower()
 
