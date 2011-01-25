@@ -13,8 +13,8 @@ Contents
    :maxdepth: 2
 
    README
-   TODO
    cloud_browser/index
+   TODO
 
 Indices and tables
 ==================

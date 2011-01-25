@@ -5,12 +5,10 @@
 Current
 =======
 
-* Add license.
 * Package / sdist.
-* Back to .rst for docs.
-* Finish README.rst, INSTALL.rst.
-
 * Add AWS.
+* Add license.
+* Finish README.rst, INSTALL.rst.
 
 Logistics
 =========
