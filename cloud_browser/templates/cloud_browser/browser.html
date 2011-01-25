@@ -27,8 +27,9 @@ Cloud Browser - {{ path }}
 <h2>Containers</h2>
 <ul>
 {% for cont in containers %}
-  <li><a href="{% url cloud_browser_browser cont.name %}">{{ cont.name }}</a>
-      {#({{ cont.count }} objects, {{ cont.size|filesizeformat }})#}</li>
+  <li>
+    <a href="{% url cloud_browser_browser cont.name %}">{{ cont.name }}</a>
+  </li>
 {% endfor %}
 </ul>
 </div>
