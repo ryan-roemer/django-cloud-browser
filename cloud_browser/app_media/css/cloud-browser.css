@@ -81,7 +81,7 @@ form.cloud-browser-form input[type='text'] {
     color: #333;
     border: 1px solid #333;
     text-align: center;
-    font-size: .75em;
+    font-size: smaller;
 }
 form.cloud-browser-form input[name='limit'] {
     width: 25px;
