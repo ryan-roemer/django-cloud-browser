@@ -6,14 +6,18 @@ Current
 =======
 
 * Change max_list
-* Add AWS?
 * Add license.
 * Package / sdist.
+* Back to .rst for docs.
+* Finish README.rst, INSTALL.rst.
+
+* Add AWS.
 
 Logistics
 =========
 
 * **README**: Write this up.
+* **INSTALL**: Write this up.
 * **Sphinx**: Continue documentation of all source in ``cloud_browser``.
   Currently at ``cloud_browser.cloud.base``.
 
