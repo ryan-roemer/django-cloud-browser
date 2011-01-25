@@ -5,7 +5,6 @@
 Current
 =======
 
-* Change max_list
 * Add license.
 * Package / sdist.
 * Back to .rst for docs.

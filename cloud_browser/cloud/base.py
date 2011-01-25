@@ -101,7 +101,11 @@ class CloudObject(object):
 
 class CloudContainer(object):
     """Cloud container wrapper."""
+    #: Storage object child class.
     obj_cls = CloudObject
+
+    #: Maximum number of objects that can be listed or ``None``.
+    max_list = None
 
     def __init__(self, conn, name=None, count=None, size=None):
         """Initializer."""
@@ -123,11 +127,6 @@ class CloudContainer(object):
         """Return native container object."""
         raise NotImplementedError
 
-    @classmethod
-    def max_list(cls):
-        """Maximum number of objects that can be listed or ``None``."""
-        return None
-
     def get_objects(self, path, marker=None,
                     limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
         """Get objects."""
@@ -140,7 +139,11 @@ class CloudContainer(object):
 
 class CloudConnection(object):
     """Cloud connection wrapper."""
+    #: Container child class.
     cont_cls = CloudContainer
+
+    #: Maximum number of containers that can be listed or ``None``.
+    max_list = None
 
     def __init__(self, account, secret_key, rs_servicenet=False):
         """Initializer."""
@@ -160,11 +163,6 @@ class CloudConnection(object):
     def _get_connection(self):
         """Return native connection object."""
         raise NotImplementedError
-
-    @classmethod
-    def max_list(cls):
-        """Maximum number of containers that can be listed or ``None``."""
-        return None
 
     def get_containers(self):
         """Return available containers."""

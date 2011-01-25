@@ -101,30 +101,25 @@ class RackspaceObject(base.CloudObject):
 
 class RackspaceContainer(base.CloudContainer):
     """Rackspace container wrapper."""
+    #: Storage object child class.
     obj_cls = RackspaceObject
+
+    #: Maximum number of objects that can be listed or ``None``.
+    #:
+    #: Enforced Rackspace maximums. We need a lower max. to be enforced on
+    #: the input end because under the hood, we can try subsequent larger
+    #: queries if we have marker or psuedo/dummy directory clashes.
+    #:
+    #: Specifically, we need to add one to the query to detect a
+    #: pseudo-directory matching the marker, and double the limit for a
+    #: follow-on query if we have both dummy and pseudo-directory objects
+    #: in results.
+    max_list = (RS_MAX_LIST_OBJECTS_LIMIT - 1) / 2
 
     @wrap_rs_errors
     def _get_container(self):
         """Return native container object."""
         return self.conn.native_conn.get_container(self.name)
-
-    @classmethod
-    def max_list(cls):
-        """Maximum number of objects that can be listed or ``None``.
-
-        Enforced Rackspace maximums. We need a lower max. to be enforced on
-        the input end because under the hood, we can try subsequent larger
-        queries if we have marker or psuedo/dummy directory clashes.
-
-        Specifically, we need to add one to the query to detect a
-        pseudo-directory matching the marker, and double the limit for a
-        follow-on query if we have both dummy and pseudo-directory objects
-        in results.
-
-        :return: Maximum number of objects that can be listed.
-        :rtype: ``int`` or ``None``.
-        """
-        return (RS_MAX_LIST_OBJECTS_LIMIT - 1) / 2
 
     @wrap_rs_errors
     def get_objects(self, path, marker=None,
@@ -221,7 +216,11 @@ class RackspaceContainer(base.CloudContainer):
 
 class RackspaceConnection(base.CloudConnection):
     """Rackspace connection wrapper."""
+    #: Container child class.
     cont_cls = RackspaceContainer
+
+    #: Maximum number of containers that can be listed or ``None``.
+    max_list = RS_MAX_LIST_CONTAINERS_LIMIT
 
     def __init__(self, account, secret_key, rs_servicenet=False):
         """Initializer."""
@@ -242,11 +241,6 @@ class RackspaceConnection(base.CloudConnection):
             kwargs['servicenet'] = True
 
         return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
-
-    @classmethod
-    def max_list(cls):
-        """Maximum number of containers that can be listed or ``None``."""
-        return RS_MAX_LIST_CONTAINERS_LIMIT
 
     @wrap_rs_errors
     def _get_containers(self):

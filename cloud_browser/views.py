@@ -9,7 +9,7 @@ from cloud_browser.common import get_int, \
     path_parts, path_join, path_yield, relpath
 
 
-MAX_LIMIT = get_connection_cls().cont_cls.max_list()
+MAX_LIMIT = get_connection_cls().cont_cls.max_list
 
 
 def _breadcrumbs(path):

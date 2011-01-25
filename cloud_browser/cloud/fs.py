@@ -76,6 +76,7 @@ class FilesystemObject(base.CloudObject):
 
 class FilesystemContainer(base.CloudContainer):
     """Filesystem container wrapper."""
+    #: Storage object child class.
     obj_cls = FilesystemObject
 
     def _get_container(self):
@@ -118,6 +119,7 @@ class FilesystemContainer(base.CloudContainer):
 
 class FilesystemConnection(base.CloudConnection):
     """Filesystem connection wrapper."""
+    #: Container child class.
     cont_cls = FilesystemContainer
 
     def __init__(self, root):
