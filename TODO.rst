@@ -5,7 +5,6 @@
 Current
 =======
 
-* Package / sdist.
 * Add AWS.
 * Add license.
 * Finish README.rst, INSTALL.rst.

@@ -61,10 +61,10 @@ class Settings(object):
     * ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to
       diplay per browser page.
     * ``CLOUD_BROWSER_STATIC_MEDIA_DIR``: If this applications static media
-      (found in ``app_media``) is served up under the ``settings.MEDIA_ROOT``,
-      then set a relative path from the root, and the static media will be
-      used instead of our hacked, "dump all CSS/JS straight into the page"
-      fallback approach.
+      (found in ``templates\cloud_browser_media``) is served up under the
+      ``settings.MEDIA_ROOT``, then set a relative path from the root, and the
+      static media will be used instead of our hacked, "dump all CSS/JS
+      straight into the page" fallback approach.
     """
     SETTINGS = {
         # Rackspace datastore settings.

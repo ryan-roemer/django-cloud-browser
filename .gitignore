@@ -3,3 +3,6 @@
 
 doc_html
 local
+
+dist
+django_cloud_browser.egg-info

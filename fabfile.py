@@ -12,6 +12,7 @@ PROJ_SETTINGS = ".".join((PROJ, "settings"))
 
 CHECK_INCLUDES = (
     "fabfile.py",
+    "setup.py",
     MOD,
     PROJ,
 )
@@ -21,6 +22,8 @@ PYLINT_CFG = "dev/pylint.cfg"
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
 
+BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
+
 
 ###############################################################################
 # Build
@@ -28,6 +31,13 @@ DOC_OUTPUT = "doc_html"
 def clean():
     """Clean build files."""
     local("rm -rf %s" % DOC_OUTPUT)
+    for build_dir in BUILD_DIRS:
+        local("rm -rf %s" % build_dir)
+
+
+def sdist():
+    """Package into distribution."""
+    local("python setup.py sdist", capture=False)
 
 
 ###############################################################################
