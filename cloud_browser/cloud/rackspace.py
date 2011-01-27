@@ -36,11 +36,12 @@ class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
         cloudfiles.errors.NoSuchContainer: errors.NoContainerException,
         cloudfiles.errors.NoSuchObject: errors.NoObjectException,
     }
-wrap_rs_errors = RackspaceExceptionWrapper()  # pylint: disable=C0103
 
 
 class RackspaceObject(base.CloudObject):
     """Cloud object wrapper."""
+    #: Exception translations.
+    wrap_rs_errors = RackspaceExceptionWrapper()
 
     @wrap_rs_errors
     def _get_object(self):
@@ -103,6 +104,9 @@ class RackspaceContainer(base.CloudContainer):
     """Rackspace container wrapper."""
     #: Storage object child class.
     obj_cls = RackspaceObject
+
+    #: Exception translations.
+    wrap_rs_errors = RackspaceExceptionWrapper()
 
     #: Maximum number of objects that can be listed or ``None``.
     #:
@@ -218,6 +222,9 @@ class RackspaceConnection(base.CloudConnection):
     """Rackspace connection wrapper."""
     #: Container child class.
     cont_cls = RackspaceContainer
+
+    #: Exception translations.
+    wrap_rs_errors = RackspaceExceptionWrapper()
 
     #: Maximum number of containers that can be listed or ``None``.
     max_list = RS_MAX_LIST_CONTAINERS_LIMIT
