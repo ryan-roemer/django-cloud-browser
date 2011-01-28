@@ -51,13 +51,13 @@ def requires(module, name=""):
     :param name: module name
     :type  name: ``string``
     """
-    def requires_wrap(method):
+    def wrapped(method):
         """Call and enforce method."""
         if module is None:
             raise ImproperlyConfigured("Module '%s' is not installed." % name)
         return method
 
-    return requires_wrap
+    return wrapped
 
 
 ###############################################################################
