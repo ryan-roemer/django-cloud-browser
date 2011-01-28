@@ -3,6 +3,8 @@
 Because cloud operations are OS agnostic, we don't use any of :module:`os` or
 :module:`os.path`.
 """
+from django.core.exceptions import ImproperlyConfigured
+
 
 ###############################################################################
 # Constants.
@@ -28,14 +30,34 @@ def get_int(value, default, test_fn=None):
 
 def check_version(mod, required):
     """Check module version."""
-    from django.core.exceptions import ImproperlyConfigured
-
     vers = tuple(int(v) for v in mod.__version__.split('.')[:3])
     if vers < required:
         req = '.'.join(str(v) for v in required)
         raise ImproperlyConfigured(
             "Module \"%s\" version (%s) must be >= %s." %
             (mod.__name__, mod.__version__, req))
+
+
+def requires(module, name=""):
+    """Enforces module presence.
+
+    The general use here is to allow conditional imports that may fail (e.g., a
+    required python package is not installed) but still allow the rest of the
+    python package to compile and run fine. If the wrapped method with this
+    decorated is invoked, then a runtime error is generated.
+
+    :param module: required module (set as variable to ``None`` on import fail)
+    :type  module: ``module`` or ``None``
+    :param name: module name
+    :type  name: ``string``
+    """
+    def requires_wrap(method):
+        """Call and enforce method."""
+        if module is None:
+            raise ImproperlyConfigured("Module '%s' is not installed." % name)
+        return method
+
+    return requires_wrap
 
 
 ###############################################################################

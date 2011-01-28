@@ -1,6 +1,6 @@
 """Rackspace cloud wrapper.
 
-**Install Note**: Use of this module requires the Rackspace ``cloudfiles``
+**Install Note**: Use of this module requires the Rackspace :mod:`cloudfiles`
 package, and at least version 1.7.4 (which introduced the ``path`` container
 query support).
 """
@@ -8,7 +8,7 @@ from datetime import datetime
 
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, check_version
+from cloud_browser.common import SEP, check_version, requires
 
 ###############################################################################
 # Constants / Conditional Imports
@@ -31,11 +31,16 @@ except ImportError:
 # Classes
 ###############################################################################
 class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
-    """Exception translator."""
-    translations = {
-        cloudfiles.errors.NoSuchContainer: errors.NoContainerException,
-        cloudfiles.errors.NoSuchObject: errors.NoObjectException,
-    }
+    """Rackspace :mod:`cloudfiles` exception translator."""
+
+    @classmethod
+    @requires(cloudfiles, 'cloudfiles')
+    def lazy_translations(cls):
+        """Lazy translations."""
+        return  {
+            cloudfiles.errors.NoSuchContainer: errors.NoContainerException,
+            cloudfiles.errors.NoSuchObject: errors.NoObjectException,
+        }
 
 
 class RackspaceObject(base.CloudObject):
@@ -235,6 +240,7 @@ class RackspaceConnection(base.CloudConnection):
         self.rs_servicenet = rs_servicenet
 
     @wrap_rs_errors
+    @requires(cloudfiles, 'cloudfiles')
     def _get_connection(self):
         """Return native connection object."""
         kwargs = {

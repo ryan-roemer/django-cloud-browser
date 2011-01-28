@@ -1,6 +1,8 @@
 """Common cloud error wrappers."""
 import sys
 
+from functools import wraps
+
 
 class CloudException(Exception):
     """Base cloud exception."""
@@ -67,6 +69,18 @@ class CloudExceptionWrapper(object):
     translations = {}
     _excepts = None
 
+    def __new__(cls, *args, **kwargs):
+        """New."""
+        obj = object.__new__(cls, *args, **kwargs)
+
+        # Patch in lazy translations.
+        if not obj.translations:
+            lazy_translations = cls.lazy_translations()
+            if lazy_translations:
+                obj.translations = lazy_translations
+
+        return obj
+
     @classmethod
     def excepts(cls):
         """Return tuple of underlying exception classes to trap and wrap.
@@ -80,6 +94,7 @@ class CloudExceptionWrapper(object):
     def __call__(self, operation):
         """Call and wrap exceptions."""
 
+        @wraps(operation)
         def wrapped(*args, **kwargs):
             """Wrapped function."""
 
@@ -98,3 +113,8 @@ class CloudExceptionWrapper(object):
                 raise new_exc.__class__, new_exc, sys.exc_info()[2]
 
         return wrapped
+
+    @classmethod
+    def lazy_translations(cls):
+        """Lazy translations definitions (for additional checks)."""
+        return None
