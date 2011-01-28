@@ -6,12 +6,11 @@ Current
 =======
 
 * Add AWS.
-* Add 'requires' wrapper/metaclass for non-installed, but optional libs.
 * Add license.
 * Finish README.rst, INSTALL.rst.
 
-Logistics
-=========
+Documentation
+=============
 
 * **README**: Write this up.
 * **INSTALL**: Write this up.
