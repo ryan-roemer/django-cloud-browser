@@ -26,6 +26,15 @@ class Config(object):
                     account, secret_key, servicenet)
 
         if conn_cls is None:
+            # Try AWS
+            account = settings.CLOUD_BROWSER_AWS_ACCOUNT
+            secret_key = settings.CLOUD_BROWSER_AWS_SECRET_KEY
+            if (account and secret_key):
+                from cloud_browser.cloud.aws import AwsConnection
+                conn_cls = AwsConnection
+                conn_fn = lambda: AwsConnection(account, secret_key)
+
+        if conn_cls is None:
             # Mock filesystem
             root = settings.CLOUD_BROWSER_FILESYSTEM_ROOT
             if root is not None:

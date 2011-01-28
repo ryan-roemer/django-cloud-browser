@@ -1,8 +1,9 @@
 """Rackspace cloud wrapper.
 
-**Install Note**: Use of this module requires the Rackspace :mod:`cloudfiles`
-package, and at least version 1.7.4 (which introduced the ``path`` container
-query support).
+.. note::
+    **Installation**: Use of this module requires the Rackspace
+    :mod:`cloudfiles` package, and at least version 1.7.4 (which introduced the
+    ``delimiter`` container query support).
 """
 from datetime import datetime
 

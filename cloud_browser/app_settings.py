@@ -42,6 +42,11 @@ class Settings(object):
       not to use Rackspace's servicenet (i.e., the private interface on a
       Cloud Server).
 
+    **Amazon Web Services**: Configure AWS S3 as backing datastore.
+
+    * ``CLOUD_BROWSER_AWS_ACCOUNT``: Account name.
+    * ``CLOUD_BROWSER_AWS_SECRET_KEY``: Account API secret key.
+
     **Filesystem**: Configure simple filesystem mock datastore.
 
     * ``CLOUD_BROWSER_FILESYSTEM_ROOT``: Filesystem root to serve from.
@@ -71,6 +76,10 @@ class Settings(object):
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SERVICENET': _get_setting_or_env,
+
+        # Amazon Web Services S3 datastore settings.
+        'CLOUD_BROWSER_AWS_ACCOUNT': _get_setting_or_env,
+        'CLOUD_BROWSER_AWS_SECRET_KEY': _get_setting_or_env,
 
         # Filesystem datastore settings.
         'CLOUD_BROWSER_FILESYSTEM_ROOT': _get_setting,

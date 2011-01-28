@@ -6,6 +6,10 @@ Current
 =======
 
 * Add AWS.
+
+  * Doesn't handle marker right (off by one).
+
+* Truncate long container names (or somehow deal with this).
 * Add license.
 * Finish README.rst, INSTALL.rst.
 
@@ -27,6 +31,12 @@ Bugs
 
 Features
 ========
+
+* **Configuration**:
+
+  * *Whitelist*: Allow a combined whitelist/blacklist user callable.
+  * *Datastore Type*: Actually have a parameter for this (rather than order).
+  * *Boto Config*: Allow use ``.boto`` file to provide settings.
 
 * **Browser**:
 
