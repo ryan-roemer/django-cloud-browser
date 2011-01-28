@@ -8,6 +8,7 @@ Current
 * Add AWS.
 
   * Doesn't handle marker right (off by one).
+  * Verify ``last_modified`` is a datetime object.
 
 * Truncate long container names (or somehow deal with this).
 * Add license.

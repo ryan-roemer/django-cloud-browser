@@ -4,11 +4,9 @@
     **Installation**: Use of this module requires the open source :mod:`boto`
     package.
 """
-from datetime import datetime
-
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, check_version, requires
+from cloud_browser.common import SEP, requires
 
 ###############################################################################
 # Constants / Conditional Imports
