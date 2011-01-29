@@ -91,6 +91,15 @@ class CloudExceptionWrapper(object):
             cls._excepts = tuple(cls.translations.keys())
         return cls._excepts
 
+    def translate(self, exc):
+        """Return translation of exception to new class."""
+        # Find actual class.
+        for key in self.translations.keys():
+            if isinstance(exc, key):
+                return self.translations[key](unicode(exc))
+
+        return None
+
     def __call__(self, operation):
         """Call and wrap exceptions."""
 
@@ -101,16 +110,12 @@ class CloudExceptionWrapper(object):
             try:
                 return operation(*args, **kwargs)
             except self.excepts(), exc:
-                # Find actual class.
-                key_cls = None
-                for key in self.translations.keys():
-                    if isinstance(exc, key):
-                        key_cls = key
-                        break
-
-                # Wrap and raise with stack intact.
-                new_exc = self.translations[key_cls](unicode(exc))
-                raise new_exc.__class__, new_exc, sys.exc_info()[2]
+                new_exc = self.translate(exc)
+                if new_exc:
+                    # Wrap and raise with stack intact.
+                    raise new_exc.__class__, new_exc, sys.exc_info()[2]
+                else:
+                    raise
 
         return wrapped
 

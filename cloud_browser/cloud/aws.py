@@ -22,18 +22,34 @@ except ImportError:
 ###############################################################################
 class AwsExceptionWrapper(errors.CloudExceptionWrapper):
     """Rackspace :mod:`boto` exception translator."""
+    error_cls = errors.CloudException
 
-    @classmethod
     @requires(boto, 'boto')
-    def lazy_translations(cls):
-        """Lazy translations."""
-        return  {}  # TODO: Insert actual boto translations.
+    def translate(self, exc):
+        """Return whether or not to do translation."""
+        from boto.exception import StorageResponseError
+
+        if isinstance(exc, StorageResponseError):
+            if exc.status == 404:
+                return self.error_cls(unicode(exc))
+
+        return None
+
+
+class AwsKeyWrapper(errors.CloudExceptionWrapper):
+    """Rackspace :mod:`boto` key exception translator."""
+    error_cls = errors.NoObjectException
+
+
+class AwsBucketWrapper(errors.CloudExceptionWrapper):
+    """Rackspace :mod:`boto` bucket exception translator."""
+    error_cls = errors.NoContainerException
 
 
 class AwsObject(base.CloudObject):
     """AWS 'key' object wrapper."""
     #: Exception translations.
-    wrap_aws_errors = AwsExceptionWrapper()
+    wrap_aws_errors = AwsKeyWrapper()
 
     @wrap_aws_errors
     def _get_object(self):
@@ -51,7 +67,10 @@ class AwsObject(base.CloudObject):
         from boto.s3.key import Key
         from boto.s3.prefix import Prefix
 
-        if isinstance(result, Key):
+        if result is None:
+            raise errors.NoObjectException
+
+        elif isinstance(result, Key):
             return cls.from_key(container, result)
 
         elif isinstance(result, Prefix):
@@ -63,6 +82,9 @@ class AwsObject(base.CloudObject):
     @classmethod
     def from_prefix(cls, container, prefix):
         """Create from prefix object."""
+        if prefix is None:
+            raise errors.NoObjectException
+
         return cls(container,
                    name=prefix.name,
                    obj_type=cls.type_cls.SUBDIR)
@@ -70,6 +92,9 @@ class AwsObject(base.CloudObject):
     @classmethod
     def from_key(cls, container, key):
         """Create from key object."""
+        if key is None:
+            raise errors.NoObjectException
+
         # TODO: Convert last_modified to ``datetime``.
         return cls(container,
                    name=key.name,
@@ -86,7 +111,7 @@ class AwsContainer(base.CloudContainer):
     obj_cls = AwsObject
 
     #: Exception translations.
-    wrap_aws_errors = AwsExceptionWrapper()
+    wrap_aws_errors = AwsBucketWrapper()
 
     #: Maximum number of objects that can be listed or ``None``.
     max_list = 1000  # TODO: Figure out this limit.
@@ -127,7 +152,7 @@ class AwsConnection(base.CloudConnection):
     cont_cls = AwsContainer
 
     #: Exception translations.
-    wrap_aws_errors = AwsExceptionWrapper()
+    wrap_aws_errors = AwsBucketWrapper()
 
     @wrap_aws_errors
     @requires(boto, 'boto')
