@@ -134,10 +134,19 @@ class AwsContainer(base.CloudContainer):
         """Get objects."""
         from itertools import islice
 
-        # TODO: (BUG) marker is "off by one" for next set.
         path = path.rstrip(SEP) + SEP if path else path
         result_set = self.native_container.list(path, SEP, marker)
-        results = islice(result_set, limit)
+
+        # Get +1 results because marker and first item can match as we strip
+        # the separator from results obscuring things. No real problem here
+        # because boto masks any real request limits.
+        results = list(islice(result_set, limit+1))
+        if results:
+            if marker and results[0].name.rstrip(SEP) == marker.rstrip(SEP):
+                results = results[1:]
+            else:
+                results = results[:limit]
+
         return [self.obj_cls.from_result(self, r) for r in results]
 
     @wrap_aws_errors

@@ -5,11 +5,6 @@
 Current
 =======
 
-* Add AWS.
-
-  * Doesn't handle marker right (off by one).
-  * Verify ``last_modified`` is a datetime object.
-
 * Add license.
 * Finish README.rst, INSTALL.rst.
 
