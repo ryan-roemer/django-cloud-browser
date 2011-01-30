@@ -1,9 +1,4 @@
-======================
- Django Cloud Browser
-======================
-
-The Cloud Browser Django application provides a basic filesystem-like
-browser on top of cloud-based blob datastores.
+.. include:: README.rst
 
 Contents
 ========
@@ -11,7 +6,6 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   README
    INSTALL
    cloud_browser/index
    TODO
