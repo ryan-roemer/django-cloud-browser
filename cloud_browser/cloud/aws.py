@@ -1,8 +1,10 @@
 """Amazon Web Services (S3) cloud wrapper.
 
 .. note::
-    **Installation**: Use of this module requires the open source :mod:`boto`
+    **Installation**: Use of this module requires the open source boto_
     package.
+
+.. _boto: http://code.google.com/p/boto/
 """
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
@@ -114,7 +116,11 @@ class AwsContainer(base.CloudContainer):
     wrap_aws_errors = AwsBucketWrapper()
 
     #: Maximum number of objects that can be listed or ``None``.
-    max_list = 1000  # TODO: Figure out this limit.
+    #:
+    #: :mod:`boto` transparently pages through objects, so there is no real
+    #: limit to the number of object that can be displayed.  However, for
+    #: practical reasons, we'll limit it to the same as Rackspace.
+    max_list = 10000
 
     @wrap_aws_errors
     def _get_container(self):
@@ -145,7 +151,8 @@ class AwsContainer(base.CloudContainer):
         if bucket is None:
             raise errors.NoContainerException
 
-        # TODO: Find bucket count and size.
+        # It appears that Amazon does not have a single-shot REST query to
+        # determine the number of keys / overall byte size of a bucket.
         return cls(connection, bucket.name)
 
 

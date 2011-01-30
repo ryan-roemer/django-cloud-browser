@@ -49,6 +49,23 @@ class CloudExceptionWrapper(object):
 
         foo()
 
+    The alternate way is to handle the translations directly in a member
+    function::
+
+        class MyWrapper(CloudExceptionWrapper):
+            '''Convert exception to another one.'''
+            def translate(self, exc):
+                if isinstance(exc, Exception):
+                    return NotImplementedError
+
+                return None
+
+        @MyWrapper()
+        def foo():
+            raise Exception("Hi.")
+
+        foo()
+
     which produces output like::
 
         Traceback (most recent call last):
@@ -92,7 +109,11 @@ class CloudExceptionWrapper(object):
         return cls._excepts
 
     def translate(self, exc):
-        """Return translation of exception to new class."""
+        """Return translation of exception to new class.
+
+        Calling code should only raise exception if exception class is passed
+        in, else ``None`` (which signifies no wrapping should be done).
+        """
         # Find actual class.
         for key in self.translations.keys():
             if isinstance(exc, key):

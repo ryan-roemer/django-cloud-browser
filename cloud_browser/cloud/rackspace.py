@@ -2,8 +2,10 @@
 
 .. note::
     **Installation**: Use of this module requires the Rackspace
-    :mod:`cloudfiles` package, and at least version 1.7.4 (which introduced the
+    cloudfiles_ package, and at least version 1.7.4 (which introduced the
     ``delimiter`` container query support).
+
+.. _cloudfiles: https://github.com/rackspace/python-cloudfiles
 """
 from datetime import datetime
 
