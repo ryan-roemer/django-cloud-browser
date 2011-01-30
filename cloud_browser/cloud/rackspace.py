@@ -7,11 +7,9 @@
 
 .. _cloudfiles: https://github.com/rackspace/python-cloudfiles
 """
-from datetime import datetime
-
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, check_version, requires
+from cloud_browser.common import SEP, check_version, requires, dt_from_header
 
 ###############################################################################
 # Constants / Conditional Imports
@@ -84,27 +82,23 @@ class RackspaceObject(base.CloudObject):
     @classmethod
     def from_file_info(cls, container, info_obj):
         """Create from regular info object."""
-        # 2010-04-15T01:52:13.919070
-        dt_str = info_obj['last_modified'].partition('.')[0]
-        last_modified = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S")
+        # RFC 8601: 2010-04-15T01:52:13.919070
         return cls(container,
                    name=info_obj['name'],
                    size=info_obj['bytes'],
                    content_type=info_obj['content_type'],
-                   last_modified=last_modified,
+                   last_modified=dt_from_header(info_obj['last_modified']),
                    obj_type=cls.choose_type(info_obj['content_type']))
 
     @classmethod
     def from_obj(cls, container, file_obj):
         """Create from regular info object."""
-        # Thu, 07 Jun 2007 18:57:07 GMT
-        dt_str = file_obj.last_modified
-        last_modified = datetime.strptime(dt_str, "%a, %d %b %Y %H:%M:%S GMT")
+        # RFC 1123: Thu, 07 Jun 2007 18:57:07 GMT
         return cls(container,
                    name=file_obj.name,
                    size=file_obj.size,
                    content_type=file_obj.content_type,
-                   last_modified=last_modified,
+                   last_modified=dt_from_header(file_obj.last_modified),
                    obj_type=cls.choose_type(file_obj.content_type))
 
 

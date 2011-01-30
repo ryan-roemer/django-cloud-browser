@@ -8,7 +8,7 @@
 """
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, requires
+from cloud_browser.common import SEP, requires, dt_from_header
 
 ###############################################################################
 # Constants / Conditional Imports
@@ -97,13 +97,14 @@ class AwsObject(base.CloudObject):
         if key is None:
             raise errors.NoObjectException
 
-        # TODO: Convert last_modified to ``datetime``.
+        # Get Key   (1123): Tue, 13 Apr 2010 14:02:48 GMT
+        # List Keys (8601): 2010-04-13T14:02:48.000Z
         return cls(container,
                    name=key.name,
                    size=key.size,
                    content_type=key.content_type,
                    content_encoding=key.content_encoding,
-                   last_modified=key.last_modified,
+                   last_modified=dt_from_header(key.last_modified),
                    obj_type=cls.type_cls.FILE)
 
 

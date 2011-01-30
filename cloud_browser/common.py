@@ -3,6 +3,7 @@
 Because cloud operations are OS agnostic, we don't use any of :module:`os` or
 :module:`os.path`.
 """
+from datetime import datetime
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -58,6 +59,49 @@ def requires(module, name=""):
         return method
 
     return wrapped
+
+
+###############################################################################
+# Date / Time.
+###############################################################################
+def dt_from_rfc8601(date_str):
+    """Convert 8601 (ISO) date string to datetime object.
+
+    Handles "Z" and milliseconds transparently.
+    """
+    # Normalize string and adjust for milliseconds. Note that Python 2.6+ has
+    # ".%f" format, but we're going for Python 2.5, so truncate the portion.
+    date_str = date_str.rstrip('Z').split('.')[0]
+
+    # Format string. (2010-04-13T14:02:48.000Z)
+    fmt = "%Y-%m-%dT%H:%M:%S"
+    # Python 2.6+: Could format and handle milliseconds.
+    #if date_str.find('.') >= 0:
+    #    fmt += ".%f"
+
+    return datetime.strptime(date_str, fmt)
+
+
+def dt_from_rfc1123(date_str):
+    """Convert 1123 (HTTP header) date string to datetime object."""
+    fmt = "%a, %d %b %Y %H:%M:%S GMT"
+    return datetime.strptime(date_str, fmt)
+
+
+def dt_from_header(date_str):
+    """Try various RFC conversions to ``datetime`` or return ``None``."""
+    convert_fns = (
+        dt_from_rfc8601,
+        dt_from_rfc1123,
+    )
+
+    for convert_fn in convert_fns:
+        try:
+            return convert_fn(date_str)
+        except ValueError:
+            pass
+
+    return None
 
 
 ###############################################################################
