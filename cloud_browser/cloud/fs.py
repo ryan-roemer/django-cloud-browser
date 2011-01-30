@@ -1,4 +1,4 @@
-"""File-system mock cloud wrapper."""
+"""File-system datastore."""
 from __future__ import with_statement
 
 import os
@@ -9,6 +9,9 @@ from cloud_browser.cloud import errors, base
 from cloud_browser.common import SEP
 
 
+###############################################################################
+# Helpers / Constants
+###############################################################################
 NO_DOT_RE = re.compile("^[^.]+")
 
 
@@ -22,6 +25,9 @@ def is_dir(path):
     return not_dot(path) and os.path.isdir(path)
 
 
+###############################################################################
+# Classes
+###############################################################################
 class FilesystemContainerWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
     translations = {

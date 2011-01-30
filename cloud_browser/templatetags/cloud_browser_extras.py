@@ -1,5 +1,4 @@
 """Cloud browser template tags."""
-
 import os
 
 from django import template

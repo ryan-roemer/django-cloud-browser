@@ -1,4 +1,4 @@
-"""Amazon Web Services (S3) cloud wrapper.
+"""Amazon Simple Storage Service (S3) datastore.
 
 .. note::
     **Installation**: Use of this module requires the open source boto_

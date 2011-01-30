@@ -1,4 +1,4 @@
-"""Rackspace cloud wrapper.
+"""Rackspace Cloud Files datastore.
 
 .. note::
     **Installation**: Use of this module requires the Rackspace
