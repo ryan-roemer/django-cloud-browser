@@ -21,9 +21,9 @@ Features
 
 * **Configuration**:
 
-  * *Whitelist*: Allow a combined whitelist/blacklist user callable.
   * *Datastore Type*: Actually have a parameter for this (rather than order).
-  * *Boto Config*: Allow use ``.boto`` file to provide settings.
+  * *Boto Config*: Allow using ``.boto`` file to provide settings.
+  * *Whitelist*: Allow a combined whitelist/blacklist user callable.
 
 * **Browser**:
 

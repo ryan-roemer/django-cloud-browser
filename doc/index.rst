@@ -3,8 +3,7 @@
 ======================
 
 The Cloud Browser Django application provides a basic filesystem-like
-browser on top of a cloud blob store. Currently only Rackspace Cloud Files
-are supported.
+browser on top of cloud-based blob datastores.
 
 Contents
 ========
@@ -13,6 +12,7 @@ Contents
    :maxdepth: 2
 
    README
+   INSTALL
    cloud_browser/index
    TODO
 
