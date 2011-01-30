@@ -2,13 +2,14 @@
  Installation
 ==============
 
-Installing the Cloud Browser package is straightforward::
+Install the Cloud Browser package from source::
 
-    pip install django-cloud-browser
+    pip install -e git://github.com/ryan-roemer/django-cloud-browser#egg=cloud_browser
 
-or::
+In the future, we'll look to add:
 
-    easy_install django-cloud-browser
+* Github tarballs.
+* PyPi registration.
 
 Software Requirements
 =====================

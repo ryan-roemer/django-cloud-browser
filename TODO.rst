@@ -7,14 +7,19 @@ Current
 
 * Add license.
 * Finish README.rst, INSTALL.rst.
+* Github push.
 
 Documentation
 =============
 
-* **README**: Write this up.
-* **INSTALL**: Write this up.
 * **Sphinx**: Continue documentation of all source in ``cloud_browser``.
   Currently at ``cloud_browser.cloud.base``.
+
+Packaging
+=========
+
+* PyPi registration.
+* Development pip requirements file.
 
 Features
 ========
