@@ -1,6 +1,6 @@
-=======================
- Cloud Browser App API
-=======================
+===========================================
+ ``cloud_browser`` - Cloud Browser App API
+===========================================
 
 .. automodule:: cloud_browser
 
@@ -13,8 +13,3 @@
 =====================================================
 .. automodule:: cloud_browser.app_settings
    :members:
-
-``cloud_browser.cloud`` - Cloud / Datastore Support
-===================================================
-See :doc:`Cloud / Datastore Support <cloud>`.
-

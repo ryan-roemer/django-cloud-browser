@@ -1,6 +1,6 @@
-===========================
- Cloud / Datastore Support
-===========================
+=====================================================
+ ``cloud_browser.cloud`` - Cloud / Datastore Support
+=====================================================
 
 .. automodule:: cloud_browser.cloud
 
