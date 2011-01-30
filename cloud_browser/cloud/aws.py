@@ -142,6 +142,9 @@ class AwsContainer(base.CloudContainer):
     @classmethod
     def from_bucket(cls, connection, bucket):
         """Create from bucket object."""
+        if bucket is None:
+            raise errors.NoContainerException
+
         # TODO: Find bucket count and size.
         return cls(connection, bucket.name)
 
