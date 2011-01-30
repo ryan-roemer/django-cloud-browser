@@ -32,6 +32,9 @@ div#cloud-browser-containers a {
 div#cloud-browser-containers a:hover {
     text-decoration: underline;
 }
+div#cloud-browser-containers li {
+    margin-left: -10px;
+}
 
 /** Objects */
 div#cloud-browser-objects {

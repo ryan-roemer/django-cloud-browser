@@ -4,11 +4,34 @@ import os
 
 from django import template
 from django.template import TemplateSyntaxError, Node
+from django.template.defaultfilters import stringfilter
 from django.template.loader_tags import IncludeNode
 
 from cloud_browser.app_settings import settings
 
 register = template.Library()  # pylint: disable=C0103
+
+
+@register.filter
+@stringfilter
+def truncatechars(value, num, end_text="..."):
+    """Truncate string on character boundary.
+
+    .. note::
+        Django ticket http://code.djangoproject.com/ticket/5025 has a patch
+        for a more extensible and robust truncate characters tag filter.
+    """
+    length = None
+    try:
+        length = int(num)
+    except ValueError:
+        pass
+
+    if length is not None and len(value) > length:
+        return value[:length-len(end_text)] + end_text
+
+    return value
+truncatechars.is_safe = True  # pylint: disable=W0612
 
 
 @register.tag

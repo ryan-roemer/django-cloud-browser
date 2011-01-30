@@ -28,7 +28,8 @@ Cloud Browser - {{ path }}
 <ul>
 {% for cont in containers %}
   <li>
-    <a href="{% url cloud_browser_browser cont.name %}">{{ cont.name }}</a>
+    <a href="{% url cloud_browser_browser cont.name %}"
+       title="{{ cont.name }}">{{ cont.name|truncatechars:22 }}</a>
   </li>
 {% endfor %}
 </ul>
