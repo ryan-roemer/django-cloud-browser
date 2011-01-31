@@ -6,8 +6,7 @@
 
 Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
-and you'll be able to view and download cloud containers and objects, with
-a very rudimentary amount of access control.
+and you'll be able to view and download cloud containers and objects.
 
 Currently supported backend datastores include:
 
@@ -18,6 +17,19 @@ Currently supported backend datastores include:
 .. _`Amazon S3`: http://aws.amazon.com/s3/
 .. _`Rackspace Cloud Files`:
   http://www.rackspacecloud.com/cloud_hosting_products/files/
+
+.. toc
+
+Access Controls
+===============
+
+Cloud Browser also has a very rudimentary set of access controls (presently
+white and black lists), so that you can expose a subset of cloud objects
+to a set of less-then-fully trusted users for read-only access without having
+to pass around the full cloud API account and secret key.
+
+Nested File Browsing
+====================
 
 One of the underlying motivations for this project is the current control
 panel for Rackspace Cloud Files that only allows listing of the flat object

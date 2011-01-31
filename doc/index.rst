@@ -1,4 +1,5 @@
 .. include:: ../README.rst
+  :end-before: toc
 
 Contents
 ========
@@ -9,6 +10,9 @@ Contents
    INSTALL
    cloud_browser/index
    TODO
+
+.. include:: ../README.rst
+  :start-after: toc
 
 Indices and tables
 ==================
