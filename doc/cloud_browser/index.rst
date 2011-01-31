@@ -9,6 +9,8 @@
 
    cloud
 
+.. _app_settings:
+
 ``cloud_browser.app_settings`` - Application Settings
 =====================================================
 .. automodule:: cloud_browser.app_settings
