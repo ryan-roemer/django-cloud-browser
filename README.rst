@@ -6,7 +6,8 @@
 
 Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
-and you'll be able to view and download cloud containers and objects.
+and you'll be able to browse cloud containers and implied subdirectories, as
+well as view / download objects.
 
 Currently supported backend datastores include:
 
