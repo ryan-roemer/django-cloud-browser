@@ -26,6 +26,7 @@ Features
 
 * **Configuration**:
 
+  * *Rackspace Servicenet*: Needs a "parse string to bool" wrapper.
   * *Datastore Type*: Actually have a parameter for this (rather than order).
   * *Boto Config*: Allow using ``.boto`` file to provide settings.
   * *Whitelist*: Allow a combined whitelist/blacklist user callable.

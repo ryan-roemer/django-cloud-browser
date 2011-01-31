@@ -49,6 +49,19 @@ First, start with edits to your Django project's ``settings.py``::
     CLOUD_BROWSER_RACKSPACE_ACCOUNT = "<my_account>"
     CLOUD_BROWSER_RACKSPACE_SECRET_KEY = "<my_secret_key>"
 
+In addition, for more security options, the following Cloud Browser options
+may be set via environment variables instead of ``settings.py`` variables:
+
+* ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``
+* ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``
+* ``CLOUD_BROWSER_RACKSPACE_SERVICENET``
+* ``CLOUD_BROWSER_AWS_ACCOUNT``
+* ``CLOUD_BROWSER_AWS_SECRET_KEY``
+
+in the form of::
+
+    $ export CLOUD_BROWSER_<Setting Name>="<value>"
+
 Other settings you may wish to investigate include:
 
 * Container white/black lists: Control access to containers.
