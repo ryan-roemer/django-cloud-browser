@@ -49,8 +49,13 @@ class Settings(object):
     This class wraps the "real" Django settings object, so can be used instead.
     The additional cloud browser settings are as follows:
 
+    **Datastore Settings**:
+
+    * ``CLOUD_BROWSER_DATASTORE``: Choice of datastore (see values below).
+
     **Rackspace**: Configure Rackspace Cloud Files as backing datastore.
 
+    * ``CLOUD_BROWSER_DATASTORE = "Rackspace"``
     * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name.
     * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key.
     * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
@@ -59,11 +64,13 @@ class Settings(object):
 
     **Amazon Web Services**: Configure AWS S3 as backing datastore.
 
+    * ``CLOUD_BROWSER_DATASTORE = "AWS"``
     * ``CLOUD_BROWSER_AWS_ACCOUNT``: Account name.
     * ``CLOUD_BROWSER_AWS_SECRET_KEY``: Account API secret key.
 
     **Filesystem**: Configure simple filesystem mock datastore.
 
+    * ``CLOUD_BROWSER_DATASTORE = "Filesystem"``
     * ``CLOUD_BROWSER_FILESYSTEM_ROOT``: Filesystem root to serve from.
 
     **Container Permissions**: Cloud browser allows a very rudimentary form
