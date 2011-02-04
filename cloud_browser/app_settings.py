@@ -1,6 +1,7 @@
 """Application-specific settings."""
 import os
 from django.conf import settings as _settings
+from django.core.exceptions import ImproperlyConfigured
 
 
 def _get_setting(name, default=None):
@@ -15,6 +16,20 @@ def _get_default(default):
         if curried_default is None:
             curried_default = default
         return _get_setting(name, curried_default)
+
+    return _get
+
+
+def _validate_default(valid_set, default):
+    """Get setting and validate with default."""
+    def _get(name, curried_default=default):
+        """Curried function."""
+        value = _get_default(default)(name, curried_default)
+        if value not in valid_set:
+            raise ImproperlyConfigured(
+                "%s: \"%s\" is not a valid setting (choose between %s)." %
+                (name, value, ", ".join("\"%s\"" % x for x in valid_set)))
+        return value
 
     return _get
 
@@ -71,7 +86,18 @@ class Settings(object):
       static media will be used instead of our hacked, "dump all CSS/JS
       straight into the page" fallback approach.
     """
+    #: Valid datastore types.
+    DATASTORES = set((
+        'AWS',
+        'Rackspace',
+        'Filesystem',
+    ))
+
+    #: Settings dictionary of accessor callables.
     SETTINGS = {
+        # Datastore choice.
+        'CLOUD_BROWSER_DATASTORE': _validate_default(DATASTORES, 'Filesystem'),
+
         # Rackspace datastore settings.
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,

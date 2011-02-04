@@ -14,27 +14,28 @@ class Config(object):
         from django.core.exceptions import ImproperlyConfigured
 
         conn_cls = conn_fn = None
-        if conn_cls is None:
+        datastore = settings.CLOUD_BROWSER_DATASTORE
+        if datastore == 'AWS':
+            # Try AWS
+            from cloud_browser.cloud.aws import AwsConnection
+            account = settings.CLOUD_BROWSER_AWS_ACCOUNT
+            secret_key = settings.CLOUD_BROWSER_AWS_SECRET_KEY
+            if account and secret_key:
+                conn_cls = AwsConnection
+                conn_fn = lambda: AwsConnection(account, secret_key)
+
+        elif datastore == 'Rackspace':
             # Try Rackspace
             account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
             secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
             servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
-            if (account and secret_key):
+            if account and secret_key:
                 from cloud_browser.cloud.rackspace import RackspaceConnection
                 conn_cls = RackspaceConnection
                 conn_fn = lambda: RackspaceConnection(
                     account, secret_key, servicenet)
 
-        if conn_cls is None:
-            # Try AWS
-            account = settings.CLOUD_BROWSER_AWS_ACCOUNT
-            secret_key = settings.CLOUD_BROWSER_AWS_SECRET_KEY
-            if (account and secret_key):
-                from cloud_browser.cloud.aws import AwsConnection
-                conn_cls = AwsConnection
-                conn_fn = lambda: AwsConnection(account, secret_key)
-
-        if conn_cls is None:
+        elif datastore == 'Filesystem':
             # Mock filesystem
             root = settings.CLOUD_BROWSER_FILESYSTEM_ROOT
             if root is not None:
@@ -43,7 +44,9 @@ class Config(object):
                 conn_fn = lambda: FilesystemConnection(root)
 
         if conn_cls is None:
-            raise ImproperlyConfigured("No suitable credentials found.")
+            raise ImproperlyConfigured(
+                "No suitable credentials found for datastore: %s." %
+                datastore)
 
         # Adjust connection function.
         conn_fn = staticmethod(conn_fn)

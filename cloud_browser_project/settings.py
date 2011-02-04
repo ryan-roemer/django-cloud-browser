@@ -83,3 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'cloud_browser',
 )
+
+# EXAMPLE: Serve up the "/usr/share" directory.
+CLOUD_BROWSER_DATASTORE = "Filesystem"
+CLOUD_BROWSER_FILESYSTEM_ROOT = "/usr/share/doc"
