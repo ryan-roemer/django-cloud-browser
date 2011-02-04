@@ -27,7 +27,6 @@ Features
 
 * **Configuration**:
 
-  * *Rackspace Servicenet*: Needs a "parse string to bool" wrapper.
   * *Boto Config*: Allow using ``.boto`` file to provide settings.
   * *Whitelist*: Allow a combined whitelist/blacklist user callable.
 

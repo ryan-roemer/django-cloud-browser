@@ -4,6 +4,23 @@ from django.conf import settings as _settings
 from django.core.exceptions import ImproperlyConfigured
 
 
+def _parse_bool(value, default=None):
+    """Convert ``string`` or ``bool`` to ``bool``."""
+    if value is None:
+        return default
+
+    elif isinstance(value, bool):
+        return value
+
+    elif isinstance(value, basestring):
+        if value == 'True':
+            return True
+        elif value == 'False':
+            return False
+
+    raise Exception("Value %s is not boolean." % value)
+
+
 def _get_setting(name, default=None):
     """Get setting from settings.py."""
     return getattr(_settings, name, default)
@@ -120,7 +137,8 @@ class Settings(object):
         # Rackspace datastore settings.
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,
-        'CLOUD_BROWSER_RACKSPACE_SERVICENET': _get_setting_or_env,
+        'CLOUD_BROWSER_RACKSPACE_SERVICENET': \
+            lambda v, d=False: _parse_bool(_get_setting_or_env(v, d)),
 
         # Amazon Web Services S3 datastore settings.
         'CLOUD_BROWSER_AWS_ACCOUNT': _get_setting_or_env,
