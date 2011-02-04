@@ -13,7 +13,7 @@ Currently supported backend datastores include:
 
 * `Amazon S3`_.
 * `Rackspace Cloud Files`_.
-* Local filesytem.
+* Local file system.
 
 .. _`Amazon S3`: http://aws.amazon.com/s3/
 .. _`Rackspace Cloud Files`:
@@ -35,7 +35,7 @@ Nested File Browsing
 One of the underlying motivations for this project is the current control
 panel for Rackspace Cloud Files that only allows listing of the flat object
 namespace within a container, without any nested hierarchy. When you get up to
-5 million or so objects, it can be tedious / impractible to search through
+5 million or so objects, it can be tedious / impracticable to search through
 results, even if you have carefully added delimiters (e.g., slashes) to your
 cloud objects names.
 

@@ -69,7 +69,7 @@ Other settings you may wish to investigate include:
   * ``CLOUD_BROWSER_CONTAINER_WHITELIST``
   * ``CLOUD_BROWSER_CONTAINER_BLACKLIST``
 
-* ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to diplay
+* ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to display
   per browser page.
 
 URLs
@@ -88,7 +88,7 @@ By default, the static media is included inline into HTML views as full script,
 as this is the most compatible approach (and has no further configuration).
 
 However, this is not efficient, as the CSS and JavaScript files should be
-separately staticly served. If you separately serve up the Cloud Browser static
+separately statically served. If you separately serve the Cloud Browser static
 media directory, the application will use links instead of inline code dumps.
 To enable this, simply symlink the Cloud Browser static media directory to
 wherever your static media is served from (in this case "/path/to/static_media"
