@@ -6,7 +6,6 @@ Current
 =======
 
 * Add license.
-* Setup: Make /*.txt temp files for package.
 * Finish README.rst, INSTALL.rst.
 * Github push.
 * Github documentation push.

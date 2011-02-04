@@ -1,6 +1,8 @@
 """Fabric file."""
 from __future__ import with_statement
 
+import os
+
 from fabric.api import abort, local, settings
 
 ###############################################################################
@@ -24,6 +26,12 @@ DOC_OUTPUT = "doc_html"
 
 BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
 
+SDIST_RST_FILES = (
+    "INSTALL.rst",
+    "README.rst",
+)
+SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
+
 
 ###############################################################################
 # Build
@@ -37,7 +45,17 @@ def clean():
 
 def sdist():
     """Package into distribution."""
-    local("python setup.py sdist", capture=False)
+    try:
+        # Copy select *.rst files to *.txt for build.
+        for rst_file, txt_file in zip(SDIST_RST_FILES, SDIST_TXT_FILES):
+            local("cp %s %s" % (rst_file, txt_file))
+
+        # Make build.
+        local("python setup.py sdist", capture=False)
+    finally:
+        # Clean up temp *.txt files.
+        for rst_file in SDIST_TXT_FILES:
+            local("rm -f %s" % rst_file, capture=False)
 
 
 ###############################################################################
