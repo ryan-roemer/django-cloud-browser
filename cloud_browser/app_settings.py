@@ -49,6 +49,18 @@ class Settings(object):
     This class wraps the "real" Django settings object, so can be used instead.
     The additional cloud browser settings are as follows:
 
+    .. note::
+      **Environment Variables**: Certain credential settings can come from OS
+      environment variables instead of from a settings file value to open up
+      more options for secrets management. Values that can be set in the
+      environment are designated with an "(*Env*)" notation.
+
+      Setting a value this way could be done, e.g.::
+
+          $ export CLOUD_BROWSER_AWS_ACCOUNT="my_account"
+          $ export CLOUD_BROWSER_AWS_SECRET_KEY="my_secret"
+          $ # ... start django application with environment variables.
+
     **Datastore Settings**:
 
     * ``CLOUD_BROWSER_DATASTORE``: Choice of datastore (see values below).
@@ -56,17 +68,17 @@ class Settings(object):
     **Rackspace**: Configure Rackspace Cloud Files as backing datastore.
 
     * ``CLOUD_BROWSER_DATASTORE = "Rackspace"``
-    * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name.
-    * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key.
+    * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name. (*Env*)
+    * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key. (*Env*)
     * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
       not to use Rackspace's servicenet (i.e., the private interface on a
-      Cloud Server).
+      Cloud Server). (*Env*)
 
     **Amazon Web Services**: Configure AWS S3 as backing datastore.
 
     * ``CLOUD_BROWSER_DATASTORE = "AWS"``
-    * ``CLOUD_BROWSER_AWS_ACCOUNT``: Account name.
-    * ``CLOUD_BROWSER_AWS_SECRET_KEY``: Account API secret key.
+    * ``CLOUD_BROWSER_AWS_ACCOUNT``: Account name. (*Env*)
+    * ``CLOUD_BROWSER_AWS_SECRET_KEY``: Account API secret key. (*Env*)
 
     **Filesystem**: Configure simple filesystem mock datastore.
 
