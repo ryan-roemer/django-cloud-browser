@@ -4,7 +4,6 @@ import os
 from django import template
 from django.template import TemplateSyntaxError, Node
 from django.template.defaultfilters import stringfilter
-from django.template.loader_tags import IncludeNode
 
 from cloud_browser.app_settings import settings
 
@@ -17,8 +16,8 @@ def truncatechars(value, num, end_text="..."):
     """Truncate string on character boundary.
 
     .. note::
-        Django ticket http://code.djangoproject.com/ticket/5025 has a patch
-        for a more extensible and robust truncate characters tag filter.
+        Django ticket `5025 <http://code.djangoproject.com/ticket/5025>`_ has a
+        patch for a more extensible and robust truncate characters tag filter.
     """
     length = None
     try:
@@ -71,6 +70,8 @@ class MediaLinkNode(Node):
 
     def render(self, context):
         """Render."""
+        from django.template.loader_tags import IncludeNode
+
         # Check if we have static-served media
         if settings.app_media_url:
             # Use a link.

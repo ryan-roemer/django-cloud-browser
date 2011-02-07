@@ -1,7 +1,7 @@
 """Common operations.
 
-Because cloud operations are OS agnostic, we don't use any of :module:`os` or
-:module:`os.path`.
+Because cloud operations are OS agnostic, we don't use any of :mod:`os` or
+:mod:`os.path`.
 """
 from datetime import datetime
 from django.core.exceptions import ImproperlyConfigured
@@ -11,7 +11,9 @@ from django.core.exceptions import ImproperlyConfigured
 # Constants.
 ###############################################################################
 # File-like constants.
+#: Browser file path separator.
 SEP = "/"
+#: Parent path phrase.
 PARENT = ".."
 
 
@@ -30,7 +32,7 @@ def get_int(value, default, test_fn=None):
 
 
 def check_version(mod, required):
-    """Check module version."""
+    """Require minimum version of module using ``__version__`` member."""
     vers = tuple(int(v) for v in mod.__version__.split('.')[:3])
     if vers < required:
         req = '.'.join(str(v) for v in required)
@@ -156,7 +158,7 @@ def path_join(*args):
 def relpath(path, start):
     """Get relative path to start.
 
-    Note: Modeled after python2.6 :method:`os.path.relpath`.
+    Note: Modeled after python2.6 :meth:`os.path.relpath`.
     """
     path_items = path_list(path)
     start_items = path_list(start)

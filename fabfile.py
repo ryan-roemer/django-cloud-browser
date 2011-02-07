@@ -95,7 +95,8 @@ def check():
 ###############################################################################
 def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
     """Generate API documentation (using Sphinx)."""
-    local("export DJANGO_SETTINGS_MODULE=%s && "
+    local("export PYTHONPATH='' && "
+          "export DJANGO_SETTINGS_MODULE=%s && "
           "sphinx-build -b html %s %s" % (proj_settings, DOC_INPUT, output),
           capture=False)
 
