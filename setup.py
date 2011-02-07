@@ -12,7 +12,7 @@ setup(
     name="django-cloud-browser",
     version=__version__,
     description="Django Cloud Browser application.",
-    long_description="Django browser for cloud datastores (Rackspace).",
+    long_description="Browser for cloud datastores (Rackspace, AWS, etc.).",
     url="https://github.com/ryan-roemer/django-cloud-browser",
 
     author="Ryan Roemer",
