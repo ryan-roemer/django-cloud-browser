@@ -33,6 +33,7 @@ Features
 * **Browser**:
 
   * *Previous*: Add previous variable and lock to previous limit.
+  * *Sort*: See if ``boto`` / ``cloudfiles`` both support sorted results.
 
 * **URL/View Choices**: Add different URLs, and maybe alternate views at the
   same time.

@@ -4,62 +4,80 @@ from django.conf import settings as _settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-def _parse_bool(value, default=None):
-    """Convert ``string`` or ``bool`` to ``bool``."""
-    if value is None:
-        return default
+###############################################################################
+# Single settings.
+###############################################################################
+class Setting(object):
+    """Settings option helper class."""
+    def __init__(self, **kwargs):
+        """Initializer.
 
-    elif isinstance(value, bool):
-        return value
+        :kwarg default: Override default for getting.
+        :type  default: ``object``
+        :kwarg from_env: Allow variable from evironment.
+        :type  from_env: ``bool``
+        :kwarg valid_set: Set of valid values for setting.
+        :type  valid_set: ``set``
+        """
+        self.from_env = kwargs.get('from_env', False)
+        self.default = kwargs.get('default', None)
+        self.valid_set = kwargs.get('valid_set', None)
 
-    elif isinstance(value, basestring):
-        if value == 'True':
-            return True
-        elif value == 'False':
-            return False
+    def validate(self, name, value):
+        """Validate and return a value."""
 
-    raise Exception("Value %s is not boolean." % value)
-
-
-def _get_setting(name, default=None):
-    """Get setting from settings.py."""
-    return getattr(_settings, name, default)
-
-
-def _get_default(default):
-    """Get setting from settings.py with default."""
-    def _get(name, curried_default=default):
-        """Curried function."""
-        if curried_default is None:
-            curried_default = default
-        return _get_setting(name, curried_default)
-
-    return _get
-
-
-def _validate_default(valid_set, default):
-    """Get setting and validate with default."""
-    def _get(name, curried_default=default):
-        """Curried function."""
-        value = _get_default(default)(name, curried_default)
-        if value not in valid_set:
+        if self.valid_set and value not in self.valid_set:
             raise ImproperlyConfigured(
                 "%s: \"%s\" is not a valid setting (choose between %s)." %
-                (name, value, ", ".join("\"%s\"" % x for x in valid_set)))
+                (name, value, ", ".join("\"%s\"" % x for x in self.valid_set)))
+
         return value
 
-    return _get
+    def env_clean(self, value):  # pylint: disable=R0201
+        """Clean / convert environment variable to proper type."""
+        return value
+
+    def get(self, name, default=None):
+        """Get value."""
+        default = default if default is not None else self.default
+        try:
+            value = getattr(_settings, name)
+        except AttributeError:
+            value = os.environ.get(name, default) if self.from_env else default
+            # Convert env variable.
+            if value != default:
+                value = self.env_clean(value)
+
+        return self.validate(name, value)
 
 
-def _get_setting_or_env(name, default=None):
-    """Get setting from settings.py or environment."""
-    # Prefer settings, then environment.
-    try:
-        return getattr(_settings, name)
-    except AttributeError:
-        return os.environ.get(name, default)
+class BoolSetting(Setting):
+    """Boolean setting.."""
+    def env_clean(self, value):
+        """Clean / convert environment variable to proper type."""
+        return self.parse_bool(value)
+
+    @classmethod
+    def parse_bool(cls, value, default=None):
+        """Convert ``string`` or ``bool`` to ``bool``."""
+        if value is None:
+            return default
+
+        elif isinstance(value, bool):
+            return value
+
+        elif isinstance(value, basestring):
+            if value == 'True':
+                return True
+            elif value == 'False':
+                return False
+
+        raise Exception("Value %s is not boolean." % value)
 
 
+###############################################################################
+# Settings wrapper.
+###############################################################################
 class Settings(object):
     """Cloud Browser application settings.
 
@@ -132,30 +150,30 @@ class Settings(object):
     #: Settings dictionary of accessor callables.
     SETTINGS = {
         # Datastore choice.
-        'CLOUD_BROWSER_DATASTORE': _validate_default(DATASTORES, 'Filesystem'),
+        'CLOUD_BROWSER_DATASTORE': \
+            Setting(default='Filesystem', valid_set=DATASTORES),
 
         # Rackspace datastore settings.
-        'CLOUD_BROWSER_RACKSPACE_ACCOUNT': _get_setting_or_env,
-        'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': _get_setting_or_env,
-        'CLOUD_BROWSER_RACKSPACE_SERVICENET': \
-            lambda v, d=False: _parse_bool(_get_setting_or_env(v, d)),
+        'CLOUD_BROWSER_RACKSPACE_ACCOUNT': Setting(from_env=True),
+        'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': Setting(from_env=True),
+        'CLOUD_BROWSER_RACKSPACE_SERVICENET': BoolSetting(from_env=True),
 
         # Amazon Web Services S3 datastore settings.
-        'CLOUD_BROWSER_AWS_ACCOUNT': _get_setting_or_env,
-        'CLOUD_BROWSER_AWS_SECRET_KEY': _get_setting_or_env,
+        'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
+        'CLOUD_BROWSER_AWS_SECRET_KEY': Setting(from_env=True),
 
         # Filesystem datastore settings.
-        'CLOUD_BROWSER_FILESYSTEM_ROOT': _get_setting,
+        'CLOUD_BROWSER_FILESYSTEM_ROOT': Setting(),
 
         # Permissions lists for containers.
-        'CLOUD_BROWSER_CONTAINER_WHITELIST': _get_setting,
-        'CLOUD_BROWSER_CONTAINER_BLACKLIST': _get_setting,
+        'CLOUD_BROWSER_CONTAINER_WHITELIST': Setting(),
+        'CLOUD_BROWSER_CONTAINER_BLACKLIST': Setting(),
 
         # Browser settings.
-        'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': _get_default(20),
+        'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': Setting(default=20),
 
         # Static media root.
-        'CLOUD_BROWSER_STATIC_MEDIA_DIR': _get_setting,
+        'CLOUD_BROWSER_STATIC_MEDIA_DIR': Setting(),
     }
 
     def __init__(self):
@@ -166,7 +184,7 @@ class Settings(object):
     def __getattr__(self, name, default=None):
         """Get setting."""
         if name in self.SETTINGS:
-            return self.SETTINGS[name](name, default)
+            return self.SETTINGS[name].get(name, default)
 
         # Use real Django settings.
         return getattr(_settings, name, default)
