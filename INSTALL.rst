@@ -32,7 +32,7 @@ corresponding library below:
 
 Configuration
 =============
-All configuration options are described in the 
+All configuration options are fully described in the 
 :ref:`application settings <app_settings>` documentation.
 
 Here is a quick start example for Rackspace Cloud Files:
@@ -46,6 +46,7 @@ First, start with edits to your Django project's ``settings.py``::
         'cloud_browser',
     )
 
+    CLOUD_BROWSER_DATASTORE = "Rackspace"
     CLOUD_BROWSER_RACKSPACE_ACCOUNT = "<my_account>"
     CLOUD_BROWSER_RACKSPACE_SECRET_KEY = "<my_secret_key>"
 
