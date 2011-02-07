@@ -1,6 +1,7 @@
 \.DS_Store
 *\.pyc
 
+cloud_browser_project/db/
 doc_html
 local
 

@@ -12,6 +12,16 @@ from cloud_browser.common import get_int, \
 MAX_LIMIT = get_connection_cls().cont_cls.max_list
 
 
+def settings_view_decorator(function):
+    """Insert decorator from settings, if any."""
+
+    dec = settings.CLOUD_BROWSER_VIEW_DECORATOR
+    if dec:
+        return dec(function)
+
+    return function
+
+
 def _breadcrumbs(path):
     """Return breadcrumb dict from path."""
 
@@ -24,6 +34,7 @@ def _breadcrumbs(path):
     return crumbs
 
 
+@settings_view_decorator
 def browser(request, path='', template="cloud_browser/browser.html"):
     """View files in a file path.
 
@@ -91,6 +102,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                               context_instance=RequestContext(request))
 
 
+@settings_view_decorator
 def document(_, path=''):
     """View single document from path.
 

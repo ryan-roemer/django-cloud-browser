@@ -120,6 +120,13 @@ class Settings(object):
     * ``CLOUD_BROWSER_DATASTORE = "Filesystem"``
     * ``CLOUD_BROWSER_FILESYSTEM_ROOT``: Filesystem root to serve from.
 
+    **View Permissions**: A standard Django view decorator object can be
+    specified, which is wrapped for all browsing / viewing view -- for example,
+    to limit views to logged in members, use ``login_required`` and for staff
+    only, use ``staff_member_required``.
+
+    * ``CLOUD_BROWSER_VIEW_DECORATOR``: View decorator.
+
     **Container Permissions**: Cloud browser allows a very rudimentary form
     of access control at the container level with white and black lists.
     If the white list is set, only container names in the white list are
@@ -164,6 +171,9 @@ class Settings(object):
 
         # Filesystem datastore settings.
         'CLOUD_BROWSER_FILESYSTEM_ROOT': Setting(),
+
+        # View permissions.
+        'CLOUD_BROWSER_VIEW_DECORATOR': Setting(),
 
         # Permissions lists for containers.
         'CLOUD_BROWSER_CONTAINER_WHITELIST': Setting(),

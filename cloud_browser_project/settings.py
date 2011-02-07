@@ -15,8 +15,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_PATH, 'db/dev.sqlite3'),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -73,9 +73,11 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'cloud_browser_project.urls'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, "templates"),
 )
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

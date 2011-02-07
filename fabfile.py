@@ -12,6 +12,8 @@ MOD = "cloud_browser"
 PROJ = "cloud_browser_project"
 PROJ_SETTINGS = ".".join((PROJ, "settings"))
 
+DEV_DB_DIR = os.path.join(PROJ, "db")
+
 CHECK_INCLUDES = (
     "fabfile.py",
     "setup.py",
@@ -24,7 +26,10 @@ PYLINT_CFG = "dev/pylint.cfg"
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
 
-BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
+BUILD_DIRS = (
+    "dist",
+    "django_cloud_browser.egg-info"
+)
 
 SDIST_RST_FILES = (
     "INSTALL.rst",
@@ -38,8 +43,7 @@ SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 ###############################################################################
 def clean():
     """Clean build files."""
-    local("rm -rf %s" % DOC_OUTPUT)
-    for build_dir in BUILD_DIRS:
+    for build_dir in list(BUILD_DIRS) + [DOC_OUTPUT, DEV_DB_DIR]:
         local("rm -rf %s" % build_dir)
 
 
@@ -111,6 +115,12 @@ def _manage(target, extra='', proj_settings=PROJ_SETTINGS):
           "django-admin.py %s %s" %
           (proj_settings, target, extra),
           capture=False)
+
+
+def syncdb(proj_settings=PROJ_SETTINGS):
+    """Run syncdb."""
+    local("mkdir -p %s" % DEV_DB_DIR)
+    _manage("syncdb", proj_settings=proj_settings)
 
 
 def run_server(addr="127.0.0.1:8000", proj_settings=PROJ_SETTINGS):

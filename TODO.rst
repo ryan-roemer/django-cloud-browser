@@ -10,12 +10,6 @@ Current
 * Github push.
 * Github documentation push.
 
-Documentation
-=============
-
-* **Sphinx**: Continue documentation of all source in ``cloud_browser``.
-  Currently at ``cloud_browser.cloud.base``.
-
 Packaging
 =========
 
@@ -35,12 +29,7 @@ Features
   * *Previous*: Add previous variable and lock to previous limit.
   * *Sort*: See if ``boto`` / ``cloudfiles`` both support sorted results.
 
-* **URL/View Choices**: Add different URLs, and maybe alternate views at the
-  same time.
-
-  * *Basic*: No AJAX, no admin.
-  * *Admin*: Get anything available to admin, with admin decorators.
-  * *AJAX*: Actually get AJAX.
+* **URL/View AJAX Options**: Enable AJAX, maybe with separate URLs.
 
 * **Rackspace**:
 
