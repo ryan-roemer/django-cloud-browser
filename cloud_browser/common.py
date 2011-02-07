@@ -21,7 +21,14 @@ PARENT = ".."
 # General.
 ###############################################################################
 def get_int(value, default, test_fn=None):
-    """Convert to integer."""
+    """Convert value to integer.
+
+    :param value: Integer value.
+    :param default: Default value on failed conversion.
+    :param test_fn: Constraint function. Use default if returns ``False``.
+    :return: Integer value.
+    :rtype:  ``int``
+    """
     try:
         converted = int(value)
     except ValueError:
@@ -70,6 +77,11 @@ def dt_from_rfc8601(date_str):
     """Convert 8601 (ISO) date string to datetime object.
 
     Handles "Z" and milliseconds transparently.
+
+    :param date_str: Date string.
+    :type  date_str: ``string``
+    :return: Date time.
+    :rtype:  :class:`datetime.datetime`
     """
     # Normalize string and adjust for milliseconds. Note that Python 2.6+ has
     # ".%f" format, but we're going for Python 2.5, so truncate the portion.
@@ -85,13 +97,25 @@ def dt_from_rfc8601(date_str):
 
 
 def dt_from_rfc1123(date_str):
-    """Convert 1123 (HTTP header) date string to datetime object."""
+    """Convert 1123 (HTTP header) date string to datetime object.
+
+    :param date_str: Date string.
+    :type  date_str: ``string``
+    :return: Date time.
+    :rtype:  :class:`datetime.datetime`
+    """
     fmt = "%a, %d %b %Y %H:%M:%S GMT"
     return datetime.strptime(date_str, fmt)
 
 
 def dt_from_header(date_str):
-    """Try various RFC conversions to ``datetime`` or return ``None``."""
+    """Try various RFC conversions to ``datetime`` or return ``None``.
+
+    :param date_str: Date string.
+    :type  date_str: ``string``
+    :return: Date time.
+    :rtype:  :class:`datetime.datetime` or ``None``
+    """
     convert_fns = (
         dt_from_rfc8601,
         dt_from_rfc1123,
