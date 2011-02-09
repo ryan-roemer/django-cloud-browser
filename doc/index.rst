@@ -5,11 +5,13 @@ Contents
 ========
 
 .. toctree::
+   :numbered:
    :maxdepth: 2
 
-   INSTALL
+   misc/install
    cloud_browser/index
-   TODO
+   misc/todo
+   misc/license
 
 .. include:: ../README.rst
   :start-after: toc

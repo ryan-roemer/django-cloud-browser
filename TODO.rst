@@ -5,8 +5,6 @@
 Current
 =======
 
-* Add license.
-* Finish README.rst, INSTALL.rst.
 * Github push.
 * Github documentation push.
 
@@ -15,6 +13,12 @@ Packaging
 
 * PyPi registration.
 * Development pip requirements file.
+
+Design / UI
+===========
+
+* **CSS Rework**: Styles and appearance need vast improvements. Hopefully
+  we'll get some help with this soon.
 
 Features
 ========
