@@ -21,11 +21,11 @@ Currently supported backend datastores include:
 
 Be sure to check out the following project resources:
 
-* Documentation_
-* `GitHub page`_
+* Documentation_.
+* `GitHub page`_.
 
 .. _Documentation: http://ryan-roemer.github.com/django-cloud-browser/
-.. _`GitHub page`: https://github.com/ryan-roemer/django-cloud-browser
+.. _`GitHub page`: https://github.com/ryan-roemer/django-cloud-browser/
 .. toc
 
 Access Controls
