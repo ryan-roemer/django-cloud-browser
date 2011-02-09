@@ -2,8 +2,9 @@
 from __future__ import with_statement
 
 import os
+import re
 
-from fabric.api import abort, local, settings
+from fabric.api import cd, abort, local, settings
 
 ###############################################################################
 # Constants
@@ -25,6 +26,10 @@ PYLINT_CFG = "dev/pylint.cfg"
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
+DOC_UNDERSCORE_DIRS = (
+    "sources",
+    "static",
+)
 
 BUILD_DIRS = (
     "dist",
@@ -97,12 +102,76 @@ def check():
 ###############################################################################
 # Documentation
 ###############################################################################
-def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
-    """Generate API documentation (using Sphinx)."""
+def _parse_bool(value):
+    """Convert ``string`` or ``bool`` to ``bool``."""
+    if isinstance(value, bool):
+        return value
+
+    elif isinstance(value, basestring):
+        if value == 'True':
+            return True
+        elif value == 'False':
+            return False
+
+    raise Exception("Value %s is not boolean." % value)
+
+
+def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
+    """Generate API documentation (using Sphinx).
+
+    :param output: Output directory.
+    :param proj_settings: Django project settings to use.
+    :param git: Convert output HTML to GitHub-friendly format?
+    """
     local("export PYTHONPATH='' && "
           "export DJANGO_SETTINGS_MODULE=%s && "
           "sphinx-build -b html %s %s" % (proj_settings, DOC_INPUT, output),
           capture=False)
+
+    if _parse_bool(github):
+        print("Modifying Sphinx HTML for GitHub.")
+        sphinx_to_github(output)
+
+
+def sphinx_to_github(output=DOC_OUTPUT):
+    """Convert Sphinx documents to a GitHub-friendly format.
+
+    :param output: Output directory.
+    """
+    # Move directories.
+    with cd(output):
+        for dir_name in DOC_UNDERSCORE_DIRS:
+            local("mv _%s %s" % (dir_name, dir_name), capture=False)
+
+    def _get_html(dir_path):
+        """Wrapper for getting HTML files."""
+        for root, _, files in os.walk(dir_path):
+            for file_name in files:
+                file_path = os.path.join(root, file_name)
+                if file_path.endswith(".html"):
+                    yield file_path
+
+    # Recursively replace links in HTML files using in-memory buffer.
+    under_re = re.compile(
+        r"(?P<first>(src|href)=[\"']([^\"']*[/]|))_(?P<dir>.*?/)")
+    for file_path in _get_html(output):
+        have_change = False
+        lines = []
+
+        # Store lines in memory and replace as appropriate.
+        with open(file_path, 'rb') as ro_file:
+            for line in ro_file:
+                match = under_re.search(line)
+                if match is not None:
+                    have_change = True
+                    line = under_re.sub(r"\g<first>\g<dir>", line)
+                lines.append(line)
+
+        # Re-open file as write and dump out modified lines.
+        if have_change:
+            print("Re-writing \"%s\"." % file_path)
+            with open(file_path, 'wb') as w_file:
+                w_file.writelines(lines)
 
 
 ###############################################################################
