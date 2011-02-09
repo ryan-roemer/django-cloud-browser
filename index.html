@@ -1,1 +1,202 @@
-My GitHub Page
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Django Cloud Browser &mdash; Cloud Browser v0.1.0alpha0 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0alpha0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Cloud Browser v0.1.0alpha0 documentation" href="#" />
+    <link rel="next" title="1. Installation" href="misc/install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="misc/install.html" title="1. Installation"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django-cloud-browser">
+<h1>Django Cloud Browser<a class="headerlink" href="#django-cloud-browser" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Info:</th><td class="field-body">A Django application browser for cloud (S3, Cloud Files) datastores.</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Ryan Roemer (<a class="reference external" href="http://github.com/ryan-roemer">http://github.com/ryan-roemer</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Cloud Browser is a simple web-based object browser for cloud-based blob
+datastores. Just add as an application to a Django project, add some settings,
+and you&#8217;ll be able to browse cloud containers and implied subdirectories, as
+well as view / download objects.</p>
+<p>Currently supported backend datastores include:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a>.</li>
+<li><a class="reference external" href="http://www.rackspacecloud.com/cloud_hosting_products/files/">Rackspace Cloud Files</a>.</li>
+<li>Local file system.</li>
+</ul>
+<p>See the project <a class="reference external" href="http://ryan-roemer.github.com/django-cloud-browser/">documentation</a> page for more details.</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="misc/install.html">1. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc/install.html#software-requirements">1.1. Software Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/install.html#configuration">1.2. Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/install.html#static-media">1.3. Static Media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/install.html#examples">1.4. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud_browser/index.html">2. <tt class="docutils literal"><span class="pre">cloud_browser</span></tt> - Cloud Browser App API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/app_settings.html">2.1. <tt class="docutils literal"><span class="pre">cloud_browser.app_settings</span></tt> - Application Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/cloud.html">2.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud</span></tt> - Cloud / Datastore Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/common.html">2.3. <tt class="docutils literal"><span class="pre">cloud_browser.common</span></tt> - Common / Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/errors.html">2.4. <tt class="docutils literal"><span class="pre">cloud_browser.errors</span></tt> - Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/tags.html">2.5. <tt class="docutils literal"><span class="pre">cloud_browser.templatetags.cloud_browser_extras</span></tt> - Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/urls.html">2.6. <tt class="docutils literal"><span class="pre">cloud_browser.urls</span></tt> - URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud_browser/views.html">2.7. <tt class="docutils literal"><span class="pre">cloud_browser.views</span></tt> - Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc/todo.html">3. Future / Task List</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc/todo.html#current">3.1. Current</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/todo.html#packaging">3.2. Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/todo.html#design-ui">3.3. Design / UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/todo.html#features">3.4. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/todo.html#test-support">3.5. Test / Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc/license.html">4. License</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="access-controls">
+<h2>Access Controls<a class="headerlink" href="#access-controls" title="Permalink to this headline">¶</a></h2>
+<p>Cloud Browser also has a very rudimentary set of access controls (presently
+white and black lists), so that you can expose a subset of cloud objects
+to a set of less-then-fully trusted users for read-only access without having
+to pass around the full cloud API account and secret key.</p>
+</div>
+<div class="section" id="nested-file-browsing">
+<h2>Nested File Browsing<a class="headerlink" href="#nested-file-browsing" title="Permalink to this headline">¶</a></h2>
+<p>One of the underlying motivations for this project is the current control
+panel for Rackspace Cloud Files that only allows listing of the flat object
+namespace within a container, without any nested hierarchy. When you get up to
+5 million or so objects, it can be tedious / impracticable to search through
+results, even if you have carefully added delimiters (e.g., slashes) to your
+cloud objects names.</p>
+<p>Accordingly, Cloud Browser correctly handles &#8220;implicit&#8221; or &#8220;pseudo&#8221; directories
+in the underlying flat namespace of cloud blob names (e.g., divides up an
+object called &#8220;long/path/with/slashes/to/foo.txt&#8221;), and allows viewing into the
+artificially nested hierarchy. Cloud object results are paged, and subsequent
+pages can be viewed at arbitrary object-per-page and starting points.
+Conveniently, URL paths can be inputted and linked to a starting point within
+a long list of results.</p>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Django Cloud Browser</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#access-controls">Access Controls</a></li>
+<li><a class="reference internal" href="#nested-file-browsing">Nested File Browsing</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="misc/install.html"
+                        title="next chapter">1. Installation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="misc/install.html" title="1. Installation"
+             >next</a> |</li>
+        <li><a href="#">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Ryan Roemer.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

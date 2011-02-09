@@ -1,0 +1,840 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.2. cloud_browser.cloud - Cloud / Datastore Support &mdash; Cloud Browser v0.1.0alpha0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Cloud Browser v0.1.0alpha0 documentation" href="../index.html" />
+    <link rel="up" title="2. cloud_browser - Cloud Browser App API" href="index.html" />
+    <link rel="next" title="2.3. cloud_browser.common - Common / Utilities" href="common.html" />
+    <link rel="prev" title="2.1. cloud_browser.app_settings - Application Settings" href="app_settings.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="common.html" title="2.3. cloud_browser.common - Common / Utilities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="app_settings.html" title="2.1. cloud_browser.app_settings - Application Settings"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">2. <tt class="docutils literal docutils literal docutils literal"><span class="pre">cloud_browser</span></tt> - Cloud Browser App API</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-cloud_browser.cloud">
+<span id="cloud-browser-cloud-cloud-datastore-support"></span><h1>2.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud</span></tt> - Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
+<p>Cloud abstractions and helpers.</p>
+<p>More generally, this is &#8220;datastore&#8221; support, since the basic interface could
+support any interface, file, memory, cloud, etc. But, as this is called a
+&#8220;cloud&#8221; browser, we&#8217;ll call it the &#8220;cloud&#8221; module.</p>
+<div class="section" id="module-cloud_browser.cloud.config">
+<span id="cloud-browser-cloud-config-configuration"></span><h2>2.2.1. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.config</span></tt> - Configuration<a class="headerlink" href="#module-cloud_browser.cloud.config" title="Permalink to this headline">¶</a></h2>
+<p>Cloud configuration.</p>
+<dl class="class">
+<dt id="cloud_browser.cloud.config.Config">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.config.</tt><tt class="descname">Config</tt><a class="headerlink" href="#cloud_browser.cloud.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>General class helper to construct connection objects.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.config.Config.from_settings">
+<em class="property">classmethod </em><tt class="descname">from_settings</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.config.Config.from_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create configuration from Django settings or environment.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.config.Config.get_connection">
+<em class="property">classmethod </em><tt class="descname">get_connection</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return connection object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#cloud_browser.cloud.base.CloudConnection" title="cloud_browser.cloud.base.CloudConnection"><tt class="xref py py-class docutils literal"><span class="pre">cloud_browser.cloud.base.CloudConnection</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.config.Config.get_connection_cls">
+<em class="property">classmethod </em><tt class="descname">get_connection_cls</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return connection class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">type</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.errors">
+<span id="cloud-browser-cloud-config-errors"></span><h2>2.2.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.config</span></tt> - Errors<a class="headerlink" href="#module-cloud_browser.cloud.errors" title="Permalink to this headline">¶</a></h2>
+<p>Common cloud error wrappers.</p>
+<dl class="exception">
+<dt id="cloud_browser.cloud.errors.CloudException">
+<em class="property">exception </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">CloudException</tt><a class="headerlink" href="#cloud_browser.cloud.errors.CloudException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base cloud exception.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.errors.CloudExceptionWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">CloudExceptionWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translator.</p>
+<p>This class wraps a &#8220;real&#8221; underlying cloud class exception and translates
+it to a &#8220;common&#8221; exception class from this module. The exception stack
+from the wrapped exception is preserved through some <tt class="xref py py-meth docutils literal"><span class="pre">sys.exc_info()</span></tt>
+hackery.</p>
+<p>It is implemented as a decorator such that you can do something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Convert exception to another one.&#39;&#39;&#39;</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="p">{</span> <span class="ne">Exception</span><span class="p">:</span> <span class="ne">NotImplementedError</span> <span class="p">}</span>
+
+<span class="nd">@MyWrapper</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Hi.&quot;</span><span class="p">)</span>
+
+<span class="n">foo</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The alternate way is to handle the translations directly in a member
+function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Convert exception to another one.&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+            <span class="k">return</span> <span class="ne">NotImplementedError</span>
+
+        <span class="k">return</span> <span class="bp">None</span>
+
+<span class="nd">@MyWrapper</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Hi.&quot;</span><span class="p">)</span>
+
+<span class="n">foo</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which produces output like:</p>
+<div class="highlight-python"><pre>Traceback (most recent call last):
+  File "...", line ..., in &lt;module&gt;
+    foo()
+  File "...", line ..., in wrapped
+    return operation(*args, **kwargs)
+  File "...", line ..., in foo
+    raise Exception("Hi.")
+NotImplementedError: Hi.</pre>
+</div>
+<p>So, we can see that we get a different exception with the proper stack.</p>
+<p>Overriding classes should implement the <tt class="docutils literal"><span class="pre">translations</span></tt> class variable
+dictionary for translating an underlying library exception to a class
+in this module. See any of the data implementation modules for examples.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.excepts">
+<em class="property">classmethod </em><tt class="descname">excepts</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.excepts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of underlying exception classes to trap and wrap.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple</span></tt> of <tt class="docutils literal"><span class="pre">type</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.lazy_translations">
+<em class="property">classmethod </em><tt class="descname">lazy_translations</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lazy translations definitions (for additional checks).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.translate">
+<tt class="descname">translate</tt><big>(</big><em>exc</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return translation of exception to new class.</p>
+<p>Calling code should only raise exception if exception class is passed
+in, else <tt class="xref docutils literal"><span class="pre">None</span></tt> (which signifies no wrapping should be done).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="cloud_browser.cloud.errors.InvalidNameException">
+<em class="property">exception </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">InvalidNameException</tt><a class="headerlink" href="#cloud_browser.cloud.errors.InvalidNameException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bad name.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="cloud_browser.cloud.errors.NoContainerException">
+<em class="property">exception </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">NoContainerException</tt><a class="headerlink" href="#cloud_browser.cloud.errors.NoContainerException" title="Permalink to this definition">¶</a></dt>
+<dd><p>No container found.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="cloud_browser.cloud.errors.NoObjectException">
+<em class="property">exception </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">NoObjectException</tt><a class="headerlink" href="#cloud_browser.cloud.errors.NoObjectException" title="Permalink to this definition">¶</a></dt>
+<dd><p>No storage object found.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="cloud_browser.cloud.errors.NotPermittedException">
+<em class="property">exception </em><tt class="descclassname">cloud_browser.cloud.errors.</tt><tt class="descname">NotPermittedException</tt><a class="headerlink" href="#cloud_browser.cloud.errors.NotPermittedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Access is not permitted</p>
+</dd></dl>
+
+</div>
+<div class="section" id="datastores">
+<h2>2.2.3. Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
+<p>Cloud Browser is written with a pluggable backend datastore model in mind.
+Currently, there are datastore implementations for a basic filesystem and
+cloud (Rackspace, Amazon) backing stores. Other cloud stores shouldn&#8217;t be too
+hard to port over to this app, as Rackspace has probably the most little
+extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- directories.</p>
+<div class="section" id="module-cloud_browser.cloud.base">
+<span id="cloud-browser-cloud-base-abstract-base"></span><h3>2.2.3.1. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.base</span></tt> - Abstract Base<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
+<p>Cloud datastore API base abstraction.</p>
+<dl class="class">
+<dt id="cloud_browser.cloud.base.CloudConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cloud connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.base.CloudConnection.get_container">
+<tt class="descname">get_container</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return single container.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.base.CloudConnection.get_containers">
+<tt class="descname">get_containers</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_containers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return available containers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudConnection.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of containers that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudConnection.native_conn">
+<tt class="descname">native_conn</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.native_conn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Native connection object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.base.CloudContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cloud container wrapper.</p>
+<dl class="method">
+<dt id="cloud_browser.cloud.base.CloudContainer.get_object">
+<tt class="descname">get_object</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.base.CloudContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>path</em>, <em>marker=None</em>, <em>limit=20</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudContainer.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of objects that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudContainer.native_container">
+<tt class="descname">native_container</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.native_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Native container object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.base.CloudObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cloud object wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.basename">
+<tt class="descname">basename</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.basename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base name from rightmost separator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.is_file">
+<tt class="descname">is_file</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is a file object?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.is_subdir">
+<tt class="descname">is_subdir</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_subdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is a subdirectory?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.native_obj">
+<tt class="descname">native_obj</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.native_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Native storage object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.path">
+<tt class="descname">path</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Full path (including container).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.base.CloudObject.read">
+<tt class="descname">read</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return contents of object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.smart_content_encoding">
+<tt class="descname">smart_content_encoding</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_encoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smart content encoding.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.smart_content_type">
+<tt class="descname">smart_content_type</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smart content type.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.base.CloudObject.type_cls">
+<tt class="descname">type_cls</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.type_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObjectTypes" title="cloud_browser.cloud.base.CloudObjectTypes"><tt class="xref py py-class docutils literal"><span class="pre">CloudObjectTypes</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.base.CloudObjectTypes">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudObjectTypes</tt><a class="headerlink" href="#cloud_browser.cloud.base.CloudObjectTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cloud object types helper.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.fs">
+<span id="cloud-browser-cloud-fs-filesystem-datastore"></span><h3>2.2.3.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.fs</span></tt> - Filesystem Datastore<a class="headerlink" href="#module-cloud_browser.cloud.fs" title="Permalink to this headline">¶</a></h3>
+<p>File-system datastore.</p>
+<dl class="class">
+<dt id="cloud_browser.cloud.fs.FilesystemConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">FilesystemConnection</tt><big>(</big><em>root</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.fs.FilesystemConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">FilesystemContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem container wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer.base_path">
+<tt class="descname">base_path</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base absolute path of container.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer.from_path">
+<em class="property">classmethod </em><tt class="descname">from_path</tt><big>(</big><em>conn</em>, <em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.from_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create container from path.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer.get_object">
+<tt class="descname">get_object</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.fs.FilesystemContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.fs.FilesystemContainerWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">FilesystemContainerWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainerWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translator.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.fs.FilesystemObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">FilesystemObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem object wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.fs.FilesystemObject.base_path">
+<tt class="descname">base_path</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.base_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base absolute path of container.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.fs.FilesystemObject.from_path">
+<em class="property">classmethod </em><tt class="descname">from_path</tt><big>(</big><em>container</em>, <em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.from_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create object from path.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.fs.FilesystemObjectWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">FilesystemObjectWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObjectWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translator.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.cloud.fs.is_dir">
+<tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">is_dir</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.is_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if non-dot and directory.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.cloud.fs.not_dot">
+<tt class="descclassname">cloud_browser.cloud.fs.</tt><tt class="descname">not_dot</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.fs.not_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if non-dot.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.aws">
+<span id="cloud-browser-cloud-aws-amazon-web-services-s3-datastore"></span><h3>2.2.3.3. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.aws</span></tt> - Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
+<p>Amazon Simple Storage Service (S3) datastore.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+package.</p>
+</div>
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsBucketWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsBucketWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsBucketWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> bucket exception translator.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsBucketWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">NoContainerException</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>AWS connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsConnection.wrap_aws_errors">
+<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace container wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.aws.AwsContainer.from_bucket">
+<em class="property">classmethod </em><tt class="descname">from_bucket</tt><big>(</big><em>connection</em>, <em>bucket</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.from_bucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from bucket object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.aws.AwsContainer.get_object">
+<tt class="descname">get_object</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.aws.AwsContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsContainer.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of objects that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+<p><tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> transparently pages through objects, so there is no real
+limit to the number of object that can be displayed.  However, for
+practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsContainer.wrap_aws_errors">
+<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsExceptionWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> exception translator.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">CloudException</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper.translate">
+<tt class="descname">translate</tt><big>(</big><em>exc</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether or not to do translation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsKeyWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsKeyWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsKeyWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> key exception translator.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsKeyWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">NoObjectException</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.aws.AwsObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>AWS &#8216;key&#8217; object wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.aws.AwsObject.from_key">
+<em class="property">classmethod </em><tt class="descname">from_key</tt><big>(</big><em>container</em>, <em>key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from key object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.aws.AwsObject.from_prefix">
+<em class="property">classmethod </em><tt class="descname">from_prefix</tt><big>(</big><em>container</em>, <em>prefix</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from prefix object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.aws.AwsObject.from_result">
+<em class="property">classmethod </em><tt class="descname">from_result</tt><big>(</big><em>container</em>, <em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from ambiguous result.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.aws.AwsObject.wrap_aws_errors">
+<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.rackspace">
+<span id="cloud-browser-cloud-rackspace-rackspace-cloud-files-datastore"></span><h3>2.2.3.4. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.rackspace</span></tt> - Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
+<p>Rackspace Cloud Files datastore.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Installation</strong>: Use of this module requires the Rackspace
+<a class="reference external" href="https://github.com/rackspace/python-cloudfiles">cloudfiles</a> package, and at least version 1.7.4 (which introduced the
+<tt class="docutils literal"><span class="pre">delimiter</span></tt> container query support).</p>
+</div>
+<dl class="class">
+<dt id="cloud_browser.cloud.rackspace.RackspaceConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceConnection.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of containers that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors">
+<tt class="descname">wrap_rs_errors</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace container wrapper.</p>
+<dl class="method">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer.get_object">
+<tt class="descname">get_object</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+<p><strong>Pseudo-directory Notes</strong>: Rackspace has two approaches to pseudo-
+directories within the (really) flat storage object namespace:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Dummy directory storage objects. These are real storage objects
+of type &#8220;application/directory&#8221; and must be manually uploaded
+by the client.</li>
+<li>Implied subdirectories using the <cite>path</cite> API query parameter.</li>
+</ol>
+</div></blockquote>
+<p>Both serve the same purpose, but the latter is much preferred because
+there is no independent maintenance of extra dummy objects, and the
+<cite>path</cite> approach is always correct (for the existing storage objects).</p>
+<p>This package uses the latter <cite>path</cite> approach, but gets into an
+ambiguous situation where there is both a dummy directory storage
+object and an implied subdirectory. To remedy this situation, we only
+show information for the dummy directory object in results if present,
+and ignore the implied subdirectory. But, under the hood this means
+that our <cite>limit</cite> parameter may end up with less than the desired
+number of objects. So, we use the heuristic that if we <strong>do</strong> have
+&#8220;application/directory&#8221; objects, we end up doing an extra query of
+double the limit size to ensure we can get up to the limit amount
+of objects. This double query approach is inefficient, but as
+using dummy objects should now be deprecated, the second query should
+only rarely occur.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of objects that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+<p>Enforced Rackspace maximums. We need a lower max. to be enforced on
+the input end because under the hood, we can try subsequent larger
+queries if we have marker or psuedo/dummy directory clashes.</p>
+<p>Specifically, we need to add one to the query to detect a
+pseudo-directory matching the marker, and double the limit for a
+follow-on query if we have both dummy and pseudo-directory objects
+in results.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors">
+<tt class="descname">wrap_rs_errors</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.rackspace.RackspaceExceptionWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceExceptionWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">cloudfiles</span></tt> exception translator.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceExceptionWrapper.lazy_translations">
+<em class="property">classmethod </em><tt class="descname">lazy_translations</tt><big>(</big><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lazy translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cloud object wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.choose_type">
+<em class="property">classmethod </em><tt class="descname">choose_type</tt><big>(</big><em>content_type</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.choose_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choose object type from content type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.from_file_info">
+<em class="property">classmethod </em><tt class="descname">from_file_info</tt><big>(</big><em>container</em>, <em>info_obj</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.from_file_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from regular info object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.from_info">
+<em class="property">classmethod </em><tt class="descname">from_info</tt><big>(</big><em>container</em>, <em>info_obj</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.from_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from subdirectory or file info object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.from_obj">
+<em class="property">classmethod </em><tt class="descname">from_obj</tt><big>(</big><em>container</em>, <em>file_obj</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.from_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from regular info object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.from_subdir">
+<em class="property">classmethod </em><tt class="descname">from_subdir</tt><big>(</big><em>container</em>, <em>info_obj</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.from_subdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from subdirectory info object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors">
+<tt class="descname">wrap_rs_errors</tt><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud</span></tt> - Cloud / Datastore Support</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.config">2.2.1. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.config</span></tt> - Configuration</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.errors">2.2.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.config</span></tt> - Errors</a></li>
+<li><a class="reference internal" href="#datastores">2.2.3. Datastores</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.base">2.2.3.1. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.base</span></tt> - Abstract Base</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.fs">2.2.3.2. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.fs</span></tt> - Filesystem Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">2.2.3.3. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.aws</span></tt> - Amazon Web Services S3 Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">2.2.3.4. <tt class="docutils literal"><span class="pre">cloud_browser.cloud.rackspace</span></tt> - Rackspace Cloud Files Datastore</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="app_settings.html"
+                        title="previous chapter">2.1. <tt class="docutils literal docutils literal"><span class="pre">cloud_browser.app_settings</span></tt> - Application Settings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="common.html"
+                        title="next chapter">2.3. <tt class="docutils literal"><span class="pre">cloud_browser.common</span></tt> - Common / Utilities</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/cloud_browser/cloud.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="common.html" title="2.3. cloud_browser.common - Common / Utilities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="app_settings.html" title="2.1. cloud_browser.app_settings - Application Settings"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >2. <tt class="docutils literal docutils literal docutils literal"><span class="pre">cloud_browser</span></tt> - Cloud Browser App API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Ryan Roemer.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

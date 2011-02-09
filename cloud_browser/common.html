@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.3. cloud_browser.common - Common / Utilities &mdash; Cloud Browser v0.1.0alpha0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0alpha0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Cloud Browser v0.1.0alpha0 documentation" href="../index.html" />
+    <link rel="up" title="2. cloud_browser - Cloud Browser App API" href="index.html" />
+    <link rel="next" title="2.4. cloud_browser.errors - Errors" href="errors.html" />
+    <link rel="prev" title="2.2. cloud_browser.cloud - Cloud / Datastore Support" href="cloud.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="2.4. cloud_browser.errors - Errors"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cloud.html" title="2.2. cloud_browser.cloud - Cloud / Datastore Support"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">2. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">cloud_browser</span></tt> - Cloud Browser App API</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-cloud_browser.common">
+<span id="cloud-browser-common-common-utilities"></span><h1>2.3. <tt class="docutils literal"><span class="pre">cloud_browser.common</span></tt> - Common / Utilities<a class="headerlink" href="#module-cloud_browser.common" title="Permalink to this headline">¶</a></h1>
+<p>Common operations.</p>
+<p>Because cloud operations are OS agnostic, we don&#8217;t use any of <tt class="xref py py-mod docutils literal"><span class="pre">os</span></tt> or
+<tt class="xref py py-mod docutils literal"><span class="pre">os.path</span></tt>.</p>
+<dl class="data">
+<dt id="cloud_browser.common.PARENT">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">PARENT</tt><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent path phrase.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="cloud_browser.common.SEP">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">SEP</tt><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser file path separator.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.basename">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">basename</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.common.basename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rightmost part of path after separator.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.check_version">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">check_version</tt><big>(</big><em>mod</em>, <em>required</em><big>)</big><a class="headerlink" href="#cloud_browser.common.check_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Require minimum version of module using <tt class="docutils literal"><span class="pre">__version__</span></tt> member.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.dt_from_header">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">dt_from_header</tt><big>(</big><em>date_str</em><big>)</big><a class="headerlink" href="#cloud_browser.common.dt_from_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try various RFC conversions to <tt class="docutils literal"><span class="pre">datetime</span></tt> or return <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt> or <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.dt_from_rfc1123">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">dt_from_rfc1123</tt><big>(</big><em>date_str</em><big>)</big><a class="headerlink" href="#cloud_browser.common.dt_from_rfc1123" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert 1123 (HTTP header) date string to datetime object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.dt_from_rfc8601">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">dt_from_rfc8601</tt><big>(</big><em>date_str</em><big>)</big><a class="headerlink" href="#cloud_browser.common.dt_from_rfc8601" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert 8601 (ISO) date string to datetime object.</p>
+<p>Handles &#8220;Z&#8221; and milliseconds transparently.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.get_int">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">get_int</tt><big>(</big><em>value</em>, <em>default</em>, <em>test_fn=None</em><big>)</big><a class="headerlink" href="#cloud_browser.common.get_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert value to integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> &#8211; Integer value.</li>
+<li><strong>default</strong> &#8211; Default value on failed conversion.</li>
+<li><strong>test_fn</strong> &#8211; Constraint function. Use default if returns <tt class="xref docutils literal"><span class="pre">False</span></tt>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Integer value.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">int</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.path_join">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">path_join</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#cloud_browser.common.path_join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join path parts to single path.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.path_list">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">path_list</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.common.path_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of path parts.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.path_parts">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">path_parts</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.common.path_parts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split path into container, object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<cite>string</cite>) &#8211; Path to resource (including container).</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Container, storage object tuple.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><cite>tuple</cite> of <cite>string</cite>, <cite>string</cite></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.path_yield">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">path_yield</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#cloud_browser.common.path_yield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield on all path parts.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.relpath">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">relpath</tt><big>(</big><em>path</em>, <em>start</em><big>)</big><a class="headerlink" href="#cloud_browser.common.relpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get relative path to start.</p>
+<p>Note: Modeled after python2.6 <tt class="xref py py-meth docutils literal"><span class="pre">os.path.relpath()</span></tt>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cloud_browser.common.requires">
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">requires</tt><big>(</big><em>module</em>, <em>name=''</em><big>)</big><a class="headerlink" href="#cloud_browser.common.requires" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enforces module presence.</p>
+<p>The general use here is to allow conditional imports that may fail (e.g., a
+required python package is not installed) but still allow the rest of the
+python package to compile and run fine. If the wrapped method with this
+decorated is invoked, then a runtime error is generated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>module</strong> (<tt class="docutils literal"><span class="pre">module</span></tt> or <tt class="xref docutils literal"><span class="pre">None</span></tt>) &#8211; required module (set as variable to <tt class="xref docutils literal"><span class="pre">None</span></tt> on import fail)</li>
+<li><strong>name</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; module name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cloud.html"
+                        title="previous chapter">2.2. <tt class="docutils literal docutils literal docutils literal"><span class="pre">cloud_browser.cloud</span></tt> - Cloud / Datastore Support</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="next chapter">2.4. <tt class="docutils literal"><span class="pre">cloud_browser.errors</span></tt> - Errors</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/cloud_browser/common.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="2.4. cloud_browser.errors - Errors"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cloud.html" title="2.2. cloud_browser.cloud - Cloud / Datastore Support"
+             >previous</a> |</li>
+        <li><a href="../index.html">Cloud Browser v0.1.0alpha0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >2. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">cloud_browser</span></tt> - Cloud Browser App API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Ryan Roemer.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
