@@ -15,12 +15,17 @@ Currently supported backend datastores include:
 * `Rackspace Cloud Files`_.
 * Local file system.
 
-See the project `documentation`_ page for more details.
-
 .. _`Amazon S3`: http://aws.amazon.com/s3/
 .. _`Rackspace Cloud Files`:
   http://www.rackspacecloud.com/cloud_hosting_products/files/
-.. _`documentation`: http://ryan-roemer.github.com/django-cloud-browser/
+
+Be sure to check out the following project resources:
+
+* Documentation_
+* `GitHub page`_
+
+.. _Documentation: http://ryan-roemer.github.com/django-cloud-browser/
+.. _`GitHub page`: https://github.com/ryan-roemer/django-cloud-browser
 .. toc
 
 Access Controls
