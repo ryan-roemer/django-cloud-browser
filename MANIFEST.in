@@ -1,3 +1,2 @@
 include *.txt
 recursive-include cloud_browser/templates *
-prune cloud_browser_project
