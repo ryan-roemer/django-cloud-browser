@@ -4,11 +4,15 @@
 
 Install the Cloud Browser package from source::
 
+    pip install https://github.com/ryan-roemer/django-cloud-browser/tarball/master
+
+or::
+
     pip install -e git://github.com/ryan-roemer/django-cloud-browser#egg=cloud_browser
 
 In the future, we'll look to add:
 
-* Github tarballs.
+* Github versioned tarballs.
 * PyPi registration.
 
 Software Requirements
