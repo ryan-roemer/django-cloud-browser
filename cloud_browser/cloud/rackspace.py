@@ -49,6 +49,14 @@ class RackspaceObject(base.CloudObject):
     #: Exception translations.
     wrap_rs_errors = RackspaceExceptionWrapper()
 
+    #: Subdirectory content types.
+    #: Rackspace has "special" content types that should be interpreted as
+    #: pseudo-directory delimiters from "old style" hierarchy detection.
+    subdir_types = set((
+        "application/directory",
+        "application/folder",
+    ))
+
     @wrap_rs_errors
     def _get_object(self):
         """Return native storage object."""
@@ -76,7 +84,7 @@ class RackspaceObject(base.CloudObject):
     @classmethod
     def choose_type(cls, content_type):
         """Choose object type from content type."""
-        return cls.type_cls.SUBDIR if content_type == "application/directory" \
+        return cls.type_cls.SUBDIR if content_type in cls.subdir_types \
             else cls.type_cls.FILE
 
     @classmethod
