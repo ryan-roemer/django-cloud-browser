@@ -16,8 +16,12 @@
 <body>
 {% block body %}
   {% block menu %}{% endblock %}
-  {% block cloud_browser_breadcrumbs %}{% endblock %}
-  <div id="cloud-browser-content">{% block content %}{% endblock %}</div>
+  <div id="cloud-browser-breadcrumbs">
+    {% block cloud_browser_breadcrumbs %}{% endblock %}
+  </div>
+  <div id="cloud-browser-content">
+    {% block cloud_browser_content %}{% endblock %}
+  </div>
 {% endblock %}
 </body>
 </html>

@@ -1,0 +1,32 @@
+/**
+ * Cloud browser admin tweaks.
+ */
+
+/** Containers */
+div#cloud-browser-containers {
+    background: none repeat scroll 0 0 #417690;
+}
+div#cloud-browser-containers h2 {
+    color: #F4F379;
+}
+
+/** Objects */
+div#cloud-browser-objects {
+    color: #666666;
+}
+table#cloud-browser-objects-table thead,
+table#cloud-browser-objects-table tfoot,
+table#cloud-browser-objects-table tfoot a {
+    background: none repeat scroll 0 0 #417690;
+}
+table#cloud-browser-objects-table tfoot th {
+    border: 2px solid #417690;
+}
+table#cloud-browser-objects-table tbody a {
+    color: #417690;
+}
+
+/** Forms */
+form.cloud-browser-form input[type='text'] {
+    background: #fff;
+}

@@ -1,8 +1,10 @@
-{% extends "cloud_browser/base.html" %}
+{% extends "cloud_browser/admin/base.html" %}
 
 {% comment %}
 ###############################################################################
-# Browser Snippet
+# Browser
+#
+# Admin version (for integration in Django admin area).
 ###############################################################################
 {% endcomment %}
 
@@ -18,6 +20,7 @@ Cloud Browser - {{ path }}
 
 {% block cloud_browser_template_head %}
 {% cloud_browser_media_link "css/cloud-browser.css" %}
+{% cloud_browser_media_link "css/cloud-browser-admin.css" %}
 {% cloud_browser_media_link "js/browser.js" %}
 {% endblock %}
 

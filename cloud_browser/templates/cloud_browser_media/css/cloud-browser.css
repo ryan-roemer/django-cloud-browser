@@ -57,6 +57,10 @@ table#cloud-browser-objects-table tfoot {
 table#cloud-browser-objects-table tfoot th {
     padding: 1px;
     border: 2px solid #333;
+    text-align: right;
+}
+table#cloud-browser-objects-table tbody {
+    margin-bottom: 10px;
 }
 table#cloud-browser-objects-table tbody a {
     color: #333;

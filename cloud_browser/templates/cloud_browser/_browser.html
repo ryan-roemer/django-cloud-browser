@@ -1,0 +1,96 @@
+{% comment %}
+###############################################################################
+# Browser Content Snippet
+###############################################################################
+{% endcomment %}
+
+{% load cloud_browser_extras %}
+
+{% block cloud_browser_content %}
+<div id="cloud-browser-all">
+<div id="cloud-browser-containers">
+<h2>Containers</h2>
+<ul>
+{% for cont in containers %}
+  <li>
+    <a href="{% url cloud_browser_browser cont.name %}"
+       title="{{ cont.name }}">{{ cont.name|truncatechars:22 }}</a>
+  </li>
+{% endfor %}
+</ul>
+</div>
+
+<div id="cloud-browser-objects">
+<h2>Objects</h2>
+{% if objects %}
+<table id="cloud-browser-objects-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Content Type</th>
+      <th>Encoding</th>
+      <th>Size (Bytes)</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in objects %}
+      <tr>
+        {% if obj.is_file %}
+        <td><a href="{% url cloud_browser_document obj.path %}">
+            {{ obj.basename }}</a></td>
+        {% else %}
+        <td><a href="{% url cloud_browser_browser obj.path %}">
+            {{ obj.basename }}</a></td>
+        {% endif %}
+        <td>{{ obj.type }}</td>
+        <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
+        <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
+        <td>{{ obj.size|filesizeformat }}</td>
+        <td>{{ obj.last_modified|default_if_none:''|date:'DATETIME_FORMAT' }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="6">
+        {% if marker_part %}
+        <form id="cloud-browser-next" class="cloud-browser-form"
+          action="{% url cloud_browser_browser path %}" method="post">
+          {% csrf_token %}
+          Next
+          <input name="limit" type="text" size="5"
+              onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
+              value="{{ limit }}"/>
+          after
+          <input name="marker_part" type="text"
+              size="{% widthratio marker_part|length 40 40 %}"
+              onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
+              value="{{ marker_part }}"/>
+          <a href="#" class="cloud-browser-form-link"
+              onclick="return CloudBrowser.submitForm('cloud-browser-next');"
+              >&raquo;</a>
+        </form>
+        {% else %}
+            &nbsp;
+        {% endif %}
+      </th>
+    </tr>
+  </tfoot>
+</table>
+{% else %}
+    {% if container %}
+        <div class="cloud-browser-empty" colspan="6">
+            No objects found in &ldquo;{{ path }}.&rdquo;
+        </div>
+    {% else %}
+        <div class="cloud-browser-empty" colspan="6">
+            No container selected. Please click on a container to list
+            object contents.
+        </div>
+    {% endif %}
+{% endif %}
+</div>
+</div>
+{% endblock %}
