@@ -10,12 +10,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',  # pylint: disable=C0103
     # Normal URLs.
-    #url(r'^$', redirect_to, name='index', kwargs={'url': 'cb/'}),
-    #url(r'^cb/', include('cloud_browser.urls')),
+    url(r'^$', redirect_to, name='index', kwargs={'url': 'cb/'}),
+    url(r'^cb/', include('cloud_browser.urls')),
 
     # Admin URLs. Note: Include ``urls_admin`` **before** admin.
-    url(r'^$', redirect_to, name='index', kwargs={'url': 'admin/'}),
-    url(r'^admin/cb/', include('cloud_browser.urls_admin')),
+    #url(r'^$', redirect_to, name='index', kwargs={'url': 'admin/'}),
+    #url(r'^admin/cb/', include('cloud_browser.urls_admin')),
 
     # Hack in the bare minimum to get accounts support.
     url(r'^admin/', include(admin.site.urls)),

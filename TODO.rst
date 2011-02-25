@@ -23,6 +23,11 @@ Design / UI
 Features
 ========
 
+* **Admin URLs/Templates**:
+
+  * Write up how to configure this.
+  * Figure out a hack to get link to show up on "/admin/" page.
+
 * **Configuration**:
 
   * *Boto Config*: Allow using ``.boto`` file to provide settings.

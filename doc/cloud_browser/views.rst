@@ -1,5 +1,5 @@
-=================================
- ``cloud_browser.views`` - Views
-=================================
+=======
+ Views
+=======
 .. automodule:: cloud_browser.views
    :members:
