@@ -121,7 +121,7 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
 
     :param output: Output directory.
     :param proj_settings: Django project settings to use.
-    :param git: Convert output HTML to GitHub-friendly format?
+    :param github: Convert output HTML to GitHub-friendly format?
     """
     local("export PYTHONPATH='' && "
           "export DJANGO_SETTINGS_MODULE=%s && "
