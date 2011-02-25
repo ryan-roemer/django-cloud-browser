@@ -1,6 +1,6 @@
-===================================
- ``cloud_browser.errors`` - Errors
-===================================
+========
+ Errors
+========
 .. automodule:: cloud_browser.errors
    :members:
 
