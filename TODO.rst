@@ -25,8 +25,9 @@ Features
 
 * **Admin URLs/Templates**:
 
-  * Write up how to configure this.
+  * Write up how to configure this (with admin authorization).
   * Figure out a hack to get link to show up on "/admin/" page.
+  * Use JS or have option to hide containers list (maybe in any context).
 
 * **Configuration**:
 
