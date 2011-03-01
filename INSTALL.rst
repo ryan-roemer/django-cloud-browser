@@ -86,6 +86,42 @@ Next, add the URLs to your ``urls.py``::
         url(r'^cb/', include('cloud_browser.urls')),
     )
 
+Admin Configuration
+===================
+Cloud Browser also supports integration with the Django admin, for cases in
+which only admin users get to access the datastore. Separate templates, as
+well as built-in Django admin resources are used for a consistent admin
+experience.
+
+.. note::
+    This is not a "full" Django application, just a modest hack (with some
+    JavaScript trickery) to make the Cloud Browser appear like a normal
+    administrative application.
+
+Settings
+--------
+In addition to the general settings above, the settings variable
+``CLOUD_BROWSER_VIEW_DECORATOR`` should be set to ``staff_member_required`` to
+match the rest of the administrative permissions::
+
+    from django.contrib.admin.views.decorators import staff_member_required
+    CLOUD_BROWSER_VIEW_DECORATOR = staff_member_required
+
+URLs
+----
+Cloud Browser has a separate set of templates and URLs for use in with the
+admin. Here's a suggested setup::
+
+    urlpatterns = patterns('',
+        # ...
+
+        # Place Cloud Browser URLs **before** admin.
+        url(r'^admin/cb/', include('cloud_browser.urls_admin')),
+
+        # Admin URLs.
+        url(r'^admin/', include(admin.site.urls)),
+    )
+
 Static Media
 ============
 The Cloud Browser application relies on a modest amount of CSS and JavaScript.
