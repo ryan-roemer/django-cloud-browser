@@ -17,10 +17,12 @@ div#cloud-browser-objects {
 table#cloud-browser-objects-table thead,
 table#cloud-browser-objects-table tfoot,
 table#cloud-browser-objects-table tfoot a {
-    background: none repeat scroll 0 0 #417690;
+    color: #666666;
+    background: none;
 }
-table#cloud-browser-objects-table tfoot th {
-    border: 2px solid #417690;
+table#cloud-browser-objects-table tfoot td {
+    border: none;
+    border-bottom: 1px solid #DDDDDD;
 }
 table#cloud-browser-objects-table tbody a {
     color: #417690;

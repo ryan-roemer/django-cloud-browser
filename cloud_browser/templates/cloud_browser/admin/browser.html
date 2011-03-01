@@ -8,6 +8,7 @@
 ###############################################################################
 {% endcomment %}
 
+{% load adminmedia %}
 {% load cloud_browser_extras %}
 
 {% block title %}
@@ -19,9 +20,25 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block cloud_browser_template_head %}
+{# Have jQuery from Admin #}
+<script type="text/javascript" 
+        src="{% admin_media_prefix %}js/jquery.js"></script>
+<script type="text/javascript" 
+        src="{% admin_media_prefix %}js/jquery.init.js"></script>
+
 {% cloud_browser_media_link "css/cloud-browser.css" %}
 {% cloud_browser_media_link "css/cloud-browser-admin.css" %}
 {% cloud_browser_media_link "js/browser.js" %}
+
+<script type="text/javascript">
+(function ($) {
+    $(document).ready(function ($) {
+        // TODO -- HERE
+        var $conts = $('#cloud-browser-containers');
+        console.log($conts);
+    });
+})(django.jQuery);
+</script>
 {% endblock %}
 
 {% block cloud_browser_content %}

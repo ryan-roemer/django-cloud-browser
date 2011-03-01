@@ -23,7 +23,8 @@ div#cloud-browser-containers {
     background: #333;
     color: #ccc;
     float: left;
-    width: 200px;
+    width: 195px;
+    margin-right: 5px;
 }
 div#cloud-browser-containers a {
     color: #ccc;
@@ -54,7 +55,7 @@ table#cloud-browser-objects-table tfoot a {
 table#cloud-browser-objects-table tfoot {
     text-align: right;
 }
-table#cloud-browser-objects-table tfoot th {
+table#cloud-browser-objects-table tfoot td {
     padding: 1px;
     border: 2px solid #333;
     text-align: right;
