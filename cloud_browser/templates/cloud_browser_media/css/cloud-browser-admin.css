@@ -9,6 +9,22 @@ div#cloud-browser-containers {
 div#cloud-browser-containers h2 {
     color: #F4F379;
 }
+div#cloud-browser-containers-hider-outer {
+    float: right;
+    position: relative;
+}
+div#cloud-browser-containers-hider {
+    border: 2px solid #666666;
+    color: #666666;
+    background-color: #DDDDDD;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    float: right;
+    cursor: pointer;
+    text-align: center;
+    width: 15px;
+}
 
 /** Objects */
 div#cloud-browser-objects {

@@ -20,7 +20,7 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block cloud_browser_template_head %}
-{# Have jQuery from Admin #}
+{# Use jQuery from Admin #}
 <script type="text/javascript" 
         src="{% admin_media_prefix %}js/jquery.js"></script>
 <script type="text/javascript" 
@@ -33,9 +33,30 @@ Cloud Browser - {{ path }}
 <script type="text/javascript">
 (function ($) {
     $(document).ready(function ($) {
-        // TODO -- HERE
         var $conts = $('#cloud-browser-containers');
-        console.log($conts);
+        var contHeight = $conts.height();
+        var $objs = $('#cloud-browser-objects');
+
+        // Add show/hide "hider" element.
+        var hiderOpen = "-";
+        var hiderClosed = "+";
+        var $hiderOuter = $('<div />').
+            attr('id', "cloud-browser-containers-hider-outer").
+            prependTo($conts);
+        var $hider = $('<div />').
+            attr('id', "cloud-browser-containers-hider").
+            text(hiderOpen);
+            // TODO -- .prependTo($hiderOuter);
+
+        $hider.click(function () {
+            if ($hider.text() == hiderOpen) {
+                console.log("Currently opened. CLOSING");
+                $hider.text(hiderClosed);
+            } else {
+                console.log("Currently closed. OPENING");
+                $hider.text(hiderOpen);
+            }
+        });
     });
 })(django.jQuery);
 </script>
