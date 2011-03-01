@@ -96,7 +96,9 @@ experience.
 .. note::
     This is not a "full" Django application, just a modest hack (with some
     JavaScript trickery) to make the Cloud Browser appear like a normal
-    administrative application.
+    administrative application. And, unfortunately there is no link off
+    the admin index page (although you could extend the Django admin index
+    template to include this without too much hassle).
 
 Settings
 --------

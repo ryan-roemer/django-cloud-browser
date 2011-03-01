@@ -33,8 +33,8 @@ Cloud Browser - {{ path }}
 <script type="text/javascript">
 (function ($) {
     $(document).ready(function ($) {
+        var $all = $('#cloud-browser-all');
         var $conts = $('#cloud-browser-containers');
-        var contHeight = $conts.height();
         var $objs = $('#cloud-browser-objects');
 
         // Add show/hide "hider" element.
@@ -43,19 +43,37 @@ Cloud Browser - {{ path }}
         var $hiderOuter = $('<div />').
             attr('id', "cloud-browser-containers-hider-outer").
             prependTo($conts);
-        var $hider = $('<div />').
-            attr('id', "cloud-browser-containers-hider").
-            text(hiderOpen);
-            // TODO -- .prependTo($hiderOuter);
+        var $hiderFull = $('<div />').
+            addClass("cloud-browser-containers-hider").
+            text(hiderOpen).
+            prependTo($hiderOuter);
 
-        $hider.click(function () {
-            if ($hider.text() == hiderOpen) {
-                console.log("Currently opened. CLOSING");
-                $hider.text(hiderClosed);
-            } else {
-                console.log("Currently closed. OPENING");
-                $hider.text(hiderOpen);
-            }
+
+        // Add hidden "minimized" element.
+        var $hiderMin = $hiderFull.clone().text(hiderClosed);
+        var $min = $('<div />').
+            attr('id', "cloud-browser-containers-min").
+            height($objs.height()).
+            hide().
+            append($hiderMin).
+            prependTo($all);
+
+        // Toggle Functions.
+        var objsOpenMargin = $objs.css('marginLeft');
+        var objsClosedMargin = $min.width() + 10;
+        $hiderFull.click(function () {
+            // Currently open. Close.
+            $conts.fadeOut('fast', function () {
+                $min.fadeIn('fast');
+                $objs.css('marginLeft', objsClosedMargin);
+            });
+        });
+        $hiderMin.click(function () {
+            // Currently closed. Open.
+            $min.fadeOut('fast', function () {
+                $conts.fadeIn('fast');
+                $objs.css('marginLeft', objsOpenMargin);
+            });
         });
     });
 })(django.jQuery);
