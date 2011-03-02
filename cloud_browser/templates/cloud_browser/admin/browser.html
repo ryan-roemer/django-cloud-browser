@@ -82,15 +82,16 @@ Cloud Browser - {{ path }}
             append($hiderMin).
             prependTo($all);
 
-        var openFn = function () {
-            // Currently closed. Open.
-            $min.fadeOut('fast', function () {
-                $conts.fadeIn('fast');
-                $objs.css('marginLeft', objsOpenMargin);
-                hiderCallback(false /* opened */);
-            });
-        };
-        
+        var objsOpenMargin = $objs.css('marginLeft');
+        var objsClosedMargin = $min.width() + 10;
+
+        // Initial setup.
+        if (closed) {
+            $conts.hide();
+            $min.show();
+            $objs.css('marginLeft', objsClosedMargin);
+        }
+
         var closeFn = function () {
             // Currently open. Close.
             $conts.fadeOut('fast', function () {
@@ -100,15 +101,16 @@ Cloud Browser - {{ path }}
             });
         }
 
-
-        // Initial setup.
-        if (closed) {
-            closeFn();
-        }
-
+        var openFn = function () {
+            // Currently closed. Open.
+            $min.fadeOut('fast', function () {
+                $conts.fadeIn('fast');
+                $objs.css('marginLeft', objsOpenMargin);
+                hiderCallback(false /* opened */);
+            });
+        };
+        
         // Toggle Functions.
-        var objsOpenMargin = $objs.css('marginLeft');
-        var objsClosedMargin = $min.width() + 10;
         $hiderFull.click(closeFn);
         $hiderMin.click(openFn);
     };
