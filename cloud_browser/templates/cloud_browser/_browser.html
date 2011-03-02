@@ -38,11 +38,12 @@
     {% for obj in objects %}
       <tr>
         {% if obj.is_file %}
-        <td><a href="{% url cloud_browser_document obj.path|urlencode %}">
-            {{ obj.basename }}</a></td>
+        <td><a href="{% url cloud_browser_document obj.path|urlencode %}"
+            >{{ obj.basename }}</a></td>
         {% else %}
-        <td><a href="{% url cloud_browser_browser obj.path|urlencode %}">
-            {{ obj.basename }}</a></td>
+        <td><a href="{% url cloud_browser_browser obj.path|urlencode %}"
+               class="cloud-browser-document-link"
+            >{{ obj.basename }}</a></td>
         {% endif %}
         <td>{{ obj.type }}</td>
         <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
