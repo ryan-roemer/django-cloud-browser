@@ -5,8 +5,10 @@
 {% endcomment %}
 
 {% block cloud_browser_breadcrumbs %}
-  ( <a href="{% url cloud_browser_browser '' %}">Home</a> )
+  ( <a class="cloud-browser-breadcrumb-link"
+       href="{% url cloud_browser_browser '' %}">Home</a> )
   {% for crumb_path, crumb in breadcrumbs %}
-    &raquo; <a href="{% url cloud_browser_browser crumb_path %}">{{ crumb }}</a>
+    &raquo; <a class="cloud-browser-breadcrumb-link"
+     href="{% url cloud_browser_browser crumb_path %}">{{ crumb }}</a>
   {% endfor %}
 {% endblock %}

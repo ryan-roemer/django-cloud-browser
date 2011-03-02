@@ -53,7 +53,7 @@ Cloud Browser - {{ path }}
             var $element = $(element);
             $element.attr('action', patchQuery($element.attr('action')));
         });
-    }
+    };
 
     /**
      * Add all hider elements to page.
@@ -100,7 +100,7 @@ Cloud Browser - {{ path }}
                 $objs.css('marginLeft', objsClosedMargin);
                 hiderCallback(true /* closed */);
             });
-        }
+        };
 
         var openFn = function () {
             // Currently closed. Open.
