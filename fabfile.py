@@ -2,9 +2,8 @@
 from __future__ import with_statement
 
 import os
-import re
 
-from fabric.api import cd, abort, local, settings
+from fabric.api import abort, local, settings
 
 ###############################################################################
 # Constants
