@@ -32,12 +32,35 @@ Cloud Browser - {{ path }}
 
 <script type="text/javascript">
 (function ($) {
+    /**
+     * Set state on all links.
+     */
+    var setLinkState = function ($allLinks, $allForms, closed) {
+        closed = closed === true;
+
+        var patchQuery = function (query) {
+            var queryObj = CloudBrowser.getQueryObj(query);
+            queryObj.params.closed = closed ? '1' : '0';
+            return CloudBrowser.toQueryString(queryObj);
+        };
+
+        $allLinks.each(function (index, element) {
+            var $element = $(element);
+            $element.attr('href', patchQuery($element.attr('href')));
+        });
+
+        $allForms.each(function (index, element) {
+            var $element = $(element);
+            $element.attr('action', patchQuery($element.attr('action')));
+        });
+    }
 
     /**
      * Add all hider elements to page.
      */
-    var addHider = function ($all, $conts, $objs, closed) {
+    var addHider = function ($all, $conts, $objs, closed, hiderCallback) {
         closed = closed === true;
+        hiderCallback = hiderCallback || function () {};
 
         // Add show/hide "hider" element.
         var hiderOpen = "-";
@@ -59,23 +82,35 @@ Cloud Browser - {{ path }}
             append($hiderMin).
             prependTo($all);
 
-        // Toggle Functions.
-        var objsOpenMargin = $objs.css('marginLeft');
-        var objsClosedMargin = $min.width() + 10;
-        $hiderFull.click(function () {
-            // Currently open. Close.
-            $conts.fadeOut('fast', function () {
-                $min.fadeIn('fast');
-                $objs.css('marginLeft', objsClosedMargin);
-            });
-        });
-        $hiderMin.click(function () {
+        var openFn = function () {
             // Currently closed. Open.
             $min.fadeOut('fast', function () {
                 $conts.fadeIn('fast');
                 $objs.css('marginLeft', objsOpenMargin);
+                hiderCallback(false /* opened */);
             });
-        });
+        };
+        
+        var closeFn = function () {
+            // Currently open. Close.
+            $conts.fadeOut('fast', function () {
+                $min.fadeIn('fast');
+                $objs.css('marginLeft', objsClosedMargin);
+                hiderCallback(true /* closed */);
+            });
+        }
+
+
+        // Initial setup.
+        if (closed) {
+            closeFn();
+        }
+
+        // Toggle Functions.
+        var objsOpenMargin = $objs.css('marginLeft');
+        var objsClosedMargin = $min.width() + 10;
+        $hiderFull.click(closeFn);
+        $hiderMin.click(openFn);
     };
 
     $(document).ready(function ($) {
@@ -89,7 +124,17 @@ Cloud Browser - {{ path }}
         var queryObj = CloudBrowser.getQueryObj(currentUrl);
         var closed = queryObj.params.closed === '1';
 
-        addHider($all, $conts, $objs, closed);
+        // Gather all links.
+        var $allLinks = $('.cloud-browser-document-link');
+        var $allForms = $('.cloud-browser-form');
+
+        // Setup initial link state.
+        setLinkState($allLinks, $allForms, closed);
+
+        // Add hider and toggle callback.
+        addHider($all, $conts, $objs, closed, function (isClosed) {
+            setLinkState($allLinks, $allForms, isClosed);
+        });
     });
 })(django.jQuery);
 </script>
