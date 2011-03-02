@@ -90,6 +90,7 @@ Cloud Browser - {{ path }}
             $conts.hide();
             $min.show();
             $objs.css('marginLeft', objsClosedMargin);
+            hiderCallback(true /* closed */);
         }
 
         var closeFn = function () {
@@ -127,7 +128,9 @@ Cloud Browser - {{ path }}
         var closed = queryObj.params.closed === '1';
 
         // Gather all links.
-        var $allLinks = $('.cloud-browser-document-link');
+        var $allLinks = $(
+            '.cloud-browser-document-link, .cloud-browser-breadcrumb-link');
+        console.log($allLinks);
         var $allForms = $('.cloud-browser-form');
 
         // Setup initial link state.
