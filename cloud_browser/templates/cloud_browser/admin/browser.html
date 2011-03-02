@@ -32,10 +32,12 @@ Cloud Browser - {{ path }}
 
 <script type="text/javascript">
 (function ($) {
-    $(document).ready(function ($) {
-        var $all = $('#cloud-browser-all');
-        var $conts = $('#cloud-browser-containers');
-        var $objs = $('#cloud-browser-objects');
+
+    /**
+     * Add all hider elements to page.
+     */
+    var addHider = function ($all, $conts, $objs, closed) {
+        closed = closed === true;
 
         // Add show/hide "hider" element.
         var hiderOpen = "-";
@@ -74,6 +76,20 @@ Cloud Browser - {{ path }}
                 $objs.css('marginLeft', objsOpenMargin);
             });
         });
+    };
+
+    $(document).ready(function ($) {
+        // Elements.
+        var $all = $('#cloud-browser-all');
+        var $conts = $('#cloud-browser-containers');
+        var $objs = $('#cloud-browser-objects');
+
+        // Detect current state from URL.
+        var currentUrl = window.location.href;
+        var queryObj = CloudBrowser.getQueryObj(currentUrl);
+        var closed = queryObj.params.closed === '1';
+
+        addHider($all, $conts, $objs, closed);
     });
 })(django.jQuery);
 </script>
