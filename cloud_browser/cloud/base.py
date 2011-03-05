@@ -145,12 +145,10 @@ class CloudConnection(object):
     #: Maximum number of containers that can be listed or ``None``.
     max_list = None
 
-    def __init__(self, account, secret_key, rs_servicenet=False, authurl=None):
+    def __init__(self, account, secret_key):
         """Initializer."""
         self.account = account
         self.secret_key = secret_key
-        self.rs_servicenet = rs_servicenet
-        self.authurl = authurl
         self.__native = None
 
     @property

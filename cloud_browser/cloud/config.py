@@ -34,7 +34,10 @@ class Config(object):
                 from cloud_browser.cloud.rackspace import RackspaceConnection
                 conn_cls = RackspaceConnection
                 conn_fn = lambda: RackspaceConnection(
-                    account, secret_key, servicenet, authurl)
+                    account,
+                    secret_key,
+                    servicenet=servicenet,
+                    authurl=authurl)
 
         elif datastore == 'Filesystem':
             # Mock filesystem
