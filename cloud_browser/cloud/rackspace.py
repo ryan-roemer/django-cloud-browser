@@ -239,9 +239,9 @@ class RackspaceConnection(base.CloudConnection):
     #: Maximum number of containers that can be listed or ``None``.
     max_list = RS_MAX_LIST_CONTAINERS_LIMIT
 
-    def __init__(self, account, secret_key, rs_servicenet=False):
+    def __init__(self, account, secret_key, rs_servicenet=False, authurl=None):
         """Initializer."""
-        super(RackspaceConnection, self).__init__(account, secret_key)
+        super(RackspaceConnection, self).__init__(account, secret_key, authurl)
         self.rs_servicenet = rs_servicenet
 
     @wrap_rs_errors
@@ -257,6 +257,9 @@ class RackspaceConnection(base.CloudConnection):
         # environment variable 'RACKSPACE_SERVICENET' separately.
         if self.rs_servicenet:
             kwargs['servicenet'] = True
+
+        if self.authurl:
+            kwargs['authurl'] = authurl
 
         return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
 

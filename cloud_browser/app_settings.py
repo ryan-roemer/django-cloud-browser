@@ -164,6 +164,7 @@ class Settings(object):
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': Setting(from_env=True),
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': Setting(from_env=True),
         'CLOUD_BROWSER_RACKSPACE_SERVICENET': BoolSetting(from_env=True),
+        'CLOUD_BROWSER_RACKSPACE_AUTHURL': BoolSetting(from_env=True),
 
         # Amazon Web Services S3 datastore settings.
         'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
