@@ -259,7 +259,7 @@ class RackspaceConnection(base.CloudConnection):
             kwargs['servicenet'] = True
 
         if self.authurl:
-            kwargs['authurl'] = authurl
+            kwargs['authurl'] = self.authurl
 
         return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
 
