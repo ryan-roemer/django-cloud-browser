@@ -241,7 +241,7 @@ class RackspaceConnection(base.CloudConnection):
 
     def __init__(self, account, secret_key, rs_servicenet=False, authurl=None):
         """Initializer."""
-        super(RackspaceConnection, self).__init__(account, secret_key, authurl)
+        super(RackspaceConnection, self).__init__(account, secret_key, authurl=authurl)
         self.rs_servicenet = rs_servicenet
 
     @wrap_rs_errors
