@@ -29,7 +29,7 @@ class Config(object):
             account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
             secret_key = settings.CLOUD_BROWSER_RACKSPACE_SECRET_KEY
             servicenet = settings.CLOUD_BROWSER_RACKSPACE_SERVICENET
-            authurl    = settings.CLOUD_BROWSER_RACKSPACE_AUTHURL
+            authurl = settings.CLOUD_BROWSER_RACKSPACE_AUTHURL
             if account and secret_key:
                 from cloud_browser.cloud.rackspace import RackspaceConnection
                 conn_cls = RackspaceConnection
