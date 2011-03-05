@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2. Cloud / Datastore Support &mdash; Cloud Browser v0.1.1alpha1 documentation</title>
+    <title>2.2. Cloud / Datastore Support &mdash; Cloud Browser v0.1.2alpha0 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.1alpha1',
+        VERSION:     '0.1.2alpha0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.1.1alpha1 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.1.2alpha0 documentation" href="../index.html" />
     <link rel="up" title="2. Cloud Browser App API" href="index.html" />
     <link rel="next" title="2.3. Common / Utilities" href="common.html" />
     <link rel="prev" title="2.1. Application Settings" href="app_settings.html" /> 
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="app_settings.html" title="2.1. Application Settings"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.1alpha1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">2. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>  
@@ -229,7 +229,7 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 <p>Cloud datastore API base abstraction.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudConnection">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.base.</tt><tt class="descname">CloudConnection</tt><big>(</big><em>account</em>, <em>secret_key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cloud connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudConnection.cont_cls">
@@ -482,7 +482,7 @@ package.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsConnection">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsConnection</tt><big>(</big><em>account</em>, <em>secret_key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>AWS connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.aws.AwsConnection.cont_cls">
@@ -615,7 +615,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 </div>
 <dl class="class">
 <dt id="cloud_browser.cloud.rackspace.RackspaceConnection">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>rs_servicenet=False</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.rackspace.</tt><tt class="descname">RackspaceConnection</tt><big>(</big><em>account</em>, <em>secret_key</em>, <em>servicenet=False</em>, <em>authurl=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rackspace connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceConnection.cont_cls">
@@ -836,7 +836,7 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
         <li class="right" >
           <a href="app_settings.html" title="2.1. Application Settings"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.1alpha1 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" >2. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>
