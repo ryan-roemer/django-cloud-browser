@@ -108,6 +108,9 @@ class Settings(object):
     * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
       not to use Rackspace's servicenet (i.e., the private interface on a
       Cloud Server). (*Env*)
+    * ``CLOUD_BROWSER_RACKSPACE_AUTHURL``: Alternative authorization server,
+      for use, e.g., with `OpenStack <http://www.openstack.org/>`_ instead of
+      Rackspace. (*Env*)
 
     **Amazon Web Services**: Configure AWS S3 as backing datastore.
 
