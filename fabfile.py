@@ -38,6 +38,7 @@ BUILD_DIRS = (
 SDIST_RST_FILES = (
     "INSTALL.rst",
     "README.rst",
+    "CHANGES.rst",
 )
 SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 

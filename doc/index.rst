@@ -10,6 +10,7 @@ Contents
 
    misc/install
    cloud_browser/index
+   misc/changes
    misc/todo
    misc/license
 
