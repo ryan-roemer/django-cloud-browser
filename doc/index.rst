@@ -9,6 +9,7 @@ Contents
    :maxdepth: 2
 
    misc/install
+   screenshots
    cloud_browser/index
    misc/changes
    misc/todo

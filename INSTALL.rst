@@ -43,6 +43,8 @@ corresponding library below:
   `cloudfiles <https://github.com/rackspace/python-cloudfiles>`_
   (version 1.7.4+ is required).
 
+.. _install_basic:
+
 Configuration
 =============
 All configuration options are fully described in the 
@@ -95,6 +97,8 @@ Next, add the URLs to your ``urls.py``::
         # ...
         url(r'^cb/', include('cloud_browser.urls')),
     )
+
+.. _install_admin:
 
 Admin Configuration
 ===================
