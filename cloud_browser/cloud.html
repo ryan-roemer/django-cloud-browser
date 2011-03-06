@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2. Cloud / Datastore Support &mdash; Cloud Browser v0.1.2alpha0 documentation</title>
+    <title>3.2. Cloud / Datastore Support &mdash; Cloud Browser v0.1.2alpha0 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Cloud Browser v0.1.2alpha0 documentation" href="../index.html" />
-    <link rel="up" title="2. Cloud Browser App API" href="index.html" />
-    <link rel="next" title="2.3. Common / Utilities" href="common.html" />
-    <link rel="prev" title="2.1. Application Settings" href="app_settings.html" /> 
+    <link rel="up" title="3. Cloud Browser App API" href="index.html" />
+    <link rel="next" title="3.3. Common / Utilities" href="common.html" />
+    <link rel="prev" title="3.1. Application Settings" href="app_settings.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,13 +37,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="common.html" title="2.3. Common / Utilities"
+          <a href="common.html" title="3.3. Common / Utilities"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="app_settings.html" title="2.1. Application Settings"
+          <a href="app_settings.html" title="3.1. Application Settings"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">2. Cloud Browser App API</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,13 +53,13 @@
           <div class="body">
             
   <div class="section" id="module-cloud_browser.cloud">
-<span id="cloud-datastore-support"></span><h1>2.2. Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
+<span id="cloud-datastore-support"></span><h1>3.2. Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
 <p>Cloud abstractions and helpers.</p>
 <p>More generally, this is &#8220;datastore&#8221; support, since the basic interface could
 support any interface, file, memory, cloud, etc. But, as this is called a
 &#8220;cloud&#8221; browser, we&#8217;ll call it the &#8220;cloud&#8221; module.</p>
 <div class="section" id="module-cloud_browser.cloud.config">
-<span id="configuration"></span><h2>2.2.1. Configuration<a class="headerlink" href="#module-cloud_browser.cloud.config" title="Permalink to this headline">¶</a></h2>
+<span id="configuration"></span><h2>3.2.1. Configuration<a class="headerlink" href="#module-cloud_browser.cloud.config" title="Permalink to this headline">¶</a></h2>
 <p>Cloud configuration.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.config.Config">
@@ -103,7 +103,7 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.errors">
-<span id="errors"></span><h2>2.2.2. Errors<a class="headerlink" href="#module-cloud_browser.cloud.errors" title="Permalink to this headline">¶</a></h2>
+<span id="errors"></span><h2>3.2.2. Errors<a class="headerlink" href="#module-cloud_browser.cloud.errors" title="Permalink to this headline">¶</a></h2>
 <p>Common cloud error wrappers.</p>
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.CloudException">
@@ -218,14 +218,14 @@ in, else <tt class="xref docutils literal"><span class="pre">None</span></tt> (w
 
 </div>
 <div class="section" id="datastores">
-<h2>2.2.3. Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.3. Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
 <p>Cloud Browser is written with a pluggable backend datastore model in mind.
 Currently, there are datastore implementations for a basic filesystem and
 cloud (Rackspace, Amazon) backing stores. Other cloud stores shouldn&#8217;t be too
 hard to port over to this app, as Rackspace has probably the most little
 extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- directories.</p>
 <div class="section" id="module-cloud_browser.cloud.base">
-<span id="abstract-base-class"></span><h3>2.2.3.1. Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
+<span id="abstract-base-class"></span><h3>3.2.3.1. Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
 <p>Cloud datastore API base abstraction.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudConnection">
@@ -367,7 +367,7 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.fs">
-<span id="filesystem-datastore"></span><h3>2.2.3.2. Filesystem Datastore<a class="headerlink" href="#module-cloud_browser.cloud.fs" title="Permalink to this headline">¶</a></h3>
+<span id="filesystem-datastore"></span><h3>3.2.3.2. Filesystem Datastore<a class="headerlink" href="#module-cloud_browser.cloud.fs" title="Permalink to this headline">¶</a></h3>
 <p>File-system datastore.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemConnection">
@@ -461,7 +461,7 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.aws">
-<span id="amazon-web-services-s3-datastore"></span><h3>2.2.3.3. Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
+<span id="amazon-web-services-s3-datastore"></span><h3>3.2.3.3. Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
 <p>Amazon Simple Storage Service (S3) datastore.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -605,7 +605,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.rackspace">
-<span id="rackspace-cloud-files-datastore"></span><h3>2.2.3.4. Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
+<span id="rackspace-cloud-files-datastore"></span><h3>3.2.3.4. Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
 <p>Rackspace Cloud Files datastore.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -779,14 +779,14 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">2.2. Cloud / Datastore Support</a><ul>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.config">2.2.1. Configuration</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.errors">2.2.2. Errors</a></li>
-<li><a class="reference internal" href="#datastores">2.2.3. Datastores</a><ul>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.base">2.2.3.1. Abstract Base Class</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.fs">2.2.3.2. Filesystem Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">2.2.3.3. Amazon Web Services S3 Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">2.2.3.4. Rackspace Cloud Files Datastore</a></li>
+<li><a class="reference internal" href="#">3.2. Cloud / Datastore Support</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.config">3.2.1. Configuration</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.errors">3.2.2. Errors</a></li>
+<li><a class="reference internal" href="#datastores">3.2.3. Datastores</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.base">3.2.3.1. Abstract Base Class</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.fs">3.2.3.2. Filesystem Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">3.2.3.3. Amazon Web Services S3 Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">3.2.3.4. Rackspace Cloud Files Datastore</a></li>
 </ul>
 </li>
 </ul>
@@ -795,10 +795,10 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="app_settings.html"
-                        title="previous chapter">2.1. Application Settings</a></p>
+                        title="previous chapter">3.1. Application Settings</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="common.html"
-                        title="next chapter">2.3. Common / Utilities</a></p>
+                        title="next chapter">3.3. Common / Utilities</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/cloud_browser/cloud.txt"
@@ -831,13 +831,13 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="common.html" title="2.3. Common / Utilities"
+          <a href="common.html" title="3.3. Common / Utilities"
              >next</a> |</li>
         <li class="right" >
-          <a href="app_settings.html" title="2.1. Application Settings"
+          <a href="app_settings.html" title="3.1. Application Settings"
              >previous</a> |</li>
         <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >2. Cloud Browser App API</a> &raquo;</li> 
+          <li><a href="index.html" >3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
