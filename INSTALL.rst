@@ -2,21 +2,32 @@
  Installation
 ==============
 
-Download
-========
 
-Currently, you can install from versioned tarballs or current source. In the
-future, we'll look to add PyPi registration.
+Install
+=======
+
+Cloud Browser can be installed from PyPi or from GitHub.
+
+PyPi
+----
+Basic installation::
+
+    pip install django-cloud-browser
 
 Versioned
 ---------
-Install a specific version (where ``VERSION`` is something like "0.1.1")::
+Install a specific version (where ``<VERSION>`` is something like "|version|")
+from PyPi::
+
+    pip install django-cloud-browser==<VERSION>
+
+or from GitHub::
 
     pip install https://github.com/ryan-roemer/django-cloud-browser/zipball/v<VERSION>
 
 Development
 -----------
-Install the Cloud Browser package from source::
+Install the Cloud Browser package from current development source::
 
     pip install https://github.com/ryan-roemer/django-cloud-browser/tarball/master
 

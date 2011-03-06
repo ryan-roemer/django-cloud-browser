@@ -2,16 +2,9 @@
  Future / Task List
 ====================
 
-Current
-=======
-
-* Github push.
-* Github documentation push.
-
 Packaging
 =========
 
-* PyPi registration.
 * Development pip requirements file.
 
 Design / UI
