@@ -82,6 +82,12 @@ def register():
         local("python setup.py register", capture=False)
 
 
+def upload():
+    """Upload package."""
+    with _dist_wrapper():
+        local("python setup.py sdist upload", capture=False)
+
+
 ###############################################################################
 # Quality
 ###############################################################################
