@@ -73,8 +73,13 @@ def _dist_wrapper():
 def sdist():
     """Package into distribution."""
     with _dist_wrapper():
-        # Make build.
         local("python setup.py sdist", capture=False)
+
+
+def register():
+    """Register package."""
+    with _dist_wrapper():
+        local("python setup.py register", capture=False)
 
 
 ###############################################################################
