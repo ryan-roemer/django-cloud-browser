@@ -240,5 +240,13 @@ class Settings(object):
 
         return url
 
+    @property
+    def app_media_doc_root(self):  # pylint: disable=R0201
+        """Get application media document (file) root."""
+        app_dir = os.path.abspath(os.path.dirname(__file__))
+        media_root = os.path.join(app_dir, 'media')
+
+        return media_root
+
 
 settings = Settings()  # pylint: disable=C0103

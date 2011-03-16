@@ -26,9 +26,12 @@ Cloud Browser - {{ path }}
 <script type="text/javascript" 
         src="{% admin_media_prefix %}js/jquery.init.js"></script>
 
-{% cloud_browser_media_link "css/cloud-browser.css" %}
-{% cloud_browser_media_link "css/cloud-browser-admin.css" %}
-{% cloud_browser_media_link "js/browser.js" %}
+<link rel="stylesheet" type="text/css"
+    href="{% cloud_browser_media_url 'css/cloud-browser.css' %}" />
+<link rel="stylesheet" type="text/css"
+    href="{% cloud_browser_media_url 'css/cloud-browser-admin.css' %}" />
+<script type="text/javascript"
+    src="{% cloud_browser_media_url 'js/browser.js' %}"></script>
 
 <script type="text/javascript">
 (function ($) {

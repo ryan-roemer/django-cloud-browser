@@ -42,76 +42,47 @@ truncatechars.is_safe = True  # pylint: disable=W0612
 
 
 @register.tag
-def cloud_browser_media_link(_, token):
-    """Create appropriate ``link``, ``script`` or ``style`` tag for JavaScript
-    and CSS files from relative resource path.
-
-    .. note::
-        Presently only works for JavaScript and CSS because those *can* be
-        dumped inline into an HTML page. Unfortunately, images cannot, and we
-        haven't decided how to handle that yet (maybe ignore if not statically
-        served?)
+def cloud_browser_media_url(_, token):
+    """Get base media URL for application static media.
 
     Correctly handles whether or not the settings variable
     ``CLOUD_BROWSER_STATIC_MEDIA_DIR`` is set and served.
 
-    For example, if we use the tag in a template::
+    For example::
 
-        {% cloud_browser_media_link "js/browser.js" %}
-
-    And the static media directory variable is set and media is served, then
-    a ``<script>`` tag **with** a ``link`` is emitted, pointing to the URL.
-    However, if the directory variable is not set, a ``<script>`` tag with
-    the full inline JavaScript text is emitted instead.
-
+        <link rel="stylesheet" type="text/css"
+            href="{% cloud_browser_media_url "css/cloud-browser.css" %}" />
     """
     bits = token.split_contents()
     if len(bits) != 2:
         raise TemplateSyntaxError("'%s' takes one argument" % bits[0])
     rel_path = bits[1]
 
-    return MediaLinkNode(rel_path)
+    return MediaUrlNode(rel_path)
 
 
-class MediaLinkNode(Node):
-    """Media link node."""
-    mappings = {
-        'css': [
-            "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />",
-            "<style type=\"text/css\">%s</style>",
-        ],
-        'js': [
-            "<script type=\"text/javascript\" src=\"%s\"></script>",
-            "<script type=\"text/javascript\">%s</script>",
-        ],
-    }
+class MediaUrlNode(Node):
+    """Media URL node."""
 
-    #: The static served media URL (or ``None``)
+    #: Static application media URL (or ``None``).
     static_media_url = settings.app_media_url
-
-    #: The fallback template path of the same media.
-    template_media_path = 'cloud_browser_media'
 
     def __init__(self, rel_path):
         """Initializer."""
-        super(MediaLinkNode, self).__init__()
+        super(MediaUrlNode, self).__init__()
         self.rel_path = rel_path.lstrip('/').strip("'").strip('"')
-        self.media_type = os.path.splitext(self.rel_path)[1].strip('.').lower()
 
     def render(self, context):
         """Render."""
-        from django.template.loader_tags import IncludeNode
+        from django.core.urlresolvers import reverse
 
-        # Check if we have static-served media
-        if self.static_media_url:
-            # Use a link.
-            static_path = os.path.join(self.static_media_url, self.rel_path)
-            return self.mappings[self.media_type][0] % static_path
+        # Check if we have real or Django static-served media
+        if self.static_media_url is not None:
+            # Real.
+            return os.path.join(self.static_media_url, self.rel_path)
 
         else:
-            # Have to render page with full media included.
-            template_path = os.path.join(self.template_media_path,
-                                         self.rel_path)
-            template_path = '"' + template_path.strip('"') + '"'
-            rendered = IncludeNode(template_path).render(context)
-            return self.mappings[self.media_type][1] % rendered
+            # Django.
+            return reverse("cloud_browser_media",
+                           args=[self.rel_path],
+                           current_app='cloud_browser')

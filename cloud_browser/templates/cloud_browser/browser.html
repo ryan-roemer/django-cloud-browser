@@ -17,8 +17,10 @@ Cloud Browser - {{ path }}
 {% endblock %}
 
 {% block cloud_browser_template_head %}
-{% cloud_browser_media_link "css/cloud-browser.css" %}
-{% cloud_browser_media_link "js/browser.js" %}
+<link rel="stylesheet" type="text/css"
+    href="{% cloud_browser_media_url 'css/cloud-browser.css' %}" />
+<script type="text/javascript"
+    src="{% cloud_browser_media_url 'js/browser.js' %}"></script>
 {% endblock %}
 
 {% block cloud_browser_content %}
