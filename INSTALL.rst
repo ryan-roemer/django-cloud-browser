@@ -152,10 +152,10 @@ admin. Here's a suggested setup::
 Static Media
 ============
 The Cloud Browser application relies on a modest amount of CSS and JavaScript.
-By default, the static media is included inline into HTML views as full script,
-as this is the most compatible approach (and has no further configuration).
+By default, the static media is served by a Django static view, as this is the
+most compatible approach (and has no further configuration).
 
-However, this is not efficient, as the CSS and JavaScript files should be
+However, this is not efficient, as the static media files should be
 separately statically served. If you separately serve the Cloud Browser static
 media directory, the application will use links instead of inline code dumps.
 To enable this, simply symlink the Cloud Browser static media directory to
