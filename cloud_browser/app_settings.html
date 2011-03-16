@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1. Application Settings &mdash; Cloud Browser v0.1.2alpha0 documentation</title>
+    <title>3.1. Application Settings &mdash; Cloud Browser v0.1.3alpha0 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2alpha0',
+        VERSION:     '0.1.3alpha0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.1.2alpha0 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.1.3alpha0 documentation" href="../index.html" />
     <link rel="up" title="3. Cloud Browser App API" href="index.html" />
     <link rel="next" title="3.2. Cloud / Datastore Support" href="cloud.html" />
     <link rel="prev" title="3. Cloud Browser App API" href="index.html" /> 
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="index.html" title="3. Cloud Browser App API"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.3alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>  
@@ -164,10 +164,9 @@ expressions, etc.).</p>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_DEFAULT_LIST_LIMIT</span></tt>: Default number of objects to
 diplay per browser page.</li>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></tt>: If this applications static media
-(found in <tt class="docutils literal"><span class="pre">templates/cloud_browser_media</span></tt>) is served up under the
-<tt class="docutils literal"><span class="pre">settings.MEDIA_ROOT</span></tt>, then set a relative path from the root, and the
-static media will be used instead of our hacked, &#8220;dump all CSS/JS
-straight into the page&#8221; fallback approach.</li>
+(found in <tt class="docutils literal"><span class="pre">app_media</span></tt>) is served up under the <tt class="docutils literal"><span class="pre">settings.MEDIA_ROOT</span></tt>,
+then set a relative path from the root, and the static media will be used
+instead of a Django-based static view fallback.</li>
 </ul>
 <dl class="attribute">
 <dt id="cloud_browser.app_settings.Settings.DATASTORES">
@@ -179,6 +178,12 @@ straight into the page&#8221; fallback approach.</li>
 <dt id="cloud_browser.app_settings.Settings.SETTINGS">
 <tt class="descname">SETTINGS</tt><a class="headerlink" href="#cloud_browser.app_settings.Settings.SETTINGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Settings dictionary of accessor callables.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.app_settings.Settings.app_media_doc_root">
+<tt class="descname">app_media_doc_root</tt><a class="headerlink" href="#cloud_browser.app_settings.Settings.app_media_doc_root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get application media document (file) root.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -258,7 +263,7 @@ straight into the page&#8221; fallback approach.</li>
         <li class="right" >
           <a href="index.html" title="3. Cloud Browser App API"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.3alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" >3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>

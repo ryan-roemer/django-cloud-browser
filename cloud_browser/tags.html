@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.5. Tags &mdash; Cloud Browser v0.1.2alpha0 documentation</title>
+    <title>3.5. Tags &mdash; Cloud Browser v0.1.3alpha0 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2alpha0',
+        VERSION:     '0.1.3alpha0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.1.2alpha0 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.1.3alpha0 documentation" href="../index.html" />
     <link rel="up" title="3. Cloud Browser App API" href="index.html" />
     <link rel="next" title="3.6. URLs" href="urls.html" />
     <link rel="prev" title="3.4. Errors" href="errors.html" /> 
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="errors.html" title="3.4. Errors"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.3alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>  
@@ -56,50 +56,33 @@
 <span id="tags"></span><h1>3.5. Tags<a class="headerlink" href="#module-cloud_browser.templatetags.cloud_browser_extras" title="Permalink to this headline">¶</a></h1>
 <p>Cloud browser template tags.</p>
 <dl class="class">
-<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode">
-<em class="property">class </em><tt class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</tt><tt class="descname">MediaLinkNode</tt><big>(</big><em>rel_path</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Media link node.</p>
+<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode">
+<em class="property">class </em><tt class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</tt><tt class="descname">MediaUrlNode</tt><big>(</big><em>rel_path</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Media URL node.</p>
 <dl class="method">
-<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.render">
-<tt class="descname">render</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.render" title="Permalink to this definition">¶</a></dt>
+<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.render">
+<tt class="descname">render</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.render" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.static_media_url">
-<tt class="descname">static_media_url</tt><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.static_media_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>The static served media URL (or <tt class="xref docutils literal"><span class="pre">None</span></tt>)</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.template_media_path">
-<tt class="descname">template_media_path</tt><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaLinkNode.template_media_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>The fallback template path of the same media.</p>
+<dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url">
+<tt class="descname">static_media_url</tt><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Static application media URL (or <tt class="xref docutils literal"><span class="pre">None</span></tt>).</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="function">
-<dt id="cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_link">
-<tt class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</tt><tt class="descname">cloud_browser_media_link</tt><big>(</big><em>_</em>, <em>token</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_link" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create appropriate <tt class="docutils literal"><span class="pre">link</span></tt>, <tt class="docutils literal"><span class="pre">script</span></tt> or <tt class="docutils literal"><span class="pre">style</span></tt> tag for JavaScript
-and CSS files from relative resource path.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Presently only works for JavaScript and CSS because those <em>can</em> be
-dumped inline into an HTML page. Unfortunately, images cannot, and we
-haven&#8217;t decided how to handle that yet (maybe ignore if not statically
-served?)</p>
-</div>
+<dt id="cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url">
+<tt class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</tt><tt class="descname">cloud_browser_media_url</tt><big>(</big><em>_</em>, <em>token</em><big>)</big><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get base media URL for application static media.</p>
 <p>Correctly handles whether or not the settings variable
 <tt class="docutils literal"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></tt> is set and served.</p>
-<p>For example, if we use the tag in a template:</p>
-<div class="highlight-python"><pre>{% cloud_browser_media_link "js/browser.js" %}</pre>
+<p>For example:</p>
+<div class="highlight-python"><pre>&lt;link rel="stylesheet" type="text/css"
+    href="{% cloud_browser_media_url "css/cloud-browser.css" %}" /&gt;</pre>
 </div>
-<p>And the static media directory variable is set and media is served, then
-a <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> tag <strong>with</strong> a <tt class="docutils literal"><span class="pre">link</span></tt> is emitted, pointing to the URL.
-However, if the directory variable is not set, a <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> tag with
-the full inline JavaScript text is emitted instead.</p>
 </dd></dl>
 
 <dl class="function">
@@ -179,7 +162,7 @@ patch for a more extensible and robust truncate characters tag filter.</p>
         <li class="right" >
           <a href="errors.html" title="3.4. Errors"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.1.2alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.1.3alpha0 documentation</a> &raquo;</li>
           <li><a href="index.html" >3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>
