@@ -9,4 +9,3 @@ recursive-include cloud_browser/templates *
 # Extraneous files.
 global-exclude .DS_Store
 global-exclude *.pyc
-global-exclude ._*
