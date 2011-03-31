@@ -1,2 +1,12 @@
+# Top level.
 include *.txt
+exclude *.rst
+
+# Non-python files.
+recursive-include cloud_browser/media *
 recursive-include cloud_browser/templates *
+
+# Extraneous files.
+global-exclude .DS_Store
+global-exclude *.pyc
+global-exclude ._*

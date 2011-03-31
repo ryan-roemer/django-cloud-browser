@@ -2,6 +2,11 @@
  Future / Task List
 ====================
 
+Current
+=======
+
+* Vendor notes.
+
 Packaging
 =========
 

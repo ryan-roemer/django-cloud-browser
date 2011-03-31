@@ -7,9 +7,9 @@
 {% endcomment %}
 
 {% block extrastyle %}
+  {{ block.super }}
   {% block cloud_browser_template_head %}{% endblock %}
 {% endblock %}
-{# Included: {% block extra_head %}{% endblock %} #}
 
 {% block breadcrumbs %}
   <div class="breadcrumbs">

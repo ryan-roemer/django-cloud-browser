@@ -5,10 +5,13 @@ from setuptools import setup, find_packages
 
 from cloud_browser import __version__
 
+###############################################################################
+# Environment and Packages.
+###############################################################################
+# Don't copy Mac OS X resource forks on tar/gzip.
+os.environ['COPYFILE_DISABLE'] = "true"
 
-###############################################################################
-# Base packages.
-###############################################################################
+# Packages.
 MOD_NAME = "cloud_browser"
 PKGS = [x for x in find_packages() if x.split('.')[0] == MOD_NAME]
 

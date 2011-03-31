@@ -4,6 +4,8 @@
 
 v.0.1.3
 =======
+* Cleaned up ``sdist`` packagin.
+* Added basic file icons and images to static media.
 * Switch application static media to use straight Django
   ``django.views.static.serve`` wrapper instead of custom system.
 
