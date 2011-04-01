@@ -4,7 +4,7 @@
 
 .cloud-browser-defaults {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
+    font-size: 11px;
 }
 
 /** Breadcrumbs */
@@ -22,6 +22,7 @@ div#cloud-browser-breadcrumbs a:hover {
 /** Containers */
 div#cloud-browser-containers h2,
 div #cloud-browser-objects h2 {
+    font-size: 1.35em;
     text-align: center;
 }
 div#cloud-browser-containers {
@@ -104,7 +105,7 @@ form.cloud-browser-form input[type='text'] {
     color: #333;
     border: 1px solid #333;
     text-align: center;
-    font-size: smaller;
+    font-size: 0.85em;
 }
 form.cloud-browser-form input[name='limit'] {
     width: 25px;
