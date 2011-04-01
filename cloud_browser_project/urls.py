@@ -8,15 +8,24 @@ from django.views.generic.simple import redirect_to
 # Enable admin.
 admin.autodiscover()
 
-urlpatterns = patterns('',  # pylint: disable=C0103
-    # Normal URLs.
-    url(r'^$', redirect_to, name='index', kwargs={'url': 'cb/'}),
-    url(r'^cb/', include('cloud_browser.urls')),
+ADMIN_URLS = False
+urlpatterns = patterns('')  # pylint: disable=C0103
 
-    # Admin URLs. Note: Include ``urls_admin`` **before** admin.
-    #url(r'^$', redirect_to, name='index', kwargs={'url': 'admin/'}),
-    #url(r'^admin/cb/', include('cloud_browser.urls_admin')),
+if ADMIN_URLS:
+    urlpatterns += patterns('',
+        # Admin URLs. Note: Include ``urls_admin`` **before** admin.
+        url(r'^$', redirect_to, name='index', kwargs={'url': 'admin/'}),
+        url(r'^admin/cb/', include('cloud_browser.urls_admin')),
+    )
 
+else:
+    urlpatterns += patterns('',
+        # Normal URLs.
+        url(r'^$', redirect_to, name='index', kwargs={'url': 'cb/'}),
+        url(r'^cb/', include('cloud_browser.urls')),
+    )
+
+urlpatterns += patterns('',
     # Hack in the bare minimum to get accounts support.
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('django.contrib.auth.urls')),

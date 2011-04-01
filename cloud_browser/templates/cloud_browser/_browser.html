@@ -7,15 +7,19 @@
 {% load cloud_browser_extras %}
 
 {% block cloud_browser_content %}
-<div id="cloud-browser-all">
+<div id="cloud-browser-all" class="cloud-browser-defaults">
 <div id="cloud-browser-containers">
 <h2>Containers</h2>
 <ul>
 {% for cont in containers %}
+  {% if cont == container %}
+  <li class="cb-selected">{{ cont.name|truncatechars:22 }}</li>
+  {% else %}
   <li>
     <a href="{% url cloud_browser_browser cont.name|urlencode %}"
        title="{{ cont.name }}">{{ cont.name|truncatechars:22 }}</a>
   </li>
+  {% endif %}
 {% endfor %}
 </ul>
 </div>

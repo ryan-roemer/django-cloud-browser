@@ -4,23 +4,34 @@
 
 /** Containers */
 div#cloud-browser-containers {
-    background: none repeat scroll 0 0 #417690;
+    border: 1px solid #666666;
+    background: none repeat scroll 0 0 #F6F6F6;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }
 div#cloud-browser-containers h2 {
-    color: #F4F379;
+    color: #666666;
 }
 div#cloud-browser-containers-min {
+    border: 1px solid #666666;
     background: none repeat scroll 0 0 #EEEEEE;
-    width: 19px;
+    width: 15px;
     position: relative;
     float: left;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }
 div#cloud-browser-containers-hider-outer {
     float: right;
     position: relative;
 }
 div.cloud-browser-containers-hider {
-    border: 2px solid #666666;
+    border-bottom: 1px solid #666666;
+    border-left: 1px solid #666666;
     color: #666666;
     background-color: #DDDDDD;
     position: absolute;
@@ -30,6 +41,10 @@ div.cloud-browser-containers-hider {
     cursor: pointer;
     text-align: center;
     width: 15px;
+    -moz-border-top-right-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -khtml-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
 /** Objects */

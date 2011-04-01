@@ -2,6 +2,11 @@
  * Cloud browser basic styles.
  */
 
+.cloud-browser-defaults {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 0.85em;
+}
+
 /** Breadcrumbs */
 div#cloud-browser-breadcrumbs {
     color: #999;
@@ -20,31 +25,41 @@ div #cloud-browser-objects h2 {
     text-align: center;
 }
 div#cloud-browser-containers {
-    background: #333;
-    color: #ccc;
     float: left;
     width: 195px;
     margin-right: 5px;
+    border: solid 1px #fff;
+}
+div#cloud-browser-containers ul {
+    list-style-image: url(../img/tango/16x16/places/folder.png);
 }
 div#cloud-browser-containers a {
-    color: #ccc;
+    color: #333;
     text-decoration: none;
 }
 div#cloud-browser-containers a:hover {
     text-decoration: underline;
+    background: #f0f0f0;
 }
 div#cloud-browser-containers li {
     margin-left: -10px;
 }
+div#cloud-browser-containers li.cb-selected {
+    font-style: italic;
+    color: #666;
+    list-style-image: url(../img/tango/16x16/status/folder-visiting.png);
+}
 
 /** Objects */
 div#cloud-browser-objects {
+    border: solid 1px #fff;
     margin-left: 200px;
     width: auto;
 }
 table#cloud-browser-objects-table {
     margin: auto;
     width: 99%;
+    font-size: 1em;
 }
 table#cloud-browser-objects-table thead,
 table#cloud-browser-objects-table tfoot,

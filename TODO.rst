@@ -4,23 +4,19 @@
 
 Current
 =======
-
 * Vendor notes.
 
 Packaging
 =========
-
 * Development pip requirements file.
 
 Design / UI
 ===========
-
 * **CSS Rework**: Styles and appearance need vast improvements. Hopefully
   we'll get some help with this soon.
 
 Features
 ========
-
 * **Admin URLs/Templates**:
 
   * Write up how to configure this (with admin authorization).
@@ -46,7 +42,6 @@ Features
 
 Test / Support
 ==============
-
 * **Mem FS**: Write memory-based FS (Python-memory).
 * **Unit Tests**: Add unit tests using fs/mem backing store.
 * **Coverage**: Add coverage fabric targets.

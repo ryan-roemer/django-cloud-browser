@@ -2,6 +2,10 @@
  Changes
 =========
 
+v.0.2.0
+=======
+* Start significant CSS refactoring.
+
 v.0.1.3
 =======
 * Cleaned up ``sdist`` packagin.
