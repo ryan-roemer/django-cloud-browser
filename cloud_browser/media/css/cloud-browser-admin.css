@@ -15,36 +15,35 @@ div#cloud-browser-containers h2 {
     color: #666666;
 }
 div#cloud-browser-containers-min {
-    border: 1px solid #666666;
-    background: none repeat scroll 0 0 #EEEEEE;
     width: 15px;
     position: relative;
     float: left;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 3px;
 }
 div#cloud-browser-containers-hider-outer {
     float: right;
     position: relative;
 }
-div.cloud-browser-containers-hider {
+div.cloud-browser-containers-hider,
+div.cloud-browser-containers-hider-min {
     border-bottom: 1px solid #666666;
     border-left: 1px solid #666666;
-    color: #666666;
-    background-color: #DDDDDD;
+    color: #333333;
+    background-color: #EEEEEE;
     position: absolute;
     top: 0px;
     right: 0px;
     float: right;
     cursor: pointer;
     text-align: center;
+    font-weight: bold;
     width: 15px;
-    -moz-border-top-right-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -khtml-border-top-right-radius: 3px;
-    border-top-right-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+div.cloud-browser-containers-hider-min {
+    border: 1px solid #666666;
 }
 
 /** Objects */

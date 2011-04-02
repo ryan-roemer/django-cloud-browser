@@ -59,27 +59,30 @@ var CloudBrowserAdmin = {
         hiderCallback = hiderCallback || function () {};
 
         // Add show/hide "hider" element.
-        var hiderOpen = "-";
-        var hiderClosed = "+";
+        var hiderOpen = "&laquo;";
+        var hiderClosed = "&raquo;";
         var $hiderOuter = $('<div />').
             attr('id', "cloud-browser-containers-hider-outer").
             prependTo($conts);
         var $hiderFull = $('<div />').
             addClass("cloud-browser-containers-hider").
-            text(hiderOpen).
+            html(hiderOpen).
             prependTo($hiderOuter);
 
         // Add hidden "minimized" element.
-        var $hiderMin = $hiderFull.clone().text(hiderClosed);
+        var $hiderMin = $hiderFull.
+            clone().
+            removeClass("cloud-browser-containers-hider").
+            addClass("cloud-browser-containers-hider-min").
+            html(hiderClosed);
         var $min = $('<div />').
             attr('id', "cloud-browser-containers-min").
-            height($objs.height()).
             hide().
             append($hiderMin).
             prependTo($all);
 
         var objsOpenMargin = $objs.css('marginLeft');
-        var objsClosedMargin = $min.width() + 10;
+        var objsClosedMargin = -2;
 
         // Initial setup.
         if (closed) {
