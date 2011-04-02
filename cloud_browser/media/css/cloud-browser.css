@@ -72,7 +72,7 @@ table#cloud-browser-objects-table tfoot {
 }
 table#cloud-browser-objects-table thead th,
 table#cloud-browser-objects-table tfoot td {
-    border: 1px solid #333;
+    border: 1px solid #999;
 }
 table#cloud-browser-objects-table tfoot td {
     padding: 1px;
@@ -104,11 +104,10 @@ table#cloud-browser-objects-table tbody a:hover {
 form.cloud-browser-form {
     display: inline;
     padding: 3px;
-    /*border: 1px solid #ccc;*/
 }
 form.cloud-browser-form input[type='text'] {
     color: #333;
-    border: 1px solid #333;
+    border: 1px solid #999;
     text-align: center;
     font-size: 0.85em;
 }

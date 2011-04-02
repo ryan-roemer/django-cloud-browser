@@ -54,10 +54,26 @@
                class="cloud-browser-document-link"
             >{{ obj.basename }}</a></td>
         {% endif %}
-        <td>{{ obj.smart_content_type|default_if_none:'' }}</td>
-        <td>{{ obj.smart_content_encoding|default_if_none:'' }}</td>
-        <td>{{ obj.size|filesizeformat }}</td>
-        <td>{{ obj.last_modified|default_if_none:''|date:'DATETIME_FORMAT' }}</td>
+        <td>
+            {% if obj.smart_content_type %}
+                {{ obj.smart_content_type }}
+            {% else %}--{% endif %}
+        </td>
+        <td>
+            {% if obj.smart_content_encoding %}
+                {{ obj.smart_content_encoding }}
+            {% else %}--{% endif %}
+        </td>
+        <td>
+            {% if obj.is_file or obj.size > 0 %}
+                {{ obj.size|filesizeformat }}
+            {% else %}--{% endif %}
+        </td>
+        <td>
+            {% if obj.last_modified %}
+                {{ obj.last_modified|date:'DATETIME_FORMAT' }}
+            {% else %}--{% endif %}
+        </td>
       </tr>
     {% endfor %}
   </tbody>
