@@ -31,116 +31,32 @@
     href="{% cloud_browser_media_url 'css/cloud-browser-admin.css' %}" />
 <script type="text/javascript"
     src="{% cloud_browser_media_url 'js/browser.js' %}"></script>
+<script type="text/javascript"
+    src="{% cloud_browser_media_url 'js/browser-admin.js' %}"></script>
 
 <script type="text/javascript">
 (function ($) {
-    /**
-     * Set state on all links.
-     */
-    var setLinkState = function ($allLinks, $allForms, closed) {
-        closed = closed === true;
-
-        var patchQuery = function (query) {
-            var queryObj = CloudBrowser.getQueryObj(query);
-            queryObj.params.closed = closed ? '1' : '0';
-            return CloudBrowser.toQueryString(queryObj);
-        };
-
-        $allLinks.each(function (index, element) {
-            var $element = $(element);
-            $element.attr('href', patchQuery($element.attr('href')));
-        });
-
-        $allForms.each(function (index, element) {
-            var $element = $(element);
-            $element.attr('action', patchQuery($element.attr('action')));
-        });
-    };
-
-    /**
-     * Add all hider elements to page.
-     */
-    var addHider = function ($all, $conts, $objs, closed, hiderCallback) {
-        closed = closed === true;
-        hiderCallback = hiderCallback || function () {};
-
-        // Add show/hide "hider" element.
-        var hiderOpen = "-";
-        var hiderClosed = "+";
-        var $hiderOuter = $('<div />').
-            attr('id', "cloud-browser-containers-hider-outer").
-            prependTo($conts);
-        var $hiderFull = $('<div />').
-            addClass("cloud-browser-containers-hider").
-            text(hiderOpen).
-            prependTo($hiderOuter);
-
-        // Add hidden "minimized" element.
-        var $hiderMin = $hiderFull.clone().text(hiderClosed);
-        var $min = $('<div />').
-            attr('id', "cloud-browser-containers-min").
-            height($objs.height()).
-            hide().
-            append($hiderMin).
-            prependTo($all);
-
-        var objsOpenMargin = $objs.css('marginLeft');
-        var objsClosedMargin = $min.width() + 10;
-
-        // Initial setup.
-        if (closed) {
-            $conts.hide();
-            $min.show();
-            $objs.css('marginLeft', objsClosedMargin);
-            hiderCallback(true /* closed */);
-        }
-
-        var closeFn = function () {
-            // Currently open. Close.
-            $conts.fadeOut('fast', function () {
-                $min.fadeIn('fast');
-                $objs.css('marginLeft', objsClosedMargin);
-                hiderCallback(true /* closed */);
-            });
-        };
-
-        var openFn = function () {
-            // Currently closed. Open.
-            $min.fadeOut('fast', function () {
-                $conts.fadeIn('fast');
-                $objs.css('marginLeft', objsOpenMargin);
-                hiderCallback(false /* opened */);
-            });
-        };
-        
-        // Toggle Functions.
-        $hiderFull.click(closeFn);
-        $hiderMin.click(openFn);
-    };
-
     $(document).ready(function ($) {
-        // Elements.
+        // Browser Elements.
         var $all = $('#cloud-browser-all');
         var $conts = $('#cloud-browser-containers');
         var $objs = $('#cloud-browser-objects');
 
-        // Detect current state from URL.
-        var currentUrl = window.location.href;
-        var queryObj = CloudBrowser.getQueryObj(currentUrl);
-        var closed = queryObj.params.closed === '1';
-
-        // Gather all links.
-        var $allLinks = $(
-            '.cloud-browser-document-link, .cloud-browser-breadcrumb-link');
+        // All relevant links.
+        var $allLinks = $('.cloud-browser-document-link, ' +
+                          '.cloud-browser-breadcrumb-link');
         var $allForms = $('.cloud-browser-form');
 
+        // Link state function.
+        var setClosedState = function (isClosed) {
+            CloudBrowserAdmin.setLinkState($allLinks, $allForms, isClosed);
+        };
+
         // Setup initial link state.
-        setLinkState($allLinks, $allForms, closed);
+        setClosedState(null);
 
         // Add hider and toggle callback.
-        addHider($all, $conts, $objs, closed, function (isClosed) {
-            setLinkState($allLinks, $allForms, isClosed);
-        });
+        CloudBrowserAdmin.addHider($all, $conts, $objs, null, setClosedState);
     });
 })(django.jQuery);
 </script>

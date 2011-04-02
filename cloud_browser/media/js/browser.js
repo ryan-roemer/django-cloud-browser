@@ -1,7 +1,6 @@
 /**
  * Cloud Browser basic navigation support.
  */
-
 var CloudBrowser = {
     /** Submit the "next" page results form. */
     submitForm: function (formId) {
