@@ -56,6 +56,16 @@ class BotoObject(base.CloudObject):
     #: Exception translations.
     wrap_boto_errors = BotoKeyWrapper()
 
+    @classmethod
+    def is_key(cls, result):
+        """Return ``True`` if result is a key object."""
+        raise NotImplementedError
+
+    @classmethod
+    def is_prefix(cls, result):
+        """Return ``True`` if result is a prefix object."""
+        raise NotImplementedError
+
     @wrap_boto_errors
     def _get_object(self):
         """Return native storage object."""
@@ -69,16 +79,13 @@ class BotoObject(base.CloudObject):
     @classmethod
     def from_result(cls, container, result):
         """Create from ambiguous result."""
-        from boto.s3.key import Key
-        from boto.s3.prefix import Prefix
-
         if result is None:
             raise errors.NoObjectException
 
-        elif isinstance(result, Key):
+        elif cls.is_key(result):
             return cls.from_key(container, result)
 
-        elif isinstance(result, Prefix):
+        elif cls.is_prefix(result):
             return cls.from_prefix(container, result)
 
         raise errors.CloudException("Unknown boto result type: %s" %

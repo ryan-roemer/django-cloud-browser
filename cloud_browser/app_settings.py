@@ -118,6 +118,13 @@ class Settings(object):
     * ``CLOUD_BROWSER_AWS_ACCOUNT``: Account name. (*Env*)
     * ``CLOUD_BROWSER_AWS_SECRET_KEY``: Account API secret key. (*Env*)
 
+    **Google Storage for Developers**: Configure Google Storage as backing
+    datastore.
+
+    * ``CLOUD_BROWSER_DATASTORE = "Google"``
+    * ``CLOUD_BROWSER_GS_ACCOUNT``: Account name. (*Env*)
+    * ``CLOUD_BROWSER_GS_SECRET_KEY``: Account API secret key. (*Env*)
+
     **Filesystem**: Configure simple filesystem mock datastore.
 
     * ``CLOUD_BROWSER_DATASTORE = "Filesystem"``
@@ -152,6 +159,7 @@ class Settings(object):
     #: Valid datastore types.
     DATASTORES = set((
         'AWS',
+        'Google',
         'Rackspace',
         'Filesystem',
     ))
@@ -162,15 +170,19 @@ class Settings(object):
         'CLOUD_BROWSER_DATASTORE': \
             Setting(default='Filesystem', valid_set=DATASTORES),
 
+        # Amazon Web Services S3 datastore settings.
+        'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
+        'CLOUD_BROWSER_AWS_SECRET_KEY': Setting(from_env=True),
+
+        # Google Storage for Developers datastore settings.
+        'CLOUD_BROWSER_GS_ACCOUNT': Setting(from_env=True),
+        'CLOUD_BROWSER_GS_SECRET_KEY': Setting(from_env=True),
+
         # Rackspace datastore settings.
         'CLOUD_BROWSER_RACKSPACE_ACCOUNT': Setting(from_env=True),
         'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': Setting(from_env=True),
         'CLOUD_BROWSER_RACKSPACE_SERVICENET': BoolSetting(from_env=True),
         'CLOUD_BROWSER_RACKSPACE_AUTHURL': BoolSetting(from_env=True),
-
-        # Amazon Web Services S3 datastore settings.
-        'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
-        'CLOUD_BROWSER_AWS_SECRET_KEY': Setting(from_env=True),
 
         # Filesystem datastore settings.
         'CLOUD_BROWSER_FILESYSTEM_ROOT': Setting(),

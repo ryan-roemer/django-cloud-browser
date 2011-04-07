@@ -24,6 +24,15 @@ class Config(object):
                 conn_cls = AwsConnection
                 conn_fn = lambda: AwsConnection(account, secret_key)
 
+        if datastore == 'Google':
+            # Try Google Storage
+            from cloud_browser.cloud.google import GsConnection
+            account = settings.CLOUD_BROWSER_GS_ACCOUNT
+            secret_key = settings.CLOUD_BROWSER_GS_SECRET_KEY
+            if account and secret_key:
+                conn_cls = GsConnection
+                conn_fn = lambda: GsConnection(account, secret_key)
+
         elif datastore == 'Rackspace':
             # Try Rackspace
             account = settings.CLOUD_BROWSER_RACKSPACE_ACCOUNT
