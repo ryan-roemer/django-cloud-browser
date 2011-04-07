@@ -49,8 +49,8 @@ The application relies on third party open source libraries to actually
 communicate with cloud datastores, so for each cloud datastore you need the
 corresponding library below:
 
-* Amazon S3: `boto <http://code.google.com/p/boto/>`_
-* Rackspace Cloud Files:
+* Amazon S3 / Google Storage: `boto <http://code.google.com/p/boto/>`_
+* Rackspace Cloud Files / OpenStack Storage:
   `cloudfiles <https://github.com/rackspace/python-cloudfiles>`_
   (version 1.7.4+ is required).
 
@@ -79,12 +79,14 @@ First, start with edits to your Django project's ``settings.py``::
 In addition, for more security options, the following Cloud Browser options
 may be set via environment variables instead of ``settings.py`` variables:
 
+* ``CLOUD_BROWSER_AWS_ACCOUNT``
+* ``CLOUD_BROWSER_AWS_SECRET_KEY``
+* ``CLOUD_BROWSER_GS_ACCOUNT``
+* ``CLOUD_BROWSER_GS_SECRET_KEY``
 * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``
 * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``
 * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``
 * ``CLOUD_BROWSER_RACKSPACE_AUTHURL``
-* ``CLOUD_BROWSER_AWS_ACCOUNT``
-* ``CLOUD_BROWSER_AWS_SECRET_KEY``
 
 in the form of::
 

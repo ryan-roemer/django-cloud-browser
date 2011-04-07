@@ -4,6 +4,12 @@
 
 Current
 =======
+* **Google Storage**: Parse up pseudo-directories differently and handle:
+
+  * The extra ``_$folder$`` semantics.
+  * Extra subdirectory 0 byte object for each implied directory. (Might be
+    added by CyberDuck).
+
 * Vendor notes.
 
 Packaging

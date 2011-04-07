@@ -12,12 +12,16 @@ well as view / download objects.
 Currently supported backend datastores include:
 
 * `Amazon S3`_.
+* `Google Storage for Developers`_.
 * `Rackspace Cloud Files`_.
+* `OpenStack Storage`_.
 * Local file system.
 
 .. _`Amazon S3`: http://aws.amazon.com/s3/
+.. _`Google Storage for Developers`: http://code.google.com/apis/storage/
 .. _`Rackspace Cloud Files`:
   http://www.rackspacecloud.com/cloud_hosting_products/files/
+.. _`OpenStack Storage`: http://openstack.org/projects/storage/
 
 Be sure to check out the following project resources:
 

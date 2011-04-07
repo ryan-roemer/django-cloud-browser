@@ -100,18 +100,6 @@ class Settings(object):
 
     * ``CLOUD_BROWSER_DATASTORE``: Choice of datastore (see values below).
 
-    **Rackspace**: Configure Rackspace Cloud Files as backing datastore.
-
-    * ``CLOUD_BROWSER_DATASTORE = "Rackspace"``
-    * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name. (*Env*)
-    * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key. (*Env*)
-    * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
-      not to use Rackspace's servicenet (i.e., the private interface on a
-      Cloud Server). (*Env*)
-    * ``CLOUD_BROWSER_RACKSPACE_AUTHURL``: Alternative authorization server,
-      for use, e.g., with `OpenStack <http://www.openstack.org/>`_ instead of
-      Rackspace. (*Env*)
-
     **Amazon Web Services**: Configure AWS S3 as backing datastore.
 
     * ``CLOUD_BROWSER_DATASTORE = "AWS"``
@@ -124,6 +112,18 @@ class Settings(object):
     * ``CLOUD_BROWSER_DATASTORE = "Google"``
     * ``CLOUD_BROWSER_GS_ACCOUNT``: Account name. (*Env*)
     * ``CLOUD_BROWSER_GS_SECRET_KEY``: Account API secret key. (*Env*)
+
+    **Rackspace**: Configure Rackspace Cloud Files as backing datastore.
+
+    * ``CLOUD_BROWSER_DATASTORE = "Rackspace"``
+    * ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``: Account name. (*Env*)
+    * ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``: Account API secret key. (*Env*)
+    * ``CLOUD_BROWSER_RACKSPACE_SERVICENET``: Boolean designating whether or
+      not to use Rackspace's servicenet (i.e., the private interface on a
+      Cloud Server). (*Env*)
+    * ``CLOUD_BROWSER_RACKSPACE_AUTHURL``: Alternative authorization server,
+      for use, e.g., with `OpenStack <http://www.openstack.org/>`_ instead of
+      Rackspace. (*Env*)
 
     **Filesystem**: Configure simple filesystem mock datastore.
 
