@@ -82,11 +82,11 @@ class BotoObject(base.CloudObject):
         if result is None:
             raise errors.NoObjectException
 
-        elif cls.is_key(result):
-            return cls.from_key(container, result)
-
         elif cls.is_prefix(result):
             return cls.from_prefix(container, result)
+
+        elif cls.is_key(result):
+            return cls.from_key(container, result)
 
         raise errors.CloudException("Unknown boto result type: %s" %
                                     type(result))

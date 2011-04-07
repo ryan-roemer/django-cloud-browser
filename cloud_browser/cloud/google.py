@@ -29,6 +29,19 @@ except ImportError:
 class GsObject(base.BotoObject):
     """Google Storage 'key' object wrapper."""
 
+    _gs_folder_suffix = "_$folder$"
+
+    @classmethod
+    def _is_gs_folder(cls, result):
+        """Return ``True`` if GS standalone folder object.
+
+        GS will create a 0 byte ``<FOLDER NAME>_$folder$`` key as a
+        pseudo-directory place holder if there are no files present.
+        """
+        return (cls.is_key(result) and
+                result.size == 0 and
+                result.name.endswith(cls._gs_folder_suffix))
+
     @classmethod
     @requires(boto, 'boto')
     def is_key(cls, result):
@@ -47,7 +60,18 @@ class GsObject(base.BotoObject):
         """
         from boto.s3.prefix import Prefix
 
-        return isinstance(result, Prefix)
+        return isinstance(result, Prefix) or cls._is_gs_folder(result)
+
+    @classmethod
+    def from_prefix(cls, container, prefix):
+        """Create from prefix object."""
+        if (cls._is_gs_folder(prefix)):
+            name, suffix, extra = prefix.name.partition(cls._gs_folder_suffix)
+            if (suffix, extra) == (cls._gs_folder_suffix, ''):
+                # Patch GS specific folder to remove suffix.
+                prefix.name = name
+
+        return super(GsObject, cls).from_prefix(container, prefix)
 
 
 class GsContainer(base.BotoContainer):

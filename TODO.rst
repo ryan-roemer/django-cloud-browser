@@ -6,9 +6,9 @@ Current
 =======
 * **Google Storage**: Parse up pseudo-directories differently and handle:
 
-  * The extra ``_$folder$`` semantics.
   * Extra subdirectory 0 byte object for each implied directory. (Might be
-    added by CyberDuck).
+    added by CyberDuck, but looks to be needed to show directory contents and
+    show up in list search).
 
 * Vendor notes.
 
