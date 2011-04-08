@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.2. Cloud / Datastore Support &mdash; Cloud Browser v0.2.0alpha0 documentation</title>
+    <title>3.2. Cloud / Datastore Support &mdash; Cloud Browser v0.2.0alpha1 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.0alpha0',
+        VERSION:     '0.2.0alpha1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.2.0alpha0 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.2.0alpha1 documentation" href="../index.html" />
     <link rel="up" title="3. Cloud Browser App API" href="index.html" />
     <link rel="next" title="3.3. Common / Utilities" href="common.html" />
     <link rel="prev" title="3.1. Application Settings" href="app_settings.html" /> 
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="app_settings.html" title="3.1. Application Settings"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>  
@@ -221,8 +221,8 @@ in, else <tt class="xref docutils literal"><span class="pre">None</span></tt> (w
 <h2>3.2.3. Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
 <p>Cloud Browser is written with a pluggable backend datastore model in mind.
 Currently, there are datastore implementations for a basic filesystem and
-cloud (Rackspace, Amazon) backing stores. Other cloud stores shouldn&#8217;t be too
-hard to port over to this app, as Rackspace has probably the most little
+cloud (e.g., Rackspace, Amazon) backing stores. Other cloud stores shouldn&#8217;t be
+too hard to port over to this app, as Rackspace has probably the most little
 extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- directories.</p>
 <div class="section" id="module-cloud_browser.cloud.base">
 <span id="abstract-base-class"></span><h3>3.2.3.1. Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
@@ -460,26 +460,172 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 </dd></dl>
 
 </div>
-<div class="section" id="module-cloud_browser.cloud.aws">
-<span id="amazon-web-services-s3-datastore"></span><h3>3.2.3.3. Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
-<p>Amazon Simple Storage Service (S3) datastore.</p>
+<div class="section" id="module-cloud_browser.cloud.boto_base">
+<span id="boto-based-datastore-abstract-base-class"></span><h3>3.2.3.3. Boto-based Datastore Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.boto_base" title="Permalink to this headline">¶</a></h3>
+<p>Abstract boto-based datastore.</p>
+<p>The <a class="reference external" href="http://code.google.com/p/boto/">boto</a> library provides interfaces to both Amazon S3 and Google Storage
+for Developers. This abstract base class gets most of the common work done.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
 package.</p>
 </div>
 <dl class="class">
-<dt id="cloud_browser.cloud.aws.AwsBucketWrapper">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsBucketWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsBucketWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> bucket exception translator.</p>
+<dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoBucketWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> bucket exception translator.</p>
 <dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsBucketWrapper.error_cls">
-<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">NoContainerException</span></tt></p>
 </dd></dl>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="cloud_browser.cloud.boto_base.BotoConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoConnection</tt><big>(</big><em>account</em>, <em>secret_key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors">
+<tt class="descname">wrap_boto_errors</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto container wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.from_bucket">
+<em class="property">classmethod </em><tt class="descname">from_bucket</tt><big>(</big><em>connection</em>, <em>bucket</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.from_bucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from bucket object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.get_object">
+<tt class="descname">get_object</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.max_list">
+<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of objects that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+<p><tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> transparently pages through objects, so there is no real
+limit to the number of object that can be displayed.  However, for
+practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors">
+<tt class="descname">wrap_boto_errors</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoExceptionWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> exception translator.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">CloudException</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper.translate">
+<tt class="descname">translate</tt><big>(</big><em>exc</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether or not to do translation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoKeyWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> key exception translator.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls">
+<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">NoObjectException</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.boto_base.BotoObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.boto_base.</tt><tt class="descname">BotoObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto &#8216;key&#8217; object wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.from_key">
+<em class="property">classmethod </em><tt class="descname">from_key</tt><big>(</big><em>container</em>, <em>key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from key object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.from_prefix">
+<em class="property">classmethod </em><tt class="descname">from_prefix</tt><big>(</big><em>container</em>, <em>prefix</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from prefix object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.from_result">
+<em class="property">classmethod </em><tt class="descname">from_result</tt><big>(</big><em>container</em>, <em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create from ambiguous result.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.is_key">
+<em class="property">classmethod </em><tt class="descname">is_key</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a key object.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.is_prefix">
+<em class="property">classmethod </em><tt class="descname">is_prefix</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a prefix object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors">
+<tt class="descname">wrap_boto_errors</tt><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.aws">
+<span id="amazon-web-services-s3-datastore"></span><h3>3.2.3.4. Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
+<p>Amazon Simple Storage Service (S3) datastore.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+package.</p>
+</div>
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsConnection">
 <em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsConnection</tt><big>(</big><em>account</em>, <em>secret_key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
@@ -490,85 +636,16 @@ package.</p>
 <dd><p>Container child class.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsConnection.wrap_aws_errors">
-<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception translations.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsContainer">
 <em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rackspace container wrapper.</p>
-<dl class="classmethod">
-<dt id="cloud_browser.cloud.aws.AwsContainer.from_bucket">
-<em class="property">classmethod </em><tt class="descname">from_bucket</tt><big>(</big><em>connection</em>, <em>bucket</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.from_bucket" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create from bucket object.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cloud_browser.cloud.aws.AwsContainer.get_object">
-<tt class="descname">get_object</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.get_object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get single object.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cloud_browser.cloud.aws.AwsContainer.get_objects">
-<tt class="descname">get_objects</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get objects.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsContainer.max_list">
-<tt class="descname">max_list</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.max_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum number of objects that can be listed or <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
-<p><tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> transparently pages through objects, so there is no real
-limit to the number of object that can be displayed.  However, for
-practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
-</dd></dl>
-
+<dd><p>AWS container wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.aws.AwsContainer.obj_cls">
 <tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsContainer.wrap_aws_errors">
-<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception translations.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsExceptionWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> exception translator.</p>
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper.error_cls">
-<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">CloudException</span></tt></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cloud_browser.cloud.aws.AwsExceptionWrapper.translate">
-<tt class="descname">translate</tt><big>(</big><em>exc</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return whether or not to do translation.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cloud_browser.cloud.aws.AwsKeyWrapper">
-<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsKeyWrapper</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsKeyWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rackspace <tt class="xref py py-mod docutils literal"><span class="pre">boto</span></tt> key exception translator.</p>
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsKeyWrapper.error_cls">
-<tt class="descname">error_cls</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">NoObjectException</span></tt></p>
 </dd></dl>
 
 </dd></dl>
@@ -578,34 +655,95 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 <em class="property">class </em><tt class="descclassname">cloud_browser.cloud.aws.</tt><tt class="descname">AwsObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>AWS &#8216;key&#8217; object wrapper.</p>
 <dl class="classmethod">
-<dt id="cloud_browser.cloud.aws.AwsObject.from_key">
-<em class="property">classmethod </em><tt class="descname">from_key</tt><big>(</big><em>container</em>, <em>key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create from key object.</p>
+<dt id="cloud_browser.cloud.aws.AwsObject.is_key">
+<em class="property">classmethod </em><tt class="descname">is_key</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a key object.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="cloud_browser.cloud.aws.AwsObject.from_prefix">
-<em class="property">classmethod </em><tt class="descname">from_prefix</tt><big>(</big><em>container</em>, <em>prefix</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_prefix" title="Permalink to this definition">¶</a></dt>
+<dt id="cloud_browser.cloud.aws.AwsObject.is_prefix">
+<em class="property">classmethod </em><tt class="descname">is_prefix</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a prefix object.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-cloud_browser.cloud.google">
+<span id="google-storage-datastore"></span><h3>3.2.3.5. Google Storage Datastore<a class="headerlink" href="#module-cloud_browser.cloud.google" title="Permalink to this headline">¶</a></h3>
+<p>Google Storage for Developers datastore.</p>
+<p><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a> (GS) is cosmetically an implementation of the
+S3 interface by Google.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+package. Not sure exactly which version installed GS support, but we&#8217;ll
+validate the version if it becomes an issue.</p>
+</div>
+<dl class="class">
+<dt id="cloud_browser.cloud.google.GsConnection">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.google.</tt><tt class="descname">GsConnection</tt><big>(</big><em>account</em>, <em>secret_key</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Google Storage connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.google.GsConnection.cont_cls">
+<tt class="descname">cont_cls</tt><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.google.GsContainer">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.google.</tt><tt class="descname">GsContainer</tt><big>(</big><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Google Storage container wrapper.</p>
+<dl class="method">
+<dt id="cloud_browser.cloud.google.GsContainer.get_objects">
+<tt class="descname">get_objects</tt><big>(</big><em>path</em>, <em>marker=None</em>, <em>limit=20</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+<p>Certain upload clients may add a 0-byte object (e.g., <tt class="docutils literal"><span class="pre">FOLDER</span></tt> object
+for path <tt class="docutils literal"><span class="pre">path/to/FOLDER</span></tt> - <tt class="docutils literal"><span class="pre">path/to/FOLDER/FOLDER</span></tt>). We add an
+extra +1 limit query and ignore any such file objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.google.GsContainer.obj_cls">
+<tt class="descname">obj_cls</tt><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.google.GsObject">
+<em class="property">class </em><tt class="descclassname">cloud_browser.cloud.google.</tt><tt class="descname">GsObject</tt><big>(</big><em>container</em>, <em>name</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Google Storage &#8216;key&#8217; object wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.google.GsObject.from_prefix">
+<em class="property">classmethod </em><tt class="descname">from_prefix</tt><big>(</big><em>container</em>, <em>prefix</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.from_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from prefix object.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="cloud_browser.cloud.aws.AwsObject.from_result">
-<em class="property">classmethod </em><tt class="descname">from_result</tt><big>(</big><em>container</em>, <em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.from_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create from ambiguous result.</p>
+<dt id="cloud_browser.cloud.google.GsObject.is_key">
+<em class="property">classmethod </em><tt class="descname">is_key</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a key object.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="cloud_browser.cloud.aws.AwsObject.wrap_aws_errors">
-<tt class="descname">wrap_aws_errors</tt><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.wrap_aws_errors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exception translations.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.google.GsObject.is_prefix">
+<em class="property">classmethod </em><tt class="descname">is_prefix</tt><big>(</big><em>result</em><big>)</big><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <tt class="xref docutils literal"><span class="pre">True</span></tt> if result is a prefix object.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Boto uses the S3 Prefix object for GS prefixes.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.rackspace">
-<span id="rackspace-cloud-files-datastore"></span><h3>3.2.3.4. Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
+<span id="rackspace-cloud-files-datastore"></span><h3>3.2.3.6. Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
 <p>Rackspace Cloud Files datastore.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -785,8 +923,10 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
 <li><a class="reference internal" href="#datastores">3.2.3. Datastores</a><ul>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.base">3.2.3.1. Abstract Base Class</a></li>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.fs">3.2.3.2. Filesystem Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">3.2.3.3. Amazon Web Services S3 Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">3.2.3.4. Rackspace Cloud Files Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.boto_base">3.2.3.3. Boto-based Datastore Abstract Base Class</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">3.2.3.4. Amazon Web Services S3 Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.google">3.2.3.5. Google Storage Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">3.2.3.6. Rackspace Cloud Files Datastore</a></li>
 </ul>
 </li>
 </ul>
@@ -836,7 +976,7 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
         <li class="right" >
           <a href="app_settings.html" title="3.1. Application Settings"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li>
           <li><a href="index.html" >3. Cloud Browser App API</a> &raquo;</li> 
       </ul>
     </div>

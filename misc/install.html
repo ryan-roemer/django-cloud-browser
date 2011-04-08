@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1. Installation &mdash; Cloud Browser v0.2.0alpha0 documentation</title>
+    <title>1. Installation &mdash; Cloud Browser v0.2.0alpha1 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.0alpha0',
+        VERSION:     '0.2.0alpha1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.2.0alpha0 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.2.0alpha1 documentation" href="../index.html" />
     <link rel="next" title="2. Screenshots" href="../screenshots.html" />
     <link rel="prev" title="Django Cloud Browser" href="../index.html" /> 
   </head>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../index.html" title="Django Cloud Browser"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -94,8 +94,8 @@ only the following is actually needed:</p>
 communicate with cloud datastores, so for each cloud datastore you need the
 corresponding library below:</p>
 <ul class="simple">
-<li>Amazon S3: <a class="reference external" href="http://code.google.com/p/boto/">boto</a></li>
-<li>Rackspace Cloud Files:
+<li>Amazon S3 / Google Storage: <a class="reference external" href="http://code.google.com/p/boto/">boto</a></li>
+<li>Rackspace Cloud Files / OpenStack Storage:
 <a class="reference external" href="https://github.com/rackspace/python-cloudfiles">cloudfiles</a>
 (version 1.7.4+ is required).</li>
 </ul>
@@ -121,12 +121,14 @@ corresponding library below:</p>
 <p>In addition, for more security options, the following Cloud Browser options
 may be set via environment variables instead of <tt class="docutils literal"><span class="pre">settings.py</span></tt> variables:</p>
 <ul class="simple">
+<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_GS_ACCOUNT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_GS_SECRET_KEY</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_SERVICENET</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_AUTHURL</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></tt></li>
 </ul>
 <p>in the form of:</p>
 <div class="highlight-python"><pre>$ export CLOUD_BROWSER_&lt;Setting Name&gt;="&lt;value&gt;"</pre>
@@ -298,7 +300,7 @@ are having difficulties getting things going.</p>
         <li class="right" >
           <a href="../index.html" title="Django Cloud Browser"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha0 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
