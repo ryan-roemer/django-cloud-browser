@@ -11,8 +11,9 @@ S3 interface by Google.
 .. _`Google Storage for Developers`: http://code.google.com/apis/storage/
 .. _boto: http://code.google.com/p/boto/
 """
+from cloud_browser.app_settings import settings
 from cloud_browser.cloud import boto_base as base
-from cloud_browser.common import requires
+from cloud_browser.common import SEP, requires
 
 ###############################################################################
 # Constants / Conditional Imports
@@ -78,6 +79,23 @@ class GsContainer(base.BotoContainer):
     """Google Storage container wrapper."""
     #: Storage object child class.
     obj_cls = GsObject
+
+    def get_objects(self, path, marker=None,
+                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+        """Get objects.
+
+        Certain upload clients may add a 0-byte object (e.g., ``FOLDER`` object
+        for path ``path/to/FOLDER`` - ``path/to/FOLDER/FOLDER``). We add an
+        extra +1 limit query and ignore any such file objects.
+        """
+        # Get basename of implied folder.
+        folder = path.split(SEP)[-1]
+
+        # Query extra objects, then strip 0-byte dummy object if present.
+        objs = super(GsContainer, self).get_objects(path, marker, limit+1)
+        objs = [o for o in objs if not (o.size == 0 and o.name == folder)]
+
+        return objs[:limit]
 
 
 class GsConnection(base.BotoConnection):

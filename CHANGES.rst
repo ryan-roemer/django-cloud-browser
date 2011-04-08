@@ -4,6 +4,7 @@
 
 v.0.2.0
 =======
+* Add Google Storage for Developers datastore support.
 * Start significant CSS refactoring.
 
 v.0.1.3

@@ -32,6 +32,11 @@ Filesystem Datastore
 .. automodule:: cloud_browser.cloud.fs
    :members:
 
+Boto-based Datastore Abstract Base Class
+----------------------------------------
+.. automodule:: cloud_browser.cloud.boto_base
+   :members:
+
 Amazon Web Services S3 Datastore
 --------------------------------
 .. automodule:: cloud_browser.cloud.aws
