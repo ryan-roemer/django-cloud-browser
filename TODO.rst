@@ -15,6 +15,25 @@ Design / UI
 * **CSS Rework**: Styles and appearance need vast improvements. Hopefully
   we'll get some help with this soon.
 
+API
+===
+* **Browser**:
+
+  * *Previous*: Add previous variable and lock to previous limit.
+  * *Sort*: See if ``boto`` / ``cloudfiles`` both support sorted results.
+
+* **Metadata**: Display.
+
+* **Modify**: Long-term project.
+
+  * *Upload Object*:
+  * *Delete Object*:
+  * *Create Bucket*:
+  * *Delete Bucket*:
+  * *Create Pseudo-Directory*: (Maybe)
+  * *Delete Pseudo-Directory*: (Maybe)
+  * *Edit Object Metadata*:
+
 Features
 ========
 * **Admin URLs/Templates**:
@@ -27,11 +46,6 @@ Features
 
   * *Boto Config*: Allow using ``.boto`` file to provide settings.
   * *Whitelist*: Allow a combined whitelist/blacklist user callable.
-
-* **Browser**:
-
-  * *Previous*: Add previous variable and lock to previous limit.
-  * *Sort*: See if ``boto`` / ``cloudfiles`` both support sorted results.
 
 * **URL/View AJAX Options**: Enable AJAX, maybe with separate URLs.
 
