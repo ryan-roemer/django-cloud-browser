@@ -17,7 +17,23 @@ def settings_view_decorator(function):
 
     dec = settings.CLOUD_BROWSER_VIEW_DECORATOR
     if dec:
-        return dec(function)
+        if callable(dec):
+            # An actual callable was supplied.
+            # CLOUD_BROWSER_VIEW_DECORATOR = staff_member_required
+            return dec(function)
+
+        elif isinstance(dec, basestring):
+            # A dot path to a callable was supplied.
+            # CLOUD_BROWSER_VIEW_DECORATOR = 'django.contrib.admin.views.decorators.staff_member_required'
+            dec_path = dec.split('.')
+            module_str = '.'.join(dec_path[0:-1])
+            dec_str = dec_path[-1]
+
+            module = __import__(module_str, globals(), locals(), [dec_str,], -1)
+            dec = getattr(module, dec_str, None)
+
+            if dec and callable(dec):
+                return dec(function)
 
     return function
 
