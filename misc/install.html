@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1. Installation &mdash; Cloud Browser v0.2.0alpha1 documentation</title>
+    <title>1. Installation &mdash; Cloud Browser v0.2.1 documentation</title>
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.0alpha1',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,7 +21,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.2.0alpha1 documentation" href="../index.html" />
+    <link rel="top" title="Cloud Browser v0.2.1 documentation" href="../index.html" />
     <link rel="next" title="2. Screenshots" href="../screenshots.html" />
     <link rel="prev" title="Django Cloud Browser" href="../index.html" /> 
   </head>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../index.html" title="Django Cloud Browser"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,7 +63,7 @@
 </div>
 <div class="section" id="versioned">
 <h3>1.1.2. Versioned<a class="headerlink" href="#versioned" title="Permalink to this headline">¶</a></h3>
-<p>Install a specific version (where <tt class="docutils literal"><span class="pre">&lt;VERSION&gt;</span></tt> is something like &#8220;0.2.0&#8221;)
+<p>Install a specific version (where <tt class="docutils literal"><span class="pre">&lt;VERSION&gt;</span></tt> is something like &#8220;0.2.1&#8221;)
 from PyPi:</p>
 <div class="highlight-python"><pre>pip install django-cloud-browser==&lt;VERSION&gt;</pre>
 </div>
@@ -176,6 +176,11 @@ template to include this without too much hassle).</p>
 match the rest of the administrative permissions:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.contrib.admin.views.decorators</span> <span class="kn">import</span> <span class="n">staff_member_required</span>
 <span class="n">CLOUD_BROWSER_VIEW_DECORATOR</span> <span class="o">=</span> <span class="n">staff_member_required</span>
+</pre></div>
+</div>
+<p>Alternatively, a fully-qualified string path can be used like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CLOUD_BROWSER_VIEW_DECORATOR</span> <span class="o">=</span> \
+    <span class="s">&quot;django.contrib.admin.views.decorators.staff_member_required&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -300,7 +305,7 @@ are having difficulties getting things going.</p>
         <li class="right" >
           <a href="../index.html" title="Django Cloud Browser"
              >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.0alpha1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
