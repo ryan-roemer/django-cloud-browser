@@ -77,7 +77,11 @@ def sdist():
 
 
 def register():
-    """Register package."""
+    """Register and prep user for PyPi upload.
+
+    .. note:: May need to weak ~/.pypirc file per issue:
+        http://stackoverflow.com/questions/1569315
+    """
     with _dist_wrapper():
         local("python setup.py register", capture=False)
 
