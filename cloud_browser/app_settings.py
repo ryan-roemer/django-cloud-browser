@@ -133,9 +133,13 @@ class Settings(object):
     **View Permissions**: A standard Django view decorator object can be
     specified, which is wrapped for all browsing / viewing view -- for example,
     to limit views to logged in members, use ``login_required`` and for staff
-    only, use ``staff_member_required``.
+    only, use ``staff_member_required``. Note that either a real decorator
+    function or a fully-qualifid string path are acceptable, so you can use,
+    e.g., "django.contrib.admin.views.decorators.staff_member_required" instead
+    which might help with certain settings.py import-order-related issues.
 
-    * ``CLOUD_BROWSER_VIEW_DECORATOR``: View decorator.
+    * ``CLOUD_BROWSER_VIEW_DECORATOR``: View decorator or fully-qualified
+      string path.
 
     **Container Permissions**: Cloud browser allows a very rudimentary form
     of access control at the container level with white and black lists.

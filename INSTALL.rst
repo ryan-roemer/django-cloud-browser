@@ -58,7 +58,7 @@ corresponding library below:
 
 Configuration
 =============
-All configuration options are fully described in the 
+All configuration options are fully described in the
 :ref:`application settings <app_settings>` documentation.
 
 Here is a quick start example for Rackspace Cloud Files:
@@ -135,6 +135,11 @@ match the rest of the administrative permissions::
 
     from django.contrib.admin.views.decorators import staff_member_required
     CLOUD_BROWSER_VIEW_DECORATOR = staff_member_required
+
+Alternatively, a fully-qualified string path can be used like::
+
+    CLOUD_BROWSER_VIEW_DECORATOR = \
+        "django.contrib.admin.views.decorators.staff_member_required"
 
 URLs
 ----
