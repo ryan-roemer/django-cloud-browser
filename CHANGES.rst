@@ -2,6 +2,10 @@
  Changes
 =========
 
+v0.2.2
+======
+* Add dev. requirements, fix URL homepage link.
+
 v0.2.1
 ======
 * Allow fully-qualified string path for ``CLOUD_BROWSER_VIEW_DECORATOR``.
