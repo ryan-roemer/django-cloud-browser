@@ -2,17 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.3. Common / Utilities &mdash; Cloud Browser v0.2.1 documentation</title>
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <title>3.3. Common / Utilities &mdash; Cloud Browser 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,37 +26,135 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="../_static/bootstrap.js"></script>
+    <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="up" title="3. Cloud Browser App API" href="index.html" />
     <link rel="next" title="3.4. Errors" href="errors.html" />
-    <link rel="prev" title="3.2. Cloud / Datastore Support" href="cloud.html" /> 
+    <link rel="prev" title="3.2. Cloud / Datastore Support" href="cloud.html" />
+<script type="text/javascript">
+(function () {
+  /**
+   * Patch TOC list.
+   *
+   * Will mutate the underlying span to have a correct ul for nav.
+   *
+   * @param $span: Span containing nested UL's to mutate.
+   * @param minLevel: Starting level for nested lists. (1: global, 2: local).
+   */
+  var patchToc = function ($ul, minLevel) {
+    var findA;
+
+    // Find all a "internal" tags, traversing recursively.
+    findA = function ($elem, level) {
+      var level = level || 0,
+        $items = $elem.find("> li > a.internal, > ul, > li > ul");
+
+      // Iterate everything in order.
+      $items.each(function (index, item) {
+        var $item = $(item),
+          tag = item.tagName.toLowerCase(),
+          pad = 15 + ((level - minLevel) * 10);
+
+        if (tag === 'a' && level >= minLevel) {
+          // Add to existing padding.
+          $item.css('padding-left', pad + "px");
+          console.log(level, $item, 'padding-left', pad + "px");
+        } else if (tag === 'ul') {
+          // Recurse.
+          findA($item, level + 1);
+        }
+      });
+    };
+
+    console.log("HERE");
+    findA($ul);
+  };
+
+  $(document).ready(function () {
+    // Add styling, structure to TOC's.
+    $(".dropdown-menu").each(function () {
+      $(this).find("ul").each(function (index, item){
+        var $item = $(item);
+        $item.addClass('unstyled');
+      });
+      $(this).find("li").each(function () {
+        $(this).parent().append(this);
+      });
+    });
+
+    // Patch in level.
+    patchToc($("ul.globaltoc"), 2);
+    patchToc($("ul.localtoc"), 2);
+
+    // Enable dropdown.
+    $('.dropdown-toggle').dropdown();
+  });
+}());
+</script>
+
   </head>
   <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="errors.html" title="3.4. Errors"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="cloud.html" title="3.2. Cloud / Datastore Support"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">3. Cloud Browser App API</a> &raquo;</li> 
-      </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
+  <div id="navbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="../index.html">Cloud Browser</a>
+        <span class="navbar-text pull-left"><b>0.2.2</b></span>
+          <ul class="nav">
+            <li class="divider-vertical"></li>
             
+              <li class="dropdown">
+  <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../misc/install.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../screenshots.html">2. Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">3. Cloud Browser App API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">4. Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/todo.html">5. Future / Task List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/license.html">6. License</a></li>
+</ul>
+</ul>
+</li>
+              <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">3.3. Common / Utilities</a></li>
+</ul>
+</ul>
+  <!--<span class="localtoc"><ul>
+<li><a class="reference internal" href="#">3.3. Common / Utilities</a></li>
+</ul>
+</span>-->
+</li>
+            
+            
+              
+  <li><a href="cloud.html"
+         title="previous chapter">&laquo; 3.2. Cloud / Datastore Support</a></li>
+  <li><a href="errors.html"
+         title="next chapter">3.4. Errors &raquo;</a></li>
+            
+            
+              
+  <li><a href="../_sources/cloud_browser/common.txt"
+         rel="nofollow">Source</a></li>
+            
+          </ul>
+          
+            
+<form class="navbar-search pull-right" style="margin-bottom:-3px;" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+   
   <div class="section" id="module-cloud_browser.common">
 <span id="common-utilities"></span><h1>3.3. Common / Utilities<a class="headerlink" href="#module-cloud_browser.common" title="Permalink to this headline">¶</a></h1>
 <p>Common operations.</p>
@@ -59,13 +162,13 @@
 <tt class="xref py py-mod docutils literal"><span class="pre">os.path</span></tt>.</p>
 <dl class="data">
 <dt id="cloud_browser.common.PARENT">
-<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">PARENT</tt><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">PARENT</tt><em class="property"> = '..'</em><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent path phrase.</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="cloud_browser.common.SEP">
-<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">SEP</tt><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">cloud_browser.common.</tt><tt class="descname">SEP</tt><em class="property"> = '/'</em><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Browser file path separator.</p>
 </dd></dl>
 
@@ -84,16 +187,16 @@
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_header">
 <tt class="descclassname">cloud_browser.common.</tt><tt class="descname">dt_from_header</tt><big>(</big><em>date_str</em><big>)</big><a class="headerlink" href="#cloud_browser.common.dt_from_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Try various RFC conversions to <tt class="docutils literal"><span class="pre">datetime</span></tt> or return <tt class="xref docutils literal"><span class="pre">None</span></tt>.</p>
+<dd><p>Try various RFC conversions to <tt class="docutils literal"><span class="pre">datetime</span></tt> or return <tt class="docutils literal"><span class="pre">None</span></tt>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt> or <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt> or <tt class="docutils literal"><span class="pre">None</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -107,11 +210,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -126,11 +229,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; Date string.</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -144,17 +247,17 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>value</strong> &#8211; Integer value.</li>
 <li><strong>default</strong> &#8211; Default value on failed conversion.</li>
-<li><strong>test_fn</strong> &#8211; Constraint function. Use default if returns <tt class="xref docutils literal"><span class="pre">False</span></tt>.</li>
+<li><strong>test_fn</strong> &#8211; Constraint function. Use default if returns <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Integer value.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Integer value.</p>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">int</span></tt></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">int</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -181,11 +284,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<cite>string</cite>) &#8211; Path to resource (including container).</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<cite>string</cite>) &#8211; Path to resource (including container).</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Container, storage object tuple.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Container, storage object tuple.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><cite>tuple</cite> of <cite>string</cite>, <cite>string</cite></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><cite>tuple</cite> of <cite>string</cite>, <cite>string</cite></td>
 </tr>
 </tbody>
 </table>
@@ -216,8 +319,8 @@ decorated is invoked, then a runtime error is generated.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>module</strong> (<tt class="docutils literal"><span class="pre">module</span></tt> or <tt class="xref docutils literal"><span class="pre">None</span></tt>) &#8211; required module (set as variable to <tt class="xref docutils literal"><span class="pre">None</span></tt> on import fail)</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>module</strong> (<tt class="docutils literal"><span class="pre">module</span></tt> or <tt class="docutils literal"><span class="pre">None</span></tt>) &#8211; required module (set as variable to <tt class="docutils literal"><span class="pre">None</span></tt> on import fail)</li>
 <li><strong>name</strong> (<tt class="docutils literal"><span class="pre">string</span></tt>) &#8211; module name</li>
 </ul>
 </td>
@@ -229,61 +332,15 @@ decorated is invoked, then a runtime error is generated.</p>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="cloud.html"
-                        title="previous chapter">3.2. Cloud / Datastore Support</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="errors.html"
-                        title="next chapter">3.4. Errors</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/cloud_browser/common.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="errors.html" title="3.4. Errors"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="cloud.html" title="3.2. Cloud / Datastore Support"
-             >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li>
-          <li><a href="index.html" >3. Cloud Browser App API</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2011, Ryan Roemer.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
-    </div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>
+        &copy; Copyright 2011, Ryan Roemer.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>

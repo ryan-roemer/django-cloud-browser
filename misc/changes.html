@@ -2,17 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Changes &mdash; Cloud Browser v0.2.1 documentation</title>
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <title>4. Changes &mdash; Cloud Browser 0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,53 +26,174 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Cloud Browser v0.2.1 documentation" href="../index.html" />
+    <script type="text/javascript" src="../_static/bootstrap.js"></script>
+    <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="next" title="5. Future / Task List" href="todo.html" />
-    <link rel="prev" title="3.7. Views" href="../cloud_browser/views.html" /> 
+    <link rel="prev" title="3.7. Views" href="../cloud_browser/views.html" />
+<script type="text/javascript">
+(function () {
+  /**
+   * Patch TOC list.
+   *
+   * Will mutate the underlying span to have a correct ul for nav.
+   *
+   * @param $span: Span containing nested UL's to mutate.
+   * @param minLevel: Starting level for nested lists. (1: global, 2: local).
+   */
+  var patchToc = function ($ul, minLevel) {
+    var findA;
+
+    // Find all a "internal" tags, traversing recursively.
+    findA = function ($elem, level) {
+      var level = level || 0,
+        $items = $elem.find("> li > a.internal, > ul, > li > ul");
+
+      // Iterate everything in order.
+      $items.each(function (index, item) {
+        var $item = $(item),
+          tag = item.tagName.toLowerCase(),
+          pad = 15 + ((level - minLevel) * 10);
+
+        if (tag === 'a' && level >= minLevel) {
+          // Add to existing padding.
+          $item.css('padding-left', pad + "px");
+          console.log(level, $item, 'padding-left', pad + "px");
+        } else if (tag === 'ul') {
+          // Recurse.
+          findA($item, level + 1);
+        }
+      });
+    };
+
+    console.log("HERE");
+    findA($ul);
+  };
+
+  $(document).ready(function () {
+    // Add styling, structure to TOC's.
+    $(".dropdown-menu").each(function () {
+      $(this).find("ul").each(function (index, item){
+        var $item = $(item);
+        $item.addClass('unstyled');
+      });
+      $(this).find("li").each(function () {
+        $(this).parent().append(this);
+      });
+    });
+
+    // Patch in level.
+    patchToc($("ul.globaltoc"), 2);
+    patchToc($("ul.localtoc"), 2);
+
+    // Enable dropdown.
+    $('.dropdown-toggle').dropdown();
+  });
+}());
+</script>
+
   </head>
   <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="todo.html" title="5. Future / Task List"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../cloud_browser/views.html" title="3.7. Views"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
+  <div id="navbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="../index.html">Cloud Browser</a>
+        <span class="navbar-text pull-left"><b>0.2.2</b></span>
+          <ul class="nav">
+            <li class="divider-vertical"></li>
             
+              <li class="dropdown">
+  <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../screenshots.html">2. Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud_browser/index.html">3. Cloud Browser App API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">4. Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">5. Future / Task List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">6. License</a></li>
+</ul>
+</ul>
+</li>
+              <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><ul>
+<li><a class="reference internal" href="#">4. Changes</a><ul>
+<li><a class="reference internal" href="#v0-2-2">4.1. v0.2.2</a></li>
+<li><a class="reference internal" href="#v0-2-1">4.2. v0.2.1</a></li>
+<li><a class="reference internal" href="#v0-2-0">4.3. v0.2.0</a></li>
+<li><a class="reference internal" href="#v0-1-3">4.4. v0.1.3</a></li>
+<li><a class="reference internal" href="#v0-1-2">4.5. v0.1.2</a></li>
+<li><a class="reference internal" href="#v0-1-1">4.6. v0.1.1</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+  <!--<span class="localtoc"><ul>
+<li><a class="reference internal" href="#">4. Changes</a><ul>
+<li><a class="reference internal" href="#v0-2-2">4.1. v0.2.2</a></li>
+<li><a class="reference internal" href="#v0-2-1">4.2. v0.2.1</a></li>
+<li><a class="reference internal" href="#v0-2-0">4.3. v0.2.0</a></li>
+<li><a class="reference internal" href="#v0-1-3">4.4. v0.1.3</a></li>
+<li><a class="reference internal" href="#v0-1-2">4.5. v0.1.2</a></li>
+<li><a class="reference internal" href="#v0-1-1">4.6. v0.1.1</a></li>
+</ul>
+</li>
+</ul>
+</span>-->
+</li>
+            
+            
+              
+  <li><a href="../cloud_browser/views.html"
+         title="previous chapter">&laquo; 3.7. Views</a></li>
+  <li><a href="todo.html"
+         title="next chapter">5. Future / Task List &raquo;</a></li>
+            
+            
+              
+  <li><a href="../_sources/misc/changes.txt"
+         rel="nofollow">Source</a></li>
+            
+          </ul>
+          
+            
+<form class="navbar-search pull-right" style="margin-bottom:-3px;" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+   
   <div class="section" id="changes">
 <h1>4. Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-2-2">
+<h2>4.1. v0.2.2<a class="headerlink" href="#v0-2-2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Add dev. requirements, fix URL homepage link.</li>
+</ul>
+</div>
 <div class="section" id="v0-2-1">
-<h2>4.1. v0.2.1<a class="headerlink" href="#v0-2-1" title="Permalink to this headline">¶</a></h2>
+<h2>4.2. v0.2.1<a class="headerlink" href="#v0-2-1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Allow fully-qualified string path for <tt class="docutils literal"><span class="pre">CLOUD_BROWSER_VIEW_DECORATOR</span></tt>.
 Thanks to <a class="reference external" href="https://github.com/bluecamel">Branton Davis</a> for patch.</li>
 </ul>
 </div>
 <div class="section" id="v0-2-0">
-<h2>4.2. v0.2.0<a class="headerlink" href="#v0-2-0" title="Permalink to this headline">¶</a></h2>
+<h2>4.3. v0.2.0<a class="headerlink" href="#v0-2-0" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Add Google Storage for Developers datastore support.</li>
 <li>Start significant CSS refactoring.</li>
 </ul>
 </div>
 <div class="section" id="v0-1-3">
-<h2>4.3. v0.1.3<a class="headerlink" href="#v0-1-3" title="Permalink to this headline">¶</a></h2>
+<h2>4.4. v0.1.3<a class="headerlink" href="#v0-1-3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Cleaned up <tt class="docutils literal"><span class="pre">sdist</span></tt> packagin.</li>
 <li>Added basic file icons and images to static media.</li>
@@ -76,14 +202,14 @@ Thanks to <a class="reference external" href="https://github.com/bluecamel">Bran
 </ul>
 </div>
 <div class="section" id="v0-1-2">
-<h2>4.4. v0.1.2<a class="headerlink" href="#v0-1-2" title="Permalink to this headline">¶</a></h2>
+<h2>4.5. v0.1.2<a class="headerlink" href="#v0-1-2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added support for <a class="reference external" href="http://www.openstack.org/">OpenStack</a>. Thanks to
 <a class="reference external" href="https://github.com/noodley">Doug Weimer</a> for patch.</li>
 </ul>
 </div>
 <div class="section" id="v0-1-1">
-<h2>4.5. v0.1.1<a class="headerlink" href="#v0-1-1" title="Permalink to this headline">¶</a></h2>
+<h2>4.6. v0.1.1<a class="headerlink" href="#v0-1-1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Initial tarball release. Basic support for AWS, Rackspace, filesystem
 datastores, and basic and admin views.</li>
@@ -92,72 +218,15 @@ datastores, and basic and admin views.</li>
 </div>
 
 
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">4. Changes</a><ul>
-<li><a class="reference internal" href="#v0-2-1">4.1. v0.2.1</a></li>
-<li><a class="reference internal" href="#v0-2-0">4.2. v0.2.0</a></li>
-<li><a class="reference internal" href="#v0-1-3">4.3. v0.1.3</a></li>
-<li><a class="reference internal" href="#v0-1-2">4.4. v0.1.2</a></li>
-<li><a class="reference internal" href="#v0-1-1">4.5. v0.1.1</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../cloud_browser/views.html"
-                        title="previous chapter">3.7. Views</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="todo.html"
-                        title="next chapter">5. Future / Task List</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/misc/changes.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="todo.html" title="5. Future / Task List"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../cloud_browser/views.html" title="3.7. Views"
-             >previous</a> |</li>
-        <li><a href="../index.html">Cloud Browser v0.2.1 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2011, Ryan Roemer.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
-    </div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>
+        &copy; Copyright 2011, Ryan Roemer.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
   </body>
 </html>
