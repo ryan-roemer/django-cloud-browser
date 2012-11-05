@@ -40,7 +40,7 @@ setup(
     version=__version__,
     description="Django Cloud Browser application.",
     long_description=read_file("README"),
-    url="https://ryan-roemer.github.com/django-cloud-browser",
+    url="http://ryan-roemer.github.com/django-cloud-browser",
 
     author="Ryan Roemer",
     author_email="ryan@loose-bits.com",
