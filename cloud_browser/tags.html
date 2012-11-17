@@ -1,6 +1,5 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +10,8 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/bootstrap-2.2.1.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/bootstrap-responsive-2.2.1.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,83 +26,38 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap.js"></script>
+    <script type="text/javascript" src="../_static/js/bootstrap-2.2.1.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="up" title="3. Cloud Browser App API" href="index.html" />
     <link rel="next" title="3.6. URLs" href="urls.html" />
     <link rel="prev" title="3.4. Errors" href="errors.html" />
-<script type="text/javascript">
-(function () {
-  /**
-   * Patch TOC list.
-   *
-   * Will mutate the underlying span to have a correct ul for nav.
-   *
-   * @param $span: Span containing nested UL's to mutate.
-   * @param minLevel: Starting level for nested lists. (1: global, 2: local).
-   */
-  var patchToc = function ($ul, minLevel) {
-    var findA;
-
-    // Find all a "internal" tags, traversing recursively.
-    findA = function ($elem, level) {
-      var level = level || 0,
-        $items = $elem.find("> li > a.internal, > ul, > li > ul");
-
-      // Iterate everything in order.
-      $items.each(function (index, item) {
-        var $item = $(item),
-          tag = item.tagName.toLowerCase(),
-          pad = 15 + ((level - minLevel) * 10);
-
-        if (tag === 'a' && level >= minLevel) {
-          // Add to existing padding.
-          $item.css('padding-left', pad + "px");
-          console.log(level, $item, 'padding-left', pad + "px");
-        } else if (tag === 'ul') {
-          // Recurse.
-          findA($item, level + 1);
-        }
-      });
-    };
-
-    console.log("HERE");
-    findA($ul);
-  };
-
-  $(document).ready(function () {
-    // Add styling, structure to TOC's.
-    $(".dropdown-menu").each(function () {
-      $(this).find("ul").each(function (index, item){
-        var $item = $(item);
-        $item.addClass('unstyled');
-      });
-      $(this).find("li").each(function () {
-        $(this).parent().append(this);
-      });
-    });
-
-    // Patch in level.
-    patchToc($("ul.globaltoc"), 2);
-    patchToc($("ul.localtoc"), 2);
-
-    // Enable dropdown.
-    $('.dropdown-toggle').dropdown();
-  });
-}());
-</script>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
   <body>
-  <div id="navbar" class="navbar navbar-fixed-top">
+<div class="container">
+  
+  <div id="navbar" class="navbar">
     <div class="navbar-inner">
-      <div class="container-fluid">
-        <a class="brand" href="../index.html">Cloud Browser</a>
-        <span class="navbar-text pull-left"><b>0.2.2</b></span>
-          <ul class="nav">
-            <li class="divider-vertical"></li>
-            
-              <li class="dropdown">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="../index.html">Cloud Browser</a>
+      <span class="navbar-text pull-left"><b>0.2.2</b></span>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="divider-vertical"></li>
+          
+            <li class="dropdown">
   <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="../misc/install.html">1. Installation</a></li>
@@ -114,47 +69,37 @@
 </ul>
 </ul>
 </li>
-              <li class="dropdown">
+            <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
 <li><a class="reference internal" href="#">3.5. Tags</a></li>
 </ul>
 </ul>
-  <!--<span class="localtoc"><ul>
-<li><a class="reference internal" href="#">3.5. Tags</a></li>
-</ul>
-</span>-->
 </li>
+          
+          
             
-            
-              
   <li><a href="errors.html"
          title="previous chapter">&laquo; 3.4. Errors</a></li>
   <li><a href="urls.html"
          title="next chapter">3.6. URLs &raquo;</a></li>
-            
-            
-              
-  <li><a href="../_sources/cloud_browser/tags.txt"
-         rel="nofollow">Source</a></li>
-            
-          </ul>
           
-            
+          
+        </ul>
+
+        
+          
 <form class="navbar-search pull-right" style="margin-bottom:-3px;" action="../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <input type="hidden" name="check_keywords" value="yes" />
   <input type="hidden" name="area" value="default" />
 </form>
-          
-          </ul>
-        </div>
+        
       </div>
     </div>
   </div>
 
-<div class="container">
-   
+  
   <div class="section" id="module-cloud_browser.templatetags.cloud_browser_extras">
 <span id="tags"></span><h1>3.5. Tags<a class="headerlink" href="#module-cloud_browser.templatetags.cloud_browser_extras" title="Permalink to this headline">¶</a></h1>
 <p>Cloud browser template tags.</p>
@@ -221,7 +166,15 @@ patch for a more extensible and robust truncate characters tag filter.</p>
 </div>
 <footer class="footer">
   <div class="container">
-    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+  <a href="../_sources/cloud_browser/tags.txt"
+     rel="nofollow">Source</a>
+      
+    </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
