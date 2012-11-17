@@ -5,7 +5,6 @@ Contents
 ========
 
 .. toctree::
-   :numbered:
    :maxdepth: 2
 
    misc/install

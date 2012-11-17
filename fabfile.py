@@ -39,7 +39,7 @@ THEME_ZIP = "%s.zip" % THEME_NAME
 # THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/"
 #                  "sphinx-bootstrap-theme/%s" % THEME_ZIP)
 THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/sphinx-bootstrap-"
-                 "theme/bootstrap-v0.0.3.zip")
+                 "theme/bootstrap-v0.0.6.zip")
 
 BUILD_DIRS = (
     "dist",
