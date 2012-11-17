@@ -2,6 +2,7 @@
 from __future__ import with_statement
 
 import os
+import urllib
 
 from contextlib import contextmanager
 from fabric.api import abort, local, settings
@@ -32,9 +33,18 @@ DOC_UNDERSCORE_DIRS = (
     "static",
 )
 
+THEMES_DIR = "doc/_themes"
+THEME_NAME = "bootstrap"
+THEME_ZIP = "%s.zip" % THEME_NAME
+# THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/"
+#                  "sphinx-bootstrap-theme/%s" % THEME_ZIP)
+THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/sphinx-bootstrap-"
+                 "theme/bootstrap-v0.0.3.zip")
+
 BUILD_DIRS = (
     "dist",
-    "django_cloud_browser.egg-info"
+    "django_cloud_browser.egg-info",
+    THEME_NAME,
 )
 
 SDIST_RST_FILES = (
@@ -141,6 +151,19 @@ def _parse_bool(value):
     raise Exception("Value %s is not boolean." % value)
 
 
+def get_theme():
+    """Checks for theme and downloads from GitHub if not present."""
+    # Make the themes directory.
+    local("mkdir -p %s" % THEMES_DIR)
+
+    # Download the theme if not present.
+    dir_path = os.path.join(THEMES_DIR, THEME_NAME)
+    zip_path = os.path.join(THEMES_DIR, THEME_ZIP)
+    zip_dl_name = os.path.basename(THEME_ZIP_URL)
+    if not (os.path.exists(dir_path) or os.path.exists(zip_path)):
+        urllib.urlretrieve(THEME_ZIP_URL, zip_path)
+
+
 def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
     """Generate API documentation (using Sphinx).
 
@@ -148,6 +171,8 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
     :param proj_settings: Django project settings to use.
     :param github: Convert to GitHub-friendly format?
     """
+    get_theme()
+
     local("export PYTHONPATH='' && "
           "export DJANGO_SETTINGS_MODULE=%s && "
           "sphinx-build -b html %s %s" % (proj_settings, DOC_INPUT, output),

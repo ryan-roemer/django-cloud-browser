@@ -2,6 +2,7 @@
 *\.pyc
 
 cloud_browser_project/db/
+doc/_themes
 doc_html
 local
 
