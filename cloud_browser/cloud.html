@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.2. Cloud / Datastore Support &mdash; Cloud Browser 0.2.2 documentation</title>
+    <title>Cloud / Datastore Support &mdash; Cloud Browser 0.2.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -29,9 +29,9 @@
     <script type="text/javascript" src="../_static/js/bootstrap-2.2.1.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
-    <link rel="up" title="3. Cloud Browser App API" href="index.html" />
-    <link rel="next" title="3.3. Common / Utilities" href="common.html" />
-    <link rel="prev" title="3.1. Application Settings" href="app_settings.html" />
+    <link rel="up" title="Cloud Browser App API" href="index.html" />
+    <link rel="next" title="Common / Utilities" href="common.html" />
+    <link rel="prev" title="Application Settings" href="app_settings.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -67,28 +67,28 @@
             <li class="dropdown">
   <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../misc/install.html">1. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../screenshots.html">2. Screenshots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">3. Cloud Browser App API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">4. Changes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../misc/todo.html">5. Future / Task List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../misc/license.html">6. License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../screenshots.html">Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Cloud Browser App API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/todo.html">Future / Task List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/license.html">License</a></li>
 </ul>
 </ul>
 </li>
             <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">3.2. Cloud / Datastore Support</a><ul>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.config">3.2.1. Configuration</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.errors">3.2.2. Errors</a></li>
-<li><a class="reference internal" href="#datastores">3.2.3. Datastores</a><ul>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.base">3.2.3.1. Abstract Base Class</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.fs">3.2.3.2. Filesystem Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.boto_base">3.2.3.3. Boto-based Datastore Abstract Base Class</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">3.2.3.4. Amazon Web Services S3 Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.google">3.2.3.5. Google Storage Datastore</a></li>
-<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">3.2.3.6. Rackspace Cloud Files Datastore</a></li>
+<li><a class="reference internal" href="#">Cloud / Datastore Support</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.config">Configuration</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.errors">Errors</a></li>
+<li><a class="reference internal" href="#datastores">Datastores</a><ul>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.base">Abstract Base Class</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.fs">Filesystem Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.boto_base">Boto-based Datastore Abstract Base Class</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.aws">Amazon Web Services S3 Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.google">Google Storage Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.rackspace">Rackspace Cloud Files Datastore</a></li>
 </ul>
 </li>
 </ul>
@@ -100,9 +100,9 @@
           
             
   <li><a href="app_settings.html"
-         title="previous chapter">&laquo; 3.1. Application Settings</a></li>
+         title="previous chapter">&laquo; Application Settings</a></li>
   <li><a href="common.html"
-         title="next chapter">3.3. Common / Utilities &raquo;</a></li>
+         title="next chapter">Common / Utilities &raquo;</a></li>
           
           
         </ul>
@@ -121,13 +121,13 @@
 
   
   <div class="section" id="module-cloud_browser.cloud">
-<span id="cloud-datastore-support"></span><h1>3.2. Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
+<span id="cloud-datastore-support"></span><h1>Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
 <p>Cloud abstractions and helpers.</p>
 <p>More generally, this is &#8220;datastore&#8221; support, since the basic interface could
 support any interface, file, memory, cloud, etc. But, as this is called a
 &#8220;cloud&#8221; browser, we&#8217;ll call it the &#8220;cloud&#8221; module.</p>
 <div class="section" id="module-cloud_browser.cloud.config">
-<span id="configuration"></span><h2>3.2.1. Configuration<a class="headerlink" href="#module-cloud_browser.cloud.config" title="Permalink to this headline">¶</a></h2>
+<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#module-cloud_browser.cloud.config" title="Permalink to this headline">¶</a></h2>
 <p>Cloud configuration.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.config.Config">
@@ -171,7 +171,7 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.errors">
-<span id="errors"></span><h2>3.2.2. Errors<a class="headerlink" href="#module-cloud_browser.cloud.errors" title="Permalink to this headline">¶</a></h2>
+<span id="errors"></span><h2>Errors<a class="headerlink" href="#module-cloud_browser.cloud.errors" title="Permalink to this headline">¶</a></h2>
 <p>Common cloud error wrappers.</p>
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.CloudException">
@@ -286,14 +286,14 @@ in, else <tt class="docutils literal"><span class="pre">None</span></tt> (which 
 
 </div>
 <div class="section" id="datastores">
-<h2>3.2.3. Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
+<h2>Datastores<a class="headerlink" href="#datastores" title="Permalink to this headline">¶</a></h2>
 <p>Cloud Browser is written with a pluggable backend datastore model in mind.
 Currently, there are datastore implementations for a basic filesystem and
 cloud (e.g., Rackspace, Amazon) backing stores. Other cloud stores shouldn&#8217;t be
 too hard to port over to this app, as Rackspace has probably the most little
 extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- directories.</p>
 <div class="section" id="module-cloud_browser.cloud.base">
-<span id="abstract-base-class"></span><h3>3.2.3.1. Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
+<span id="abstract-base-class"></span><h3>Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.base" title="Permalink to this headline">¶</a></h3>
 <p>Cloud datastore API base abstraction.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudConnection">
@@ -437,7 +437,7 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.fs">
-<span id="filesystem-datastore"></span><h3>3.2.3.2. Filesystem Datastore<a class="headerlink" href="#module-cloud_browser.cloud.fs" title="Permalink to this headline">¶</a></h3>
+<span id="filesystem-datastore"></span><h3>Filesystem Datastore<a class="headerlink" href="#module-cloud_browser.cloud.fs" title="Permalink to this headline">¶</a></h3>
 <p>File-system datastore.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemConnection">
@@ -533,7 +533,7 @@ extra &#8220;gotcha&#8217;s&#8221; in listing objects using implied / pseudo- di
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.boto_base">
-<span id="boto-based-datastore-abstract-base-class"></span><h3>3.2.3.3. Boto-based Datastore Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.boto_base" title="Permalink to this headline">¶</a></h3>
+<span id="boto-based-datastore-abstract-base-class"></span><h3>Boto-based Datastore Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.boto_base" title="Permalink to this headline">¶</a></h3>
 <p>Abstract boto-based datastore.</p>
 <p>The <a class="reference external" href="http://code.google.com/p/boto/">boto</a> library provides interfaces to both Amazon S3 and Google Storage
 for Developers. This abstract base class gets most of the common work done.</p>
@@ -567,7 +567,7 @@ package.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x1052c2250&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x10e2d8b90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -613,7 +613,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x1052c2290&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x10e2d8bd0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -685,7 +685,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object at 0x1052c21d0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object at 0x10e2d8b10&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -693,7 +693,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.aws">
-<span id="amazon-web-services-s3-datastore"></span><h3>3.2.3.4. Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
+<span id="amazon-web-services-s3-datastore"></span><h3>Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
 <p>Amazon Simple Storage Service (S3) datastore.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -746,7 +746,7 @@ package.</p>
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.google">
-<span id="google-storage-datastore"></span><h3>3.2.3.5. Google Storage Datastore<a class="headerlink" href="#module-cloud_browser.cloud.google" title="Permalink to this headline">¶</a></h3>
+<span id="google-storage-datastore"></span><h3>Google Storage Datastore<a class="headerlink" href="#module-cloud_browser.cloud.google" title="Permalink to this headline">¶</a></h3>
 <p>Google Storage for Developers datastore.</p>
 <p><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a> (GS) is cosmetically an implementation of the
 S3 interface by Google.</p>
@@ -821,7 +821,7 @@ extra +1 limit query and ignore any such file objects.</p>
 
 </div>
 <div class="section" id="module-cloud_browser.cloud.rackspace">
-<span id="rackspace-cloud-files-datastore"></span><h3>3.2.3.6. Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
+<span id="rackspace-cloud-files-datastore"></span><h3>Rackspace Cloud Files Datastore<a class="headerlink" href="#module-cloud_browser.cloud.rackspace" title="Permalink to this headline">¶</a></h3>
 <p>Rackspace Cloud Files datastore.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -848,7 +848,7 @@ extra +1 limit query and ignore any such file objects.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x1054475d0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484fd0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -917,7 +917,7 @@ in results.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x105447590&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484f90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -979,7 +979,7 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x105447550&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484f50&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
