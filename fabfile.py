@@ -39,12 +39,12 @@ THEME_ZIP = "%s.zip" % THEME_NAME
 # THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/"
 #                  "sphinx-bootstrap-theme/%s" % THEME_ZIP)
 THEME_ZIP_URL = ("https://github.com/downloads/ryan-roemer/sphinx-bootstrap-"
-                 "theme/bootstrap-v0.0.6.zip")
+                 "theme/bootstrap-v0.1.0.zip")
 
 BUILD_DIRS = (
     "dist",
     "django_cloud_browser.egg-info",
-    THEME_NAME,
+    THEMES_DIR,
 )
 
 SDIST_RST_FILES = (
