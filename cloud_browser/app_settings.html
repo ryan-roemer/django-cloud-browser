@@ -10,9 +10,9 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/css/bootstrap-2.2.1.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.0/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/css/bootstrap-responsive-2.2.1.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.0/css/bootstrap-responsive.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -26,7 +26,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/bootstrap-2.2.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-2.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="up" title="Cloud Browser App API" href="index.html" />
@@ -64,9 +66,12 @@
         <ul class="nav">
           <li class="divider-vertical"></li>
           
-            <li class="dropdown">
-  <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"><ul>
+            <li class="dropdown globaltoc-container">
+  <a href="../index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul>
 <li class="toctree-l1"><a class="reference internal" href="../misc/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../screenshots.html">Screenshots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Cloud Browser App API</a></li>
@@ -242,7 +247,7 @@ instead of a Django-based static view fallback.</li>
 
 <dl class="attribute">
 <dt id="cloud_browser.app_settings.Settings.SETTINGS">
-<tt class="descname">SETTINGS</tt><em class="property"> = {'CLOUD_BROWSER_DATASTORE': &lt;cloud_browser.app_settings.Setting object at 0x10d673f50&gt;, 'CLOUD_BROWSER_AWS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x10d678290&gt;, 'CLOUD_BROWSER_VIEW_DECORATOR': &lt;cloud_browser.app_settings.Setting object at 0x10d678810&gt;, 'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': &lt;cloud_browser.app_settings.Setting object at 0x10d6788d0&gt;, 'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x10d678710&gt;, 'CLOUD_BROWSER_STATIC_MEDIA_DIR': &lt;cloud_browser.app_settings.Setting object at 0x10d678910&gt;, 'CLOUD_BROWSER_RACKSPACE_SERVICENET': &lt;cloud_browser.app_settings.BoolSetting object at 0x10d678750&gt;, 'CLOUD_BROWSER_RACKSPACE_AUTHURL': &lt;cloud_browser.app_settings.BoolSetting object at 0x10d678790&gt;, 'CLOUD_BROWSER_GS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x10d678650&gt;, 'CLOUD_BROWSER_CONTAINER_BLACKLIST': &lt;cloud_browser.app_settings.Setting object at 0x10d678890&gt;, 'CLOUD_BROWSER_GS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x10d678690&gt;, 'CLOUD_BROWSER_RACKSPACE_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x10d6786d0&gt;, 'CLOUD_BROWSER_CONTAINER_WHITELIST': &lt;cloud_browser.app_settings.Setting object at 0x10d678850&gt;, 'CLOUD_BROWSER_FILESYSTEM_ROOT': &lt;cloud_browser.app_settings.Setting object at 0x10d6787d0&gt;, 'CLOUD_BROWSER_AWS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x10d678610&gt;}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.SETTINGS" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">SETTINGS</tt><em class="property"> = {'CLOUD_BROWSER_DATASTORE': &lt;cloud_browser.app_settings.Setting object at 0x10507fe50&gt;, 'CLOUD_BROWSER_AWS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x105084190&gt;, 'CLOUD_BROWSER_VIEW_DECORATOR': &lt;cloud_browser.app_settings.Setting object at 0x105084710&gt;, 'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': &lt;cloud_browser.app_settings.Setting object at 0x1050847d0&gt;, 'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x105084610&gt;, 'CLOUD_BROWSER_STATIC_MEDIA_DIR': &lt;cloud_browser.app_settings.Setting object at 0x105084810&gt;, 'CLOUD_BROWSER_RACKSPACE_SERVICENET': &lt;cloud_browser.app_settings.BoolSetting object at 0x105084650&gt;, 'CLOUD_BROWSER_RACKSPACE_AUTHURL': &lt;cloud_browser.app_settings.BoolSetting object at 0x105084690&gt;, 'CLOUD_BROWSER_GS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x105084550&gt;, 'CLOUD_BROWSER_CONTAINER_BLACKLIST': &lt;cloud_browser.app_settings.Setting object at 0x105084790&gt;, 'CLOUD_BROWSER_GS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x105084590&gt;, 'CLOUD_BROWSER_RACKSPACE_ACCOUNT': &lt;cloud_browser.app_settings.Setting object at 0x1050845d0&gt;, 'CLOUD_BROWSER_CONTAINER_WHITELIST': &lt;cloud_browser.app_settings.Setting object at 0x105084750&gt;, 'CLOUD_BROWSER_FILESYSTEM_ROOT': &lt;cloud_browser.app_settings.Setting object at 0x1050846d0&gt;, 'CLOUD_BROWSER_AWS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object at 0x105084510&gt;}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.SETTINGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Settings dictionary of accessor callables.</p>
 </dd></dl>
 

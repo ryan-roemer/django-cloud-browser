@@ -10,9 +10,9 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/css/bootstrap-2.2.1.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.0/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/css/bootstrap-responsive-2.2.1.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-2.3.0/css/bootstrap-responsive.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -26,7 +26,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/bootstrap-2.2.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-2.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="up" title="Cloud Browser App API" href="index.html" />
@@ -64,9 +66,12 @@
         <ul class="nav">
           <li class="divider-vertical"></li>
           
-            <li class="dropdown">
-  <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
-  <ul class="dropdown-menu globaltoc"><ul>
+            <li class="dropdown globaltoc-container">
+  <a href="../index.html"
+     class="dropdown-toggle"
+     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+    ><ul>
 <li class="toctree-l1"><a class="reference internal" href="../misc/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../screenshots.html">Screenshots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Cloud Browser App API</a></li>
@@ -567,7 +572,7 @@ package.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x10e2d8b90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x105ce6a90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -613,7 +618,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x10e2d8bd0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object at 0x105ce6ad0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -685,7 +690,7 @@ practical reasons, we&#8217;ll limit it to the same as Rackspace.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors">
-<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object at 0x10e2d8b10&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_boto_errors</tt><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object at 0x105ce6a10&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -848,7 +853,7 @@ extra +1 limit query and ignore any such file objects.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484fd0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x105e90ed0&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceConnection.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -917,7 +922,7 @@ in results.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484f90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x105e90e90&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceContainer.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -979,7 +984,7 @@ pseudo-directory delimiters from &#8220;old style&#8221; hierarchy detection.</p
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors">
-<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x10e484f50&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">wrap_rs_errors</tt><em class="property"> = &lt;cloud_browser.cloud.rackspace.RackspaceExceptionWrapper object at 0x105e90e50&gt;</em><a class="headerlink" href="#cloud_browser.cloud.rackspace.RackspaceObject.wrap_rs_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
