@@ -18,6 +18,7 @@ import sys, os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('..'))
 import cloud_browser
+import sphinx_bootstrap_theme
 
 # -- General configuration -----------------------------------------------------
 
@@ -91,8 +92,9 @@ pygments_style = 'sphinx'
 # -- Options for HTML output ---------------------------------------------------
 
 # Activate the theme.
-sys.path.append(os.path.abspath('_themes'))
-html_theme_path = ['_themes']
+# sys.path.append(os.path.abspath('_themes'))
+# html_theme_path = ['_themes']
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 html_theme = 'bootstrap'
 
 # (Optional) Use a shorter name to conserve nav. bar space.
