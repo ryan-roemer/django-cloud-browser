@@ -4,6 +4,7 @@
 cloud_browser_project/db/
 doc_html
 local
+local_data
 
 dist
 django_cloud_browser.egg-info
