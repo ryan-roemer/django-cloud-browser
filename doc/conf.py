@@ -90,14 +90,24 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output ---------------------------------------------------
 
+# Activate the theme.
+sys.path.append(os.path.abspath('_themes'))
+html_theme_path = ['_themes']
+html_theme = 'bootstrap'
+
+# (Optional) Use a shorter name to conserve nav. bar space.
+html_short_title = "Cloud Browser"
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'nature'
+#html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+  'source_link_position': "footer",
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []

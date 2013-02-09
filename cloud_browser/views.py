@@ -2,6 +2,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.importlib import import_module
 
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import get_connection, get_connection_cls, errors
@@ -13,10 +14,30 @@ MAX_LIMIT = get_connection_cls().cont_cls.max_list
 
 
 def settings_view_decorator(function):
-    """Insert decorator from settings, if any."""
+    """Insert decorator from settings, if any.
+
+    .. note:: Decorator in ``CLOUD_BROWSER_VIEW_DECORATOR`` can be either a
+        callable or a fully-qualified string path (the latter, which we'll
+        lazy import).
+    """
 
     dec = settings.CLOUD_BROWSER_VIEW_DECORATOR
-    if dec:
+
+    # Trade-up string to real decorator.
+    if isinstance(dec, basestring):
+        # Split into module and decorator strings.
+        mod_str, _, dec_str = dec.rpartition('.')
+        if not (mod_str and dec_str):
+            raise ImportError("Unable to import module: %s" % mod_str)
+
+        # Import and try to get decorator function.
+        mod = import_module(mod_str)
+        if not hasattr(mod, dec_str):
+            raise ImportError("Unable to import decorator: %s" % dec)
+
+        dec = getattr(mod, dec_str)
+
+    if dec and callable(dec):
         return dec(function)
 
     return function
