@@ -85,6 +85,10 @@
     }
 
     // Local TOC.
+    $(".bs-sidenav ul").addClass("nav nav-list");
+    $(".bs-sidenav > ul > li > a").addClass("nav-header");
+
+    // Local TOC.
     patchToc($("ul.localtoc"), 2);
 
     // Mutate sub-lists (for bs-2.3.0).
@@ -116,9 +120,9 @@
     // Patch tables.
     patchTables();
 
-    // Add Note, Warning styles.
-    $('div.note').addClass('alert').addClass('alert-info');
-    $('div.warning').addClass('alert');
+    // Add Note, Warning styles. (BS v2,3 compatible).
+    $('div.note').addClass('alert alert-info');
+    $('div.warning').addClass('alert alert-danger alert-error');
 
     // Inline code styles to Bootstrap style.
     $('tt.docutils.literal').not(".xref").each(function (i, e) {
