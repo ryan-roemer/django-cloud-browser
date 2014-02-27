@@ -1,12 +1,4 @@
 
-
-  
- 
-  
-  
- 
-
-
 <!DOCTYPE html>
 
 
@@ -18,9 +10,9 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -34,9 +26,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="prev" title="Future / Task List" href="todo.html" />
@@ -64,7 +56,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html">Cloud Browser</a>
+        <a class="navbar-brand" href="../index.html">
+          Cloud Browser</a>
         <span class="navbar-text navbar-version pull-left"><b>0.2.2</b></span>
       </div>
 
@@ -74,11 +67,14 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="../index.html"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul class="current">
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#software-requirements">Software Requirements</a></li>
@@ -127,8 +123,14 @@
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"><ul>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">License</a></li>
 </ul>
 </ul>
@@ -138,8 +140,10 @@
             
               
                 
-  <li><a href="todo.html"
-         title="Previous Chapter: Future / Task List">&laquo; Future / Task Li...</a></li>
+  <li>
+    <a href="todo.html" title="Previous Chapter: Future / Task List"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Future / Task Li...</span>
+    </a>
+  </li>
               
             
             
@@ -163,7 +167,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
       
   <div class="section" id="license">
 <h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
@@ -198,8 +202,10 @@ THE SOFTWARE.</p>
       
         <br/>
         
+<div id="sourcelink">
   <a href="../_sources/misc/license.txt"
      rel="nofollow">Source</a>
+</div>
       
     </p>
     <p>

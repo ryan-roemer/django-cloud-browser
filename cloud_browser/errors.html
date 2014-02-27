@@ -1,12 +1,4 @@
 
-
-  
- 
-  
-  
- 
-
-
 <!DOCTYPE html>
 
 
@@ -18,9 +10,9 @@
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -34,9 +26,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="../index.html" />
     <link rel="up" title="Cloud Browser App API" href="index.html" />
@@ -66,7 +58,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.html">Cloud Browser</a>
+        <a class="navbar-brand" href="../index.html">
+          Cloud Browser</a>
         <span class="navbar-text navbar-version pull-left"><b>0.2.2</b></span>
       </div>
 
@@ -76,11 +69,14 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="../index.html"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul class="current">
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../misc/install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/install.html#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/install.html#software-requirements">Software Requirements</a></li>
@@ -129,8 +125,14 @@
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"><ul>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Errors</a></li>
 </ul>
 </ul>
@@ -140,10 +142,14 @@
             
               
                 
-  <li><a href="common.html"
-         title="Previous Chapter: Common / Utilities">&laquo; Common / Utiliti...</a></li>
-  <li><a href="tags.html"
-         title="Next Chapter: Tags">Tags &raquo;</a></li>
+  <li>
+    <a href="common.html" title="Previous Chapter: Common / Utilities"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Common / Utiliti...</span>
+    </a>
+  </li>
+  <li>
+    <a href="tags.html" title="Next Chapter: Tags"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Tags &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -167,7 +173,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
       
   <div class="section" id="module-cloud_browser.errors">
 <span id="errors"></span><h1>Errors<a class="headerlink" href="#module-cloud_browser.errors" title="Permalink to this headline">¶</a></h1>
@@ -194,8 +200,10 @@
       
         <br/>
         
+<div id="sourcelink">
   <a href="../_sources/cloud_browser/errors.txt"
      rel="nofollow">Source</a>
+</div>
       
     </p>
     <p>

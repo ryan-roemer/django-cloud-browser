@@ -1,12 +1,4 @@
 
-
-  
- 
-  
-  
- 
-
-
 <!DOCTYPE html>
 
 
@@ -18,9 +10,9 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -34,9 +26,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloud Browser 0.2.2 documentation" href="#" />
     <link rel="next" title="Installation" href="misc/install.html" />
@@ -64,7 +56,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Cloud Browser</a>
+        <a class="navbar-brand" href="#">
+          Cloud Browser</a>
         <span class="navbar-text navbar-version pull-left"><b>0.2.2</b></span>
       </div>
 
@@ -74,11 +67,14 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="#"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul>
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="misc/install.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc/install.html#install">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc/install.html#software-requirements">Software Requirements</a></li>
@@ -127,8 +123,14 @@
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"><ul>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Django Cloud Browser</a><ul>
 <li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
@@ -146,8 +148,10 @@
             
               
                 
-  <li><a href="misc/install.html"
-         title="Next Chapter: Installation">Installation &raquo;</a></li>
+  <li>
+    <a href="misc/install.html" title="Next Chapter: Installation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Installation &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -171,7 +175,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="span12">
+    <div class="col-md-12">
       
   <div class="section" id="django-cloud-browser">
 <h1>Django Cloud Browser<a class="headerlink" href="#django-cloud-browser" title="Permalink to this headline">¶</a></h1>
@@ -297,8 +301,10 @@ a long list of results.</p>
       
         <br/>
         
+<div id="sourcelink">
   <a href="_sources/index.txt"
      rel="nofollow">Source</a>
+</div>
       
     </p>
     <p>
