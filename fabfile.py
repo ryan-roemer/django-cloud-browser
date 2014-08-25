@@ -2,7 +2,6 @@
 from __future__ import with_statement
 
 import os
-import urllib
 
 from contextlib import contextmanager
 from fabric.api import abort, local, settings

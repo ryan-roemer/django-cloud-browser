@@ -171,8 +171,10 @@ class Settings(object):
     #: Settings dictionary of accessor callables.
     SETTINGS = {
         # Datastore choice.
-        'CLOUD_BROWSER_DATASTORE': \
-            Setting(default='Filesystem', valid_set=DATASTORES),
+        'CLOUD_BROWSER_DATASTORE': Setting(
+            default='Filesystem',
+            valid_set=DATASTORES
+        ),
 
         # Amazon Web Services S3 datastore settings.
         'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
