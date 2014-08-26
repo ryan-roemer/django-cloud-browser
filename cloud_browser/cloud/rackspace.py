@@ -208,8 +208,8 @@ class RackspaceContainer(base.CloudContainer):
         full_query = len(object_infos) == limit
         if object_infos:
             # Check first object for marker match and truncate if so.
-            if marker and \
-                object_infos[0].get('subdir', '').strip(SEP) == marker:
+            if (marker and
+                    object_infos[0].get('subdir', '').strip(SEP) == marker):
                 object_infos = object_infos[1:]
 
             # Collapse subdirs and dummy objects.

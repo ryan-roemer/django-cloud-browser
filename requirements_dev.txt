@@ -1,4 +1,4 @@
-Django==1.4.2
+Django==1.5.8
 Fabric==1.4.3
 boto==2.6.0
 distribute==0.6.36

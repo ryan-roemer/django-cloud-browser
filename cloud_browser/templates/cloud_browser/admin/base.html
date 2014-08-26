@@ -14,7 +14,7 @@
 {% block breadcrumbs %}
   <div class="breadcrumbs">
     <a href="/">Home</a> &raquo;
-    <a href="{% url cloud_browser_index %}">Cloud Browser</a> &raquo;
+    <a href="{% url "cloud_browser_index" %}">Cloud Browser</a> &raquo;
     {% block cloud_browser_breadcrumbs %}
       {% include "cloud_browser/_breadcrumbs.html" %}
     {% endblock %}
