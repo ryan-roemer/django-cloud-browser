@@ -59,5 +59,5 @@ pages can be viewed at arbitrary object-per-page and starting points.
 Conveniently, URL paths can be inputted and linked to a starting point within
 a long list of results.
 
-.. |build| image:: https://travis-ci.org/ryan-roemer/django-cloud-browser.svg?branch=feature-travis
+.. |build| image:: https://travis-ci.org/ryan-roemer/django-cloud-browser.svg
    :target: https://travis-ci.org/ryan-roemer/django-cloud-browser
