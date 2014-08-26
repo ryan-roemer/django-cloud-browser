@@ -15,7 +15,7 @@ v0.2.2
 v0.2.1
 ======
 * Allow fully-qualified string path for ``CLOUD_BROWSER_VIEW_DECORATOR``.
-  Thanks to `Branton Davis <https://github.com/bluecamel>`_ for patch.
+  [`@bluecamel <https://github.com/bluecamel>`_]
 
 v0.2.0
 ======
