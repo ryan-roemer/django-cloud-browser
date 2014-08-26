@@ -2,6 +2,12 @@
  Changes
 =========
 
+Current
+=======
+* Fix PyLint, PEP8 issues and upgrade to Django 1.5.
+  [`@wxu-urbandaddy <https://github.com/wxu-urbandaddy>`_,
+  `@jfk-urbandaddy <https://github.com/jfk-urbandaddy>`_]
+
 v0.2.2
 ======
 * Add dev. requirements, fix URL homepage link.
@@ -25,8 +31,8 @@ v0.1.3
 
 v0.1.2
 ======
-* Added support for `OpenStack <http://www.openstack.org/>`_. Thanks to
-  `Doug Weimer <https://github.com/noodley>`_ for patch.
+* Added support for `OpenStack <http://www.openstack.org/>`_.
+  [`@noodley <https://github.com/noodley>`_]
 
 v0.1.1
 ======
