@@ -1,12 +1,11 @@
 """Cloud browser URLs."""
-from django.conf.urls.defaults import patterns, url
-from django.views.generic.simple import redirect_to
+from django.conf.urls import patterns, include, url
+from django.views.generic.base import RedirectView
 
 from cloud_browser.app_settings import settings
 
 urlpatterns = patterns('cloud_browser.views',  # pylint: disable=C0103
-    url(r'^$', redirect_to, name="cloud_browser_index",
-        kwargs={'url': 'browser'}),
+    url(r'^$', RedirectView.as_view(url='browser'), name="cloud_browser_index"),
     url(r'^browser/(?P<path>.*)$', 'browser', name="cloud_browser_browser"),
     url(r'^document/(?P<path>.*)$', 'document', name="cloud_browser_document"),
 )

@@ -16,7 +16,7 @@
   <li class="cb-selected">{{ cont.name|truncatechars:22 }}</li>
   {% else %}
   <li>
-    <a href="{% url cloud_browser_browser cont.name|urlencode %}"
+    <a href="{% url "cloud_browser_browser" cont.name|urlencode %}"
        title="{{ cont.name }}">{{ cont.name|truncatechars:22 }}</a>
   </li>
   {% endif %}
@@ -47,10 +47,10 @@
             <td><img src="{% cloud_browser_media_url 'img/tango/16x16/mimetypes/text-x-generic.png' %}" /></td>
         {% endif %}
         {% if obj.is_file %}
-        <td><a href="{% url cloud_browser_document obj.path|urlencode %}"
+        <td><a href="{% url "cloud_browser_document" obj.path|urlencode %}"
             >{{ obj.basename }}</a></td>
         {% else %}
-        <td><a href="{% url cloud_browser_browser obj.path|urlencode %}"
+        <td><a href="{% url "cloud_browser_browser" obj.path|urlencode %}"
                class="cloud-browser-document-link"
             >{{ obj.basename }}</a></td>
         {% endif %}
@@ -82,7 +82,7 @@
       <td colspan="6">
         {% if marker_part %}
         <form id="cloud-browser-next" class="cloud-browser-form"
-          action="{% url cloud_browser_browser path|urlencode %}" method="post">
+          action="{% url "cloud_browser_browser" path|urlencode %}" method="post">
           {% csrf_token %}
           Next
           <input name="limit" type="text" size="5"
