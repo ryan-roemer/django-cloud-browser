@@ -2,8 +2,10 @@
  Changes
 =========
 
-Current
-=======
+v0.2.3
+======
+* Fix deprecated ``django.conf.urls.defaults``.
+  [`@Anton-Shutik <https://github.com/Anton-Shutik>`_]
 * Fix PyLint, PEP8 issues and upgrade to Django 1.5.
   [`@wxu-urbandaddy <https://github.com/wxu-urbandaddy>`_,
   `@jfk-urbandaddy <https://github.com/jfk-urbandaddy>`_]

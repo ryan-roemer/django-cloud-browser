@@ -1,5 +1,5 @@
 """Cloud browser URLs for Django admin integration."""
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from django.views.generic.base import RedirectView
 
 from cloud_browser.app_settings import settings

@@ -79,7 +79,7 @@ def sdist():
 def register():
     """Register and prep user for PyPi upload.
 
-    .. note:: May need to weak ~/.pypirc file per issue:
+    .. note:: May need to tweak ~/.pypirc file per issue:
         http://stackoverflow.com/questions/1569315
     """
     with _dist_wrapper():
