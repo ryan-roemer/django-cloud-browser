@@ -90,7 +90,7 @@ def dt_from_rfc8601(date_str):
     # Format string. (2010-04-13T14:02:48.000Z)
     fmt = "%Y-%m-%dT%H:%M:%S"
     # Python 2.6+: Could format and handle milliseconds.
-    #if date_str.find('.') >= 0:
+    # if date_str.find('.') >= 0:
     #    fmt += ".%f"
 
     return datetime.strptime(date_str, fmt)
@@ -140,7 +140,7 @@ def basename(path):
     if sep_ind < 0:
         return path
 
-    return base_path[sep_ind+1:]
+    return base_path[sep_ind + 1:]
 
 
 def path_parts(path):

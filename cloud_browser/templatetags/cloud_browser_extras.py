@@ -35,7 +35,7 @@ def truncatechars(value, num, end_text="..."):
         pass
 
     if length is not None and len(value) > length:
-        return value[:length-len(end_text)] + end_text
+        return value[:length - len(end_text)] + end_text
 
     return value
 truncatechars.is_safe = True  # pylint: disable=W0612

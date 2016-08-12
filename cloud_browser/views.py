@@ -2,7 +2,11 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.importlib import import_module
+
+try:
+    from django.utils.importlib import import_module
+except ImportError:
+    from importlib import import_module
 
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import get_connection, get_connection_cls, errors
@@ -76,7 +80,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
     # Get and adjust listing limit.
     limit_default = settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
-    limit_test = lambda x: x > 0 and (MAX_LIMIT is None or x <= MAX_LIMIT - 1)
+
+    def limit_test(num):
+        return num > 0 and (MAX_LIMIT is None or num <= MAX_LIMIT - 1)
+
     limit = get_int(incoming.get('limit', limit_default),
                     limit_default,
                     limit_test)
@@ -93,14 +100,15 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     objects = None
     if container_path != '':
         # Find marked container from list.
-        cont_eq = lambda c: c.name == container_path
+        def cont_eq(container):
+            return container.name == container_path
         cont_list = list(islice(ifilter(cont_eq, containers), 1))
         if not cont_list:
             raise Http404("No container at: %s" % container_path)
 
         # Q2: Get objects for instant list, plus one to check "next".
         container = cont_list[0]
-        objects = container.get_objects(object_path, marker, limit+1)
+        objects = container.get_objects(object_path, marker, limit + 1)
         marker = None
 
         # If over limit, strip last item and set marker.

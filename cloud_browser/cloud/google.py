@@ -92,7 +92,7 @@ class GsContainer(base.BotoContainer):
         folder = path.split(SEP)[-1]
 
         # Query extra objects, then strip 0-byte dummy object if present.
-        objs = super(GsContainer, self).get_objects(path, marker, limit+1)
+        objs = super(GsContainer, self).get_objects(path, marker, limit + 1)
         objs = [o for o in objs if not (o.size == 0 and o.name == folder)]
 
         return objs[:limit]
