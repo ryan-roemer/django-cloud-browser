@@ -2,6 +2,11 @@
  Changes
 =========
 
+v0.3.0
+======
+* Various updates for Django 1.8.
+  [`@sysradium <https://github.com/sysradium>`_]
+
 v0.2.3
 ======
 * Fix deprecated ``django.conf.urls.defaults``.
