@@ -38,7 +38,7 @@ class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
     @requires(cloudfiles, 'cloudfiles')
     def lazy_translations(cls):
         """Lazy translations."""
-        return  {
+        return {
             cloudfiles.errors.NoSuchContainer: errors.NoContainerException,
             cloudfiles.errors.NoSuchObject: errors.NoObjectException,
         }
@@ -171,7 +171,7 @@ class RackspaceContainer(base.CloudContainer):
             # The underlying query returned a full result set, but we
             # truncated it to under limit. Re-run at twice the limit and then
             # slice back.
-            object_infos, _ = self._get_object_infos(path, marker, 2*limit)
+            object_infos, _ = self._get_object_infos(path, marker, 2 * limit)
             object_infos = object_infos[:limit]
 
         return [self.obj_cls.from_info(self, x) for x in object_infos]

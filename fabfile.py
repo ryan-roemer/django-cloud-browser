@@ -101,9 +101,9 @@ def pylint(rcfile=PYLINT_CFG):
     :param rcfile: PyLint configuration file.
     """
     # Have a spurious DeprecationWarning in pylint.
-    local(
-        "python -W ignore::DeprecationWarning `which pylint` --rcfile=%s %s" %
-        (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("pylint --rcfile=%s %s" % (
+        rcfile, " ".join(CHECK_INCLUDES)), capture=False
+    )
 
 
 def pep8():
