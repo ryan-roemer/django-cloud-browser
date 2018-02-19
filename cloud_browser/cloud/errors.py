@@ -130,11 +130,11 @@ class CloudExceptionWrapper(object):
 
             try:
                 return operation(*args, **kwargs)
-            except self.excepts(), exc:
+            except self.excepts() as exc:
                 new_exc = self.translate(exc)
                 if new_exc:
                     # Wrap and raise with stack intact.
-                    raise new_exc.__class__, new_exc, sys.exc_info()[2]
+                    raise new_exc.__class__(new_exc, sys.exc_info()[2])
                 else:
                     raise
 

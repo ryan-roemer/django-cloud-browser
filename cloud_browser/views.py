@@ -1,6 +1,6 @@
 """Cloud browser views."""
 from django.http import HttpResponse, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 try:
@@ -28,7 +28,7 @@ def settings_view_decorator(function):
     dec = settings.CLOUD_BROWSER_VIEW_DECORATOR
 
     # Trade-up string to real decorator.
-    if isinstance(dec, basestring):
+    if isinstance(dec, str):
         # Split into module and decorator strings.
         mod_str, _, dec_str = dec.rpartition('.')
         if not (mod_str and dec_str):
@@ -67,7 +67,13 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     :param path: Path to resource, including container as first part of path.
     :param template: Template to render.
     """
-    from itertools import ifilter, islice
+
+    from itertools import islice
+
+    try:
+        from future_builtins import filter
+    except ImportError:
+        from builtins import filter
 
     # Inputs.
     container_path, object_path = path_parts(path)
@@ -102,7 +108,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
         # Find marked container from list.
         def cont_eq(container):
             return container.name == container_path
-        cont_list = list(islice(ifilter(cont_eq, containers), 1))
+        filtered_conts = filter(cont_eq, containers)
+        cont_list = list(islice(filtered_conts, 1))
         if not cont_list:
             raise Http404("No container at: %s" % container_path)
 
@@ -117,7 +124,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             marker = objects[-1].name
             marker_part = relpath(marker, object_path)
 
-    return render_to_response(template,
+    return render(request, template,
                               {'path': path,
                                'marker': marker,
                                'marker_part': marker_part,
@@ -127,8 +134,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
                                'containers': containers,
                                'container': container,
                                'object_path': object_path,
-                               'objects': objects},
-                              context_instance=RequestContext(request))
+                               'objects': objects})
 
 
 @settings_view_decorator

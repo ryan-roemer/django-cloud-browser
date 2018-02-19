@@ -74,7 +74,12 @@ class MediaUrlNode(Node):
 
     def render(self, context):
         """Render."""
-        from django.core.urlresolvers import reverse
+
+        try:
+            from django.urls import reverse
+        except ImportError:
+            from django.core.urlresolvers import reverse
+
 
         # Check if we have real or Django static-served media
         if self.static_media_url is not None:
