@@ -1,5 +1,6 @@
 """Fabric file."""
 from __future__ import with_statement
+from __future__ import print_function
 
 import os
 
@@ -101,9 +102,8 @@ def pylint(rcfile=PYLINT_CFG):
     :param rcfile: PyLint configuration file.
     """
     # Have a spurious DeprecationWarning in pylint.
-    local("pylint --rcfile=%s %s" % (
-        rcfile, " ".join(CHECK_INCLUDES)), capture=False
-    )
+    local("pylint --rcfile=%s %s" %
+          (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
 
 
 def pep8():
@@ -132,7 +132,7 @@ def _parse_bool(value):
     if isinstance(value, bool):
         return value
 
-    elif isinstance(value, basestring):
+    elif isinstance(value, str):
         if value == 'True':
             return True
         elif value == 'False':

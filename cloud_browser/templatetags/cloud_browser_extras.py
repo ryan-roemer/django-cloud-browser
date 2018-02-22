@@ -85,9 +85,7 @@ class MediaUrlNode(Node):
         if self.static_media_url is not None:
             # Real.
             return os.path.join(self.static_media_url, self.rel_path)
-
-        else:
-            # Django.
-            return reverse("cloud_browser_media",
-                           args=[self.rel_path],
-                           current_app='cloud_browser')
+        # Django.
+        return reverse("cloud_browser_media",
+                       args=[self.rel_path],
+                       current_app='cloud_browser')

@@ -36,7 +36,7 @@ class BotoExceptionWrapper(errors.CloudExceptionWrapper):
 
         if isinstance(exc, StorageResponseError):
             if exc.status == 404:
-                return self.error_cls(unicode(exc))
+                return self.error_cls(str(exc))
 
         return None
 

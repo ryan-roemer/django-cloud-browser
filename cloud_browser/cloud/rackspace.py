@@ -262,7 +262,7 @@ class RackspaceConnection(base.CloudConnection):
         if self.authurl:
             kwargs['authurl'] = self.authurl
 
-        return cloudfiles.get_connection(**kwargs)  # pylint: disable=W0142
+        return cloudfiles.get_connection(**kwargs)
 
     @wrap_rs_errors
     def _get_containers(self):

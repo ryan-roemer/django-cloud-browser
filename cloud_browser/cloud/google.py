@@ -66,7 +66,7 @@ class GsObject(base.BotoObject):
     @classmethod
     def from_prefix(cls, container, prefix):
         """Create from prefix object."""
-        if (cls._is_gs_folder(prefix)):
+        if cls._is_gs_folder(prefix):
             name, suffix, extra = prefix.name.partition(cls._gs_folder_suffix)
             if (suffix, extra) == (cls._gs_folder_suffix, ''):
                 # Patch GS specific folder to remove suffix.

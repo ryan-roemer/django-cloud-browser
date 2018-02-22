@@ -117,7 +117,8 @@ class CloudExceptionWrapper(object):
         # Find actual class.
         for key in self.translations.keys():
             if isinstance(exc, key):
-                return self.translations[key](unicode(exc))
+                # pylint: disable=unsubscriptable-object
+                return self.translations[key](str(exc))
 
         return None
 
@@ -130,6 +131,7 @@ class CloudExceptionWrapper(object):
 
             try:
                 return operation(*args, **kwargs)
+            # pylint: disable=catching-non-exception
             except self.excepts() as exc:
                 new_exc = self.translate(exc)
                 if new_exc:

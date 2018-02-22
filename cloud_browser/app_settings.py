@@ -66,7 +66,7 @@ class BoolSetting(Setting):
         elif isinstance(value, bool):
             return value
 
-        elif isinstance(value, basestring):
+        elif isinstance(value, str):
             if value == 'True':
                 return True
             elif value == 'False':

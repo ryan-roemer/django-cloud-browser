@@ -155,7 +155,7 @@ def path_parts(path):
     container_path = object_path = ''
     parts = path_list(path)
 
-    if len(parts) > 0:
+    if len(parts) >= 1:
         container_path = parts[0]
     if len(parts) > 1:
         object_path = path_join(*parts[1:])
@@ -200,4 +200,4 @@ def relpath(path, start):
 
     # Start with parent traversal and add relative parts.
     rel_items = [PARENT] * parent_num + path_items[common_ind:]
-    return path_join(*rel_items)  # pylint: disable=W0142
+    return path_join(*rel_items)
