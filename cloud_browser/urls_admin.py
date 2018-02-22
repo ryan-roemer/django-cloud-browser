@@ -25,4 +25,3 @@ if settings.app_media_url is None:
             {'document_root': settings.app_media_doc_root},
             name="cloud_browser_media"),
     ]
-

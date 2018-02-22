@@ -125,16 +125,16 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             marker_part = relpath(marker, object_path)
 
     return render(request, template,
-                              {'path': path,
-                               'marker': marker,
-                               'marker_part': marker_part,
-                               'limit': limit,
-                               'breadcrumbs': _breadcrumbs(path),
-                               'container_path': container_path,
-                               'containers': containers,
-                               'container': container,
-                               'object_path': object_path,
-                               'objects': objects})
+                  {'path': path,
+                   'marker': marker,
+                   'marker_part': marker_part,
+                   'limit': limit,
+                   'breadcrumbs': _breadcrumbs(path),
+                   'container_path': container_path,
+                   'containers': containers,
+                   'container': container,
+                   'object_path': object_path,
+                   'objects': objects})
 
 
 @settings_view_decorator
