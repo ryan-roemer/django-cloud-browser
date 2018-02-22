@@ -6,5 +6,9 @@ python:
 install:
   - "pip install -r requirements_dev.txt"
 
+before_install:
+  - sudo rm -f /etc/boto.cfg
+  - easy_install distribute
+
 script:
   - "fab check"

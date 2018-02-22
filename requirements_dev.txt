@@ -1,4 +1,4 @@
-Django==1.8.0
+Django>=1.8.0
 setuptools==20.1
 Fabric==1.4.3
 boto==2.6.0
