@@ -1,7 +1,7 @@
 # pylint: disable=no-value-for-parameter
 
 from django.conf import settings
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import RedirectView
 
@@ -9,7 +9,8 @@ from django.views.generic import RedirectView
 admin.autodiscover()
 
 ADMIN_URLS = False
-urlpatterns = patterns('')  # pylint: disable=C0103
+# pylint: disable=invalid-name
+urlpatterns = []
 
 if ADMIN_URLS:
     urlpatterns += [
@@ -17,7 +18,6 @@ if ADMIN_URLS:
         url(r'^$', RedirectView.as_view(url='/admin/'), name='index'),
         url(r'^admin/cb/', include('cloud_browser.urls_admin')),
     ]
-
 else:
     urlpatterns += [
         # Normal URLs.

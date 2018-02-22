@@ -76,9 +76,10 @@ class MediaUrlNode(Node):
         """Render."""
 
         try:
-            from django.urls import reverse
-        except ImportError:
             from django.core.urlresolvers import reverse
+        except ImportError:
+            # pylint: disable=no-name-in-module, import-error
+            from django.urls import reverse
 
         # Check if we have real or Django static-served media
         if self.static_media_url is not None:

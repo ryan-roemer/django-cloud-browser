@@ -1,9 +1,9 @@
 """Cloud browser views."""
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from django.template import RequestContext
 
 try:
+    # pylint: disable=no-name-in-module, import-error
     from django.utils.importlib import import_module
 except ImportError:
     from importlib import import_module
@@ -71,8 +71,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     from itertools import islice
 
     try:
+        # pylint: disable=redefined-builtin
         from future_builtins import filter
     except ImportError:
+        # pylint: disable=import-error
         from builtins import filter
 
     # Inputs.
