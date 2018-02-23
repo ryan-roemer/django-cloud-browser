@@ -1,26 +1,22 @@
-
 <!DOCTYPE html>
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Cloud Browser App API &mdash; Cloud Browser 0.3.0 documentation</title>
+    <title>Cloud Browser App API &#8212; Cloud Browser 0.4.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.0',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -28,9 +24,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Cloud Browser 0.3.0 documentation" href="../index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Application Settings" href="app_settings.html" />
     <link rel="prev" title="Screenshots" href="../screenshots.html" />
 <meta charset='utf-8'>
@@ -59,7 +56,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.3.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -89,7 +86,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../screenshots.html#admin-deployment">Admin Deployment</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Cloud Browser App API</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud Browser App API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="app_settings.html">Application Settings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cloud.html">Cloud / Datastore Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="common.html">Common / Utilities</a></li>
@@ -100,6 +97,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-3-0">v0.3.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-2-3">v0.2.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-2-2">v0.2.2</a></li>
@@ -133,9 +131,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Cloud Browser App API</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Cloud Browser App API</a></li>
 </ul>
 </ul>
 </li>
@@ -145,11 +141,11 @@
               
                 
   <li>
-    <a href="../screenshots.html" title="Previous Chapter: Screenshots"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Screenshots</span>
+    <a href="../screenshots.html" title="Previous Chapter: Screenshots"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Screenshots</span>
     </a>
   </li>
   <li>
-    <a href="app_settings.html" title="Next Chapter: Application Settings"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Application Sett... &raquo;</span>
+    <a href="app_settings.html" title="Next Chapter: Application Settings"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Application Settings &raquo;</span>
     </a>
   </li>
               
@@ -175,7 +171,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 content">
       
   <div class="section" id="module-cloud_browser">
 <span id="cloud-browser-app-api"></span><h1>Cloud Browser App API<a class="headerlink" href="#module-cloud_browser" title="Permalink to this headline">¶</a></h1>
@@ -207,14 +203,14 @@
         <br/>
         
 <div id="sourcelink">
-  <a href="../_sources/cloud_browser/index.txt"
+  <a href="../_sources/cloud_browser/index.rst.txt"
      rel="nofollow">Source</a>
 </div>
       
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
     </p>
   </div>
 </footer>
