@@ -5,7 +5,7 @@ from __future__ import print_function
 import os
 
 from contextlib import contextmanager
-from fabric.api import abort, local, settings
+from fabric.api import local
 
 
 ###############################################################################
@@ -23,7 +23,6 @@ CHECK_INCLUDES = (
     MOD,
     PROJ,
 )
-PEP8_IGNORES = ('E225',)
 PYLINT_CFG = "dev/pylint.cfg"
 
 DOC_INPUT = "doc"
@@ -106,21 +105,10 @@ def pylint(rcfile=PYLINT_CFG):
           (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
 
 
-def pep8():
-    """Run pep8 style checker."""
-    includes = "-r %s" % " ".join(CHECK_INCLUDES)
-    ignores = "--ignore=%s" % ",".join(PEP8_IGNORES) if PEP8_IGNORES else ''
-    with settings(warn_only=True):
-        results = local("pep8 %s %s" % (includes, ignores), capture=True)
-    errors = results.strip() if results else None
-    if errors:
-        print(errors)
-        abort("PEP8 failed.")
-
-
 def check():
     """Run all checkers."""
-    pep8()
+    # TODO: Add pycodestyle.
+    # https://github.com/ryan-roemer/django-cloud-browser/issues/15
     pylint()
 
 

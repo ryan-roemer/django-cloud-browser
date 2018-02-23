@@ -2,6 +2,11 @@
  Changes
 =========
 
+v0.4.0
+======
+* Various updates for Django 1.8+ and Python 3.
+  [`@corcoran <https://github.com/corcoran>`_]
+
 v0.3.0
 ======
 * Various updates for Django 1.8.

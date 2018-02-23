@@ -1,5 +1,9 @@
 """Rackspace Cloud Files datastore.
 
+.. warning::
+    Rackspace is deprecated and we need to refactor to OpenStack.
+    See https://github.com/ryan-roemer/django-cloud-browser/issues/16
+
 .. note::
     **Installation**: Use of this module requires the Rackspace
     cloudfiles_ package, and at least version 1.7.4 (which introduced the

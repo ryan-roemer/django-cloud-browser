@@ -15,6 +15,8 @@ Currently supported backend datastores include:
 * `Amazon S3`_.
 * `Google Storage for Developers`_.
 * `Rackspace Cloud Files`_.
+    .. warning:: Rackspace is deprecated and we need to refactor to OpenStack.
+       See https://github.com/ryan-roemer/django-cloud-browser/issues/16
 * `OpenStack Storage`_.
 * Local file system.
 
