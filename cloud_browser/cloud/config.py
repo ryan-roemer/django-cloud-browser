@@ -15,6 +15,19 @@ class Config(object):
 
         conn_cls = conn_fn = None
         datastore = settings.CLOUD_BROWSER_DATASTORE
+
+        if datastore == 'ApacheLibcloud':
+            # Try ApacheLibcloud
+            from cloud_browser.cloud.apache_libcloud import \
+                ApacheLibcloudConnection
+            provider = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER
+            account = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT
+            secret_key = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY
+            if provider and account and secret_key:
+                conn_cls = ApacheLibcloudConnection
+                conn_fn = lambda: ApacheLibcloudConnection(
+                    provider, account, secret_key)
+
         if datastore == 'AWS':
             # Try AWS
             from cloud_browser.cloud.aws import AwsConnection

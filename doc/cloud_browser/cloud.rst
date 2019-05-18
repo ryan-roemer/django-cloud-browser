@@ -32,6 +32,11 @@ Filesystem Datastore
 .. automodule:: cloud_browser.cloud.fs
    :members:
 
+Apache Libcloud Datastore
+-------------------------
+.. automodule:: cloud_browser.cloud.apache_libcloud
+   :members:
+
 Boto-based Datastore Abstract Base Class
 ----------------------------------------
 .. automodule:: cloud_browser.cloud.boto_base
