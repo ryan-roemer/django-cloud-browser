@@ -1,6 +1,8 @@
 """Cloud browser package."""
 from __future__ import with_statement
 import os
+from sys import version_info
+
 from setuptools import setup, find_packages
 
 from cloud_browser import __version__
@@ -58,9 +60,7 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
 
-    install_requires=[
-        "distribute",
-    ],
+    install_requires=["distribute"] if version_info < (3, 6) else [],
 
     packages=PKGS,
     include_package_data=True,
