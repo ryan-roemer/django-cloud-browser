@@ -2,6 +2,7 @@
 import sys
 
 from functools import wraps
+from itertools import chain
 
 
 class CloudException(Exception):
@@ -86,18 +87,6 @@ class CloudExceptionWrapper(object):
     translations = {}
     _excepts = None
 
-    def __new__(cls, *args, **kwargs):
-        """New."""
-        obj = object.__new__(cls, *args, **kwargs)
-
-        # Patch in lazy translations.
-        if not obj.translations:
-            lazy_translations = cls.lazy_translations()
-            if lazy_translations:
-                obj.translations = lazy_translations
-
-        return obj
-
     @classmethod
     def excepts(cls):
         """Return tuple of underlying exception classes to trap and wrap.
@@ -105,7 +94,8 @@ class CloudExceptionWrapper(object):
         :rtype: ``tuple`` of ``type``
         """
         if cls._excepts is None:
-            cls._excepts = tuple(cls.translations.keys())
+            cls._excepts = tuple(chain(cls.translations,
+                                       cls.lazy_translations()))
         return cls._excepts
 
     def translate(self, exc):
@@ -115,10 +105,11 @@ class CloudExceptionWrapper(object):
         in, else ``None`` (which signifies no wrapping should be done).
         """
         # Find actual class.
-        for key in self.translations.keys():
-            if isinstance(exc, key):
-                # pylint: disable=unsubscriptable-object
-                return self.translations[key](str(exc))
+        for translations in self.translations, self.lazy_translations():
+            for key in translations:
+                if isinstance(exc, key):
+                    # pylint: disable=unsubscriptable-object
+                    return translations[key](str(exc))
 
         return None
 
@@ -145,4 +136,4 @@ class CloudExceptionWrapper(object):
     @classmethod
     def lazy_translations(cls):
         """Lazy translations definitions (for additional checks)."""
-        return None
+        return {}
