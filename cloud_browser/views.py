@@ -1,6 +1,7 @@
 """Cloud browser views."""
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.utils.http import urlencode
 
 try:
     # pylint: disable=no-name-in-module, import-error
@@ -158,6 +159,13 @@ def document(_, path=''):
         storage_obj = container.get_object(object_path)
     except errors.NoObjectException:
         raise Http404("No object at: %s" % object_path)
+
+    custom_view = settings.CLOUD_BROWSER_OBJECT_REDIRECT_URL
+    if custom_view:
+        return redirect(custom_view + "?" + urlencode({
+            "container": container_path,
+            "object": object_path,
+        }))
 
     # Get content-type and encoding.
     content_type = storage_obj.smart_content_type

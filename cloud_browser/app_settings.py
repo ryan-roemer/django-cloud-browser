@@ -155,6 +155,10 @@ class Settings(object):
 
     * ``CLOUD_BROWSER_DEFAULT_LIST_LIMIT``: Default number of objects to
       diplay per browser page.
+
+    * ``CLOUD_BROWSER_OBJECT_REDIRECT_URL``: Custom URL to which to redirect
+      when clicking on an object (defaults to showing object contents).
+
     * ``CLOUD_BROWSER_STATIC_MEDIA_DIR``: If this applications static media
       (found in ``app_media``) is served up under the ``settings.MEDIA_ROOT``,
       then set a relative path from the root, and the static media will be used
@@ -202,6 +206,9 @@ class Settings(object):
 
         # Browser settings.
         'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': Setting(default=20),
+
+        # Hook for custom actions.
+        'CLOUD_BROWSER_OBJECT_REDIRECT_URL': Setting(),
 
         # Static media root.
         'CLOUD_BROWSER_STATIC_MEDIA_DIR': Setting(),
