@@ -1,18 +1,14 @@
 """Cloud browser URLs for Django admin integration."""
 from django.conf.urls import url
-from django.views.generic.base import RedirectView
 from django.views.static import serve
 
 from cloud_browser.app_settings import settings
-from cloud_browser.views import browser, document
+from cloud_browser.views import browser, document, index
 
 # pylint: disable=invalid-name
 
 urlpatterns = [
-    url(r'^$',
-        # pylint: disable=no-value-for-parameter
-        RedirectView.as_view(url='browser'),
-        name="cloud_browser_index"),
+    url(r'^$', index, name="cloud_browser_index"),
     url(r'^browser/(?P<path>.*)$', browser, name="cloud_browser_browser",
         kwargs={'template': "cloud_browser/admin/browser.html"}),
     url(r'^document/(?P<path>.*)$', document, name="cloud_browser_document"),
