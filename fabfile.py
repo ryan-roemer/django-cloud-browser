@@ -2,8 +2,9 @@
 from __future__ import with_statement
 from __future__ import print_function
 
+import errno
 import os
-
+import shutil
 from contextlib import contextmanager
 from fabric.api import local
 
@@ -11,6 +12,8 @@ from fabric.api import local
 ###############################################################################
 # Constants
 ###############################################################################
+ROOT_DIR = os.path.dirname(__file__)
+
 MOD = "cloud_browser"
 PROJ = "cloud_browser_project"
 PROJ_SETTINGS = ".".join((PROJ, "settings"))
@@ -23,7 +26,7 @@ CHECK_INCLUDES = (
     MOD,
     PROJ,
 )
-PYLINT_CFG = "dev/pylint.cfg"
+PYLINT_CFG = os.path.join("dev", "pylint.cfg")
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
@@ -44,6 +47,8 @@ SDIST_RST_FILES = (
 )
 SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 
+MANAGE = os.path.join(PROJ, 'manage.py')
+
 
 ###############################################################################
 # Build
@@ -51,7 +56,11 @@ SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 def clean():
     """Clean build files."""
     for build_dir in list(BUILD_DIRS) + [DOC_OUTPUT, DEV_DB_DIR]:
-        local("rm -rf %s" % build_dir)
+        try:
+            shutil.rmtree(build_dir)
+        except OSError as ex:
+            if ex.errno != errno.ENOENT:
+                raise
 
 
 @contextmanager
@@ -60,14 +69,14 @@ def _dist_wrapper():
     try:
         # Copy select *.rst files to *.txt for build.
         for rst_file, txt_file in zip(SDIST_RST_FILES, SDIST_TXT_FILES):
-            local("cp %s %s" % (rst_file, txt_file))
+            shutil.copy(rst_file, txt_file)
 
         # Perform action.
         yield
     finally:
         # Clean up temp *.txt files.
         for rst_file in SDIST_TXT_FILES:
-            local("rm -f %s" % rst_file, capture=False)
+            os.remove(rst_file)
 
 
 def sdist():
@@ -89,7 +98,8 @@ def register():
 def upload():
     """Upload package."""
     with _dist_wrapper():
-        local("python setup.py sdist upload", capture=False)
+        local("python setup.py sdist", capture=False)
+        local("twine upload dist/*", capture=False)
 
 
 ###############################################################################
@@ -137,33 +147,38 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
     :param github: Convert to GitHub-friendly format?
     """
 
-    local("export PYTHONPATH='' && "
-          "export DJANGO_SETTINGS_MODULE=%s && "
-          "sphinx-build -b html %s %s" % (proj_settings, DOC_INPUT, output),
+    os.environ['PYTHONPATH'] = ROOT_DIR
+    os.environ['DJANGO_SETTINGS_MODULE'] = proj_settings
+
+    local("sphinx-build -b html %s %s" % (DOC_INPUT, output),
           capture=False)
 
     if _parse_bool(github):
-        local("touch %s/.nojekyll" % output, capture=False)
+        with open(os.path.join(output, ".nojekyll"), "wb") as fobj:
+            fobj.write(b'')
 
 
 ###############################################################################
 # Django Targets
 ###############################################################################
-def _manage(target, extra='', proj_settings=PROJ_SETTINGS):
-    """Generic wrapper for ``django-admin.py``."""
-    local("export PYTHONPATH='' && "
-          "export DJANGO_SETTINGS_MODULE='%s' && "
-          "django-admin.py %s %s" %
-          (proj_settings, target, extra),
-          capture=False)
+def _manage(target, extra=""):
+    """Generic wrapper for ``manage.py``."""
+    os.environ['PYTHONPATH'] = ROOT_DIR
+
+    local("python %s %s %s" % (MANAGE, target, extra), capture=False)
 
 
-def syncdb(proj_settings=PROJ_SETTINGS):
+def syncdb():
     """Run syncdb."""
-    local("mkdir -p %s" % DEV_DB_DIR)
-    _manage("syncdb", proj_settings=proj_settings)
+    try:
+        os.makedirs(DEV_DB_DIR)
+    except OSError as ex:
+        if ex.errno != errno.EEXIST:
+            raise
+
+    _manage("syncdb")
 
 
-def run_server(addr="127.0.0.1:8000", proj_settings=PROJ_SETTINGS):
+def run_server(addr="127.0.0.1:8000"):
     """Run Django dev. server."""
-    _manage("runserver", addr, proj_settings)
+    _manage("runserver", addr)

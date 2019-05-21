@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_PATH, 'db/dev.sqlite3'),
+        'NAME': os.path.join(PROJECT_PATH, 'db', 'dev.sqlite3'),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -85,6 +85,6 @@ INSTALLED_APPS = (
     'cloud_browser',
 )
 
-# EXAMPLE: Serve up the "/usr/share" directory.
+# EXAMPLE: Serve up the project directory.
 CLOUD_BROWSER_DATASTORE = "Filesystem"
-CLOUD_BROWSER_FILESYSTEM_ROOT = "/usr/share/doc"
+CLOUD_BROWSER_FILESYSTEM_ROOT = PROJECT_PATH
