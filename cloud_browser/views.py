@@ -162,7 +162,8 @@ def document(_, path=''):
 
     custom_view = settings.CLOUD_BROWSER_OBJECT_REDIRECT_URL
     if custom_view:
-        return redirect(custom_view + "?" + urlencode({
+        separator = "?" if "?" not in custom_view else "&"
+        return redirect(custom_view + separator + urlencode({
             "container": container_path,
             "object": object_path,
         }))
