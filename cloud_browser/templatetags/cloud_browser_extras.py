@@ -38,6 +38,8 @@ def truncatechars(value, num, end_text="..."):
         return value[:length - len(end_text)] + end_text
 
     return value
+
+
 truncatechars.is_safe = True  # pylint: disable=W0612
 
 

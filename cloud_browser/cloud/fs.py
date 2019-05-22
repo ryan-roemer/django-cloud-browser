@@ -33,7 +33,6 @@ class FilesystemContainerWrapper(errors.CloudExceptionWrapper):
     translations = {
         OSError: errors.NoContainerException,
     }
-wrap_fs_cont_errors = FilesystemContainerWrapper()  # pylint: disable=C0103
 
 
 class FilesystemObjectWrapper(errors.CloudExceptionWrapper):
@@ -41,6 +40,9 @@ class FilesystemObjectWrapper(errors.CloudExceptionWrapper):
     translations = {
         OSError: errors.NoObjectException,
     }
+
+
+wrap_fs_cont_errors = FilesystemContainerWrapper()  # pylint: disable=C0103
 wrap_fs_obj_errors = FilesystemObjectWrapper()  # pylint: disable=C0103
 
 

@@ -4,5 +4,6 @@ boto==2.48.0
 Fabric3
 Sphinx
 pylint
+flake8
 sphinx-bootstrap-theme
 twine
