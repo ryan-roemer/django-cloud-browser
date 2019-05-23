@@ -16,3 +16,35 @@ before_install:
 
 script:
   - "fab check"
+
+cache: pip
+sudo: required
+
+before_deploy:
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@travis-ci.org"
+  - curl -sL "https://deb.nodesource.com/setup_8.x" | sudo bash -
+  - sudo apt-get install -y nodejs
+  - sudo npm install --global gh-pages@2.0.1
+
+deploy:
+  - provider: script
+    script: fab upload
+    on:
+      tags: true
+      python: "3.6"
+
+  - provider: script
+    script: fab docs publish_docs
+    on:
+      tags: true
+      python: "3.6"
+
+env:
+  global:
+    # TWINE_USERNAME
+    - secure: "UDqGCBOaIluq9GLxjGNMqNsYmgLl8tgBaA48aZFVvo1A+OOftAKz4SxcrxX5T6RQk/tyjGmYmsqp29Omfwbs0+HB8ybQa5+Y+yK2zUGq9qlyqQjl4DxLGIoK09yvRizmN4DVjGiiCWuGfLDissztrAs62t0vL4saRXXTItQIy5c="
+    # TWINE_PASSWORD
+    - secure: "jKfYcuOTx3Bp+4iqjOc7npDT30Vm4nqntQSNtuXn8VH1NkrUYhtN8PU7/4uxoH9r0UnNaFDj0JDXqYFKqt/fFQJgJXYQsBOP0oMxPwIzd1t3tvqhyE4Qn+9JJrN8LoQeGtFA+HOiyRNZiWm0WHQyD0LtQWyv7dmezV2r8zc7tL8="
+    # GITHUB_TOKEN
+    - secure: "T6jNcZb+c/J5fhTFCiBo/19APZ3MiI6kQXhPPdA+DAOro2GBRb11mli01cm8CDwJi/uxfDpzo0m3S66vAgLsRR1t9hy2m2773Wc3D05SUjlygHBURKy1MKpkrfypcsmZ28VjJSZBlB2b5VkovvlGcXCCpE2NSwyh0/OioeAWZw0="
