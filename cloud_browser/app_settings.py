@@ -100,6 +100,13 @@ class Settings(object):
 
     * ``CLOUD_BROWSER_DATASTORE``: Choice of datastore (see values below).
 
+    **Apache Libcloud**: Configure Apache Libcloud as backing datastore.
+
+    * ``CLOUD_BROWSER_DATASTORE = "ApacheLibcloud"``
+    * ``CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER``: Provider name. (*Env*)
+    * ``CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT``: Account name. (*Env*)
+    * ``CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY``: Account secret. (*Env*)
+
     **Amazon Web Services**: Configure AWS S3 as backing datastore.
 
     * ``CLOUD_BROWSER_DATASTORE = "AWS"``
@@ -166,6 +173,7 @@ class Settings(object):
     """
     #: Valid datastore types.
     DATASTORES = set((
+        'ApacheLibcloud',
         'AWS',
         'Google',
         'Rackspace',
@@ -179,6 +187,11 @@ class Settings(object):
             default='Filesystem',
             valid_set=DATASTORES
         ),
+
+        # Apache Libcloud datastore settings.
+        'CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER': Setting(from_env=True),
+        'CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT': Setting(from_env=True),
+        'CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY': Setting(from_env=True),
 
         # Amazon Web Services S3 datastore settings.
         'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),

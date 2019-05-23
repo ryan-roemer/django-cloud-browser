@@ -12,6 +12,7 @@ well as view / download objects.
 
 Currently supported backend datastores include:
 
+* `Apache Libcloud`_.
 * `Amazon S3`_.
 * `Google Storage for Developers`_.
 * `Rackspace Cloud Files`_.
@@ -20,6 +21,7 @@ Currently supported backend datastores include:
 * `OpenStack Storage`_.
 * Local file system.
 
+.. _`Apache Libcloud`: https://libcloud.readthedocs.io/en/latest/storage/index.html
 .. _`Amazon S3`: http://aws.amazon.com/s3/
 .. _`Google Storage for Developers`: http://code.google.com/apis/storage/
 .. _`Rackspace Cloud Files`:
