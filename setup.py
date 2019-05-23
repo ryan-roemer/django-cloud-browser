@@ -17,6 +17,17 @@ os.environ['COPYFILE_DISABLE'] = "true"
 MOD_NAME = "cloud_browser"
 PKGS = [x for x in find_packages() if x.split('.')[0] == MOD_NAME]
 
+TEST_DEPENDENCIES = [
+    "Django==1.8.0",
+    "boto==2.48.0",
+    "Fabric3",
+    "pylint",
+    "flake8",
+    "Sphinx",
+    "sphinx-bootstrap-theme",
+    "twine",
+]
+
 
 ###############################################################################
 # Helpers.
@@ -59,7 +70,7 @@ setup(
         "Topic :: Internet",
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
-
+    extras_require={"test": TEST_DEPENDENCIES},
     install_requires=["distribute"] if version_info < (3, 6) else [],
 
     packages=PKGS,
