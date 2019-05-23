@@ -150,7 +150,7 @@ class BotoContainer(base.CloudContainer):
         # Get +1 results because marker and first item can match as we strip
         # the separator from results obscuring things. No real problem here
         # because boto masks any real request limits.
-        results = list(islice(result_set, limit+1))
+        results = list(islice(result_set, limit + 1))
         if results:
             if marker and results[0].name.rstrip(SEP) == marker.rstrip(SEP):
                 results = results[1:]

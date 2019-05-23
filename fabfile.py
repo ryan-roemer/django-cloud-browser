@@ -27,6 +27,7 @@ CHECK_INCLUDES = (
     PROJ,
 )
 PYLINT_CFG = os.path.join("dev", "pylint.cfg")
+FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
@@ -115,10 +116,18 @@ def pylint(rcfile=PYLINT_CFG):
           (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
 
 
+def flake8(rcfile=FLAKE8_CFG):
+    """Run flake8 style checker.
+
+    :param rcfile: Flake8 configuration file.
+    """
+    local("flake8 --config=%s %s"
+          % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+
+
 def check():
     """Run all checkers."""
-    # TODO: Add pycodestyle.
-    # https://github.com/ryan-roemer/django-cloud-browser/issues/15
+    flake8()
     pylint()
 
 
