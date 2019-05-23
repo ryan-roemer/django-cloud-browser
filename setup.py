@@ -28,7 +28,7 @@ TEST_DEPENDENCIES = [
     "twine",
 ]
 
-if version_info.major > 2:
+if version_info >= (3, 6, 0):
     TEST_DEPENDENCIES.append("black")
 
 
