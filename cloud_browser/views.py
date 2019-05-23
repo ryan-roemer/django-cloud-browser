@@ -1,6 +1,9 @@
 """Cloud browser views."""
+import json
+
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.utils.http import urlencode
 
 try:
     # pylint: disable=no-name-in-module, import-error
@@ -57,6 +60,32 @@ def _breadcrumbs(path):
         crumbs.append((full, part))
 
     return crumbs
+
+
+def _get_context_data(request):
+    try:
+        return json.loads(request.session["context_data"])
+    except (AttributeError, KeyError):
+        return {}
+
+
+def _set_context_data(request):
+    try:
+        request.session["context_data"] = json.dumps(request.GET.dict())
+    except AttributeError:
+        pass
+
+
+def index(request):
+    """Stash context data in the session and redirect to the cloud browser.
+
+    The context data will be passed to the custom view function when exiting
+    the cloud browser context.
+
+    :param request: The request.
+    """
+    _set_context_data(request)
+    return redirect("cloud_browser_browser", path="")
 
 
 @settings_view_decorator
@@ -140,9 +169,10 @@ def browser(request, path='', template="cloud_browser/browser.html"):
 
 
 @settings_view_decorator
-def document(_, path=''):
+def document(request, path=''):
     """View single document from path.
 
+    :param request: The request.
     :param path: Path to resource, including container as first part of path.
     """
     container_path, object_path = path_parts(path)
@@ -158,6 +188,13 @@ def document(_, path=''):
         storage_obj = container.get_object(object_path)
     except errors.NoObjectException:
         raise Http404("No object at: %s" % object_path)
+
+    custom_view = settings.CLOUD_BROWSER_OBJECT_REDIRECT_URL
+    if custom_view:
+        separator = "?" if "?" not in custom_view else "&"
+        params = {"container": container_path, "object": object_path}
+        params.update(_get_context_data(request))
+        return redirect(custom_view + separator + urlencode(params))
 
     # Get content-type and encoding.
     content_type = storage_obj.smart_content_type
