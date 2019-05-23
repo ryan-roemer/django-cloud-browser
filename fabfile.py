@@ -7,6 +7,8 @@ import os
 import shutil
 import sys
 from contextlib import contextmanager
+from uuid import uuid4
+
 from fabric.api import local
 
 
@@ -28,6 +30,10 @@ FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
 DOC_UNDERSCORE_DIRS = ("sources", "static")
+DOC_BRANCH = "gh-pages"
+GITHUB_USER = "ryan-roemer"
+GITHUB_REPO = "django-cloud-browser"
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
 BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
 
@@ -125,26 +131,18 @@ def check():
 ###############################################################################
 # Documentation
 ###############################################################################
-def _parse_bool(value):
-    """Convert ``string`` or ``bool`` to ``bool``."""
-    if isinstance(value, bool):
-        return value
+def _touch(file_path):
+    with open(file_path, "wb") as fobj:
+        fobj.write(b"")
 
-    elif isinstance(value, str):
-        if value == "True":
-            return True
-        elif value == "False":
-            return False
-
-    raise Exception("Value %s is not boolean." % value)
+    return fobj.name
 
 
-def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
+def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
     """Generate API documentation (using Sphinx).
 
     :param output: Output directory.
     :param proj_settings: Django project settings to use.
-    :param github: Convert to GitHub-friendly format?
     """
 
     os.environ["PYTHONPATH"] = ROOT_DIR
@@ -152,9 +150,26 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
 
     local("sphinx-build -b html %s %s" % (DOC_INPUT, output), capture=False)
 
-    if _parse_bool(github):
-        with open(os.path.join(output, ".nojekyll"), "wb") as fobj:
-            fobj.write(b"")
+
+def publish_docs(
+    from_folder=DOC_OUTPUT,
+    to_branch=DOC_BRANCH,
+    github_token=GITHUB_TOKEN,
+    github_user=GITHUB_USER,
+    github_repo=GITHUB_REPO,
+):
+    _touch(os.path.join(DOC_OUTPUT, ".nojekyll"))
+
+    temp_remote = "publish-%s" % uuid4()
+    local(
+        "git remote add %s https://%s@github.com/%s/%s"
+        % (temp_remote, github_token, github_user, github_repo)
+    )
+    local(
+        "gh-pages --dotfiles --dist %s --branch %s --remote %s"
+        % (from_folder, to_branch, temp_remote)
+    )
+    local("git remote rm %s" % temp_remote)
 
 
 ###############################################################################
