@@ -35,7 +35,7 @@ def truncatechars(value, num, end_text="..."):
         pass
 
     if length is not None and len(value) > length:
-        return value[:length - len(end_text)] + end_text
+        return value[: length - len(end_text)] + end_text
 
     return value
 
@@ -72,7 +72,7 @@ class MediaUrlNode(Node):
     def __init__(self, rel_path):
         """Initializer."""
         super(MediaUrlNode, self).__init__()
-        self.rel_path = rel_path.lstrip('/').strip("'").strip('"')
+        self.rel_path = rel_path.lstrip("/").strip("'").strip('"')
 
     def render(self, context):
         """Render."""
@@ -88,6 +88,6 @@ class MediaUrlNode(Node):
             # Real.
             return os.path.join(self.static_media_url, self.rel_path)
         # Django.
-        return reverse("cloud_browser_media",
-                       args=[self.rel_path],
-                       current_app='cloud_browser')
+        return reverse(
+            "cloud_browser_media", args=[self.rel_path], current_app="cloud_browser"
+        )

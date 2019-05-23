@@ -13,8 +13,7 @@ except ImportError:
 
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import get_connection, get_connection_cls, errors
-from cloud_browser.common import get_int, \
-    path_parts, path_join, path_yield, relpath
+from cloud_browser.common import get_int, path_parts, path_join, path_yield, relpath
 
 
 MAX_LIMIT = get_connection_cls().cont_cls.max_list
@@ -33,7 +32,7 @@ def settings_view_decorator(function):
     # Trade-up string to real decorator.
     if isinstance(dec, str):
         # Split into module and decorator strings.
-        mod_str, _, dec_str = dec.rpartition('.')
+        mod_str, _, dec_str = dec.rpartition(".")
         if not (mod_str and dec_str):
             raise ImportError("Unable to import module: %s" % mod_str)
 
@@ -89,7 +88,7 @@ def index(request):
 
 
 @settings_view_decorator
-def browser(request, path='', template="cloud_browser/browser.html"):
+def browser(request, path="", template="cloud_browser/browser.html"):
     """View files in a file path.
 
     :param request: The request.
@@ -110,8 +109,8 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     container_path, object_path = path_parts(path)
     incoming = request.POST or request.GET or {}
 
-    marker = incoming.get('marker', None)
-    marker_part = incoming.get('marker_part', None)
+    marker = incoming.get("marker", None)
+    marker_part = incoming.get("marker_part", None)
     if marker_part:
         marker = path_join(object_path, marker_part)
 
@@ -121,9 +120,7 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     def limit_test(num):
         return num > 0 and (MAX_LIMIT is None or num <= MAX_LIMIT - 1)
 
-    limit = get_int(incoming.get('limit', limit_default),
-                    limit_default,
-                    limit_test)
+    limit = get_int(incoming.get("limit", limit_default), limit_default, limit_test)
 
     # Q1: Get all containers.
     #     We optimize here by not individually looking up containers later,
@@ -135,10 +132,11 @@ def browser(request, path='', template="cloud_browser/browser.html"):
     marker_part = None
     container = None
     objects = None
-    if container_path != '':
+    if container_path != "":
         # Find marked container from list.
         def cont_eq(container):
             return container.name == container_path
+
         filtered_conts = filter(cont_eq, containers)
         cont_list = list(islice(filtered_conts, 1))
         if not cont_list:
@@ -155,21 +153,26 @@ def browser(request, path='', template="cloud_browser/browser.html"):
             marker = objects[-1].name
             marker_part = relpath(marker, object_path)
 
-    return render(request, template,
-                  {'path': path,
-                   'marker': marker,
-                   'marker_part': marker_part,
-                   'limit': limit,
-                   'breadcrumbs': _breadcrumbs(path),
-                   'container_path': container_path,
-                   'containers': containers,
-                   'container': container,
-                   'object_path': object_path,
-                   'objects': objects})
+    return render(
+        request,
+        template,
+        {
+            "path": path,
+            "marker": marker,
+            "marker_part": marker_part,
+            "limit": limit,
+            "breadcrumbs": _breadcrumbs(path),
+            "container_path": container_path,
+            "containers": containers,
+            "container": container,
+            "object_path": object_path,
+            "objects": objects,
+        },
+    )
 
 
 @settings_view_decorator
-def document(request, path=''):
+def document(request, path=""):
     """View single document from path.
 
     :param request: The request.
@@ -199,9 +202,8 @@ def document(request, path=''):
     # Get content-type and encoding.
     content_type = storage_obj.smart_content_type
     encoding = storage_obj.smart_content_encoding
-    response = HttpResponse(content=storage_obj.read(),
-                            content_type=content_type)
-    if encoding not in (None, ''):
-        response['Content-Encoding'] = encoding
+    response = HttpResponse(content=storage_obj.read(), content_type=content_type)
+    if encoding not in (None, ""):
+        response["Content-Encoding"] = encoding
 
     return response

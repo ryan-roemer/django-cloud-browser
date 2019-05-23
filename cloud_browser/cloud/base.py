@@ -3,18 +3,19 @@ import mimetypes
 
 from cloud_browser.cloud import errors
 from cloud_browser.app_settings import settings
-from cloud_browser.common import SEP, \
-    path_join, basename
+from cloud_browser.common import SEP, path_join, basename
 
 
 class CloudObjectTypes(object):
     """Cloud object types helper."""
-    FILE = 'file'
-    SUBDIR = 'subdirectory'
+
+    FILE = "file"
+    SUBDIR = "subdirectory"
 
 
 class CloudObject(object):
     """Cloud object wrapper."""
+
     type_cls = CloudObjectTypes
 
     def __init__(self, container, name, **kwargs):
@@ -30,11 +31,11 @@ class CloudObject(object):
         """
         self.container = container
         self.name = name.rstrip(SEP)
-        self.size = kwargs.get('size', 0)
-        self.content_type = kwargs.get('content_type', '')
-        self.content_encoding = kwargs.get('content_encoding', '')
-        self.last_modified = kwargs.get('last_modified', None)
-        self.type = kwargs.get('obj_type', self.type_cls.FILE)
+        self.size = kwargs.get("size", 0)
+        self.content_type = kwargs.get("content_type", "")
+        self.content_encoding = kwargs.get("content_encoding", "")
+        self.last_modified = kwargs.get("last_modified", None)
+        self.type = kwargs.get("obj_type", self.type_cls.FILE)
         self.__native = None
 
     @property
@@ -73,7 +74,7 @@ class CloudObject(object):
     def smart_content_type(self):
         """Smart content type."""
         content_type = self.content_type
-        if content_type in (None, '', 'application/octet-stream'):
+        if content_type in (None, "", "application/octet-stream"):
             content_type, _ = mimetypes.guess_type(self.name)
 
         return content_type
@@ -83,9 +84,9 @@ class CloudObject(object):
         """Smart content encoding."""
         encoding = self.content_encoding
         if not encoding:
-            base_list = self.basename.split('.')
+            base_list = self.basename.split(".")
             while (not encoding) and len(base_list) > 1:
-                _, encoding = mimetypes.guess_type('.'.join(base_list))
+                _, encoding = mimetypes.guess_type(".".join(base_list))
                 base_list.pop()
 
         return encoding
@@ -101,6 +102,7 @@ class CloudObject(object):
 
 class CloudContainer(object):
     """Cloud container wrapper."""
+
     #: Storage object child class.
     obj_cls = CloudObject
 
@@ -127,8 +129,9 @@ class CloudContainer(object):
         """Return native container object."""
         raise NotImplementedError
 
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects."""
         raise NotImplementedError
 
@@ -139,6 +142,7 @@ class CloudContainer(object):
 
 class CloudConnection(object):
     """Cloud connection wrapper."""
+
     #: Container child class.
     cont_cls = CloudContainer
 
@@ -176,7 +180,8 @@ class CloudConnection(object):
         """Return single container."""
         if not settings.container_permitted(path):
             raise errors.NotPermittedException(
-                "Access to container \"%s\" is not permitted." % path)
+                'Access to container "%s" is not permitted.' % path
+            )
         return self._get_container(path)
 
     def _get_container(self, path):

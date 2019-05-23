@@ -39,12 +39,14 @@ class GsObject(base.BotoObject):
         GS will create a 0 byte ``<FOLDER NAME>_$folder$`` key as a
         pseudo-directory place holder if there are no files present.
         """
-        return (cls.is_key(result) and
-                result.size == 0 and
-                result.name.endswith(cls._gs_folder_suffix))
+        return (
+            cls.is_key(result)
+            and result.size == 0
+            and result.name.endswith(cls._gs_folder_suffix)
+        )
 
     @classmethod
-    @requires(boto, 'boto')
+    @requires(boto, "boto")
     def is_key(cls, result):
         """Return ``True`` if result is a key object."""
         from boto.gs.key import Key
@@ -52,7 +54,7 @@ class GsObject(base.BotoObject):
         return isinstance(result, Key)
 
     @classmethod
-    @requires(boto, 'boto')
+    @requires(boto, "boto")
     def is_prefix(cls, result):
         """Return ``True`` if result is a prefix object.
 
@@ -68,7 +70,7 @@ class GsObject(base.BotoObject):
         """Create from prefix object."""
         if cls._is_gs_folder(prefix):
             name, suffix, extra = prefix.name.partition(cls._gs_folder_suffix)
-            if (suffix, extra) == (cls._gs_folder_suffix, ''):
+            if (suffix, extra) == (cls._gs_folder_suffix, ""):
                 # Patch GS specific folder to remove suffix.
                 prefix.name = name
 
@@ -77,11 +79,13 @@ class GsObject(base.BotoObject):
 
 class GsContainer(base.BotoContainer):
     """Google Storage container wrapper."""
+
     #: Storage object child class.
     obj_cls = GsObject
 
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects.
 
         Certain upload clients may add a 0-byte object (e.g., ``FOLDER`` object
@@ -100,11 +104,12 @@ class GsContainer(base.BotoContainer):
 
 class GsConnection(base.BotoConnection):
     """Google Storage connection wrapper."""
+
     #: Container child class.
     cont_cls = GsContainer
 
     @base.BotoConnection.wrap_boto_errors
-    @requires(boto, 'boto')
+    @requires(boto, "boto")
     def _get_connection(self):
         """Return native connection object."""
         return boto.connect_gs(self.account, self.secret_key)

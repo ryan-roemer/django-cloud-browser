@@ -7,4 +7,5 @@ All cloud browser errors are sub-classed off the base
 
 class CloudBrowserException(Exception):
     """Base class for all exceptions."""
+
     pass
