@@ -20,6 +20,7 @@ PKGS = [x for x in find_packages() if x.split(".")[0] == MOD_NAME]
 TEST_DEPENDENCIES = [
     "Django==1.8.0",
     "boto==2.48.0",
+    "apache-libcloud==2.4.0",
     "Fabric3",
     "pylint",
     "flake8",
