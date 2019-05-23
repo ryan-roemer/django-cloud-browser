@@ -30,16 +30,14 @@ def is_dir(path):
 ###############################################################################
 class FilesystemContainerWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
-    translations = {
-        OSError: errors.NoContainerException,
-    }
+
+    translations = {OSError: errors.NoContainerException}
 
 
 class FilesystemObjectWrapper(errors.CloudExceptionWrapper):
     """Exception translator."""
-    translations = {
-        OSError: errors.NoObjectException,
-    }
+
+    translations = {OSError: errors.NoObjectException}
 
 
 wrap_fs_cont_errors = FilesystemContainerWrapper()  # pylint: disable=C0103
@@ -55,7 +53,7 @@ class FilesystemObject(base.CloudObject):
 
     def _read(self):
         """Return contents of object."""
-        with open(self.base_path, 'rb') as file_obj:
+        with open(self.base_path, "rb") as file_obj:
             return file_obj.read()
 
     @property
@@ -71,19 +69,21 @@ class FilesystemObject(base.CloudObject):
         path = path.strip(SEP)
         full_path = os.path.join(container.base_path, path)
         last_modified = datetime.fromtimestamp(os.path.getmtime(full_path))
-        obj_type = cls.type_cls.SUBDIR if is_dir(full_path)\
-            else cls.type_cls.FILE
+        obj_type = cls.type_cls.SUBDIR if is_dir(full_path) else cls.type_cls.FILE
 
-        return cls(container,
-                   name=path,
-                   size=os.path.getsize(full_path),
-                   content_type=None,
-                   last_modified=last_modified,
-                   obj_type=obj_type)
+        return cls(
+            container,
+            name=path,
+            size=os.path.getsize(full_path),
+            content_type=None,
+            last_modified=last_modified,
+            obj_type=obj_type,
+        )
 
 
 class FilesystemContainer(base.CloudContainer):
     """Filesystem container wrapper."""
+
     #: Storage object child class.
     obj_cls = FilesystemObject
 
@@ -92,18 +92,24 @@ class FilesystemContainer(base.CloudContainer):
         return object()
 
     @wrap_fs_obj_errors
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects."""
+
         def _filter(name):
             """Filter."""
-            return (not_dot(name) and
-                    (marker is None or
-                     os.path.join(path, name).strip(SEP) > marker.strip(SEP)))
+            return not_dot(name) and (
+                marker is None
+                or os.path.join(path, name).strip(SEP) > marker.strip(SEP)
+            )
 
         search_path = os.path.join(self.base_path, path)
-        objs = [self.obj_cls.from_path(self, os.path.join(path, o))
-                for o in os.listdir(search_path) if _filter(o)]
+        objs = [
+            self.obj_cls.from_path(self, os.path.join(path, o))
+            for o in os.listdir(search_path)
+            if _filter(o)
+        ]
         objs = sorted(objs, key=lambda x: x.base_path)
         return objs[:limit]
 
@@ -127,6 +133,7 @@ class FilesystemContainer(base.CloudContainer):
 
 class FilesystemConnection(base.CloudConnection):
     """Filesystem connection wrapper."""
+
     #: Container child class.
     cont_cls = FilesystemContainer
 
@@ -146,14 +153,17 @@ class FilesystemConnection(base.CloudConnection):
 
         def full_fn(path):
             return os.path.join(self.abs_root, path)
-        return [self.cont_cls.from_path(self, d)
-                for d in os.listdir(self.abs_root) if is_dir(full_fn(d))]
+
+        return [
+            self.cont_cls.from_path(self, d)
+            for d in os.listdir(self.abs_root)
+            if is_dir(full_fn(d))
+        ]
 
     @wrap_fs_cont_errors
     def _get_container(self, path):
         """Return single container."""
         path = path.strip(SEP)
         if SEP in path:
-            raise errors.InvalidNameException(
-                "Path contains %s - %s" % (SEP, path))
+            raise errors.InvalidNameException("Path contains %s - %s" % (SEP, path))
         return self.cont_cls.from_path(self, path)

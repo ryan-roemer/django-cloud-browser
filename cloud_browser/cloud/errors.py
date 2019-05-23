@@ -7,26 +7,31 @@ from itertools import chain
 
 class CloudException(Exception):
     """Base cloud exception."""
+
     pass
 
 
 class InvalidNameException(CloudException):
     """Bad name."""
+
     pass
 
 
 class NotPermittedException(CloudException):
     """Access is not permitted"""
+
     pass
 
 
 class NoContainerException(CloudException):
     """No container found."""
+
     pass
 
 
 class NoObjectException(CloudException):
     """No storage object found."""
+
     pass
 
 
@@ -84,6 +89,7 @@ class CloudExceptionWrapper(object):
     dictionary for translating an underlying library exception to a class
     in this module. See any of the data implementation modules for examples.
     """
+
     translations = {}
     _excepts = None
 
@@ -94,8 +100,7 @@ class CloudExceptionWrapper(object):
         :rtype: ``tuple`` of ``type``
         """
         if cls._excepts is None:
-            cls._excepts = tuple(chain(cls.translations,
-                                       cls.lazy_translations()))
+            cls._excepts = tuple(chain(cls.translations, cls.lazy_translations()))
         return cls._excepts
 
     def translate(self, exc):

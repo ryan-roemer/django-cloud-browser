@@ -40,12 +40,13 @@ def get_int(value, default, test_fn=None):
 
 def check_version(mod, required):
     """Require minimum version of module using ``__version__`` member."""
-    vers = tuple(int(v) for v in mod.__version__.split('.')[:3])
+    vers = tuple(int(v) for v in mod.__version__.split(".")[:3])
     if vers < required:
-        req = '.'.join(str(v) for v in required)
+        req = ".".join(str(v) for v in required)
         raise ImproperlyConfigured(
-            "Module \"%s\" version (%s) must be >= %s." %
-            (mod.__name__, mod.__version__, req))
+            'Module "%s" version (%s) must be >= %s.'
+            % (mod.__name__, mod.__version__, req)
+        )
 
 
 def requires(module, name=""):
@@ -61,6 +62,7 @@ def requires(module, name=""):
     :param name: module name
     :type  name: ``string``
     """
+
     def wrapped(method):
         """Call and enforce method."""
         if module is None:
@@ -85,7 +87,7 @@ def dt_from_rfc8601(date_str):
     """
     # Normalize string and adjust for milliseconds. Note that Python 2.6+ has
     # ".%f" format, but we're going for Python 2.5, so truncate the portion.
-    date_str = date_str.rstrip('Z').split('.')[0]
+    date_str = date_str.rstrip("Z").split(".")[0]
 
     # Format string. (2010-04-13T14:02:48.000Z)
     fmt = "%Y-%m-%dT%H:%M:%S"
@@ -116,10 +118,7 @@ def dt_from_header(date_str):
     :return: Date time.
     :rtype:  :class:`datetime.datetime` or ``None``
     """
-    convert_fns = (
-        dt_from_rfc8601,
-        dt_from_rfc1123,
-    )
+    convert_fns = (dt_from_rfc8601, dt_from_rfc1123)
 
     for convert_fn in convert_fns:
         try:
@@ -140,7 +139,7 @@ def basename(path):
     if sep_ind < 0:
         return path
 
-    return base_path[sep_ind + 1:]
+    return base_path[sep_ind + 1 :]
 
 
 def path_parts(path):
@@ -151,8 +150,8 @@ def path_parts(path):
     :return: Container, storage object tuple.
     :rtype:  `tuple` of `string`, `string`
     """
-    path = path if path is not None else ''
-    container_path = object_path = ''
+    path = path if path is not None else ""
+    container_path = object_path = ""
     parts = path_list(path)
 
     if len(parts) >= 1:
@@ -165,7 +164,7 @@ def path_parts(path):
 
 def path_yield(path):
     """Yield on all path parts."""
-    for part in (x for x in path.strip(SEP).split(SEP) if x not in (None, '')):
+    for part in (x for x in path.strip(SEP).split(SEP) if x not in (None, "")):
         yield part
 
 
@@ -176,7 +175,7 @@ def path_list(path):
 
 def path_join(*args):
     """Join path parts to single path."""
-    return SEP.join((x for x in args if x not in (None, ''))).strip(SEP)
+    return SEP.join((x for x in args if x not in (None, ""))).strip(SEP)
 
 
 def relpath(path, start):

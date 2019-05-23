@@ -5,7 +5,7 @@ python:
   - "3.6"
 
 install:
-  - "pip install -r requirements_dev.txt"
+  - pip install -e .[test]
 
 before_install:
   - sudo rm -f /etc/boto.cfg

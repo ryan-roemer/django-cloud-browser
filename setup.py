@@ -11,11 +11,25 @@ from cloud_browser import __version__
 # Environment and Packages.
 ###############################################################################
 # Don't copy Mac OS X resource forks on tar/gzip.
-os.environ['COPYFILE_DISABLE'] = "true"
+os.environ["COPYFILE_DISABLE"] = "true"
 
 # Packages.
 MOD_NAME = "cloud_browser"
-PKGS = [x for x in find_packages() if x.split('.')[0] == MOD_NAME]
+PKGS = [x for x in find_packages() if x.split(".")[0] == MOD_NAME]
+
+TEST_DEPENDENCIES = [
+    "Django==1.8.0",
+    "boto==2.48.0",
+    "Fabric3",
+    "pylint",
+    "flake8",
+    "Sphinx",
+    "sphinx-bootstrap-theme",
+    "twine",
+]
+
+if version_info.major > 2:
+    TEST_DEPENDENCIES.append("black")
 
 
 ###############################################################################
@@ -24,14 +38,14 @@ PKGS = [x for x in find_packages() if x.split('.')[0] == MOD_NAME]
 def read_file(name):
     """Read file name (without extension) to string."""
     cur_path = os.path.dirname(__file__)
-    exts = ('txt', 'rst')
+    exts = ("txt", "rst")
     for ext in exts:
-        path = os.path.join(cur_path, '.'.join((name, ext)))
+        path = os.path.join(cur_path, ".".join((name, ext)))
         if os.path.exists(path):
-            with open(path, 'r') as file_obj:
+            with open(path, "r") as file_obj:
                 return file_obj.read()
 
-    return ''
+    return ""
 
 
 ###############################################################################
@@ -43,10 +57,8 @@ setup(
     description="Django Cloud Browser application.",
     long_description=read_file("README"),
     url="http://ryan-roemer.github.com/django-cloud-browser",
-
     author="Ryan Roemer",
     author_email="ryan@loose-bits.com",
-
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
@@ -59,9 +71,8 @@ setup(
         "Topic :: Internet",
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
-
+    extras_require={"test": TEST_DEPENDENCIES},
     install_requires=["distribute"] if version_info < (3, 6) else [],
-
     packages=PKGS,
     include_package_data=True,
 )

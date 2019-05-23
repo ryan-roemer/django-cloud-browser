@@ -27,6 +27,7 @@ RS_MAX_LIST_CONTAINERS_LIMIT = 10000
 
 try:
     import cloudfiles  # pylint: disable=F0401
+
     check_version(cloudfiles, RS_MIN_CLOUDFILES_VERSION)
 except ImportError:
     cloudfiles = None  # pylint: disable=C0103
@@ -39,7 +40,7 @@ class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
     """Rackspace :mod:`cloudfiles` exception translator."""
 
     @classmethod
-    @requires(cloudfiles, 'cloudfiles')
+    @requires(cloudfiles, "cloudfiles")
     def lazy_translations(cls):
         """Lazy translations."""
         return {
@@ -50,16 +51,14 @@ class RackspaceExceptionWrapper(errors.CloudExceptionWrapper):
 
 class RackspaceObject(base.CloudObject):
     """Cloud object wrapper."""
+
     #: Exception translations.
     wrap_rs_errors = RackspaceExceptionWrapper()
 
     #: Subdirectory content types.
     #: Rackspace has "special" content types that should be interpreted as
     #: pseudo-directory delimiters from "old style" hierarchy detection.
-    subdir_types = set((
-        "application/directory",
-        "application/folder",
-    ))
+    subdir_types = set(("application/directory", "application/folder"))
 
     @wrap_rs_errors
     def _get_object(self):
@@ -74,48 +73,53 @@ class RackspaceObject(base.CloudObject):
     @classmethod
     def from_info(cls, container, info_obj):
         """Create from subdirectory or file info object."""
-        create_fn = cls.from_subdir if 'subdir' in info_obj \
-            else cls.from_file_info
+        create_fn = cls.from_subdir if "subdir" in info_obj else cls.from_file_info
         return create_fn(container, info_obj)
 
     @classmethod
     def from_subdir(cls, container, info_obj):
         """Create from subdirectory info object."""
-        return cls(container,
-                   info_obj['subdir'],
-                   obj_type=cls.type_cls.SUBDIR)
+        return cls(container, info_obj["subdir"], obj_type=cls.type_cls.SUBDIR)
 
     @classmethod
     def choose_type(cls, content_type):
         """Choose object type from content type."""
-        return cls.type_cls.SUBDIR if content_type in cls.subdir_types \
+        return (
+            cls.type_cls.SUBDIR
+            if content_type in cls.subdir_types
             else cls.type_cls.FILE
+        )
 
     @classmethod
     def from_file_info(cls, container, info_obj):
         """Create from regular info object."""
         # RFC 8601: 2010-04-15T01:52:13.919070
-        return cls(container,
-                   name=info_obj['name'],
-                   size=info_obj['bytes'],
-                   content_type=info_obj['content_type'],
-                   last_modified=dt_from_header(info_obj['last_modified']),
-                   obj_type=cls.choose_type(info_obj['content_type']))
+        return cls(
+            container,
+            name=info_obj["name"],
+            size=info_obj["bytes"],
+            content_type=info_obj["content_type"],
+            last_modified=dt_from_header(info_obj["last_modified"]),
+            obj_type=cls.choose_type(info_obj["content_type"]),
+        )
 
     @classmethod
     def from_obj(cls, container, file_obj):
         """Create from regular info object."""
         # RFC 1123: Thu, 07 Jun 2007 18:57:07 GMT
-        return cls(container,
-                   name=file_obj.name,
-                   size=file_obj.size,
-                   content_type=file_obj.content_type,
-                   last_modified=dt_from_header(file_obj.last_modified),
-                   obj_type=cls.choose_type(file_obj.content_type))
+        return cls(
+            container,
+            name=file_obj.name,
+            size=file_obj.size,
+            content_type=file_obj.content_type,
+            last_modified=dt_from_header(file_obj.last_modified),
+            obj_type=cls.choose_type(file_obj.content_type),
+        )
 
 
 class RackspaceContainer(base.CloudContainer):
     """Rackspace container wrapper."""
+
     #: Storage object child class.
     obj_cls = RackspaceObject
 
@@ -140,8 +144,9 @@ class RackspaceContainer(base.CloudContainer):
         return self.conn.native_conn.get_container(self.name)
 
     @wrap_rs_errors
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects.
 
         **Pseudo-directory Notes**: Rackspace has two approaches to pseudo-
@@ -181,8 +186,9 @@ class RackspaceContainer(base.CloudContainer):
         return [self.obj_cls.from_info(self, x) for x in object_infos]
 
     @wrap_rs_errors
-    def _get_object_infos(self, path, marker=None,
-                          limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def _get_object_infos(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get raw object infos (single-shot)."""
         # Adjust limit to +1 to handle marker object as first result.
         # We can get in to this situation for a marker of "foo", that will
@@ -193,27 +199,28 @@ class RackspaceContainer(base.CloudContainer):
 
         # Enforce maximum object size.
         if limit > RS_MAX_LIST_OBJECTS_LIMIT:
-            raise errors.CloudException("Object limit must be less than %s" %
-                                        RS_MAX_LIST_OBJECTS_LIMIT)
+            raise errors.CloudException(
+                "Object limit must be less than %s" % RS_MAX_LIST_OBJECTS_LIMIT
+            )
 
         def _collapse(infos):
             """Remove duplicate dummy / implied objects."""
             name = None
             for info in infos:
-                name = info.get('name', name)
-                subdir = info.get('subdir', '').strip(SEP)
+                name = info.get("name", name)
+                subdir = info.get("subdir", "").strip(SEP)
                 if not name or subdir != name:
                     yield info
 
-        path = path + SEP if path else ''
+        path = path + SEP if path else ""
         object_infos = self.native_container.list_objects_info(
-            limit=limit, delimiter=SEP, prefix=path, marker=marker)
+            limit=limit, delimiter=SEP, prefix=path, marker=marker
+        )
 
         full_query = len(object_infos) == limit
         if object_infos:
             # Check first object for marker match and truncate if so.
-            if (marker and
-                    object_infos[0].get('subdir', '').strip(SEP) == marker):
+            if marker and object_infos[0].get("subdir", "").strip(SEP) == marker:
                 object_infos = object_infos[1:]
 
             # Collapse subdirs and dummy objects.
@@ -234,6 +241,7 @@ class RackspaceContainer(base.CloudContainer):
 
 class RackspaceConnection(base.CloudConnection):
     """Rackspace connection wrapper."""
+
     #: Container child class.
     cont_cls = RackspaceContainer
 
@@ -250,21 +258,18 @@ class RackspaceConnection(base.CloudConnection):
         self.authurl = authurl
 
     @wrap_rs_errors
-    @requires(cloudfiles, 'cloudfiles')
+    @requires(cloudfiles, "cloudfiles")
     def _get_connection(self):
         """Return native connection object."""
-        kwargs = {
-            'username': self.account,
-            'api_key': self.secret_key,
-        }
+        kwargs = {"username": self.account, "api_key": self.secret_key}
 
         # Only add kwarg for servicenet if True because user could set
         # environment variable 'RACKSPACE_SERVICENET' separately.
         if self.servicenet:
-            kwargs['servicenet'] = True
+            kwargs["servicenet"] = True
 
         if self.authurl:
-            kwargs['authurl'] = self.authurl
+            kwargs["authurl"] = self.authurl
 
         return cloudfiles.get_connection(**kwargs)
 
@@ -272,14 +277,10 @@ class RackspaceConnection(base.CloudConnection):
     def _get_containers(self):
         """Return available containers."""
         infos = self.native_conn.list_containers_info()
-        return [self.cont_cls(self, i['name'], i['count'], i['bytes'])
-                for i in infos]
+        return [self.cont_cls(self, i["name"], i["count"], i["bytes"]) for i in infos]
 
     @wrap_rs_errors
     def _get_container(self, path):
         """Return single container."""
         cont = self.native_conn.get_container(path)
-        return self.cont_cls(self,
-                             cont.name,
-                             cont.object_count,
-                             cont.size_used)
+        return self.cont_cls(self, cont.name, cont.object_count, cont.size_used)

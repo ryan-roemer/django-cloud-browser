@@ -9,6 +9,7 @@ from django.core.exceptions import ImproperlyConfigured
 ###############################################################################
 class Setting(object):
     """Settings option helper class."""
+
     def __init__(self, **kwargs):
         """Initializer.
 
@@ -19,17 +20,18 @@ class Setting(object):
         :kwarg valid_set: Set of valid values for setting.
         :type  valid_set: ``set``
         """
-        self.from_env = kwargs.get('from_env', False)
-        self.default = kwargs.get('default', None)
-        self.valid_set = kwargs.get('valid_set', None)
+        self.from_env = kwargs.get("from_env", False)
+        self.default = kwargs.get("default", None)
+        self.valid_set = kwargs.get("valid_set", None)
 
     def validate(self, name, value):
         """Validate and return a value."""
 
         if self.valid_set and value not in self.valid_set:
             raise ImproperlyConfigured(
-                "%s: \"%s\" is not a valid setting (choose between %s)." %
-                (name, value, ", ".join("\"%s\"" % x for x in self.valid_set)))
+                '%s: "%s" is not a valid setting (choose between %s).'
+                % (name, value, ", ".join('"%s"' % x for x in self.valid_set))
+            )
 
         return value
 
@@ -53,6 +55,7 @@ class Setting(object):
 
 class BoolSetting(Setting):
     """Boolean setting.."""
+
     def env_clean(self, value):
         """Clean / convert environment variable to proper type."""
         return self.parse_bool(value)
@@ -67,9 +70,9 @@ class BoolSetting(Setting):
             return value
 
         elif isinstance(value, str):
-            if value == 'True':
+            if value == "True":
                 return True
-            elif value == 'False':
+            elif value == "False":
                 return False
 
         raise Exception("Value %s is not boolean." % value)
@@ -171,60 +174,42 @@ class Settings(object):
       then set a relative path from the root, and the static media will be used
       instead of a Django-based static view fallback.
     """
+
     #: Valid datastore types.
-    DATASTORES = set((
-        'ApacheLibcloud',
-        'AWS',
-        'Google',
-        'Rackspace',
-        'Filesystem',
-    ))
+    DATASTORES = set(("ApacheLibcloud", "AWS", "Google", "Rackspace", "Filesystem"))
 
     #: Settings dictionary of accessor callables.
     SETTINGS = {
         # Datastore choice.
-        'CLOUD_BROWSER_DATASTORE': Setting(
-            default='Filesystem',
-            valid_set=DATASTORES
-        ),
-
+        "CLOUD_BROWSER_DATASTORE": Setting(default="Filesystem", valid_set=DATASTORES),
         # Apache Libcloud datastore settings.
-        'CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER': Setting(from_env=True),
-        'CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT': Setting(from_env=True),
-        'CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY': Setting(from_env=True),
-
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER": Setting(from_env=True),
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT": Setting(from_env=True),
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY": Setting(from_env=True),
         # Amazon Web Services S3 datastore settings.
-        'CLOUD_BROWSER_AWS_ACCOUNT': Setting(from_env=True),
-        'CLOUD_BROWSER_AWS_SECRET_KEY': Setting(from_env=True),
-
+        "CLOUD_BROWSER_AWS_ACCOUNT": Setting(from_env=True),
+        "CLOUD_BROWSER_AWS_SECRET_KEY": Setting(from_env=True),
         # Google Storage for Developers datastore settings.
-        'CLOUD_BROWSER_GS_ACCOUNT': Setting(from_env=True),
-        'CLOUD_BROWSER_GS_SECRET_KEY': Setting(from_env=True),
-
+        "CLOUD_BROWSER_GS_ACCOUNT": Setting(from_env=True),
+        "CLOUD_BROWSER_GS_SECRET_KEY": Setting(from_env=True),
         # Rackspace datastore settings.
-        'CLOUD_BROWSER_RACKSPACE_ACCOUNT': Setting(from_env=True),
-        'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': Setting(from_env=True),
-        'CLOUD_BROWSER_RACKSPACE_SERVICENET': BoolSetting(from_env=True),
-        'CLOUD_BROWSER_RACKSPACE_AUTHURL': BoolSetting(from_env=True),
-
+        "CLOUD_BROWSER_RACKSPACE_ACCOUNT": Setting(from_env=True),
+        "CLOUD_BROWSER_RACKSPACE_SECRET_KEY": Setting(from_env=True),
+        "CLOUD_BROWSER_RACKSPACE_SERVICENET": BoolSetting(from_env=True),
+        "CLOUD_BROWSER_RACKSPACE_AUTHURL": BoolSetting(from_env=True),
         # Filesystem datastore settings.
-        'CLOUD_BROWSER_FILESYSTEM_ROOT': Setting(),
-
+        "CLOUD_BROWSER_FILESYSTEM_ROOT": Setting(),
         # View permissions.
-        'CLOUD_BROWSER_VIEW_DECORATOR': Setting(),
-
+        "CLOUD_BROWSER_VIEW_DECORATOR": Setting(),
         # Permissions lists for containers.
-        'CLOUD_BROWSER_CONTAINER_WHITELIST': Setting(),
-        'CLOUD_BROWSER_CONTAINER_BLACKLIST': Setting(),
-
+        "CLOUD_BROWSER_CONTAINER_WHITELIST": Setting(),
+        "CLOUD_BROWSER_CONTAINER_BLACKLIST": Setting(),
         # Browser settings.
-        'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': Setting(default=20),
-
+        "CLOUD_BROWSER_DEFAULT_LIST_LIMIT": Setting(default=20),
         # Hook for custom actions.
-        'CLOUD_BROWSER_OBJECT_REDIRECT_URL': Setting(),
-
+        "CLOUD_BROWSER_OBJECT_REDIRECT_URL": Setting(),
         # Static media root.
-        'CLOUD_BROWSER_STATIC_MEDIA_DIR': Setting(),
+        "CLOUD_BROWSER_STATIC_MEDIA_DIR": Setting(),
     }
 
     def __init__(self):
@@ -244,16 +229,18 @@ class Settings(object):
     def _container_whitelist(self):
         """Container whitelist."""
         if self.__container_whitelist is None:
-            self.__container_whitelist = \
-                set(self.CLOUD_BROWSER_CONTAINER_WHITELIST or [])
+            self.__container_whitelist = set(
+                self.CLOUD_BROWSER_CONTAINER_WHITELIST or []
+            )
         return self.__container_whitelist
 
     @property
     def _container_blacklist(self):
         """Container blacklist."""
         if self.__container_blacklist is None:
-            self.__container_blacklist = \
-                set(self.CLOUD_BROWSER_CONTAINER_BLACKLIST or [])
+            self.__container_blacklist = set(
+                self.CLOUD_BROWSER_CONTAINER_BLACKLIST or []
+            )
         return self.__container_blacklist
 
     def container_permitted(self, name):
@@ -273,7 +260,7 @@ class Settings(object):
         url = None
         media_dir = self.CLOUD_BROWSER_STATIC_MEDIA_DIR
         if media_dir:
-            url = os.path.join(self.MEDIA_URL, media_dir).rstrip('/') + '/'
+            url = os.path.join(self.MEDIA_URL, media_dir).rstrip("/") + "/"
 
         return url
 
@@ -281,7 +268,7 @@ class Settings(object):
     def app_media_doc_root(self):  # pylint: disable=R0201
         """Get application media document (file) root."""
         app_dir = os.path.abspath(os.path.dirname(__file__))
-        media_root = os.path.join(app_dir, 'media')
+        media_root = os.path.join(app_dir, "media")
 
         return media_root
 

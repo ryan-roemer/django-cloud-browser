@@ -15,7 +15,7 @@ try:
 except ImportError:
     libcloud = None  # pylint: disable=C0103
 
-DATE_FORMAT = '%a, %d %b %Y %H:%M:%S %Z'
+DATE_FORMAT = "%a, %d %b %Y %H:%M:%S %Z"
 
 
 ###############################################################################
@@ -25,15 +25,15 @@ class ApacheLibcloudExceptionWrapper(errors.CloudExceptionWrapper):
     """ApacheLibcloud :mod:`cloudfiles` exception translator."""
 
     @classmethod
-    @requires(libcloud, 'libcloud')
+    @requires(libcloud, "libcloud")
     def lazy_translations(cls):
         """Lazy translations."""
 
+        types = libcloud.storage.types
+
         return {
-            libcloud.storage.types.ContainerDoesNotExistError:
-                errors.NoContainerException,
-            libcloud.storage.types.ObjectDoesNotExistError:
-                errors.NoObjectException,
+            types.ContainerDoesNotExistError: errors.NoContainerException,
+            types.ObjectDoesNotExistError: errors.NoObjectException,
         }
 
 
@@ -57,7 +57,7 @@ class ApacheLibcloudObject(base.CloudObject):
         """Create object from `libcloud.storage.base.Object`."""
 
         try:
-            last_modified = obj.extra['last_modified']
+            last_modified = obj.extra["last_modified"]
             last_modified = datetime.strptime(last_modified, DATE_FORMAT)
         except (KeyError, ValueError):
             last_modified = None
@@ -66,8 +66,8 @@ class ApacheLibcloudObject(base.CloudObject):
             container,
             name=obj.name,
             size=obj.size,
-            content_encoding=obj.extra.get('content_encoding'),
-            content_type=obj.extra.get('content_type'),
+            content_encoding=obj.extra.get("content_encoding"),
+            content_type=obj.extra.get("content_type"),
             last_modified=last_modified,
             obj_type=cls.type_cls.FILE,
         )
@@ -75,6 +75,7 @@ class ApacheLibcloudObject(base.CloudObject):
 
 class ApacheLibcloudContainer(base.CloudContainer):
     """ApacheLibcloud container wrapper."""
+
     #: Storage object child class.
     obj_cls = ApacheLibcloudObject
 
@@ -86,16 +87,17 @@ class ApacheLibcloudContainer(base.CloudContainer):
         return self.conn.native_conn.get_container(self.name)
 
     @wrap_libcloud_errors
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects."""
         client = self.conn.native_conn
-        path = path.rstrip(SEP) + SEP if path else ''
+        path = path.rstrip(SEP) + SEP if path else ""
         dirs = set()
 
         def get_files_and_directories(items):
             for item in items:
-                suffix = item.name[len(path):]
+                suffix = item.name[len(path) :]
                 subdirs = suffix.split(SEP)
                 is_file = len(subdirs) == 1
 
@@ -134,6 +136,7 @@ class ApacheLibcloudContainer(base.CloudContainer):
 
 class ApacheLibcloudConnection(base.CloudConnection):
     """ApacheLibcloud connection wrapper."""
+
     #: Container child class.
     cont_cls = ApacheLibcloudContainer
 
@@ -146,19 +149,20 @@ class ApacheLibcloudConnection(base.CloudConnection):
         self.provider = provider
 
     @wrap_libcloud_errors
-    @requires(libcloud, 'libcloud')
+    @requires(libcloud, "libcloud")
     def _get_connection(self):
         """Return native connection object."""
-        driver = libcloud.get_driver(libcloud.DriverType.STORAGE,
-                                     self.provider.lower())
+        driver = libcloud.get_driver(libcloud.DriverType.STORAGE, self.provider.lower())
 
         return driver(self.account, self.secret_key)
 
     @wrap_libcloud_errors
     def _get_containers(self):
         """Return available containers."""
-        return [self.cont_cls.from_libcloud(self, container)
-                for container in self.native_conn.iterate_containers()]
+        return [
+            self.cont_cls.from_libcloud(self, container)
+            for container in self.native_conn.iterate_containers()
+        ]
 
     @wrap_libcloud_errors
     def _get_container(self, path):

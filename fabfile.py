@@ -5,6 +5,7 @@ from __future__ import print_function
 import errno
 import os
 import shutil
+import sys
 from contextlib import contextmanager
 from fabric.api import local
 
@@ -20,35 +21,20 @@ PROJ_SETTINGS = ".".join((PROJ, "settings"))
 
 DEV_DB_DIR = os.path.join(PROJ, "db")
 
-CHECK_INCLUDES = (
-    "fabfile.py",
-    "setup.py",
-    MOD,
-    PROJ,
-)
+CHECK_INCLUDES = ("fabfile.py", "setup.py", MOD, PROJ)
 PYLINT_CFG = os.path.join("dev", "pylint.cfg")
 FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
-DOC_UNDERSCORE_DIRS = (
-    "sources",
-    "static",
-)
+DOC_UNDERSCORE_DIRS = ("sources", "static")
 
-BUILD_DIRS = (
-    "dist",
-    "django_cloud_browser.egg-info",
-)
+BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
 
-SDIST_RST_FILES = (
-    "INSTALL.rst",
-    "README.rst",
-    "CHANGES.rst",
-)
+SDIST_RST_FILES = ("INSTALL.rst", "README.rst", "CHANGES.rst")
 SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 
-MANAGE = os.path.join(PROJ, 'manage.py')
+MANAGE = os.path.join(PROJ, "manage.py")
 
 
 ###############################################################################
@@ -112,8 +98,7 @@ def pylint(rcfile=PYLINT_CFG):
     :param rcfile: PyLint configuration file.
     """
     # Have a spurious DeprecationWarning in pylint.
-    local("pylint --rcfile=%s %s" %
-          (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
 
 
 def flake8(rcfile=FLAKE8_CFG):
@@ -121,13 +106,19 @@ def flake8(rcfile=FLAKE8_CFG):
 
     :param rcfile: Flake8 configuration file.
     """
-    local("flake8 --config=%s %s"
-          % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+
+
+def black():
+    """Run black style checker."""
+    if sys.version_info.major > 2:
+        local("black --check %s" % (" ".join(CHECK_INCLUDES)), capture=False)
 
 
 def check():
     """Run all checkers."""
     flake8()
+    black()
     pylint()
 
 
@@ -140,9 +131,9 @@ def _parse_bool(value):
         return value
 
     elif isinstance(value, str):
-        if value == 'True':
+        if value == "True":
             return True
-        elif value == 'False':
+        elif value == "False":
             return False
 
     raise Exception("Value %s is not boolean." % value)
@@ -156,15 +147,14 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
     :param github: Convert to GitHub-friendly format?
     """
 
-    os.environ['PYTHONPATH'] = ROOT_DIR
-    os.environ['DJANGO_SETTINGS_MODULE'] = proj_settings
+    os.environ["PYTHONPATH"] = ROOT_DIR
+    os.environ["DJANGO_SETTINGS_MODULE"] = proj_settings
 
-    local("sphinx-build -b html %s %s" % (DOC_INPUT, output),
-          capture=False)
+    local("sphinx-build -b html %s %s" % (DOC_INPUT, output), capture=False)
 
     if _parse_bool(github):
         with open(os.path.join(output, ".nojekyll"), "wb") as fobj:
-            fobj.write(b'')
+            fobj.write(b"")
 
 
 ###############################################################################
@@ -172,7 +162,7 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, github=False):
 ###############################################################################
 def _manage(target, extra=""):
     """Generic wrapper for ``manage.py``."""
-    os.environ['PYTHONPATH'] = ROOT_DIR
+    os.environ["PYTHONPATH"] = ROOT_DIR
 
     local("python %s %s %s" % (MANAGE, target, extra), capture=False)
 

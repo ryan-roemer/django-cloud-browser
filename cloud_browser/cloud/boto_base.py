@@ -27,9 +27,10 @@ except ImportError:
 ###############################################################################
 class BotoExceptionWrapper(errors.CloudExceptionWrapper):
     """Boto :mod:`boto` exception translator."""
+
     error_cls = errors.CloudException
 
-    @requires(boto, 'boto')
+    @requires(boto, "boto")
     def translate(self, exc):
         """Return whether or not to do translation."""
         from boto.exception import StorageResponseError
@@ -43,16 +44,19 @@ class BotoExceptionWrapper(errors.CloudExceptionWrapper):
 
 class BotoKeyWrapper(errors.CloudExceptionWrapper):
     """Boto :mod:`boto` key exception translator."""
+
     error_cls = errors.NoObjectException
 
 
 class BotoBucketWrapper(errors.CloudExceptionWrapper):
     """Boto :mod:`boto` bucket exception translator."""
+
     error_cls = errors.NoContainerException
 
 
 class BotoObject(base.CloudObject):
     """Boto 'key' object wrapper."""
+
     #: Exception translations.
     wrap_boto_errors = BotoKeyWrapper()
 
@@ -88,8 +92,7 @@ class BotoObject(base.CloudObject):
         elif cls.is_key(result):
             return cls.from_key(container, result)
 
-        raise errors.CloudException("Unknown boto result type: %s" %
-                                    type(result))
+        raise errors.CloudException("Unknown boto result type: %s" % type(result))
 
     @classmethod
     def from_prefix(cls, container, prefix):
@@ -97,9 +100,7 @@ class BotoObject(base.CloudObject):
         if prefix is None:
             raise errors.NoObjectException
 
-        return cls(container,
-                   name=prefix.name,
-                   obj_type=cls.type_cls.SUBDIR)
+        return cls(container, name=prefix.name, obj_type=cls.type_cls.SUBDIR)
 
     @classmethod
     def from_key(cls, container, key):
@@ -109,17 +110,20 @@ class BotoObject(base.CloudObject):
 
         # Get Key   (1123): Tue, 13 Apr 2010 14:02:48 GMT
         # List Keys (8601): 2010-04-13T14:02:48.000Z
-        return cls(container,
-                   name=key.name,
-                   size=key.size,
-                   content_type=key.content_type,
-                   content_encoding=key.content_encoding,
-                   last_modified=dt_from_header(key.last_modified),
-                   obj_type=cls.type_cls.FILE)
+        return cls(
+            container,
+            name=key.name,
+            size=key.size,
+            content_type=key.content_type,
+            content_encoding=key.content_encoding,
+            last_modified=dt_from_header(key.last_modified),
+            obj_type=cls.type_cls.FILE,
+        )
 
 
 class BotoContainer(base.CloudContainer):
     """Boto container wrapper."""
+
     #: Storage object child class.
     obj_cls = BotoObject
 
@@ -139,8 +143,9 @@ class BotoContainer(base.CloudContainer):
         return self.conn.native_conn.get_bucket(self.name)
 
     @wrap_boto_errors
-    def get_objects(self, path, marker=None,
-                    limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT):
+    def get_objects(
+        self, path, marker=None, limit=settings.CLOUD_BROWSER_DEFAULT_LIST_LIMIT
+    ):
         """Get objects."""
         from itertools import islice
 
@@ -178,6 +183,7 @@ class BotoContainer(base.CloudContainer):
 
 class BotoConnection(base.CloudConnection):
     """Boto connection wrapper."""
+
     #: Container child class.
     cont_cls = BotoContainer
 
