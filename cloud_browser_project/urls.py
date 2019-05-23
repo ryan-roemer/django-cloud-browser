@@ -1,4 +1,5 @@
 # pylint: disable=no-value-for-parameter
+import os
 
 from django.conf import settings
 from django.conf.urls import url, include
@@ -39,4 +40,11 @@ if settings.DEBUG:
         url(r'^' + settings.MEDIA_URL.strip('/') + '/(?P<path>.*)$',
             'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
+    ]
+    # Serve up static admin media.
+    urlpatterns += [
+        url(r'^' + settings.STATIC_URL.strip('/') + '/admin/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': os.path.join(os.path.dirname(admin.__file__),
+                                           'static', 'admin')}),
     ]
