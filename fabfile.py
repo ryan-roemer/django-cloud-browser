@@ -3,6 +3,7 @@ from __future__ import with_statement
 from __future__ import print_function
 
 import errno
+from fileinput import FileInput
 import os
 import shutil
 import sys
@@ -35,6 +36,7 @@ GITHUB_USER = "ryan-roemer"
 GITHUB_REPO = "django-cloud-browser"
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
+BUILD_VERSION = os.environ.get("BUILD_VERSION")
 BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
 
 SDIST_RST_FILES = ("INSTALL.rst", "README.rst", "CHANGES.rst")
@@ -72,8 +74,24 @@ def _dist_wrapper():
             os.remove(rst_file)
 
 
-def sdist():
-    """Package into distribution."""
+def sdist(version=BUILD_VERSION):
+    """Package into distribution.
+
+    :param version: Optional version to set before packaging.
+    """
+    if version:
+        major, minor, patch = version.strip().split(".")
+        version_file = os.path.join(ROOT_DIR, MOD, "__init__.py")
+        fobj = FileInput(version_file, inplace=True)
+        try:
+            for line in fobj:
+                if line.startswith("VERSION = ("):
+                    print("VERSION = (%s, %s, %s)" % (major, minor, patch))
+                else:
+                    print(line)
+        finally:
+            fobj.close()
+
     with _dist_wrapper():
         local("python setup.py sdist", capture=False)
 
@@ -88,11 +106,9 @@ def register():
         local("python setup.py register", capture=False)
 
 
-def upload():
+def publish_pypi():
     """Upload package."""
-    with _dist_wrapper():
-        local("python setup.py sdist", capture=False)
-        local("twine upload dist/*", capture=False)
+    local("twine upload dist/*", capture=False)
 
 
 ###############################################################################

@@ -26,11 +26,10 @@ before_deploy:
   - curl -sL "https://deb.nodesource.com/setup_8.x" | sudo bash -
   - sudo apt-get install -y nodejs
   - sudo npm install --global gh-pages@2.0.1
-  - sed -i "s|^VERSION = \(.*\)$|VERSION = (${TRAVIS_TAG//./, })|g" cloud_browser/__init__.py
 
 deploy:
   - provider: script
-    script: fab upload
+    script: fab sdist:version=${TRAVIS_TAG} publish_pypi
     on:
       tags: true
       python: "3.6"
