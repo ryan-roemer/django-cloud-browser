@@ -6,7 +6,7 @@ import errno
 from fileinput import FileInput
 import os
 import shutil
-import sys
+from sys import version_info
 from contextlib import contextmanager
 from uuid import uuid4
 
@@ -143,7 +143,7 @@ def flake8(rcfile=FLAKE8_CFG):
 
 def black():
     """Run black style checker."""
-    if sys.version_info.major > 2:
+    if version_info >= (3, 6, 0):
         local("black --check %s" % (" ".join(CHECK_INCLUDES)))
 
 
