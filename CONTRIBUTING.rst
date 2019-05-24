@@ -13,6 +13,22 @@ You can also run the CI locally via:
 
     fab check
 
+Up and running via local filesystem
+==============
+
+The example project, ``cloud_browser_project``, is configured to connect to a
+local sqlite database.
+
+To run:
+
+::
+
+   fab syncdb run_server
+
+This will start a server for the local filesystem, browsable at
+``http://localhost:8000/``, creating a sqlite database in
+``cloud_browser_project/db``.
+
 Publishing a release
 ====================
 
