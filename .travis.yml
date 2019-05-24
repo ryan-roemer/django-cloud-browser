@@ -8,7 +8,10 @@ install:
   - pip install -e .[test]
 
 before_install:
-  - sudo rm -f /etc/boto.cfg
+  - sudo rm -f /etc/boto.cfg # Workaround for travis boto issue with GCE
+  - python -m pip install --upgrade pip
+  # easy_install instead of pip because of a problem with travis' virtualenv
+  # https://stackoverflow.com/q/35780537/3817588
   - if [[ "${TRAVIS_PYTHON_VERSION}" = "2.7" ]]; then easy_install distribute; fi
 
 script:

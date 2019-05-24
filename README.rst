@@ -3,7 +3,7 @@
 ======================
 :Info: A Django application browser for cloud (S3, Cloud Files) datastores.
 :Author: Ryan Roemer (http://github.com/ryan-roemer)
-:Build: |build| |style|
+:Build: |travis| |azdo| |style|
 
 Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
@@ -63,8 +63,11 @@ pages can be viewed at arbitrary object-per-page and starting points.
 Conveniently, URL paths can be inputted and linked to a starting point within
 a long list of results.
 
-.. |build| image:: https://travis-ci.org/ryan-roemer/django-cloud-browser.svg
+.. |travis| image:: https://travis-ci.org/ryan-roemer/django-cloud-browser.svg
    :target: https://travis-ci.org/ryan-roemer/django-cloud-browser
+
+.. |azdo| image:: https://dev.azure.com/michaelsethperel/django-cloud-browser/_apis/build/status/michaelperel.django-cloud-browser?branchName=master
+   :target: https://dev.azure.com/michaelsethperel/django-cloud-browser/_build/latest?definitionId=3&branchName=master
 
 .. |style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black

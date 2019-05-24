@@ -1,0 +1,39 @@
+trigger:
+- master
+
+strategy:
+  matrix:
+    Windows-Python27:
+      python.version: '2.7'
+      os.image: windows-latest
+    Windows-Python36:
+      python.version: '3.6'
+      os.image: windows-latest
+    MacOS-Python27:
+      python.version: '2.7'
+      os.image: macOS-latest
+    MacOS-Python36:
+      python.version: '3.6'
+      os.image: macOS-latest
+
+pool:
+  vmImage: $(os.image)
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: $(python.version)
+  displayName: 'Use Python $(python.version)'
+
+- script: python -m pip install --upgrade pip
+  displayName: Update pip
+
+- script: pip install distribute
+  displayName: Before Install
+  condition: eq(variables['python.version'], '2.7')
+
+- script: pip install -e .[test]
+  displayName: Install
+
+- script: fab check
+  displayName: Run checkers

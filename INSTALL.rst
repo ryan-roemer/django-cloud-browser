@@ -42,7 +42,7 @@ Cloud Browser uses conditional imports to only actually require other libraries
 that are used in the active configuration. Loosely speaking, for deployment,
 only the following is actually needed:
 
-* Python 2.5+
+* Python 2.7 or Python 3.6
 * `Django <http://www.djangoproject.com/>`_
 
 The application relies on third party open source libraries to actually
