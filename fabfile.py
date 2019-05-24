@@ -1,17 +1,15 @@
 """Fabric file."""
-from __future__ import with_statement
-from __future__ import print_function
+from __future__ import print_function, with_statement
 
 import errno
-from fileinput import FileInput
 import os
 import shutil
-import sys
 from contextlib import contextmanager
+from fileinput import FileInput
+from sys import version_info
 from uuid import uuid4
 
 from fabric.api import local
-
 
 ###############################################################################
 # Constants
@@ -27,6 +25,7 @@ DEV_DB_DIR = os.path.join(PROJ, "db")
 CHECK_INCLUDES = ("fabfile.py", "setup.py", MOD, PROJ)
 PYLINT_CFG = os.path.join("dev", "pylint.cfg")
 FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
+ISORT_CFG = os.path.join("dev", ".isort.cfg")
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
@@ -103,7 +102,7 @@ def sdist(version=BUILD_VERSION):
     :param version: Optional version to set before packaging.
     """
     with _update_version(version), _dist_wrapper():
-        local("python setup.py sdist", capture=False)
+        local("python setup.py sdist")
 
 
 def register():
@@ -113,12 +112,12 @@ def register():
         http://stackoverflow.com/questions/1569315
     """
     with _dist_wrapper():
-        local("python setup.py register", capture=False)
+        local("python setup.py register")
 
 
 def publish_pypi():
     """Upload package."""
-    local("twine upload dist/*", capture=False)
+    local("twine upload dist/*")
 
 
 ###############################################################################
@@ -130,7 +129,7 @@ def pylint(rcfile=PYLINT_CFG):
     :param rcfile: PyLint configuration file.
     """
     # Have a spurious DeprecationWarning in pylint.
-    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
 def flake8(rcfile=FLAKE8_CFG):
@@ -138,18 +137,34 @@ def flake8(rcfile=FLAKE8_CFG):
 
     :param rcfile: Flake8 configuration file.
     """
-    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
+
+
+def isort(rcfile=ISORT_CFG):
+    """Run isort style checker.
+
+    :param rcfile: isort configuration file.
+    """
+
+    # use dirname until https://github.com/timothycrosley/isort/issues/710 is resolved
+    rcfile = os.path.dirname(rcfile)
+
+    local(
+        "isort --recursive --check-only --settings-path=%s %s"
+        % (rcfile, " ".join(CHECK_INCLUDES))
+    )
 
 
 def black():
     """Run black style checker."""
-    if sys.version_info.major > 2:
-        local("black --check %s" % (" ".join(CHECK_INCLUDES)), capture=False)
+    if version_info >= (3, 6, 0):
+        local("black --check %s" % (" ".join(CHECK_INCLUDES)))
 
 
 def check():
     """Run all checkers."""
     flake8()
+    isort()
     black()
     pylint()
 
@@ -174,7 +189,7 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
     os.environ["PYTHONPATH"] = ROOT_DIR
     os.environ["DJANGO_SETTINGS_MODULE"] = proj_settings
 
-    local("sphinx-build -b html %s %s" % (DOC_INPUT, output), capture=False)
+    local("sphinx-build -b html %s %s" % (DOC_INPUT, output))
 
 
 def publish_docs(
@@ -205,7 +220,7 @@ def _manage(target, extra=""):
     """Generic wrapper for ``manage.py``."""
     os.environ["PYTHONPATH"] = ROOT_DIR
 
-    local("python %s %s %s" % (MANAGE, target, extra), capture=False)
+    local("python %s %s %s" % (MANAGE, target, extra))
 
 
 def syncdb():

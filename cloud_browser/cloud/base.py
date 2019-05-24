@@ -1,9 +1,9 @@
 """Cloud datastore API base abstraction."""
 import mimetypes
 
-from cloud_browser.cloud import errors
 from cloud_browser.app_settings import settings
-from cloud_browser.common import SEP, path_join, basename
+from cloud_browser.cloud import errors
+from cloud_browser.common import SEP, basename, path_join
 
 
 class CloudObjectTypes(object):

@@ -1,6 +1,5 @@
 """Common cloud error wrappers."""
 import sys
-
 from functools import wraps
 from itertools import chain
 

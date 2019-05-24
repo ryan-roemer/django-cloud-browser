@@ -12,8 +12,8 @@
 .. _cloudfiles: https://github.com/rackspace/python-cloudfiles
 """
 from cloud_browser.app_settings import settings
-from cloud_browser.cloud import errors, base
-from cloud_browser.common import SEP, check_version, requires, dt_from_header
+from cloud_browser.cloud import base, errors
+from cloud_browser.common import SEP, check_version, dt_from_header, requires
 
 ###############################################################################
 # Constants / Conditional Imports

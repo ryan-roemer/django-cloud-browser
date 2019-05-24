@@ -2,7 +2,7 @@
 import os
 
 from django import template
-from django.template import TemplateSyntaxError, Node
+from django.template import Node, TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 
 from cloud_browser.app_settings import settings

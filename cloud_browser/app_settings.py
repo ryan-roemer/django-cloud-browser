@@ -1,5 +1,6 @@
 """Application-specific settings."""
 import os
+
 from django.conf import settings as _settings
 from django.core.exceptions import ImproperlyConfigured
 

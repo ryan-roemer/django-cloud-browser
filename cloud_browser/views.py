@@ -1,19 +1,19 @@
 """Cloud browser views."""
 import json
 
-from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.http import Http404, HttpResponse
+from django.shortcuts import redirect, render
 from django.utils.http import urlencode
 
+from cloud_browser.app_settings import settings
+from cloud_browser.cloud import errors, get_connection, get_connection_cls
+from cloud_browser.common import get_int, path_join, path_parts, path_yield, relpath
+
 try:
-    # pylint: disable=no-name-in-module, import-error
+    # pylint: disable=no-name-in-module, import-error, ungrouped-imports
     from django.utils.importlib import import_module
 except ImportError:
     from importlib import import_module
-
-from cloud_browser.app_settings import settings
-from cloud_browser.cloud import get_connection, get_connection_cls, errors
-from cloud_browser.common import get_int, path_parts, path_join, path_yield, relpath
 
 
 MAX_LIMIT = get_connection_cls().cont_cls.max_list
