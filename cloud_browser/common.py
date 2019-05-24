@@ -4,8 +4,8 @@ Because cloud operations are OS agnostic, we don't use any of :mod:`os` or
 :mod:`os.path`.
 """
 from datetime import datetime
-from django.core.exceptions import ImproperlyConfigured
 
+from django.core.exceptions import ImproperlyConfigured
 
 ###############################################################################
 # Constants.

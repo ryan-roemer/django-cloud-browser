@@ -1,9 +1,10 @@
 """Cloud browser package."""
 from __future__ import with_statement
+
 import os
 from sys import version_info
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 from cloud_browser import __version__
 
@@ -23,6 +24,7 @@ TEST_DEPENDENCIES = [
     "apache-libcloud==2.4.0",
     "Fabric3",
     "pylint",
+    "isort",
     "flake8",
     "Sphinx",
     "sphinx-bootstrap-theme",

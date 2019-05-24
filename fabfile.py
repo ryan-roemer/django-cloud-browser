@@ -1,17 +1,15 @@
 """Fabric file."""
-from __future__ import with_statement
-from __future__ import print_function
+from __future__ import print_function, with_statement
 
 import errno
-from fileinput import FileInput
 import os
 import shutil
-from sys import version_info
 from contextlib import contextmanager
+from fileinput import FileInput
+from sys import version_info
 from uuid import uuid4
 
 from fabric.api import local
-
 
 ###############################################################################
 # Constants
@@ -27,6 +25,7 @@ DEV_DB_DIR = os.path.join(PROJ, "db")
 CHECK_INCLUDES = ("fabfile.py", "setup.py", MOD, PROJ)
 PYLINT_CFG = os.path.join("dev", "pylint.cfg")
 FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
+ISORT_CFG = os.path.join("dev", ".isort.cfg")
 
 DOC_INPUT = "doc"
 DOC_OUTPUT = "doc_html"
@@ -141,6 +140,21 @@ def flake8(rcfile=FLAKE8_CFG):
     local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
+def isort(rcfile=ISORT_CFG):
+    """Run isort style checker.
+
+    :param rcfile: isort configuration file.
+    """
+
+    # use dirname until https://github.com/timothycrosley/isort/issues/710 is resolved
+    rcfile = os.path.dirname(rcfile)
+
+    local(
+        "isort --recursive --check-only --settings-path=%s %s"
+        % (rcfile, " ".join(CHECK_INCLUDES))
+    )
+
+
 def black():
     """Run black style checker."""
     if version_info >= (3, 6, 0):
@@ -150,6 +164,7 @@ def black():
 def check():
     """Run all checkers."""
     flake8()
+    isort()
     black()
     pylint()
 
