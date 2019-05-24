@@ -74,25 +74,35 @@ def _dist_wrapper():
             os.remove(rst_file)
 
 
+@contextmanager
+def _update_version(version):
+    if not version:
+        yield
+        return
+
+    major, minor, patch = version.strip().split(".")
+    version_file = os.path.join(ROOT_DIR, MOD, "__init__.py")
+    fobj = FileInput(version_file, inplace=True)
+    try:
+        for line in fobj:
+            if line.startswith("VERSION = ("):
+                print("VERSION = (%s, %s, %s)" % (major, minor, patch))
+            else:
+                print(line)
+    finally:
+        fobj.close()
+
+    yield
+
+    local("git checkout %s" % version_file)
+
+
 def sdist(version=BUILD_VERSION):
     """Package into distribution.
 
     :param version: Optional version to set before packaging.
     """
-    if version:
-        major, minor, patch = version.strip().split(".")
-        version_file = os.path.join(ROOT_DIR, MOD, "__init__.py")
-        fobj = FileInput(version_file, inplace=True)
-        try:
-            for line in fobj:
-                if line.startswith("VERSION = ("):
-                    print("VERSION = (%s, %s, %s)" % (major, minor, patch))
-                else:
-                    print(line)
-        finally:
-            fobj.close()
-
-    with _dist_wrapper():
+    with _update_version(version), _dist_wrapper():
         local("python setup.py sdist", capture=False)
 
 
