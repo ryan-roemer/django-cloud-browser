@@ -4,6 +4,7 @@
 :Info: A Django application browser for cloud (S3, Cloud Files) datastores.
 :Author: Ryan Roemer (http://github.com/ryan-roemer)
 :Build: |travis| |azdo| |style|
+:Version: |version|
 
 Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
@@ -71,3 +72,6 @@ a long list of results.
 
 .. |style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black
+
+.. |version| image:: https://img.shields.io/pypi/v/django-cloud-browser.svg
+   :target: https://pypi.org/project/django-cloud-browser/
