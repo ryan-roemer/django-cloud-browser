@@ -103,7 +103,7 @@ def sdist(version=BUILD_VERSION):
     :param version: Optional version to set before packaging.
     """
     with _update_version(version), _dist_wrapper():
-        local("python setup.py sdist", capture=False)
+        local("python setup.py sdist")
 
 
 def register():
@@ -113,12 +113,12 @@ def register():
         http://stackoverflow.com/questions/1569315
     """
     with _dist_wrapper():
-        local("python setup.py register", capture=False)
+        local("python setup.py register")
 
 
 def publish_pypi():
     """Upload package."""
-    local("twine upload dist/*", capture=False)
+    local("twine upload dist/*")
 
 
 ###############################################################################
@@ -130,7 +130,7 @@ def pylint(rcfile=PYLINT_CFG):
     :param rcfile: PyLint configuration file.
     """
     # Have a spurious DeprecationWarning in pylint.
-    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
 def flake8(rcfile=FLAKE8_CFG):
@@ -138,13 +138,13 @@ def flake8(rcfile=FLAKE8_CFG):
 
     :param rcfile: Flake8 configuration file.
     """
-    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)), capture=False)
+    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
 def black():
     """Run black style checker."""
     if sys.version_info.major > 2:
-        local("black --check %s" % (" ".join(CHECK_INCLUDES)), capture=False)
+        local("black --check %s" % (" ".join(CHECK_INCLUDES)))
 
 
 def check():
@@ -174,7 +174,7 @@ def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
     os.environ["PYTHONPATH"] = ROOT_DIR
     os.environ["DJANGO_SETTINGS_MODULE"] = proj_settings
 
-    local("sphinx-build -b html %s %s" % (DOC_INPUT, output), capture=False)
+    local("sphinx-build -b html %s %s" % (DOC_INPUT, output))
 
 
 def publish_docs(
@@ -205,7 +205,7 @@ def _manage(target, extra=""):
     """Generic wrapper for ``manage.py``."""
     os.environ["PYTHONPATH"] = ROOT_DIR
 
-    local("python %s %s %s" % (MANAGE, target, extra), capture=False)
+    local("python %s %s %s" % (MANAGE, target, extra))
 
 
 def syncdb():
