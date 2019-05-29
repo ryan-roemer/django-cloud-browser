@@ -2,30 +2,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Cloud / Datastore Support &#8212; Cloud Browser 0.4.0 documentation</title>
-    
+    <meta charset="utf-8" />
+    <title>Cloud / Datastore Support &#8212; Cloud Browser 0.0.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Common / Utilities" href="common.html" />
@@ -34,9 +19,12 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
   
   <a href="https://github.com/ryan-roemer/django-cloud-browser"
      class="visible-desktop"><img
@@ -56,7 +44,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -137,6 +125,7 @@
 <li><a class="reference internal" href="#datastores">Datastores</a><ul>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.base">Abstract Base Class</a></li>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.fs">Filesystem Datastore</a></li>
+<li><a class="reference internal" href="#module-cloud_browser.cloud.apache_libcloud">Apache Libcloud Datastore</a></li>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.boto_base">Boto-based Datastore Abstract Base Class</a></li>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.aws">Amazon Web Services S3 Datastore</a></li>
 <li><a class="reference internal" href="#module-cloud_browser.cloud.google">Google Storage Datastore</a></li>
@@ -184,7 +173,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <div class="section" id="module-cloud_browser.cloud">
 <span id="cloud-datastore-support"></span><h1>Cloud / Datastore Support<a class="headerlink" href="#module-cloud_browser.cloud" title="Permalink to this headline">¶</a></h1>
@@ -209,28 +198,22 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 <dt id="cloud_browser.cloud.config.Config.get_connection">
 <em class="property">classmethod </em><code class="descname">get_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return connection object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#cloud_browser.cloud.base.CloudConnection" title="cloud_browser.cloud.base.CloudConnection"><code class="xref py py-class docutils literal"><span class="pre">cloud_browser.cloud.base.CloudConnection</span></code></a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cloud_browser.cloud.base.CloudConnection" title="cloud_browser.cloud.base.CloudConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.base.CloudConnection</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.config.Config.get_connection_cls">
 <em class="property">classmethod </em><code class="descname">get_connection_cls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return connection class.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -251,10 +234,10 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 <dd><p>Exception translator.</p>
 <p>This class wraps a “real” underlying cloud class exception and translates
 it to a “common” exception class from this module. The exception stack
-from the wrapped exception is preserved through some <code class="xref py py-meth docutils literal"><span class="pre">sys.exc_info()</span></code>
+from the wrapped exception is preserved through some <code class="xref py py-meth docutils literal notranslate"><span class="pre">sys.exc_info()</span></code>
 hackery.</p>
 <p>It is implemented as a decorator such that you can do something like:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert exception to another one.&#39;&#39;&#39;</span>
     <span class="n">translations</span> <span class="o">=</span> <span class="p">{</span> <span class="ne">Exception</span><span class="p">:</span> <span class="ne">NotImplementedError</span> <span class="p">}</span>
 
@@ -267,7 +250,7 @@ hackery.</p>
 </div>
 <p>The alternate way is to handle the translations directly in a member
 function:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyWrapper</span><span class="p">(</span><span class="n">CloudExceptionWrapper</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert exception to another one.&#39;&#39;&#39;</span>
     <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
@@ -283,7 +266,7 @@ function:</p>
 </pre></div>
 </div>
 <p>which produces output like:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="o">...</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="n">foo</span><span class="p">()</span>
   <span class="n">File</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="o">...</span><span class="p">,</span> <span class="ow">in</span> <span class="n">wrapped</span>
@@ -294,21 +277,18 @@ function:</p>
 </pre></div>
 </div>
 <p>So, we can see that we get a different exception with the proper stack.</p>
-<p>Overriding classes should implement the <code class="docutils literal"><span class="pre">translations</span></code> class variable
+<p>Overriding classes should implement the <code class="docutils literal notranslate"><span class="pre">translations</span></code> class variable
 dictionary for translating an underlying library exception to a class
 in this module. See any of the data implementation modules for examples.</p>
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.excepts">
 <em class="property">classmethod </em><code class="descname">excepts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.excepts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return tuple of underlying exception classes to trap and wrap.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">tuple</span></code> of <code class="docutils literal"><span class="pre">type</span></code></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="docutils literal notranslate"><span class="pre">type</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="classmethod">
@@ -322,7 +302,7 @@ in this module. See any of the data implementation modules for examples.</p>
 <code class="descname">translate</code><span class="sig-paren">(</span><em>exc</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return translation of exception to new class.</p>
 <p>Calling code should only raise exception if exception class is passed
-in, else <code class="docutils literal"><span class="pre">None</span></code> (which signifies no wrapping should be done).</p>
+in, else <code class="docutils literal notranslate"><span class="pre">None</span></code> (which signifies no wrapping should be done).</p>
 </dd></dl>
 
 </dd></dl>
@@ -370,7 +350,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dt id="cloud_browser.cloud.base.CloudConnection.cont_cls">
 <code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudContainer" title="cloud_browser.cloud.base.CloudContainer"><code class="xref py py-class docutils literal"><span class="pre">CloudContainer</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudContainer" title="cloud_browser.cloud.base.CloudContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudContainer</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
@@ -388,7 +368,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudConnection.max_list">
 <code class="descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.max_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum number of containers that can be listed or <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<dd><p>Maximum number of containers that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -418,7 +398,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudContainer.max_list">
 <code class="descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.max_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum number of objects that can be listed or <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<dd><p>Maximum number of objects that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -431,7 +411,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dt id="cloud_browser.cloud.base.CloudContainer.obj_cls">
 <code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObject" title="cloud_browser.cloud.base.CloudObject"><code class="xref py py-class docutils literal"><span class="pre">CloudObject</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObject" title="cloud_browser.cloud.base.CloudObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudObject</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -491,7 +471,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.type_cls">
 <code class="descname">type_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.type_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObjectTypes" title="cloud_browser.cloud.base.CloudObjectTypes"><code class="xref py py-class docutils literal"><span class="pre">CloudObjectTypes</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObjectTypes" title="cloud_browser.cloud.base.CloudObjectTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudObjectTypes</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -514,7 +494,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dt id="cloud_browser.cloud.fs.FilesystemConnection.cont_cls">
 <code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemContainer" title="cloud_browser.cloud.fs.FilesystemContainer"><code class="xref py py-class docutils literal"><span class="pre">FilesystemContainer</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemContainer" title="cloud_browser.cloud.fs.FilesystemContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilesystemContainer</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -551,7 +531,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.obj_cls">
 <code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemObject" title="cloud_browser.cloud.fs.FilesystemObject"><code class="xref py py-class docutils literal"><span class="pre">FilesystemObject</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemObject" title="cloud_browser.cloud.fs.FilesystemObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilesystemObject</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -599,24 +579,108 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 </dd></dl>
 
 </div>
+<div class="section" id="module-cloud_browser.cloud.apache_libcloud">
+<span id="apache-libcloud-datastore"></span><h3>Apache Libcloud Datastore<a class="headerlink" href="#module-cloud_browser.cloud.apache_libcloud" title="Permalink to this headline">¶</a></h3>
+<p>ApacheLibcloud datastore.</p>
+<dl class="class">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection">
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudConnection</code><span class="sig-paren">(</span><em>provider</em>, <em>account</em>, <em>secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>ApacheLibcloud connection wrapper.</p>
+<dl class="attribute">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.cont_cls">
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container child class.</p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer" title="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApacheLibcloudContainer</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.wrap_libcloud_errors">
+<code class="descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer">
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>ApacheLibcloud container wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.from_libcloud">
+<em class="property">classmethod </em><code class="descname">from_libcloud</code><span class="sig-paren">(</span><em>conn</em>, <em>container</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.from_libcloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create container from <cite>libcloud.storage.base.Container</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_object">
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get single object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_objects">
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.obj_cls">
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage object child class.</p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject" title="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApacheLibcloudObject</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.wrap_libcloud_errors">
+<code class="descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper">
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>ApacheLibcloud <code class="xref py py-mod docutils literal notranslate"><span class="pre">cloudfiles</span></code> exception translator.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper.lazy_translations">
+<em class="property">classmethod </em><code class="descname">lazy_translations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lazy translations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject">
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>ApacheLibcloud object wrapper.</p>
+<dl class="classmethod">
+<dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject.from_libcloud">
+<em class="property">classmethod </em><code class="descname">from_libcloud</code><span class="sig-paren">(</span><em>container</em>, <em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject.from_libcloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create object from <cite>libcloud.storage.base.Object</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-cloud_browser.cloud.boto_base">
 <span id="boto-based-datastore-abstract-base-class"></span><h3>Boto-based Datastore Abstract Base Class<a class="headerlink" href="#module-cloud_browser.cloud.boto_base" title="Permalink to this headline">¶</a></h3>
 <p>Abstract boto-based datastore.</p>
 <p>The <a class="reference external" href="http://code.google.com/p/boto/">boto</a> library provides interfaces to both Amazon S3 and Google Storage
 for Developers. This abstract base class gets most of the common work done.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+<p class="admonition-title">Note</p>
+<p><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
 package.</p>
 </div>
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper">
 <em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoBucketWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Boto <code class="xref py py-mod docutils literal"><span class="pre">boto</span></code> bucket exception translator.</p>
+<dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> bucket exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls">
 <code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">NoContainerException</span></code></p>
+<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.NoContainerException" title="cloud_browser.cloud.errors.NoContainerException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.NoContainerException</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -629,7 +693,7 @@ package.</p>
 <dt id="cloud_browser.cloud.boto_base.BotoConnection.cont_cls">
 <code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoContainer" title="cloud_browser.cloud.boto_base.BotoContainer"><code class="xref py py-class docutils literal"><span class="pre">BotoContainer</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoContainer" title="cloud_browser.cloud.boto_base.BotoContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BotoContainer</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -665,8 +729,8 @@ package.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.max_list">
 <code class="descname">max_list</code><em class="property"> = 10000</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.max_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum number of objects that can be listed or <code class="docutils literal"><span class="pre">None</span></code>.</p>
-<p><code class="xref py py-mod docutils literal"><span class="pre">boto</span></code> transparently pages through objects, so there is no real
+<dd><p>Maximum number of objects that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> transparently pages through objects, so there is no real
 limit to the number of object that can be displayed.  However, for
 practical reasons, we’ll limit it to the same as Rackspace.</p>
 </dd></dl>
@@ -675,7 +739,7 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.obj_cls">
 <code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoObject" title="cloud_browser.cloud.boto_base.BotoObject"><code class="xref py py-class docutils literal"><span class="pre">BotoObject</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoObject" title="cloud_browser.cloud.boto_base.BotoObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">BotoObject</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -689,11 +753,11 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper">
 <em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Boto <code class="xref py py-mod docutils literal"><span class="pre">boto</span></code> exception translator.</p>
+<dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls">
 <code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">CloudException</span></code></p>
+<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.CloudException" title="cloud_browser.cloud.errors.CloudException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.CloudException</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
@@ -707,11 +771,11 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper">
 <em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoKeyWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Boto <code class="xref py py-mod docutils literal"><span class="pre">boto</span></code> key exception translator.</p>
+<dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> key exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls">
 <code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">NoObjectException</span></code></p>
+<dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.NoObjectException" title="cloud_browser.cloud.errors.NoObjectException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.NoObjectException</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -741,13 +805,13 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.is_key">
 <em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a key object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.is_prefix">
 <em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a prefix object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -763,8 +827,8 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 <span id="amazon-web-services-s3-datastore"></span><h3>Amazon Web Services S3 Datastore<a class="headerlink" href="#module-cloud_browser.cloud.aws" title="Permalink to this headline">¶</a></h3>
 <p>Amazon Simple Storage Service (S3) datastore.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+<p class="admonition-title">Note</p>
+<p><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
 package.</p>
 </div>
 <dl class="class">
@@ -775,7 +839,7 @@ package.</p>
 <dt id="cloud_browser.cloud.aws.AwsConnection.cont_cls">
 <code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsContainer" title="cloud_browser.cloud.aws.AwsContainer"><code class="xref py py-class docutils literal"><span class="pre">AwsContainer</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsContainer" title="cloud_browser.cloud.aws.AwsContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AwsContainer</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -788,7 +852,7 @@ package.</p>
 <dt id="cloud_browser.cloud.aws.AwsContainer.obj_cls">
 <code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsObject" title="cloud_browser.cloud.aws.AwsObject"><code class="xref py py-class docutils literal"><span class="pre">AwsObject</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsObject" title="cloud_browser.cloud.aws.AwsObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">AwsObject</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -800,13 +864,13 @@ package.</p>
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.aws.AwsObject.is_key">
 <em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a key object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.aws.AwsObject.is_prefix">
 <em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a prefix object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 </dd></dl>
 
 </dd></dl>
@@ -818,8 +882,8 @@ package.</p>
 <p><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a> (GS) is cosmetically an implementation of the
 S3 interface by Google.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
+<p class="admonition-title">Note</p>
+<p><strong>Installation</strong>: Use of this module requires the open source <a class="reference external" href="http://code.google.com/p/boto/">boto</a>
 package. Not sure exactly which version installed GS support, but we’ll
 validate the version if it becomes an issue.</p>
 </div>
@@ -831,7 +895,7 @@ validate the version if it becomes an issue.</p>
 <dt id="cloud_browser.cloud.google.GsConnection.cont_cls">
 <code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsContainer" title="cloud_browser.cloud.google.GsContainer"><code class="xref py py-class docutils literal"><span class="pre">GsContainer</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsContainer" title="cloud_browser.cloud.google.GsContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">GsContainer</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -844,8 +908,8 @@ validate the version if it becomes an issue.</p>
 <dt id="cloud_browser.cloud.google.GsContainer.get_objects">
 <code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
-<p>Certain upload clients may add a 0-byte object (e.g., <code class="docutils literal"><span class="pre">FOLDER</span></code> object
-for path <code class="docutils literal"><span class="pre">path/to/FOLDER</span></code> - <code class="docutils literal"><span class="pre">path/to/FOLDER/FOLDER</span></code>). We add an
+<p>Certain upload clients may add a 0-byte object (e.g., <code class="docutils literal notranslate"><span class="pre">FOLDER</span></code> object
+for path <code class="docutils literal notranslate"><span class="pre">path/to/FOLDER</span></code> - <code class="docutils literal notranslate"><span class="pre">path/to/FOLDER/FOLDER</span></code>). We add an
 extra +1 limit query and ignore any such file objects.</p>
 </dd></dl>
 
@@ -853,7 +917,7 @@ extra +1 limit query and ignore any such file objects.</p>
 <dt id="cloud_browser.cloud.google.GsContainer.obj_cls">
 <code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
-<p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsObject" title="cloud_browser.cloud.google.GsObject"><code class="xref py py-class docutils literal"><span class="pre">GsObject</span></code></a></p>
+<p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsObject" title="cloud_browser.cloud.google.GsObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GsObject</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -871,16 +935,16 @@ extra +1 limit query and ignore any such file objects.</p>
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.google.GsObject.is_key">
 <em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_key" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a key object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="cloud_browser.cloud.google.GsObject.is_prefix">
 <em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if result is a prefix object.</p>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Boto uses the S3 Prefix object for GS prefixes.</p>
+<p class="admonition-title">Note</p>
+<p>Boto uses the S3 Prefix object for GS prefixes.</p>
 </div>
 </dd></dl>
 
@@ -913,7 +977,7 @@ extra +1 limit query and ignore any such file objects.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

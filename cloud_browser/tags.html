@@ -2,30 +2,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Tags &#8212; Cloud Browser 0.4.0 documentation</title>
-    
+    <meta charset="utf-8" />
+    <title>Tags &#8212; Cloud Browser 0.0.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="URLs" href="urls.html" />
@@ -34,9 +19,12 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
   
   <a href="https://github.com/ryan-roemer/django-cloud-browser"
      class="visible-desktop"><img
@@ -56,7 +44,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -171,7 +159,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <div class="section" id="module-cloud_browser.templatetags.cloud_browser_extras">
 <span id="tags"></span><h1>Tags<a class="headerlink" href="#module-cloud_browser.templatetags.cloud_browser_extras" title="Permalink to this headline">¶</a></h1>
@@ -189,7 +177,7 @@
 <dl class="attribute">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url">
 <code class="descname">static_media_url</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Static application media URL (or <code class="docutils literal"><span class="pre">None</span></code>).</p>
+<dd><p>Static application media URL (or <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
 </dd></dl>
 
 </dd></dl>
@@ -199,9 +187,9 @@
 <code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">cloud_browser_media_url</code><span class="sig-paren">(</span><em>_</em>, <em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get base media URL for application static media.</p>
 <p>Correctly handles whether or not the settings variable
-<code class="docutils literal"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></code> is set and served.</p>
+<code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></code> is set and served.</p>
 <p>For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span>
     <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{</span><span class="si">% c</span><span class="s2">loud_browser_media_url &quot;</span><span class="n">css</span><span class="o">/</span><span class="n">cloud</span><span class="o">-</span><span class="n">browser</span><span class="o">.</span><span class="n">css</span><span class="s2">&quot; %}&quot;</span> <span class="o">/&gt;</span>
 </pre></div>
 </div>
@@ -209,29 +197,25 @@
 
 <dl class="function">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.truncatechars">
-<code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">truncatechars</code><span class="sig-paren">(</span><em>value</em>, <em>num</em>, <em>end_text=’…’</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.truncatechars" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">truncatechars</code><span class="sig-paren">(</span><em>value</em>, <em>num</em>, <em>end_text='...'</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.truncatechars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Truncate string on character boundary.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Django ticket <a class="reference external" href="http://code.djangoproject.com/ticket/5025">5025</a> has a
+<p class="admonition-title">Note</p>
+<p>Django ticket <a class="reference external" href="http://code.djangoproject.com/ticket/5025">5025</a> has a
 patch for a more extensible and robust truncate characters tag filter.</p>
 </div>
 <p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">my_variable</span><span class="o">|</span><span class="n">truncatechars</span><span class="p">:</span><span class="mi">22</span> <span class="p">}}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">my_variable</span><span class="o">|</span><span class="n">truncatechars</span><span class="p">:</span><span class="mi">22</span> <span class="p">}}</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>value</strong> (<code class="docutils literal"><span class="pre">string</span></code>) – Value to truncate.</li>
-<li><strong>num</strong> (<code class="docutils literal"><span class="pre">int</span></code>) – Number of characters to trim to.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – Value to truncate.</p></li>
+<li><p><strong>num</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) – Number of characters to trim to.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -256,7 +240,7 @@ patch for a more extensible and robust truncate characters tag filter.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

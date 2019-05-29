@@ -2,30 +2,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Django Cloud Browser &#8212; Cloud Browser 0.4.0 documentation</title>
-    
+    <meta charset="utf-8" />
+    <title>Django Cloud Browser &#8212; Cloud Browser 0.0.0 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.4.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="misc/install.html" />
@@ -33,9 +18,12 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
   
   <a href="https://github.com/ryan-roemer/django-cloud-browser"
      class="visible-desktop"><img
@@ -55,7 +43,7 @@
         </button>
         <a class="navbar-brand" href="#">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -172,51 +160,49 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <div class="section" id="django-cloud-browser">
 <h1>Django Cloud Browser<a class="headerlink" href="#django-cloud-browser" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Info:</th><td class="field-body">A Django application browser for cloud (S3, Cloud Files) datastores.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Author:</th><td class="field-body">Ryan Roemer (<a class="reference external" href="http://github.com/ryan-roemer">http://github.com/ryan-roemer</a>)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Build:</th><td class="field-body"><a class="reference external" href="https://travis-ci.org/ryan-roemer/django-cloud-browser"><img alt="build" src="https://travis-ci.org/ryan-roemer/django-cloud-browser.svg" /></a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Info</dt>
+<dd class="field-odd"><p>A Django application browser for cloud (S3, Cloud Files) datastores.</p>
+</dd>
+<dt class="field-even">Author</dt>
+<dd class="field-even"><p>Ryan Roemer (<a class="reference external" href="http://github.com/ryan-roemer">http://github.com/ryan-roemer</a>)</p>
+</dd>
+<dt class="field-odd">Build</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://travis-ci.org/ryan-roemer/django-cloud-browser"><img alt="travis" src="https://travis-ci.org/ryan-roemer/django-cloud-browser.svg" /></a> <a class="reference external" href="https://dev.azure.com/michaelsethperel/django-cloud-browser/_build/latest?definitionId=3&amp;branchName=master"><img alt="azdo" src="https://dev.azure.com/michaelsethperel/django-cloud-browser/_apis/build/status/michaelperel.django-cloud-browser?branchName=master" /></a> <a class="reference external" href="https://github.com/python/black"><img alt="style" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a></p>
+</dd>
+<dt class="field-even">Version</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pypi.org/project/django-cloud-browser/"><img alt="version" src="https://img.shields.io/pypi/v/django-cloud-browser.svg" /></a></p>
+</dd>
+</dl>
 <p>Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
 and you’ll be able to browse cloud containers and implied subdirectories, as
 well as view / download objects.</p>
 <p>Currently supported backend datastores include:</p>
 <ul>
-<li><p class="first"><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a>.</p>
-</li>
-<li><p class="first"><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a>.</p>
-</li>
-<li><dl class="first docutils">
-<dt><a class="reference external" href="http://www.rackspacecloud.com/cloud_hosting_products/files/">Rackspace Cloud Files</a>.</dt>
-<dd><div class="first last admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Rackspace is deprecated and we need to refactor to OpenStack.
+<li><p><a class="reference external" href="https://libcloud.readthedocs.io/en/latest/storage/index.html">Apache Libcloud</a>.</p></li>
+<li><p><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a>.</p></li>
+<li><p><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a>.</p></li>
+<li><dl>
+<dt><a class="reference external" href="http://www.rackspacecloud.com/cloud_hosting_products/files/">Rackspace Cloud Files</a>.</dt><dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Rackspace is deprecated and we need to refactor to OpenStack.
 See <a class="reference external" href="https://github.com/ryan-roemer/django-cloud-browser/issues/16">https://github.com/ryan-roemer/django-cloud-browser/issues/16</a></p>
 </div>
 </dd>
 </dl>
 </li>
-<li><p class="first"><a class="reference external" href="http://openstack.org/projects/storage/">OpenStack Storage</a>.</p>
-</li>
-<li><p class="first">Local file system.</p>
-</li>
+<li><p><a class="reference external" href="http://openstack.org/projects/storage/">OpenStack Storage</a>.</p></li>
+<li><p>Local file system.</p></li>
 </ul>
 <p>Be sure to check out the following project resources:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://ryan-roemer.github.com/django-cloud-browser/">Documentation</a>.</li>
-<li><a class="reference external" href="https://github.com/ryan-roemer/django-cloud-browser/">GitHub page</a>.</li>
+<li><p><a class="reference external" href="http://ryan-roemer.github.com/django-cloud-browser/">Documentation</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/ryan-roemer/django-cloud-browser/">GitHub page</a>.</p></li>
 </ul>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
@@ -297,9 +283,9 @@ a long list of results.</p>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 </div>
@@ -324,7 +310,7 @@ a long list of results.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

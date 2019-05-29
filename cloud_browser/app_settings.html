@@ -2,30 +2,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Application Settings &#8212; Cloud Browser 0.4.0 documentation</title>
-    
+    <meta charset="utf-8" />
+    <title>Application Settings &#8212; Cloud Browser 0.0.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Cloud / Datastore Support" href="cloud.html" />
@@ -34,9 +19,12 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
   
   <a href="https://github.com/ryan-roemer/django-cloud-browser"
      class="visible-desktop"><img
@@ -56,7 +44,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -171,7 +159,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <div class="section" id="application-settings">
 <h1>Application Settings<a class="headerlink" href="#application-settings" title="Permalink to this headline">¶</a></h1>
@@ -189,7 +177,7 @@
 <dl class="classmethod">
 <dt id="cloud_browser.app_settings.BoolSetting.parse_bool">
 <em class="property">classmethod </em><code class="descname">parse_bool</code><span class="sig-paren">(</span><em>value</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.app_settings.BoolSetting.parse_bool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert <code class="docutils literal"><span class="pre">string</span></code> or <code class="docutils literal"><span class="pre">bool</span></code> to <code class="docutils literal"><span class="pre">bool</span></code>.</p>
+<dd><p>Convert <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><span class="pre">bool</span></code> to <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -225,13 +213,13 @@
 <p>This class wraps the “real” Django settings object, so can be used instead.
 The additional cloud browser settings are as follows:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p><strong>Environment Variables</strong>: Certain credential settings can come from OS
 environment variables instead of from a settings file value to open up
 more options for secrets management. Values that can be set in the
 environment are designated with an “(<em>Env</em>)” notation.</p>
 <p>Setting a value this way could be done, e.g.:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span>$ export CLOUD_BROWSER_AWS_ACCOUNT=&quot;my_account&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export CLOUD_BROWSER_AWS_ACCOUNT=&quot;my_account&quot;
 $ export CLOUD_BROWSER_AWS_SECRET_KEY=&quot;my_secret&quot;
 $ # ... start django application with environment variables.
 </pre></div>
@@ -239,48 +227,55 @@ $ # ... start django application with environment variables.
 </div>
 <p><strong>Datastore Settings</strong>:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DATASTORE</span></code>: Choice of datastore (see values below).</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span></code>: Choice of datastore (see values below).</p></li>
+</ul>
+<p><strong>Apache Libcloud</strong>: Configure Apache Libcloud as backing datastore.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;ApacheLibcloud&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER</span></code>: Provider name. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT</span></code>: Account name. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY</span></code>: Account secret. (<em>Env</em>)</p></li>
 </ul>
 <p><strong>Amazon Web Services</strong>: Configure AWS S3 as backing datastore.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;AWS&quot;</span></code></li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></code>: Account name. (<em>Env</em>)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;AWS&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></code>: Account name. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</p></li>
 </ul>
 <p><strong>Google Storage for Developers</strong>: Configure Google Storage as backing
 datastore.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Google&quot;</span></code></li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_GS_ACCOUNT</span></code>: Account name. (<em>Env</em>)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_GS_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Google&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_ACCOUNT</span></code>: Account name. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</p></li>
 </ul>
 <p><strong>Rackspace</strong>: Configure Rackspace Cloud Files as backing datastore.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Rackspace&quot;</span></code></li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span></code>: Account name. (<em>Env</em>)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_SERVICENET</span></code>: Boolean designating whether or
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Rackspace&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span></code>: Account name. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span></code>: Account API secret key. (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SERVICENET</span></code>: Boolean designating whether or
 not to use Rackspace’s servicenet (i.e., the private interface on a
-Cloud Server). (<em>Env</em>)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_RACKSPACE_AUTHURL</span></code>: Alternative authorization server,
+Cloud Server). (<em>Env</em>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_AUTHURL</span></code>: Alternative authorization server,
 for use, e.g., with <a class="reference external" href="http://www.openstack.org/">OpenStack</a> instead of
-Rackspace. (<em>Env</em>)</li>
+Rackspace. (<em>Env</em>)</p></li>
 </ul>
 <p><strong>Filesystem</strong>: Configure simple filesystem mock datastore.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Filesystem&quot;</span></code></li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_FILESYSTEM_ROOT</span></code>: Filesystem root to serve from.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DATASTORE</span> <span class="pre">=</span> <span class="pre">&quot;Filesystem&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_FILESYSTEM_ROOT</span></code>: Filesystem root to serve from.</p></li>
 </ul>
 <p><strong>View Permissions</strong>: A standard Django view decorator object can be
 specified, which is wrapped for all browsing / viewing view – for example,
-to limit views to logged in members, use <code class="docutils literal"><span class="pre">login_required</span></code> and for staff
-only, use <code class="docutils literal"><span class="pre">staff_member_required</span></code>. Note that either a real decorator
+to limit views to logged in members, use <code class="docutils literal notranslate"><span class="pre">login_required</span></code> and for staff
+only, use <code class="docutils literal notranslate"><span class="pre">staff_member_required</span></code>. Note that either a real decorator
 function or a fully-qualifid string path are acceptable, so you can use,
 e.g., “django.contrib.admin.views.decorators.staff_member_required” instead
 which might help with certain settings.py import-order-related issues.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_VIEW_DECORATOR</span></code>: View decorator or fully-qualified
-string path.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_VIEW_DECORATOR</span></code>: View decorator or fully-qualified
+string path.</p></li>
 </ul>
 <p><strong>Container Permissions</strong>: Cloud browser allows a very rudimentary form
 of access control at the container level with white and black lists.
@@ -289,27 +284,29 @@ allowed. If the white list is unset, then any container name <em>not</em> in
 the black list is permitted. All name matching is exact (no regular
 expressions, etc.).</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_CONTAINER_WHITELIST</span></code>: White list of names. (Iterable)</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_CONTAINER_BLACKLIST</span></code>: Black list of names. (Iterable)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_CONTAINER_WHITELIST</span></code>: White list of names. (Iterable)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_CONTAINER_BLACKLIST</span></code>: Black list of names. (Iterable)</p></li>
 </ul>
 <p><strong>General</strong>: Other settings.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_DEFAULT_LIST_LIMIT</span></code>: Default number of objects to
-diplay per browser page.</li>
-<li><code class="docutils literal"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></code>: If this applications static media
-(found in <code class="docutils literal"><span class="pre">app_media</span></code>) is served up under the <code class="docutils literal"><span class="pre">settings.MEDIA_ROOT</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_DEFAULT_LIST_LIMIT</span></code>: Default number of objects to
+diplay per browser page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_OBJECT_REDIRECT_URL</span></code>: Custom URL to which to redirect
+when clicking on an object (defaults to showing object contents).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></code>: If this applications static media
+(found in <code class="docutils literal notranslate"><span class="pre">app_media</span></code>) is served up under the <code class="docutils literal notranslate"><span class="pre">settings.MEDIA_ROOT</span></code>,
 then set a relative path from the root, and the static media will be used
-instead of a Django-based static view fallback.</li>
+instead of a Django-based static view fallback.</p></li>
 </ul>
 <dl class="attribute">
 <dt id="cloud_browser.app_settings.Settings.DATASTORES">
-<code class="descname">DATASTORES</code><em class="property"> = {‘AWS’, ‘Google’, ‘Rackspace’, ‘Filesystem’}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.DATASTORES" title="Permalink to this definition">¶</a></dt>
+<code class="descname">DATASTORES</code><em class="property"> = {'AWS', 'ApacheLibcloud', 'Filesystem', 'Google', 'Rackspace'}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.DATASTORES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Valid datastore types.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.app_settings.Settings.SETTINGS">
-<code class="descname">SETTINGS</code><em class="property"> = {‘CLOUD_BROWSER_DATASTORE’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_AWS_ACCOUNT’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_AWS_SECRET_KEY’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_GS_ACCOUNT’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_GS_SECRET_KEY’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_RACKSPACE_ACCOUNT’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_RACKSPACE_SECRET_KEY’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_RACKSPACE_SERVICENET’: &lt;cloud_browser.app_settings.BoolSetting object&gt;, ‘CLOUD_BROWSER_RACKSPACE_AUTHURL’: &lt;cloud_browser.app_settings.BoolSetting object&gt;, ‘CLOUD_BROWSER_FILESYSTEM_ROOT’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_VIEW_DECORATOR’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_CONTAINER_WHITELIST’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_CONTAINER_BLACKLIST’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_DEFAULT_LIST_LIMIT’: &lt;cloud_browser.app_settings.Setting object&gt;, ‘CLOUD_BROWSER_STATIC_MEDIA_DIR’: &lt;cloud_browser.app_settings.Setting object&gt;}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.SETTINGS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">SETTINGS</code><em class="property"> = {'CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_AWS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_AWS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_CONTAINER_BLACKLIST': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_CONTAINER_WHITELIST': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_DATASTORE': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_DEFAULT_LIST_LIMIT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_FILESYSTEM_ROOT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_GS_ACCOUNT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_GS_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_OBJECT_REDIRECT_URL': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_RACKSPACE_ACCOUNT': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_RACKSPACE_AUTHURL': &lt;cloud_browser.app_settings.BoolSetting object&gt;, 'CLOUD_BROWSER_RACKSPACE_SECRET_KEY': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_RACKSPACE_SERVICENET': &lt;cloud_browser.app_settings.BoolSetting object&gt;, 'CLOUD_BROWSER_STATIC_MEDIA_DIR': &lt;cloud_browser.app_settings.Setting object&gt;, 'CLOUD_BROWSER_VIEW_DECORATOR': &lt;cloud_browser.app_settings.Setting object&gt;}</em><a class="headerlink" href="#cloud_browser.app_settings.Settings.SETTINGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Settings dictionary of accessor callables.</p>
 </dd></dl>
 
@@ -329,18 +326,17 @@ instead of a Django-based static view fallback.</li>
 <dt id="cloud_browser.app_settings.Settings.container_permitted">
 <code class="descname">container_permitted</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.app_settings.Settings.container_permitted" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether or not a container is permitted.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – Container name.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">True</span></code> if container is permitted.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">bool</span></code></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Container name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if container is permitted.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -367,7 +363,7 @@ instead of a Django-based static view fallback.</li>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

@@ -2,30 +2,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Common / Utilities &#8212; Cloud Browser 0.4.0 documentation</title>
-    
+    <meta charset="utf-8" />
+    <title>Common / Utilities &#8212; Cloud Browser 0.0.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.4.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Errors" href="errors.html" />
@@ -34,9 +19,12 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
   
   <a href="https://github.com/ryan-roemer/django-cloud-browser"
      class="visible-desktop"><img
@@ -56,7 +44,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.4.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -171,22 +159,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <div class="section" id="module-cloud_browser.common">
 <span id="common-utilities"></span><h1>Common / Utilities<a class="headerlink" href="#module-cloud_browser.common" title="Permalink to this headline">¶</a></h1>
 <p>Common operations.</p>
-<p>Because cloud operations are OS agnostic, we don’t use any of <code class="xref py py-mod docutils literal"><span class="pre">os</span></code> or
-<code class="xref py py-mod docutils literal"><span class="pre">os.path</span></code>.</p>
+<p>Because cloud operations are OS agnostic, we don’t use any of <code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code> or
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code>.</p>
 <dl class="data">
 <dt id="cloud_browser.common.PARENT">
-<code class="descclassname">cloud_browser.common.</code><code class="descname">PARENT</code><em class="property"> = ‘..’</em><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">PARENT</code><em class="property"> = '..'</em><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent path phrase.</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="cloud_browser.common.SEP">
-<code class="descclassname">cloud_browser.common.</code><code class="descname">SEP</code><em class="property"> = ‘/’</em><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">SEP</code><em class="property"> = '/'</em><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Browser file path separator.</p>
 </dd></dl>
 
@@ -199,43 +187,41 @@
 <dl class="function">
 <dt id="cloud_browser.common.check_version">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">check_version</code><span class="sig-paren">(</span><em>mod</em>, <em>required</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.check_version" title="Permalink to this definition">¶</a></dt>
-<dd><p>Require minimum version of module using <code class="docutils literal"><span class="pre">__version__</span></code> member.</p>
+<dd><p>Require minimum version of module using <code class="docutils literal notranslate"><span class="pre">__version__</span></code> member.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_header">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_header</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Try various RFC conversions to <code class="docutils literal"><span class="pre">datetime</span></code> or return <code class="docutils literal"><span class="pre">None</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<code class="docutils literal"><span class="pre">string</span></code>) – Date string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code> or <code class="docutils literal"><span class="pre">None</span></code></td>
-</tr>
-</tbody>
-</table>
+<dd><p>Try various RFC conversions to <code class="docutils literal notranslate"><span class="pre">datetime</span></code> or return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date_str</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – Date string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Date time.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_rfc1123">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_rfc1123</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc1123" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert 1123 (HTTP header) date string to datetime object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<code class="docutils literal"><span class="pre">string</span></code>) – Date string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date_str</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – Date string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Date time.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -243,43 +229,38 @@
 <code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_rfc8601</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc8601" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert 8601 (ISO) date string to datetime object.</p>
 <p>Handles “Z” and milliseconds transparently.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>date_str</strong> (<code class="docutils literal"><span class="pre">string</span></code>) – Date string.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Date time.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></code></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>date_str</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – Date string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Date time.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.get_int">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">get_int</code><span class="sig-paren">(</span><em>value</em>, <em>default</em>, <em>test_fn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.get_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert value to integer.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>value</strong> – Integer value.</li>
-<li><strong>default</strong> – Default value on failed conversion.</li>
-<li><strong>test_fn</strong> – Constraint function. Use default if returns <code class="docutils literal"><span class="pre">False</span></code>.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Integer value.</p></li>
+<li><p><strong>default</strong> – Default value on failed conversion.</p></li>
+<li><p><strong>test_fn</strong> – Constraint function. Use default if returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Integer value.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">int</span></code></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Integer value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -298,18 +279,17 @@
 <dt id="cloud_browser.common.path_parts">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">path_parts</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_parts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split path into container, object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<cite>string</cite>) – Path to resource (including container).</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Container, storage object tuple.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><cite>tuple</cite> of <cite>string</cite>, <cite>string</cite></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<cite>string</cite>) – Path to resource (including container).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Container, storage object tuple.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>tuple</cite> of <cite>string</cite>, <cite>string</cite></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -322,29 +302,25 @@
 <dt id="cloud_browser.common.relpath">
 <code class="descclassname">cloud_browser.common.</code><code class="descname">relpath</code><span class="sig-paren">(</span><em>path</em>, <em>start</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.relpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get relative path to start.</p>
-<p>Note: Modeled after python2.6 <code class="xref py py-meth docutils literal"><span class="pre">os.path.relpath()</span></code>.</p>
+<p>Note: Modeled after python2.6 <code class="xref py py-meth docutils literal notranslate"><span class="pre">os.path.relpath()</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.requires">
-<code class="descclassname">cloud_browser.common.</code><code class="descname">requires</code><span class="sig-paren">(</span><em>module</em>, <em>name=’‘</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.requires" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">requires</code><span class="sig-paren">(</span><em>module</em>, <em>name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.requires" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enforces module presence.</p>
 <p>The general use here is to allow conditional imports that may fail (e.g., a
 required python package is not installed) but still allow the rest of the
 python package to compile and run fine. If the wrapped method with this
 decorated is invoked, then a runtime error is generated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>module</strong> (<code class="docutils literal"><span class="pre">module</span></code> or <code class="docutils literal"><span class="pre">None</span></code>) – required module (set as variable to <code class="docutils literal"><span class="pre">None</span></code> on import fail)</li>
-<li><strong>name</strong> (<code class="docutils literal"><span class="pre">string</span></code>) – module name</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<code class="docutils literal notranslate"><span class="pre">module</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code>) – required module (set as variable to <code class="docutils literal notranslate"><span class="pre">None</span></code> on import fail)</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">string</span></code>) – module name</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -369,7 +345,7 @@ decorated is invoked, then a runtime error is generated.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>
