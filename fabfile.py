@@ -179,17 +179,19 @@ def _touch(file_path):
     return fobj.name
 
 
-def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS):
+def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, version=BUILD_VERSION):
     """Generate API documentation (using Sphinx).
 
     :param output: Output directory.
     :param proj_settings: Django project settings to use.
+    :param version: Optional version to set before packaging.
     """
 
     os.environ["PYTHONPATH"] = ROOT_DIR
     os.environ["DJANGO_SETTINGS_MODULE"] = proj_settings
 
-    local("sphinx-build -b html %s %s" % (DOC_INPUT, output))
+    with _update_version(version):
+        local("sphinx-build -b html %s %s" % (DOC_INPUT, output))
 
 
 def publish_docs(
