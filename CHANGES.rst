@@ -2,6 +2,13 @@
  Changes
 =========
 
+v0.5.0
+======
+* Add support for more cloud backends via Apache libcloud.
+  [`@c-w <https://github.com/c-w>`_]
+* Fix install on Python 3.6+
+  [`@c-w <https://github.com/c-w>`_]
+
 v0.4.0
 ======
 * Various updates for Django 1.8+ and Python 3.
