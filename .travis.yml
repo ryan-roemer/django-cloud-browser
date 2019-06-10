@@ -15,7 +15,7 @@ before_install:
   - if [[ "${TRAVIS_PYTHON_VERSION}" = "2.7" ]]; then easy_install distribute; fi
 
 script:
-  - "fab check"
+  - invoke check
 
 cache: pip
 sudo: required
@@ -29,7 +29,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: fab sdist:version=${TRAVIS_TAG} publish_pypi docs:version=${TRAVIS_TAG} publish_docs
+    script: invoke sdist --version=${TRAVIS_TAG} publish-pypi docs --version=${TRAVIS_TAG} publish-docs
     on:
       tags: true
       python: "3.6"

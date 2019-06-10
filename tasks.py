@@ -9,7 +9,7 @@ from fileinput import FileInput
 from sys import version_info
 from uuid import uuid4
 
-from fabric.api import local
+from invoke import task
 
 ###############################################################################
 # Constants
@@ -22,7 +22,7 @@ PROJ_SETTINGS = ".".join((PROJ, "settings"))
 
 DEV_DB_DIR = os.path.join(PROJ, "db")
 
-CHECK_INCLUDES = ("fabfile.py", "setup.py", MOD, PROJ)
+CHECK_INCLUDES = ("tasks.py", "setup.py", MOD, PROJ)
 PYLINT_CFG = os.path.join("dev", "pylint.cfg")
 FLAKE8_CFG = os.path.join("dev", "flake8.cfg")
 ISORT_CFG = os.path.join("dev", ".isort.cfg")
@@ -47,7 +47,8 @@ MANAGE = os.path.join(PROJ, "manage.py")
 ###############################################################################
 # Build
 ###############################################################################
-def clean():
+@task
+def clean(_):
     """Clean build files."""
     for build_dir in list(BUILD_DIRS) + [DOC_OUTPUT, DEV_DB_DIR]:
         try:
@@ -74,7 +75,7 @@ def _dist_wrapper():
 
 
 @contextmanager
-def _update_version(version):
+def _update_version(context, version):
     if not version:
         yield
         return
@@ -93,80 +94,72 @@ def _update_version(version):
 
     yield
 
-    local("git checkout %s" % version_file)
+    context.run("git checkout %s" % version_file)
 
 
-def sdist(version=BUILD_VERSION):
-    """Package into distribution.
-
-    :param version: Optional version to set before packaging.
-    """
-    with _update_version(version), _dist_wrapper():
-        local("python setup.py sdist")
+@task
+def sdist(context, version=BUILD_VERSION):
+    """Package into distribution."""
+    with _update_version(context, version), _dist_wrapper():
+        context.run("python setup.py sdist")
 
 
-def register():
+@task
+def register(context):
     """Register and prep user for PyPi upload.
 
     .. note:: May need to tweak ~/.pypirc file per issue:
         http://stackoverflow.com/questions/1569315
     """
     with _dist_wrapper():
-        local("python setup.py register")
+        context.run("python setup.py register")
 
 
-def publish_pypi():
+@task
+def publish_pypi(context):
     """Upload package."""
-    local("twine upload dist/*")
+    context.run("twine upload dist/*")
 
 
 ###############################################################################
 # Quality
 ###############################################################################
-def pylint(rcfile=PYLINT_CFG):
-    """Run pylint style checker.
-
-    :param rcfile: PyLint configuration file.
-    """
+@task
+def pylint(context, rcfile=PYLINT_CFG):
+    """Run pylint style checker."""
     # Have a spurious DeprecationWarning in pylint.
-    local("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
+    context.run("pylint --rcfile=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
-def flake8(rcfile=FLAKE8_CFG):
-    """Run flake8 style checker.
-
-    :param rcfile: Flake8 configuration file.
-    """
-    local("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
+@task
+def flake8(context, rcfile=FLAKE8_CFG):
+    """Run flake8 style checker."""
+    context.run("flake8 --config=%s %s" % (rcfile, " ".join(CHECK_INCLUDES)))
 
 
-def isort(rcfile=ISORT_CFG):
-    """Run isort style checker.
-
-    :param rcfile: isort configuration file.
-    """
-
+@task
+def isort(context, rcfile=ISORT_CFG):
+    """Run isort style checker."""
     # use dirname until https://github.com/timothycrosley/isort/issues/710 is resolved
     rcfile = os.path.dirname(rcfile)
 
-    local(
+    context.run(
         "isort --recursive --check-only --settings-path=%s %s"
         % (rcfile, " ".join(CHECK_INCLUDES))
     )
 
 
-def black():
+@task
+def black(context):
     """Run black style checker."""
     if version_info >= (3, 6, 0):
-        local("black --check %s" % (" ".join(CHECK_INCLUDES)))
+        context.run("black --check %s" % (" ".join(CHECK_INCLUDES)))
 
 
-def check():
+@task(flake8, isort, black, pylint)
+def check(_):
     """Run all checkers."""
-    flake8()
-    isort()
-    black()
-    pylint()
+    pass
 
 
 ###############################################################################
@@ -179,22 +172,21 @@ def _touch(file_path):
     return fobj.name
 
 
-def docs(output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, version=BUILD_VERSION):
-    """Generate API documentation (using Sphinx).
-
-    :param output: Output directory.
-    :param proj_settings: Django project settings to use.
-    :param version: Optional version to set before packaging.
-    """
-
+@task
+def docs(
+    context, output=DOC_OUTPUT, proj_settings=PROJ_SETTINGS, version=BUILD_VERSION
+):
+    """Generate API documentation (using Sphinx)."""
     os.environ["PYTHONPATH"] = ROOT_DIR
     os.environ["DJANGO_SETTINGS_MODULE"] = proj_settings
 
-    with _update_version(version):
-        local("sphinx-build -b html %s %s" % (DOC_INPUT, output))
+    with _update_version(context, version):
+        context.run("sphinx-build -b html %s %s" % (DOC_INPUT, output))
 
 
+@task
 def publish_docs(
+    context,
     from_folder=DOC_OUTPUT,
     to_branch=DOC_BRANCH,
     github_token=GITHUB_TOKEN,
@@ -204,28 +196,30 @@ def publish_docs(
     _touch(os.path.join(DOC_OUTPUT, ".nojekyll"))
 
     temp_remote = "publish-%s" % uuid4()
-    local(
+    context.run(
         "git remote add %s https://%s@github.com/%s/%s"
         % (temp_remote, github_token, github_user, github_repo)
     )
-    local(
+    context.run(
         "gh-pages --dotfiles --dist %s --branch %s --remote %s"
         % (from_folder, to_branch, temp_remote)
     )
-    local("git remote rm %s" % temp_remote)
+    context.run("git remote rm %s" % temp_remote)
 
 
 ###############################################################################
 # Django Targets
 ###############################################################################
-def _manage(target, extra=""):
+def _manage(context, target, extra=""):
     """Generic wrapper for ``manage.py``."""
     os.environ["PYTHONPATH"] = ROOT_DIR
+    os.environ["PYTHONUNBUFFERED"] = "1"
 
-    local("python %s %s %s" % (MANAGE, target, extra))
+    context.run("python %s %s %s" % (MANAGE, target, extra))
 
 
-def syncdb():
+@task
+def syncdb(context):
     """Run syncdb."""
     try:
         os.makedirs(DEV_DB_DIR)
@@ -233,9 +227,10 @@ def syncdb():
         if ex.errno != errno.EEXIST:
             raise
 
-    _manage("syncdb")
+    _manage(context, "syncdb")
 
 
-def run_server(addr="127.0.0.1:8000"):
+@task
+def run_server(context, addr="127.0.0.1:8000"):
     """Run Django dev. server."""
-    _manage("runserver", addr)
+    _manage(context, "runserver", addr)

@@ -22,7 +22,7 @@ TEST_DEPENDENCIES = [
     "Django==1.8.0",
     "boto==2.48.0",
     "apache-libcloud==2.4.0",
-    "Fabric3",
+    "invoke",
     "pylint",
     "isort",
     "flake8",

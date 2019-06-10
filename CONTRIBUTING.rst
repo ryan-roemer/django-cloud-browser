@@ -11,7 +11,7 @@ You can also run the CI locally via:
 
 .. sourcecode :: sh
 
-    fab check
+    invoke check
 
 Up and running via local filesystem
 ==============
@@ -23,7 +23,7 @@ To run:
 
 ::
 
-   fab syncdb run_server
+   invoke syncdb run-server
 
 This will start a server for the local filesystem, browsable at
 ``http://localhost:8000/``, creating a sqlite database in
@@ -58,4 +58,4 @@ Alternatively, the release steps can also be run locally via:
     export BUILD_VERSION="1.2.3"
 
     # run the release
-    fab sdist publish_pypi docs publish_docs
+    invoke sdist publish-pypi docs publish-docs

@@ -35,5 +35,5 @@ steps:
 - script: pip install -e .[test]
   displayName: Install
 
-- script: fab check
+- script: invoke check
   displayName: Run checkers
