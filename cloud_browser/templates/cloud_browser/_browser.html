@@ -4,19 +4,20 @@
 ###############################################################################
 {% endcomment %}
 
+{% load i18n %}
 {% load cloud_browser_extras %}
 
 {% block cloud_browser_content %}
 <div id="cloud-browser-all" class="cloud-browser-defaults">
 <div id="cloud-browser-containers">
-<h2>Containers</h2>
+<h2>{% trans 'Containers' %}</h2>
 <ul>
 {% for cont in containers %}
   {% if cont == container %}
   <li class="cb-selected">{{ cont.name|truncatechars:22 }}</li>
   {% else %}
   <li>
-    <a href="{% url "cloud_browser_browser" cont.name|urlencode %}"
+    <a href="{% url 'cloud_browser_browser' cont.name|urlencode %}"
        title="{{ cont.name }}">{{ cont.name|truncatechars:22 }}</a>
   </li>
   {% endif %}
@@ -25,17 +26,17 @@
 </div>
 
 <div id="cloud-browser-objects">
-<h2>Objects</h2>
+<h2>{% trans 'Objects' %}</h2>
 {% if objects %}
 <table id="cloud-browser-objects-table">
   <thead>
     <tr>
       <th style="width: 16px;">&nbsp;</th>
-      <th>Name</th>
-      <th>Content Type</th>
-      <th>Encoding</th>
-      <th>Size (Bytes)</th>
-      <th>Date</th>
+      <th>{% trans 'Name' %}</th>
+      <th>{% trans 'Content Type' %}</th>
+      <th>{% trans 'Encoding' %}</th>
+      <th>{% trans 'Size (Bytes)' %}</th>
+      <th>{% trans 'Date' %}</th>
     </tr>
   </thead>
   <tbody>
@@ -47,10 +48,10 @@
             <td><img src="{% cloud_browser_media_url 'img/tango/16x16/mimetypes/text-x-generic.png' %}" /></td>
         {% endif %}
         {% if obj.is_file %}
-        <td><a href="{% url "cloud_browser_document" obj.path|urlencode %}"
+        <td><a href="{% url 'cloud_browser_document' obj.path|urlencode %}"
             >{{ obj.basename }}</a></td>
         {% else %}
-        <td><a href="{% url "cloud_browser_browser" obj.path|urlencode %}"
+        <td><a href="{% url 'cloud_browser_browser' obj.path|urlencode %}"
                class="cloud-browser-document-link"
             >{{ obj.basename }}</a></td>
         {% endif %}
@@ -82,13 +83,13 @@
       <td colspan="6">
         {% if marker_part %}
         <form id="cloud-browser-next" class="cloud-browser-form"
-          action="{% url "cloud_browser_browser" path|urlencode %}" method="post">
+          action="{% url 'cloud_browser_browser' path|urlencode %}" method="post">
           {% csrf_token %}
-          Next
+          {% trans 'Next' %}
           <input name="limit" type="text" size="5"
               onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
               value="{{ limit }}"/>
-          after
+          {% trans 'after' %}
           <input name="marker_part" type="text"
               size="{% widthratio marker_part|length 40 40 %}"
               onkeypress="CloudBrowser.submitOnEnter(event, 'cloud-browser-next');"
@@ -107,12 +108,11 @@
 {% else %}
     {% if container %}
         <div class="cloud-browser-empty" colspan="6">
-            No objects found in &ldquo;{{ path }}.&rdquo;
+            {% blocktrans %}No objects found in &ldquo;{{ path }}.&rdquo;{% endblocktrans %}
         </div>
     {% else %}
         <div class="cloud-browser-empty" colspan="6">
-            No container selected. Please click on a container to list
-            object contents.
+            {% trans 'No container selected. Please click on a container to list object contents.' %}
         </div>
     {% endif %}
 {% endif %}

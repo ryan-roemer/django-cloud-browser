@@ -6,10 +6,11 @@
 ###############################################################################
 {% endcomment %}
 
+{% load i18n %}
 {% load cloud_browser_extras %}
 
 {% block title %}
-Cloud Browser - {{ path }}
+{% blocktrans %}Cloud Browser - {{ path }}{% endblocktrans %}
 {% endblock %}
 
 {% block cloud_browser_breadcrumbs %}

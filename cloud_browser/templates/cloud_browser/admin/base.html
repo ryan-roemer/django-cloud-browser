@@ -6,6 +6,8 @@
 ###############################################################################
 {% endcomment %}
 
+{% load i18n %}
+
 {% block extrastyle %}
   {{ block.super }}
   {% block cloud_browser_template_head %}{% endblock %}
@@ -13,8 +15,8 @@
 
 {% block breadcrumbs %}
   <div class="breadcrumbs">
-    <a href="/">Home</a> &raquo;
-    <a href="{% url "cloud_browser_index" %}">Cloud Browser</a> &raquo;
+    <a href="/">{% trans 'Home' %}</a> &raquo;
+    <a href="{% url 'cloud_browser_index' %}">{% trans 'Cloud Browser' %}</a> &raquo;
     {% block cloud_browser_breadcrumbs %}
       {% include "cloud_browser/_breadcrumbs.html" %}
     {% endblock %}

@@ -53,7 +53,7 @@ def cloud_browser_media_url(_, token):
     For example::
 
         <link rel="stylesheet" type="text/css"
-            href="{% cloud_browser_media_url "css/cloud-browser.css" %}" />
+            href="{% cloud_browser_media_url 'css/cloud-browser.css' %}" />
     """
     bits = token.split_contents()
     if len(bits) != 2:
