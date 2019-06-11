@@ -2,6 +2,11 @@
  Changes
 =========
 
+v0.5.1
+======
+* Fix filesystem backend on Windows.
+  [`@c-w <https://github.com/c-w>`_]
+
 v0.5.0
 ======
 * Add support for more cloud backends via Apache libcloud.

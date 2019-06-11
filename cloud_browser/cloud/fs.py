@@ -14,14 +14,36 @@ from cloud_browser.common import SEP
 NO_DOT_RE = re.compile("^[^.]+")
 
 
+def path_to_os(path):
+    return path.replace(SEP, os.path.sep)
+
+
+def os_to_path(path):
+    return path.replace(os.path.sep, SEP)
+
+
 def not_dot(path):
-    """Check if non-dot."""
-    return NO_DOT_RE.match(os.path.basename(path))
+    return NO_DOT_RE.match(os.path.basename(path_to_os(path)))
 
 
 def is_dir(path):
-    """Check if non-dot and directory."""
-    return not_dot(path) and os.path.isdir(path)
+    return not_dot(path) and os.path.isdir(path_to_os(path))
+
+
+def listdir(path):
+    return [os_to_path(result) for result in os.listdir(path_to_os(path))]
+
+
+def getmtime(path):
+    return os.path.getmtime(path_to_os(path))
+
+
+def getsize(path):
+    return os.path.getsize(path_to_os(path))
+
+
+def abspath(path):
+    return os.path.abspath(path_to_os(path))
 
 
 ###############################################################################
@@ -58,7 +80,7 @@ class FilesystemObject(base.CloudObject):
     @property
     def base_path(self):
         """Base absolute path of container."""
-        return os.path.join(self.container.base_path, self.name)
+        return SEP.join((self.container.base_path, self.name))
 
     @classmethod
     def from_path(cls, container, path):
@@ -66,14 +88,14 @@ class FilesystemObject(base.CloudObject):
         from datetime import datetime
 
         path = path.strip(SEP)
-        full_path = os.path.join(container.base_path, path)
-        last_modified = datetime.fromtimestamp(os.path.getmtime(full_path))
+        full_path = SEP.join((container.base_path, path))
+        last_modified = datetime.fromtimestamp(getmtime(full_path))
         obj_type = cls.type_cls.SUBDIR if is_dir(full_path) else cls.type_cls.FILE
 
         return cls(
             container,
             name=path,
-            size=os.path.getsize(full_path),
+            size=getsize(full_path),
             content_type=None,
             last_modified=last_modified,
             obj_type=obj_type,
@@ -99,14 +121,13 @@ class FilesystemContainer(base.CloudContainer):
         def _filter(name):
             """Filter."""
             return not_dot(name) and (
-                marker is None
-                or os.path.join(path, name).strip(SEP) > marker.strip(SEP)
+                marker is None or SEP.join((path, name)).strip(SEP) > marker.strip(SEP)
             )
 
-        search_path = os.path.join(self.base_path, path)
+        search_path = SEP.join((self.base_path, path))
         objs = [
-            self.obj_cls.from_path(self, os.path.join(path, o))
-            for o in os.listdir(search_path)
+            self.obj_cls.from_path(self, SEP.join((path, o)))
+            for o in listdir(search_path)
             if _filter(o)
         ]
         objs = sorted(objs, key=lambda x: x.base_path)
@@ -120,14 +141,14 @@ class FilesystemContainer(base.CloudContainer):
     @property
     def base_path(self):
         """Base absolute path of container."""
-        return os.path.join(self.conn.abs_root, self.name)
+        return SEP.join((self.conn.abs_root, self.name))
 
     @classmethod
     def from_path(cls, conn, path):
         """Create container from path."""
         path = path.strip(SEP)
-        full_path = os.path.join(conn.abs_root, path)
-        return cls(conn, path, 0, os.path.getsize(full_path))
+        full_path = SEP.join((conn.abs_root, path))
+        return cls(conn, path, 0, getsize(full_path))
 
 
 class FilesystemConnection(base.CloudConnection):
@@ -140,7 +161,7 @@ class FilesystemConnection(base.CloudConnection):
         """Initializer."""
         super(FilesystemConnection, self).__init__(None, None)
         self.root = root
-        self.abs_root = os.path.abspath(root)
+        self.abs_root = abspath(root)
 
     def _get_connection(self):
         """Return native connection object."""
@@ -151,11 +172,11 @@ class FilesystemConnection(base.CloudConnection):
         """Return available containers."""
 
         def full_fn(path):
-            return os.path.join(self.abs_root, path)
+            return SEP.join((self.abs_root, path))
 
         return [
             self.cont_cls.from_path(self, d)
-            for d in os.listdir(self.abs_root)
+            for d in listdir(self.abs_root)
             if is_dir(full_fn(d))
         ]
 
