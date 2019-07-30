@@ -187,6 +187,9 @@ class Settings(object):
         "CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER": Setting(from_env=True),
         "CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT": Setting(from_env=True),
         "CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY": Setting(from_env=True),
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_HOST": Setting(from_env=True),
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_PORT": Setting(from_env=True),
+        "CLOUD_BROWSER_APACHE_LIBCLOUD_SECURE": Setting(from_env=True),
         # Amazon Web Services S3 datastore settings.
         "CLOUD_BROWSER_AWS_ACCOUNT": Setting(from_env=True),
         "CLOUD_BROWSER_AWS_SECRET_KEY": Setting(from_env=True),

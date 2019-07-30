@@ -143,10 +143,15 @@ class ApacheLibcloudConnection(base.CloudConnection):
     #: Exception translations.
     wrap_libcloud_errors = ApacheLibcloudExceptionWrapper()
 
-    def __init__(self, provider, account, secret_key):
+    def __init__(
+        self, provider, account, secret_key, host=None, port=None, secure=True
+    ):
         """Initializer."""
         super(ApacheLibcloudConnection, self).__init__(account, secret_key)
         self.provider = provider
+        self.host = host
+        self.port = port
+        self.secure = secure
 
     @wrap_libcloud_errors
     @requires(libcloud, "libcloud")
@@ -154,7 +159,13 @@ class ApacheLibcloudConnection(base.CloudConnection):
         """Return native connection object."""
         driver = libcloud.get_driver(libcloud.DriverType.STORAGE, self.provider.lower())
 
-        return driver(self.account, self.secret_key)
+        return driver(
+            self.account,
+            self.secret_key,
+            host=self.host,
+            port=self.port,
+            secure=self.secure,
+        )
 
     @wrap_libcloud_errors
     def _get_containers(self):

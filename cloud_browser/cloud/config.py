@@ -24,10 +24,13 @@ class Config(object):
             provider = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER
             account = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT
             secret_key = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY
+            host = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_HOST
+            port = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_PORT
+            secure = settings.CLOUD_BROWSER_APACHE_LIBCLOUD_SECURE != "False"
             if provider and account and secret_key:
                 conn_cls = ApacheLibcloudConnection
                 conn_fn = lambda: ApacheLibcloudConnection(
-                    provider, account, secret_key
+                    provider, account, secret_key, host=host, port=port, secure=secure
                 )
 
         if datastore == "AWS":
