@@ -86,3 +86,8 @@ INSTALLED_APPS = (
 # EXAMPLE: Serve up the project directory.
 CLOUD_BROWSER_DATASTORE = "Filesystem"
 CLOUD_BROWSER_FILESYSTEM_ROOT = PROJECT_PATH
+
+# enable overrides of the example configuration via the environment
+for env, value in os.environ.items():
+    if env.startswith("CLOUD_BROWSER_"):
+        locals()[env] = value

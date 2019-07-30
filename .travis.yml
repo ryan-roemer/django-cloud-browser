@@ -7,6 +7,9 @@ python:
 install:
   - pip install -e .[test]
 
+services:
+  - docker
+
 before_install:
   - sudo rm -f /etc/boto.cfg # Workaround for travis boto issue with GCE
   - python -m pip install --upgrade pip
@@ -29,7 +32,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: invoke sdist --version=${TRAVIS_TAG} publish-pypi docs --version=${TRAVIS_TAG} publish-docs
+    script: invoke sdist --version=${TRAVIS_TAG} publish-pypi docs --version=${TRAVIS_TAG} publish-docs publish-docker --version=${TRAVIS_TAG}
     on:
       tags: true
       python: "3.6"
@@ -42,3 +45,5 @@ env:
     - secure: "jKfYcuOTx3Bp+4iqjOc7npDT30Vm4nqntQSNtuXn8VH1NkrUYhtN8PU7/4uxoH9r0UnNaFDj0JDXqYFKqt/fFQJgJXYQsBOP0oMxPwIzd1t3tvqhyE4Qn+9JJrN8LoQeGtFA+HOiyRNZiWm0WHQyD0LtQWyv7dmezV2r8zc7tL8="
     # GITHUB_TOKEN
     - secure: "T6jNcZb+c/J5fhTFCiBo/19APZ3MiI6kQXhPPdA+DAOro2GBRb11mli01cm8CDwJi/uxfDpzo0m3S66vAgLsRR1t9hy2m2773Wc3D05SUjlygHBURKy1MKpkrfypcsmZ28VjJSZBlB2b5VkovvlGcXCCpE2NSwyh0/OioeAWZw0="
+    # DOCKER_PASSWORD
+    - secure: "W7broJUfYEIDqwekNHq+MbF/LlFT80tU+bc9jUs2gcTaRDum5gGpfqIqxNPRlXGB7G1apWq0cG8UteZ+uCYz25gsbcxWKh+mrdU7TThggrB/S/3kFJrYz9uqrspXR6TaiZG1d3Eeo+hOdByk2hPTKcM3IpfSazhcVycXbMc3rAM="

@@ -1,0 +1,7 @@
+*
+!cloud_browser/
+!cloud_browser_project/
+!dev/
+!vendor/
+!setup.py
+!tasks.py

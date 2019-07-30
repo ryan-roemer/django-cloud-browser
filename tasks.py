@@ -35,6 +35,10 @@ GITHUB_USER = "ryan-roemer"
 GITHUB_REPO = "django-cloud-browser"
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
+DOCKER_USER = "cwolff"
+DOCKER_IMAGE = "django-cloud-browser"
+DOCKER_PASSWORD = os.environ.get("DOCKER_PASSWORD")
+
 BUILD_VERSION = os.environ.get("BUILD_VERSION")
 BUILD_DIRS = ("dist", "django_cloud_browser.egg-info")
 
@@ -42,6 +46,11 @@ SDIST_RST_FILES = ("INSTALL.rst", "README.rst", "CHANGES.rst")
 SDIST_TXT_FILES = [os.path.splitext(x)[0] + ".txt" for x in SDIST_RST_FILES]
 
 MANAGE = os.path.join(PROJ, "manage.py")
+
+try:
+    SERVER_ADDRESS = "%s:%s" % (os.environ["HOST"], os.environ["PORT"])
+except KeyError:
+    SERVER_ADDRESS = "127.0.0.1:8000"
 
 
 ###############################################################################
@@ -207,6 +216,16 @@ def publish_docs(
     context.run("git remote rm %s" % temp_remote)
 
 
+@task
+def publish_docker(
+    context, user=DOCKER_USER, image=DOCKER_IMAGE, version=BUILD_VERSION
+):
+    image_name = "%s/%s:%s" % (user, image, version)
+    context.run("docker build -t %s ." % image_name)
+    context.run("docker login -u %s -p %s" % (user, DOCKER_PASSWORD))
+    context.run("docker push %s" % image_name)
+
+
 ###############################################################################
 # Django Targets
 ###############################################################################
@@ -231,6 +250,6 @@ def syncdb(context):
 
 
 @task
-def run_server(context, addr="127.0.0.1:8000"):
+def run_server(context, addr=SERVER_ADDRESS):
     """Run Django dev. server."""
     _manage(context, "runserver", addr)
