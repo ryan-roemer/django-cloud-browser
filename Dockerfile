@@ -5,7 +5,7 @@ RUN useradd -ms /bin/sh cloudbrowser
 
 WORKDIR /app
 
-COPY . .
+COPY --chown=cloudbrowser:cloudbrowser . .
 
 RUN pip install .[test] --no-cache-dir
 
