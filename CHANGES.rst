@@ -2,6 +2,11 @@
  Changes
 =========
 
+v0.5.2
+======
+* Deprecate old drivers.
+  [`@c-w <https://github.com/c-w>`_]
+
 v0.5.1
 ======
 * Fix filesystem backend on Windows.
