@@ -85,6 +85,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-2">v0.5.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-1">v0.5.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-0">v0.5.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-4-0">v0.4.0</a></li>
@@ -188,17 +189,17 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 <p>Cloud configuration.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.config.Config">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.config.</code><code class="sig-name descname">Config</code><a class="headerlink" href="#cloud_browser.cloud.config.Config" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.config.</code><code class="descname">Config</code><a class="headerlink" href="#cloud_browser.cloud.config.Config" title="Permalink to this definition">¶</a></dt>
 <dd><p>General class helper to construct connection objects.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.config.Config.from_settings">
-<em class="property">classmethod </em><code class="sig-name descname">from_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.from_settings" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.from_settings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create configuration from Django settings or environment.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.config.Config.get_connection">
-<em class="property">classmethod </em><code class="sig-name descname">get_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">get_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return connection object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -207,9 +208,9 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.config.Config.get_connection_cls">
-<em class="property">classmethod </em><code class="sig-name descname">get_connection_cls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection_cls" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">get_connection_cls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.config.Config.get_connection_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return connection class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -226,13 +227,13 @@ support any interface, file, memory, cloud, etc. But, as this is called a
 <p>Common cloud error wrappers.</p>
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.CloudException">
-<em class="property">exception </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">CloudException</code><a class="headerlink" href="#cloud_browser.cloud.errors.CloudException" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">CloudException</code><a class="headerlink" href="#cloud_browser.cloud.errors.CloudException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base cloud exception.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.errors.CloudExceptionWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">CloudExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">CloudExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translator.</p>
 <p>This class wraps a “real” underlying cloud class exception and translates
 it to a “common” exception class from this module. The exception stack
@@ -282,9 +283,9 @@ function:</p>
 <p>Overriding classes should implement the <code class="docutils literal notranslate"><span class="pre">translations</span></code> class variable
 dictionary for translating an underlying library exception to a class
 in this module. See any of the data implementation modules for examples.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.excepts">
-<em class="property">classmethod </em><code class="sig-name descname">excepts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.excepts" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">excepts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.excepts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return tuple of underlying exception classes to trap and wrap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -293,15 +294,15 @@ in this module. See any of the data implementation modules for examples.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.lazy_translations">
-<em class="property">classmethod </em><code class="sig-name descname">lazy_translations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">lazy_translations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lazy translations definitions (for additional checks).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.errors.CloudExceptionWrapper.translate">
-<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param">exc</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">translate</code><span class="sig-paren">(</span><em>exc</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.errors.CloudExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return translation of exception to new class.</p>
 <p>Calling code should only raise exception if exception class is passed
 in, else <code class="docutils literal notranslate"><span class="pre">None</span></code> (which signifies no wrapping should be done).</p>
@@ -311,25 +312,25 @@ in, else <code class="docutils literal notranslate"><span class="pre">None</span
 
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.InvalidNameException">
-<em class="property">exception </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">InvalidNameException</code><a class="headerlink" href="#cloud_browser.cloud.errors.InvalidNameException" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">InvalidNameException</code><a class="headerlink" href="#cloud_browser.cloud.errors.InvalidNameException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bad name.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.NoContainerException">
-<em class="property">exception </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">NoContainerException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NoContainerException" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">NoContainerException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NoContainerException" title="Permalink to this definition">¶</a></dt>
 <dd><p>No container found.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.NoObjectException">
-<em class="property">exception </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">NoObjectException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NoObjectException" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">NoObjectException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NoObjectException" title="Permalink to this definition">¶</a></dt>
 <dd><p>No storage object found.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cloud_browser.cloud.errors.NotPermittedException">
-<em class="property">exception </em><code class="sig-prename descclassname">cloud_browser.cloud.errors.</code><code class="sig-name descname">NotPermittedException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NotPermittedException" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">cloud_browser.cloud.errors.</code><code class="descname">NotPermittedException</code><a class="headerlink" href="#cloud_browser.cloud.errors.NotPermittedException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Access is not permitted</p>
 </dd></dl>
 
@@ -346,36 +347,36 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <p>Cloud datastore API base abstraction.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.base.</code><code class="sig-name descname">CloudConnection</code><span class="sig-paren">(</span><em class="sig-param">account</em>, <em class="sig-param">secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.base.</code><code class="descname">CloudConnection</code><span class="sig-paren">(</span><em>account</em>, <em>secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cloud connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudContainer" title="cloud_browser.cloud.base.CloudContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudContainer</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.base.CloudConnection.get_container">
-<code class="sig-name descname">get_container</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_container" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_container</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_container" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return single container.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.base.CloudConnection.get_containers">
-<code class="sig-name descname">get_containers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_containers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_containers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.get_containers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return available containers.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudConnection.max_list">
-<code class="sig-name descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.max_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.max_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum number of containers that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudConnection.native_conn">
-<em class="property">property </em><code class="sig-name descname">native_conn</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.native_conn" title="Permalink to this definition">¶</a></dt>
+<code class="descname">native_conn</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudConnection.native_conn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Native connection object.</p>
 </dd></dl>
 
@@ -383,35 +384,35 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.base.</code><code class="sig-name descname">CloudContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.base.</code><code class="descname">CloudContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cloud container wrapper.</p>
 <dl class="method">
 <dt id="cloud_browser.cloud.base.CloudContainer.get_object">
-<code class="sig-name descname">get_object</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get single object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.base.CloudContainer.get_objects">
-<code class="sig-name descname">get_objects</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudContainer.max_list">
-<code class="sig-name descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">max_list</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.max_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum number of objects that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudContainer.native_container">
-<em class="property">property </em><code class="sig-name descname">native_container</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.native_container" title="Permalink to this definition">¶</a></dt>
+<code class="descname">native_container</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.native_container" title="Permalink to this definition">¶</a></dt>
 <dd><p>Native container object.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObject" title="cloud_browser.cloud.base.CloudObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudObject</span></code></a></p>
 </dd></dl>
@@ -420,59 +421,59 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.base.</code><code class="sig-name descname">CloudObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.base.</code><code class="descname">CloudObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cloud object wrapper.</p>
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.basename">
-<em class="property">property </em><code class="sig-name descname">basename</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.basename" title="Permalink to this definition">¶</a></dt>
+<code class="descname">basename</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.basename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base name from rightmost separator.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.is_file">
-<em class="property">property </em><code class="sig-name descname">is_file</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">is_file</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is a file object?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.is_subdir">
-<em class="property">property </em><code class="sig-name descname">is_subdir</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_subdir" title="Permalink to this definition">¶</a></dt>
+<code class="descname">is_subdir</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.is_subdir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is a subdirectory?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.native_obj">
-<em class="property">property </em><code class="sig-name descname">native_obj</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.native_obj" title="Permalink to this definition">¶</a></dt>
+<code class="descname">native_obj</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.native_obj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Native storage object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.path">
-<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">path</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Full path (including container).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.base.CloudObject.read">
-<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.read" title="Permalink to this definition">¶</a></dt>
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return contents of object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.smart_content_encoding">
-<em class="property">property </em><code class="sig-name descname">smart_content_encoding</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_encoding" title="Permalink to this definition">¶</a></dt>
+<code class="descname">smart_content_encoding</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_encoding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Smart content encoding.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.smart_content_type">
-<em class="property">property </em><code class="sig-name descname">smart_content_type</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_type" title="Permalink to this definition">¶</a></dt>
+<code class="descname">smart_content_type</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.smart_content_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Smart content type.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.base.CloudObject.type_cls">
-<code class="sig-name descname">type_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.type_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_cls</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObject.type_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.base.CloudObjectTypes" title="cloud_browser.cloud.base.CloudObjectTypes"><code class="xref py py-class docutils literal notranslate"><span class="pre">CloudObjectTypes</span></code></a></p>
 </dd></dl>
 
@@ -480,7 +481,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.base.CloudObjectTypes">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.base.</code><code class="sig-name descname">CloudObjectTypes</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObjectTypes" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.base.</code><code class="descname">CloudObjectTypes</code><a class="headerlink" href="#cloud_browser.cloud.base.CloudObjectTypes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cloud object types helper.</p>
 </dd></dl>
 
@@ -490,11 +491,11 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <p>File-system datastore.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.fs.</code><code class="sig-name descname">FilesystemConnection</code><span class="sig-paren">(</span><em class="sig-param">root</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.fs.</code><code class="descname">FilesystemConnection</code><span class="sig-paren">(</span><em>root</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.fs.FilesystemConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemContainer" title="cloud_browser.cloud.fs.FilesystemContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilesystemContainer</span></code></a></p>
 </dd></dl>
@@ -503,35 +504,35 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.fs.</code><code class="sig-name descname">FilesystemContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.fs.</code><code class="descname">FilesystemContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem container wrapper.</p>
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.base_path">
-<em class="property">property </em><code class="sig-name descname">base_path</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.base_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">base_path</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.base_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base absolute path of container.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.from_path">
-<em class="property">classmethod </em><code class="sig-name descname">from_path</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.from_path" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_path</code><span class="sig-paren">(</span><em>conn</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.from_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create container from path.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.get_object">
-<code class="sig-name descname">get_object</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get single object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.get_objects">
-<code class="sig-name descname">get_objects</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.fs.FilesystemContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.fs.FilesystemObject" title="cloud_browser.cloud.fs.FilesystemObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilesystemObject</span></code></a></p>
 </dd></dl>
@@ -540,23 +541,23 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemContainerWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.fs.</code><code class="sig-name descname">FilesystemContainerWrapper</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainerWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.fs.</code><code class="descname">FilesystemContainerWrapper</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemContainerWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translator.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.fs.</code><code class="sig-name descname">FilesystemObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.fs.</code><code class="descname">FilesystemObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem object wrapper.</p>
-<dl class="method">
+<dl class="attribute">
 <dt id="cloud_browser.cloud.fs.FilesystemObject.base_path">
-<em class="property">property </em><code class="sig-name descname">base_path</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.base_path" title="Permalink to this definition">¶</a></dt>
+<code class="descname">base_path</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.base_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base absolute path of container.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.fs.FilesystemObject.from_path">
-<em class="property">classmethod </em><code class="sig-name descname">from_path</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.from_path" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_path</code><span class="sig-paren">(</span><em>container</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObject.from_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create object from path.</p>
 </dd></dl>
 
@@ -564,7 +565,7 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.fs.FilesystemObjectWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.fs.</code><code class="sig-name descname">FilesystemObjectWrapper</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObjectWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.fs.</code><code class="descname">FilesystemObjectWrapper</code><a class="headerlink" href="#cloud_browser.cloud.fs.FilesystemObjectWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translator.</p>
 </dd></dl>
 
@@ -574,18 +575,18 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 <p>ApacheLibcloud datastore.</p>
 <dl class="class">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="sig-name descname">ApacheLibcloudConnection</code><span class="sig-paren">(</span><em class="sig-param">provider</em>, <em class="sig-param">account</em>, <em class="sig-param">secret_key</em>, <em class="sig-param">host=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">secure=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudConnection</code><span class="sig-paren">(</span><em>provider</em>, <em>account</em>, <em>secret_key</em>, <em>host=None</em>, <em>port=None</em>, <em>secure=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>ApacheLibcloud connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer" title="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApacheLibcloudContainer</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.wrap_libcloud_errors">
-<code class="sig-name descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudConnection.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -593,36 +594,36 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="sig-name descname">ApacheLibcloudContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>ApacheLibcloud container wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.from_libcloud">
-<em class="property">classmethod </em><code class="sig-name descname">from_libcloud</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">container</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.from_libcloud" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_libcloud</code><span class="sig-paren">(</span><em>conn</em>, <em>container</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.from_libcloud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create container from <cite>libcloud.storage.base.Container</cite>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_object">
-<code class="sig-name descname">get_object</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get single object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_objects">
-<code class="sig-name descname">get_objects</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject" title="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApacheLibcloudObject</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.wrap_libcloud_errors">
-<code class="sig-name descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">wrap_libcloud_errors</code><em class="property"> = &lt;cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudContainer.wrap_libcloud_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -630,11 +631,11 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="sig-name descname">ApacheLibcloudExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>ApacheLibcloud <code class="xref py py-mod docutils literal notranslate"><span class="pre">cloudfiles</span></code> exception translator.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper.lazy_translations">
-<em class="property">classmethod </em><code class="sig-name descname">lazy_translations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">lazy_translations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudExceptionWrapper.lazy_translations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lazy translations.</p>
 </dd></dl>
 
@@ -642,11 +643,11 @@ extra “gotcha’s” in listing objects using implied / pseudo- directories.</
 
 <dl class="class">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="sig-name descname">ApacheLibcloudObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.apache_libcloud.</code><code class="descname">ApacheLibcloudObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>ApacheLibcloud object wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject.from_libcloud">
-<em class="property">classmethod </em><code class="sig-name descname">from_libcloud</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject.from_libcloud" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_libcloud</code><span class="sig-paren">(</span><em>container</em>, <em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.apache_libcloud.ApacheLibcloudObject.from_libcloud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create object from <cite>libcloud.storage.base.Object</cite>.</p>
 </dd></dl>
 
@@ -665,11 +666,11 @@ package.</p>
 </div>
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoBucketWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoBucketWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> bucket exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls">
-<code class="sig-name descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoBucketWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.NoContainerException" title="cloud_browser.cloud.errors.NoContainerException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.NoContainerException</span></code></a></p>
 </dd></dl>
 
@@ -677,18 +678,18 @@ package.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoConnection</code><span class="sig-paren">(</span><em class="sig-param">account</em>, <em class="sig-param">secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoConnection</code><span class="sig-paren">(</span><em>account</em>, <em>secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoContainer" title="cloud_browser.cloud.boto_base.BotoContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BotoContainer</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors">
-<code class="sig-name descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoConnection.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -696,29 +697,29 @@ package.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto container wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.from_bucket">
-<em class="property">classmethod </em><code class="sig-name descname">from_bucket</code><span class="sig-paren">(</span><em class="sig-param">connection</em>, <em class="sig-param">bucket</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.from_bucket" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_bucket</code><span class="sig-paren">(</span><em>connection</em>, <em>bucket</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.from_bucket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from bucket object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.get_object">
-<code class="sig-name descname">get_object</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_object" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_object</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get single object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.get_objects">
-<code class="sig-name descname">get_objects</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.max_list">
-<code class="sig-name descname">max_list</code><em class="property"> = 10000</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.max_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">max_list</code><em class="property"> = 10000</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.max_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum number of objects that can be listed or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p><code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> transparently pages through objects, so there is no real
 limit to the number of object that can be displayed.  However, for
@@ -727,14 +728,14 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.boto_base.BotoObject" title="cloud_browser.cloud.boto_base.BotoObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">BotoObject</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors">
-<code class="sig-name descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoBucketWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoContainer.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -742,17 +743,17 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoExceptionWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls">
-<code class="sig-name descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.CloudException" title="cloud_browser.cloud.errors.CloudException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.CloudException</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cloud_browser.cloud.boto_base.BotoExceptionWrapper.translate">
-<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param">exc</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">translate</code><span class="sig-paren">(</span><em>exc</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoExceptionWrapper.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether or not to do translation.</p>
 </dd></dl>
 
@@ -760,11 +761,11 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoKeyWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoKeyWrapper</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto <code class="xref py py-mod docutils literal notranslate"><span class="pre">boto</span></code> key exception translator.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls">
-<code class="sig-name descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">error_cls</code><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoKeyWrapper.error_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#cloud_browser.cloud.errors.NoObjectException" title="cloud_browser.cloud.errors.NoObjectException"><code class="xref py py-class docutils literal notranslate"><span class="pre">cloud_browser.cloud.errors.NoObjectException</span></code></a></p>
 </dd></dl>
 
@@ -772,41 +773,41 @@ practical reasons, we’ll limit it to the same as Rackspace.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.boto_base.BotoObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.boto_base.</code><code class="sig-name descname">BotoObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.boto_base.</code><code class="descname">BotoObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boto ‘key’ object wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.from_key">
-<em class="property">classmethod </em><code class="sig-name descname">from_key</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_key" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_key</code><span class="sig-paren">(</span><em>container</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from key object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.from_prefix">
-<em class="property">classmethod </em><code class="sig-name descname">from_prefix</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_prefix" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_prefix</code><span class="sig-paren">(</span><em>container</em>, <em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from prefix object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.from_result">
-<em class="property">classmethod </em><code class="sig-name descname">from_result</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_result" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_result</code><span class="sig-paren">(</span><em>container</em>, <em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.from_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from ambiguous result.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.is_key">
-<em class="property">classmethod </em><code class="sig-name descname">is_key</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_key" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.is_prefix">
-<em class="property">classmethod </em><code class="sig-name descname">is_prefix</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.is_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors">
-<code class="sig-name descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
+<code class="descname">wrap_boto_errors</code><em class="property"> = &lt;cloud_browser.cloud.boto_base.BotoKeyWrapper object&gt;</em><a class="headerlink" href="#cloud_browser.cloud.boto_base.BotoObject.wrap_boto_errors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception translations.</p>
 </dd></dl>
 
@@ -823,11 +824,11 @@ package.</p>
 </div>
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.aws.</code><code class="sig-name descname">AwsConnection</code><span class="sig-paren">(</span><em class="sig-param">account</em>, <em class="sig-param">secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.aws.</code><code class="descname">AwsConnection</code><span class="sig-paren">(</span><em>account</em>, <em>secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>AWS connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.aws.AwsConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsContainer" title="cloud_browser.cloud.aws.AwsContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AwsContainer</span></code></a></p>
 </dd></dl>
@@ -836,11 +837,11 @@ package.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.aws.</code><code class="sig-name descname">AwsContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.aws.</code><code class="descname">AwsContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>AWS container wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.aws.AwsContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.aws.AwsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.aws.AwsObject" title="cloud_browser.cloud.aws.AwsObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">AwsObject</span></code></a></p>
 </dd></dl>
@@ -849,17 +850,17 @@ package.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.aws.AwsObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.aws.</code><code class="sig-name descname">AwsObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.aws.</code><code class="descname">AwsObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>AWS ‘key’ object wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.aws.AwsObject.is_key">
-<em class="property">classmethod </em><code class="sig-name descname">is_key</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_key" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.aws.AwsObject.is_prefix">
-<em class="property">classmethod </em><code class="sig-name descname">is_prefix</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.aws.AwsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 </dd></dl>
 
@@ -879,11 +880,11 @@ validate the version if it becomes an issue.</p>
 </div>
 <dl class="class">
 <dt id="cloud_browser.cloud.google.GsConnection">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.google.</code><code class="sig-name descname">GsConnection</code><span class="sig-paren">(</span><em class="sig-param">account</em>, <em class="sig-param">secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.google.</code><code class="descname">GsConnection</code><span class="sig-paren">(</span><em>account</em>, <em>secret_key</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Google Storage connection wrapper.</p>
 <dl class="attribute">
 <dt id="cloud_browser.cloud.google.GsConnection.cont_cls">
-<code class="sig-name descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cont_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsConnection.cont_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsContainer" title="cloud_browser.cloud.google.GsContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">GsContainer</span></code></a></p>
 </dd></dl>
@@ -892,11 +893,11 @@ validate the version if it becomes an issue.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.google.GsContainer">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.google.</code><code class="sig-name descname">GsContainer</code><span class="sig-paren">(</span><em class="sig-param">conn</em>, <em class="sig-param">name=None</em>, <em class="sig-param">count=None</em>, <em class="sig-param">size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.google.</code><code class="descname">GsContainer</code><span class="sig-paren">(</span><em>conn</em>, <em>name=None</em>, <em>count=None</em>, <em>size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Google Storage container wrapper.</p>
 <dl class="method">
 <dt id="cloud_browser.cloud.google.GsContainer.get_objects">
-<code class="sig-name descname">get_objects</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">marker=None</em>, <em class="sig-param">limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_objects</code><span class="sig-paren">(</span><em>path</em>, <em>marker=None</em>, <em>limit=20</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.get_objects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get objects.</p>
 <p>Certain upload clients may add a 0-byte object (e.g., <code class="docutils literal notranslate"><span class="pre">FOLDER</span></code> object
 for path <code class="docutils literal notranslate"><span class="pre">path/to/FOLDER</span></code> - <code class="docutils literal notranslate"><span class="pre">path/to/FOLDER/FOLDER</span></code>). We add an
@@ -905,7 +906,7 @@ extra +1 limit query and ignore any such file objects.</p>
 
 <dl class="attribute">
 <dt id="cloud_browser.cloud.google.GsContainer.obj_cls">
-<code class="sig-name descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">obj_cls</code><a class="headerlink" href="#cloud_browser.cloud.google.GsContainer.obj_cls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Storage object child class.</p>
 <p>alias of <a class="reference internal" href="#cloud_browser.cloud.google.GsObject" title="cloud_browser.cloud.google.GsObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">GsObject</span></code></a></p>
 </dd></dl>
@@ -914,23 +915,23 @@ extra +1 limit query and ignore any such file objects.</p>
 
 <dl class="class">
 <dt id="cloud_browser.cloud.google.GsObject">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.cloud.google.</code><code class="sig-name descname">GsObject</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">name</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.cloud.google.</code><code class="descname">GsObject</code><span class="sig-paren">(</span><em>container</em>, <em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Google Storage ‘key’ object wrapper.</p>
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.google.GsObject.from_prefix">
-<em class="property">classmethod </em><code class="sig-name descname">from_prefix</code><span class="sig-paren">(</span><em class="sig-param">container</em>, <em class="sig-param">prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.from_prefix" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_prefix</code><span class="sig-paren">(</span><em>container</em>, <em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.from_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create from prefix object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.google.GsObject.is_key">
-<em class="property">classmethod </em><code class="sig-name descname">is_key</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_key" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_key</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a key object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="cloud_browser.cloud.google.GsObject.is_prefix">
-<em class="property">classmethod </em><code class="sig-name descname">is_prefix</code><span class="sig-paren">(</span><em class="sig-param">result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">is_prefix</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.cloud.google.GsObject.is_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if result is a prefix object.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -967,7 +968,7 @@ extra +1 limit query and ignore any such file objects.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

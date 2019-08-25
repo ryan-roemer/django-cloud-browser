@@ -85,6 +85,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-2">v0.5.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-1">v0.5.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-0">v0.5.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-4-0">v0.4.0</a></li>
@@ -168,17 +169,17 @@
 <p>Cloud browser template tags.</p>
 <dl class="class">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode">
-<em class="property">class </em><code class="sig-prename descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="sig-name descname">MediaUrlNode</code><span class="sig-paren">(</span><em class="sig-param">rel_path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">MediaUrlNode</code><span class="sig-paren">(</span><em>rel_path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Media URL node.</p>
 <dl class="method">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.render">
-<code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.render" title="Permalink to this definition">¶</a></dt>
+<code class="descname">render</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.render" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url">
-<code class="sig-name descname">static_media_url</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url" title="Permalink to this definition">¶</a></dt>
+<code class="descname">static_media_url</code><em class="property"> = None</em><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.MediaUrlNode.static_media_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Static application media URL (or <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
 </dd></dl>
 
@@ -186,7 +187,7 @@
 
 <dl class="function">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url">
-<code class="sig-prename descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="sig-name descname">cloud_browser_media_url</code><span class="sig-paren">(</span><em class="sig-param">_</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">cloud_browser_media_url</code><span class="sig-paren">(</span><em>_</em>, <em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.cloud_browser_media_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get base media URL for application static media.</p>
 <p>Correctly handles whether or not the settings variable
 <code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_STATIC_MEDIA_DIR</span></code> is set and served.</p>
@@ -199,7 +200,7 @@
 
 <dl class="function">
 <dt id="cloud_browser.templatetags.cloud_browser_extras.truncatechars">
-<code class="sig-prename descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="sig-name descname">truncatechars</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">num</em>, <em class="sig-param">end_text='...'</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.truncatechars" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.templatetags.cloud_browser_extras.</code><code class="descname">truncatechars</code><span class="sig-paren">(</span><em>value</em>, <em>num</em>, <em>end_text='...'</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.templatetags.cloud_browser_extras.truncatechars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Truncate string on character boundary.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -242,7 +243,7 @@ patch for a more extensible and robust truncate characters tag filter.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>

@@ -85,6 +85,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../misc/changes.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-2">v0.5.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-1">v0.5.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-5-0">v0.5.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc/changes.html#v0-4-0">v0.4.0</a></li>
@@ -170,31 +171,31 @@
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code>.</p>
 <dl class="data">
 <dt id="cloud_browser.common.PARENT">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">PARENT</code><em class="property"> = '..'</em><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">PARENT</code><em class="property"> = '..'</em><a class="headerlink" href="#cloud_browser.common.PARENT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent path phrase.</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="cloud_browser.common.SEP">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">SEP</code><em class="property"> = '/'</em><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">SEP</code><em class="property"> = '/'</em><a class="headerlink" href="#cloud_browser.common.SEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Browser file path separator.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.basename">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">basename</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.basename" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">basename</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.basename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rightmost part of path after separator.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.check_version">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">check_version</code><span class="sig-paren">(</span><em class="sig-param">mod</em>, <em class="sig-param">required</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.check_version" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">check_version</code><span class="sig-paren">(</span><em>mod</em>, <em>required</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.check_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Require minimum version of module using <code class="docutils literal notranslate"><span class="pre">__version__</span></code> member.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_header">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">dt_from_header</code><span class="sig-paren">(</span><em class="sig-param">date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_header" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_header</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Try various RFC conversions to <code class="docutils literal notranslate"><span class="pre">datetime</span></code> or return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -211,7 +212,7 @@
 
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_rfc1123">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">dt_from_rfc1123</code><span class="sig-paren">(</span><em class="sig-param">date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc1123" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_rfc1123</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc1123" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert 1123 (HTTP header) date string to datetime object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,7 +229,7 @@
 
 <dl class="function">
 <dt id="cloud_browser.common.dt_from_rfc8601">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">dt_from_rfc8601</code><span class="sig-paren">(</span><em class="sig-param">date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc8601" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">dt_from_rfc8601</code><span class="sig-paren">(</span><em>date_str</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.dt_from_rfc8601" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert 8601 (ISO) date string to datetime object.</p>
 <p>Handles “Z” and milliseconds transparently.</p>
 <dl class="field-list simple">
@@ -246,7 +247,7 @@
 
 <dl class="function">
 <dt id="cloud_browser.common.get_int">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">get_int</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">default</em>, <em class="sig-param">test_fn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.get_int" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">get_int</code><span class="sig-paren">(</span><em>value</em>, <em>default</em>, <em>test_fn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.get_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert value to integer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -267,19 +268,19 @@
 
 <dl class="function">
 <dt id="cloud_browser.common.path_join">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">path_join</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_join" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">path_join</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Join path parts to single path.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.path_list">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">path_list</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_list" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">path_list</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return list of path parts.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.path_parts">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">path_parts</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_parts" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">path_parts</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_parts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Split path into container, object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,20 +297,20 @@
 
 <dl class="function">
 <dt id="cloud_browser.common.path_yield">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">path_yield</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_yield" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">path_yield</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.path_yield" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yield on all path parts.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.relpath">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">relpath</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">start</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.relpath" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">relpath</code><span class="sig-paren">(</span><em>path</em>, <em>start</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.relpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get relative path to start.</p>
 <p>Note: Modeled after python2.6 <code class="xref py py-meth docutils literal notranslate"><span class="pre">os.path.relpath()</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="cloud_browser.common.requires">
-<code class="sig-prename descclassname">cloud_browser.common.</code><code class="sig-name descname">requires</code><span class="sig-paren">(</span><em class="sig-param">module</em>, <em class="sig-param">name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.requires" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">cloud_browser.common.</code><code class="descname">requires</code><span class="sig-paren">(</span><em>module</em>, <em>name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cloud_browser.common.requires" title="Permalink to this definition">¶</a></dt>
 <dd><p>Enforces module presence.</p>
 <p>The general use here is to allow conditional imports that may fail (e.g., a
 required python package is not installed) but still allow the rest of the
@@ -347,7 +348,7 @@ decorated is invoked, then a runtime error is generated.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.<br/>
     </p>
   </div>
 </footer>
