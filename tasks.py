@@ -220,10 +220,11 @@ def publish_docs(
 def publish_docker(
     context, user=DOCKER_USER, image=DOCKER_IMAGE, version=BUILD_VERSION
 ):
-    image_name = "%s/%s:%s" % (user, image, version)
-    context.run("docker build -t %s ." % image_name)
     context.run("docker login -u %s -p %s" % (user, DOCKER_PASSWORD))
-    context.run("docker push %s" % image_name)
+    for tag in version, "latest":
+        image_name = "%s/%s:%s" % (user, image, tag)
+        context.run("docker build -t %s ." % image_name)
+        context.run("docker push %s" % image_name)
 
 
 ###############################################################################

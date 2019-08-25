@@ -6,8 +6,15 @@
 
 .. _boto: http://code.google.com/p/boto/
 """
+from warnings import warn
+
 from cloud_browser.cloud import boto_base as base
 from cloud_browser.common import requires
+
+warn(
+    "The boto driver is deprecated, please move to the Apache Libcloud driver",
+    DeprecationWarning,
+)
 
 ###############################################################################
 # Constants / Conditional Imports

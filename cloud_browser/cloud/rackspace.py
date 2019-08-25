@@ -11,9 +11,16 @@
 
 .. _cloudfiles: https://github.com/rackspace/python-cloudfiles
 """
+from warnings import warn
+
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import base, errors
 from cloud_browser.common import SEP, check_version, dt_from_header, requires
+
+warn(
+    "The cloudfiles driver is deprecated, please move to the Apache Libcloud driver",
+    DeprecationWarning,
+)
 
 ###############################################################################
 # Constants / Conditional Imports

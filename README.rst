@@ -4,7 +4,7 @@
 :Info: A Django application browser for cloud (S3, Cloud Files) datastores.
 :Author: Ryan Roemer (http://github.com/ryan-roemer)
 :Build: |travis| |azdo| |style|
-:Version: |version|
+:Version: |version| |dockerhub|
 
 Cloud Browser is a simple web-based object browser for cloud-based blob
 datastores. Just add as an application to a Django project, add some settings,
@@ -13,21 +13,19 @@ well as view / download objects.
 
 Currently supported backend datastores include:
 
-* `Apache Libcloud`_.
-* `Amazon S3`_.
-* `Google Storage for Developers`_.
-* `Rackspace Cloud Files`_.
-    .. warning:: Rackspace is deprecated and we need to refactor to OpenStack.
-       See https://github.com/ryan-roemer/django-cloud-browser/issues/16
-* `OpenStack Storage`_.
-* Local file system.
+* Local file system for testing.
+* `Amazon S3`_
+* `Azure Blob Storage`_
+* `Google Cloud Storage`_
+* `OpenStack Swift`_
+* `And many more`_
 
 .. _`Apache Libcloud`: https://libcloud.readthedocs.io/en/latest/storage/index.html
 .. _`Amazon S3`: http://aws.amazon.com/s3/
-.. _`Google Storage for Developers`: http://code.google.com/apis/storage/
-.. _`Rackspace Cloud Files`:
-  http://www.rackspacecloud.com/cloud_hosting_products/files/
-.. _`OpenStack Storage`: http://openstack.org/projects/storage/
+.. _`Azure Blob Storage`: https://azure.microsoft.com/en-us/services/storage/blobs/
+.. _`Google Cloud Storage`: https://cloud.google.com/storage/
+.. _`OpenStack Swift`: https://www.swiftstack.com/product/open-source/openstack-swift
+.. _`And many more`: https://libcloud.readthedocs.io/en/latest/storage/supported_providers.html
 
 Be sure to check out the following project resources:
 
@@ -75,3 +73,6 @@ a long list of results.
 
 .. |version| image:: https://img.shields.io/pypi/v/django-cloud-browser.svg
    :target: https://pypi.org/project/django-cloud-browser/
+
+.. |dockerhub| image:: https://images.microbadger.com/badges/version/cwolff/django-cloud-browser.svg
+   :target: https://hub.docker.com/r/cwolff/django-cloud-browser/tags

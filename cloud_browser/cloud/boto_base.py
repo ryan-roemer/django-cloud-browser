@@ -9,9 +9,16 @@ for Developers. This abstract base class gets most of the common work done.
 
 .. _boto: http://code.google.com/p/boto/
 """
+from warnings import warn
+
 from cloud_browser.app_settings import settings
 from cloud_browser.cloud import base, errors
 from cloud_browser.common import SEP, dt_from_header, requires
+
+warn(
+    "The boto driver is deprecated, please move to the Apache Libcloud driver",
+    DeprecationWarning,
+)
 
 ###############################################################################
 # Constants / Conditional Imports

@@ -6,7 +6,7 @@
 Install
 =======
 
-Cloud Browser can be installed from PyPi or from GitHub.
+Cloud Browser can be installed from PyPI or from GitHub.
 
 PyPi
 ----
@@ -50,8 +50,8 @@ communicate with cloud datastores, so for each cloud datastore you need the
 corresponding library below:
 
 * Apache Libcloud: `apache-libcloud <https://pypi.org/project/apache-libcloud/>`_
-* Amazon S3 / Google Storage: `boto <http://code.google.com/p/boto/>`_
-* Rackspace Cloud Files / OpenStack Storage:
+* Amazon S3 / Google Storage (deprecated): `boto <http://code.google.com/p/boto/>`_
+* Rackspace Cloud Files / OpenStack Storage (deprecated):
   `cloudfiles <https://github.com/rackspace/python-cloudfiles>`_
   (version 1.7.4+ is required).
 
@@ -73,9 +73,10 @@ First, start with edits to your Django project's ``settings.py``::
         'cloud_browser',
     )
 
-    CLOUD_BROWSER_DATASTORE = "Rackspace"
-    CLOUD_BROWSER_RACKSPACE_ACCOUNT = "<my_account>"
-    CLOUD_BROWSER_RACKSPACE_SECRET_KEY = "<my_secret_key>"
+    CLOUD_BROWSER_DATASTORE = "ApacheLibcloud"
+    CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER = "OPENSTACK_SWIFT"
+    CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT = "<my_account>"
+    CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY = "<my_secret_key>"
 
 In addition, for more security options, the following Cloud Browser options
 may be set via environment variables instead of ``settings.py`` variables:
@@ -83,14 +84,14 @@ may be set via environment variables instead of ``settings.py`` variables:
 * ``CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER``
 * ``CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT``
 * ``CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY``
-* ``CLOUD_BROWSER_AWS_ACCOUNT``
-* ``CLOUD_BROWSER_AWS_SECRET_KEY``
-* ``CLOUD_BROWSER_GS_ACCOUNT``
-* ``CLOUD_BROWSER_GS_SECRET_KEY``
-* ``CLOUD_BROWSER_RACKSPACE_ACCOUNT``
-* ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY``
-* ``CLOUD_BROWSER_RACKSPACE_SERVICENET``
-* ``CLOUD_BROWSER_RACKSPACE_AUTHURL``
+* ``CLOUD_BROWSER_AWS_ACCOUNT`` (deprecated)
+* ``CLOUD_BROWSER_AWS_SECRET_KEY`` (deprecated)
+* ``CLOUD_BROWSER_GS_ACCOUNT`` (deprecated)
+* ``CLOUD_BROWSER_GS_SECRET_KEY`` (deprecated)
+* ``CLOUD_BROWSER_RACKSPACE_ACCOUNT`` (deprecated)
+* ``CLOUD_BROWSER_RACKSPACE_SECRET_KEY`` (deprecated)
+* ``CLOUD_BROWSER_RACKSPACE_SERVICENET`` (deprecated)
+* ``CLOUD_BROWSER_RACKSPACE_AUTHURL`` (deprecated)
 
 in the form of::
 
@@ -191,3 +192,17 @@ are having difficulties getting things going.
 
 .. _`example project`: https://github.com/ryan-roemer/django-cloud-browser/
   blob/master/cloud_browser_project
+
+Docker
+------
+
+The example project can also be used as a quick ad-hoc explorer for cloud storage
+systems by running it in Docker::
+
+    docker run \
+      -p 8000:8000 \
+      -e CLOUD_BROWSER_DATASTORE="ApacheLibcloud" \
+      -e CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER="OPENSTACK_SWIFT" \
+      -e CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT="<my_account>" \
+      -e CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY="<my_secret_key>" \
+      cwolff/django-cloud-browser:latest
