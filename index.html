@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Django Cloud Browser &#8212; Cloud Browser 0.5.1 documentation</title>
+    <title>Django Cloud Browser &#8212; Cloud Browser 0.5.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -43,7 +43,7 @@
         </button>
         <a class="navbar-brand" href="#">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.5.2</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -177,7 +177,7 @@
 <dd class="field-odd"><p><a class="reference external" href="https://travis-ci.org/ryan-roemer/django-cloud-browser"><img alt="travis" src="https://travis-ci.org/ryan-roemer/django-cloud-browser.svg" /></a> <a class="reference external" href="https://dev.azure.com/michaelsethperel/django-cloud-browser/_build/latest?definitionId=3&amp;branchName=master"><img alt="azdo" src="https://dev.azure.com/michaelsethperel/django-cloud-browser/_apis/build/status/michaelperel.django-cloud-browser?branchName=master" /></a> <a class="reference external" href="https://github.com/python/black"><img alt="style" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a></p>
 </dd>
 <dt class="field-even">Version</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pypi.org/project/django-cloud-browser/"><img alt="version" src="https://img.shields.io/pypi/v/django-cloud-browser.svg" /></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://pypi.org/project/django-cloud-browser/"><img alt="version" src="https://img.shields.io/pypi/v/django-cloud-browser.svg" /></a> <a class="reference external" href="https://hub.docker.com/r/cwolff/django-cloud-browser/tags"><img alt="dockerhub" src="https://images.microbadger.com/badges/version/cwolff/django-cloud-browser.svg" /></a></p>
 </dd>
 </dl>
 <p>Cloud Browser is a simple web-based object browser for cloud-based blob
@@ -185,21 +185,13 @@ datastores. Just add as an application to a Django project, add some settings,
 and you’ll be able to browse cloud containers and implied subdirectories, as
 well as view / download objects.</p>
 <p>Currently supported backend datastores include:</p>
-<ul>
-<li><p><a class="reference external" href="https://libcloud.readthedocs.io/en/latest/storage/index.html">Apache Libcloud</a>.</p></li>
-<li><p><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a>.</p></li>
-<li><p><a class="reference external" href="http://code.google.com/apis/storage/">Google Storage for Developers</a>.</p></li>
-<li><dl>
-<dt><a class="reference external" href="http://www.rackspacecloud.com/cloud_hosting_products/files/">Rackspace Cloud Files</a>.</dt><dd><div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Rackspace is deprecated and we need to refactor to OpenStack.
-See <a class="reference external" href="https://github.com/ryan-roemer/django-cloud-browser/issues/16">https://github.com/ryan-roemer/django-cloud-browser/issues/16</a></p>
-</div>
-</dd>
-</dl>
-</li>
-<li><p><a class="reference external" href="http://openstack.org/projects/storage/">OpenStack Storage</a>.</p></li>
-<li><p>Local file system.</p></li>
+<ul class="simple">
+<li><p>Local file system for testing.</p></li>
+<li><p><a class="reference external" href="http://aws.amazon.com/s3/">Amazon S3</a></p></li>
+<li><p><a class="reference external" href="https://azure.microsoft.com/en-us/services/storage/blobs/">Azure Blob Storage</a></p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/storage/">Google Cloud Storage</a></p></li>
+<li><p><a class="reference external" href="https://www.swiftstack.com/product/open-source/openstack-swift">OpenStack Swift</a></p></li>
+<li><p><a class="reference external" href="https://libcloud.readthedocs.io/en/latest/storage/supported_providers.html">And many more</a></p></li>
 </ul>
 <p>Be sure to check out the following project resources:</p>
 <ul class="simple">
@@ -314,7 +306,7 @@ a long list of results.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.<br/>
     </p>
   </div>
 </footer>

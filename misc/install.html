@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Installation &#8212; Cloud Browser 0.5.1 documentation</title>
+    <title>Installation &#8212; Cloud Browser 0.5.2 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -44,7 +44,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Cloud Browser</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.5.2</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -140,7 +140,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#static-media">Static Media</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -188,7 +191,7 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Cloud Browser can be installed from PyPi or from GitHub.</p>
+<p>Cloud Browser can be installed from PyPI or from GitHub.</p>
 <div class="section" id="pypi">
 <h3>PyPi<a class="headerlink" href="#pypi" title="Permalink to this headline">¶</a></h3>
 <p>Basic installation:</p>
@@ -198,7 +201,7 @@
 </div>
 <div class="section" id="versioned">
 <h3>Versioned<a class="headerlink" href="#versioned" title="Permalink to this headline">¶</a></h3>
-<p>Install a specific version (where <code class="docutils literal notranslate"><span class="pre">&lt;VERSION&gt;</span></code> is something like “0.5.1”)
+<p>Install a specific version (where <code class="docutils literal notranslate"><span class="pre">&lt;VERSION&gt;</span></code> is something like “0.5.2”)
 from PyPi:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">browser</span><span class="o">==&lt;</span><span class="n">VERSION</span><span class="o">&gt;</span>
 </pre></div>
@@ -234,8 +237,8 @@ communicate with cloud datastores, so for each cloud datastore you need the
 corresponding library below:</p>
 <ul class="simple">
 <li><p>Apache Libcloud: <a class="reference external" href="https://pypi.org/project/apache-libcloud/">apache-libcloud</a></p></li>
-<li><p>Amazon S3 / Google Storage: <a class="reference external" href="http://code.google.com/p/boto/">boto</a></p></li>
-<li><p>Rackspace Cloud Files / OpenStack Storage:
+<li><p>Amazon S3 / Google Storage (deprecated): <a class="reference external" href="http://code.google.com/p/boto/">boto</a></p></li>
+<li><p>Rackspace Cloud Files / OpenStack Storage (deprecated):
 <a class="reference external" href="https://github.com/rackspace/python-cloudfiles">cloudfiles</a>
 (version 1.7.4+ is required).</p></li>
 </ul>
@@ -253,9 +256,10 @@ corresponding library below:</p>
     <span class="s1">&#39;cloud_browser&#39;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">CLOUD_BROWSER_DATASTORE</span> <span class="o">=</span> <span class="s2">&quot;Rackspace&quot;</span>
-<span class="n">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span> <span class="o">=</span> <span class="s2">&quot;&lt;my_account&gt;&quot;</span>
-<span class="n">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span> <span class="o">=</span> <span class="s2">&quot;&lt;my_secret_key&gt;&quot;</span>
+<span class="n">CLOUD_BROWSER_DATASTORE</span> <span class="o">=</span> <span class="s2">&quot;ApacheLibcloud&quot;</span>
+<span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER</span> <span class="o">=</span> <span class="s2">&quot;OPENSTACK_SWIFT&quot;</span>
+<span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT</span> <span class="o">=</span> <span class="s2">&quot;&lt;my_account&gt;&quot;</span>
+<span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY</span> <span class="o">=</span> <span class="s2">&quot;&lt;my_secret_key&gt;&quot;</span>
 </pre></div>
 </div>
 <p>In addition, for more security options, the following Cloud Browser options
@@ -264,14 +268,14 @@ may be set via environment variables instead of <code class="docutils literal no
 <li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_ACCOUNT</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_SECRET_KEY</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SERVICENET</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_AUTHURL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_ACCOUNT</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_AWS_SECRET_KEY</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_ACCOUNT</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_GS_SECRET_KEY</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_ACCOUNT</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SECRET_KEY</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_SERVICENET</span></code> (deprecated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLOUD_BROWSER_RACKSPACE_AUTHURL</span></code> (deprecated)</p></li>
 </ul>
 <p>in the form of:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export CLOUD_BROWSER_&lt;Setting Name&gt;=&quot;&lt;value&gt;&quot;
@@ -373,6 +377,20 @@ your <code class="docutils literal notranslate"><span class="pre">MEDIA_ROOT</sp
 <p>The source contains an <a class="reference external" href="https://github.com/ryan-roemer/django-cloud-browser/blob/master/cloud_browser_project">example project</a> that is configures and serves up the
 Cloud Browser application, and little more. It is a good starting point if you
 are having difficulties getting things going.</p>
+<div class="section" id="docker">
+<h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<p>The example project can also be used as a quick ad-hoc explorer for cloud storage
+systems by running it in Docker:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> \
+  <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> \
+  <span class="o">-</span><span class="n">e</span> <span class="n">CLOUD_BROWSER_DATASTORE</span><span class="o">=</span><span class="s2">&quot;ApacheLibcloud&quot;</span> \
+  <span class="o">-</span><span class="n">e</span> <span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_PROVIDER</span><span class="o">=</span><span class="s2">&quot;OPENSTACK_SWIFT&quot;</span> \
+  <span class="o">-</span><span class="n">e</span> <span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_ACCOUNT</span><span class="o">=</span><span class="s2">&quot;&lt;my_account&gt;&quot;</span> \
+  <span class="o">-</span><span class="n">e</span> <span class="n">CLOUD_BROWSER_APACHE_LIBCLOUD_SECRET_KEY</span><span class="o">=</span><span class="s2">&quot;&lt;my_secret_key&gt;&quot;</span> \
+  <span class="n">cwolff</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">browser</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -396,7 +414,7 @@ are having difficulties getting things going.</p>
     </p>
     <p>
         &copy; Copyright 2011, Ryan Roemer.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.<br/>
     </p>
   </div>
 </footer>
