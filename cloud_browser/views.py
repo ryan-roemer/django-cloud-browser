@@ -15,6 +15,11 @@ try:
 except ImportError:
     from importlib import import_module
 
+try:
+    from urllib.parse import unquote_to_bytes as unquote
+except ImportError:
+    from urllib import unquote
+
 
 MAX_LIMIT = get_connection_cls().cont_cls.max_list
 
@@ -106,6 +111,7 @@ def browser(request, path="", template="cloud_browser/browser.html"):
         from builtins import filter
 
     # Inputs.
+    path = unquote(path).decode("utf-8").replace("+", " ")
     container_path, object_path = path_parts(path)
     incoming = request.POST or request.GET or {}
 
