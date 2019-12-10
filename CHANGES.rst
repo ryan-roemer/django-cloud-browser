@@ -2,6 +2,18 @@
  Changes
 =========
 
+v0.5.4
+======
+* Fix rendering of doc paths with URL characters.
+  [`@c-w <https://github.com/c-w>`_]
+* Fix docker start.
+  [`@c-w <https://github.com/c-w>`_]
+
+v0.5.3
+======
+* Fix rendering of object paths with URL characters.
+  [`@c-w <https://github.com/c-w>`_]
+
 v0.5.2
 ======
 * Deprecate old drivers.
