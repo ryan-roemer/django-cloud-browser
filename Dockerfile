@@ -15,4 +15,4 @@ ENV HOST="0.0.0.0"
 ENV PORT="8000"
 
 ENTRYPOINT ["invoke"]
-CMD ["run-server"]
+CMD ["syncdb", "run-server"]

@@ -247,7 +247,7 @@ def syncdb(context):
         if ex.errno != errno.EEXIST:
             raise
 
-    _manage(context, "syncdb")
+    _manage(context, "syncdb", "--noinput")
 
 
 @task
