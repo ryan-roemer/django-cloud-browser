@@ -184,6 +184,7 @@ def document(request, path=""):
     :param request: The request.
     :param path: Path to resource, including container as first part of path.
     """
+    path = unquote(path).decode("utf-8").replace("+", " ")
     container_path, object_path = path_parts(path)
     conn = get_connection()
     try:
