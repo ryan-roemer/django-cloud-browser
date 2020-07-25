@@ -24,7 +24,7 @@ TEST_DEPENDENCIES = [
     "apache-libcloud>=2.4.0",
     "invoke",
     "pylint",
-    "isort",
+    "isort<5.0.0",
     "flake8",
     "Sphinx",
     "sphinx-bootstrap-theme",
